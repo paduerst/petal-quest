@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - adding-github-actions
 
   workflow_dispatch:
 
