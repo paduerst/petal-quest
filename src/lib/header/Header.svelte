@@ -40,9 +40,9 @@
 	$hoverTextColor: #fff;
 	$hoverBackgroundColor: #53902b;
 
-	$logoHeight: 40px;
-	$logoVerticalPadding: 6px;
-	$totalHeaderHeight: $logoHeight + 2 * $logoVerticalPadding;
+	$totalHeaderHeight: 52px;
+	$logoHeight: 36px;
+	$logoVerticalPadding: 0.5 * ($totalHeaderHeight - $logoHeight);
 
 	$navFontSize: 16px;
 	$navFontVerticalPadding: 0.5 * ($totalHeaderHeight - $navFontSize);
@@ -74,7 +74,6 @@
 	header {
 		display: flex;
 		align-items: center;
-		background-color: rgb(28, 28, 28);
 		overflow: hidden;
 	}
 

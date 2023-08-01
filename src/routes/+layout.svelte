@@ -17,7 +17,7 @@
 <style lang="scss">
 	main {
 		width: 100%;
-		background-color: rgb(127, 50, 118);
+		background-color: rgb(40, 42, 54);
 	}
 
 	.main-contents-wrapper {
