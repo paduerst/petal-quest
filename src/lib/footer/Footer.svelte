@@ -1,19 +1,18 @@
 <footer>
-	<div class="footer-contents">
+	<div class="footer-contents-wrapper">
 		<p>This is the footer.</p>
 	</div>
 </footer>
 
 <style lang="scss">
 	footer {
-		padding: 16px;
 		text-align: center;
 		width: 100%;
-		background-color: rgb(28, 28, 28);
 		box-sizing: border-box;
 	}
 
-	.footer-contents {
+	.footer-contents-wrapper {
+		padding: 16px 12px;
 		margin: 0 auto;
 		width: auto;
 		max-width: 1200px;

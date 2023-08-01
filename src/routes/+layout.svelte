@@ -21,7 +21,7 @@
 	}
 
 	.main-contents-wrapper {
-		padding: 0 16px;
+		padding: 8px 12px;
 		margin: 0 auto;
 		width: auto;
 		max-width: 1200px;

@@ -6,7 +6,7 @@
 	}
 </script>
 
-<header class="primary-header">
+<header>
 	<a href="/" class="logo-anchor" aria-label="Home">
 		<img src="favicon.png" alt="Petal Quest logo" class="logo-img" />
 		<span class="logo-txt">Petal Quest</span>
@@ -26,10 +26,10 @@
 		</ul>
 
 		<button class="hamburger-button" on:click={toggleSidebar}>
-			<svg class:sidebar={sidebarOpen} viewBox="0 0 80 80">
-				<rect class="hamburger-line-top" fill="currentColor" y="0" width="80" height="10" rx="2" />
-				<rect class="hamburger-line-mid" fill="currentColor" y="35" width="80" height="10" rx="2" />
-				<rect class="hamburger-line-bot" fill="currentColor" y="70" width="80" height="10" rx="2" />
+			<svg viewBox="0 0 80 80">
+				<rect fill="currentColor" y="0" width="80" height="10" rx="3" />
+				<rect fill="currentColor" y="35" width="80" height="10" rx="3" />
+				<rect fill="currentColor" y="70" width="80" height="10" rx="3" />
 			</svg>
 		</button>
 	</nav>
@@ -71,7 +71,7 @@
 
 	$logoTextRemovalThresholdWidth: $logoOverallWidth + $hamburgerButtonWidth + 20px;
 
-	.primary-header {
+	header {
 		display: flex;
 		align-items: center;
 		background-color: rgb(28, 28, 28);
@@ -135,18 +135,6 @@
 			rect {
 				transform-origin: center;
 				transition: transform 0.25s;
-			}
-
-			&.sidebar {
-				.hamburger-line-top {
-					transform: rotate(45deg) translate(0px, 35px);
-				}
-				.hamburger-line-mid {
-					opacity: 0;
-				}
-				.hamburger-line-bot {
-					transform: rotate(-45deg) translate(0px, -35px);
-				}
 			}
 		}
 
