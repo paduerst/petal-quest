@@ -131,11 +131,6 @@
 			height: $hamburgerHeight;
 			width: $hamburgerWidth;
 			padding: $hamburgerVerticalPadding $hamburgerHorizontalPadding;
-
-			rect {
-				transform-origin: center;
-				transition: transform 0.25s;
-			}
 		}
 
 		@media (hover: hover) {
