@@ -7,38 +7,41 @@
 </script>
 
 <header>
-	<a href="/" class="logo-anchor" aria-label="Home">
-		<img src="favicon.png" alt="Petal Quest logo" class="logo-img" />
-		<span class="logo-txt">Petal Quest</span>
-	</a>
+	<div class="header-contents-wrapper">
+		<a href="/" class="logo-anchor" aria-label="Home">
+			<img src="favicon.png" alt="Petal Quest logo" class="logo-img" />
+			<span class="logo-txt">Petal Quest</span>
+		</a>
 
-	<nav class="primary-navigation" class:sidebar={sidebarOpen}>
-		<ul class="nav-list" class:sidebar={sidebarOpen}>
-			<li>
-				<a href="/prismatic-dragons">Prismatic Dragons</a>
-			</li>
-			<li>
-				<a href="/dragon-builder">Dragon Builder</a>
-			</li>
-			<li>
-				<a href="/about">About</a>
-			</li>
-		</ul>
+		<nav class="primary-navigation" class:sidebar={sidebarOpen}>
+			<ul class="nav-list" class:sidebar={sidebarOpen}>
+				<li>
+					<a href="/prismatic-dragons" class="btn btn-sm">Prismatic Dragons</a>
+				</li>
+				<li>
+					<a href="/dragon-builder">Dragon Builder</a>
+				</li>
+				<li>
+					<a href="/about">About</a>
+				</li>
+			</ul>
 
-		<button class="hamburger-button" on:click={toggleSidebar}>
-			<svg viewBox="0 0 80 80">
-				<rect fill="currentColor" y="0" width="80" height="10" rx="3" />
-				<rect fill="currentColor" y="35" width="80" height="10" rx="3" />
-				<rect fill="currentColor" y="70" width="80" height="10" rx="3" />
-			</svg>
-		</button>
-	</nav>
+			<button class="hamburger-button" on:click={toggleSidebar}>
+				<svg viewBox="0 0 80 80">
+					<rect fill="currentColor" y="0" width="80" height="10" rx="3" />
+					<rect fill="currentColor" y="35" width="80" height="10" rx="3" />
+					<rect fill="currentColor" y="70" width="80" height="10" rx="3" />
+				</svg>
+			</button>
+
+			<button type="button" class="btn-icon hover:bg-surface-100-800-token">Button</button>
+		</nav>
+	</div>
 </header>
 
 <style lang="scss">
 	$inactiveTextColor: #eee;
 	$hoverTextColor: #fff;
-	$hoverBackgroundColor: #53902b;
 
 	$totalHeaderHeight: 52px;
 	$logoHeight: 36px;
@@ -72,9 +75,17 @@
 	$logoTextRemovalThresholdWidth: $logoOverallWidth + $hamburgerButtonWidth + 20px;
 
 	header {
+		width: 100%;
+	}
+
+	.header-contents-wrapper {
 		display: flex;
 		align-items: center;
 		overflow: hidden;
+		padding: 0 12px;
+		margin: 0 auto;
+		width: auto;
+		max-width: 1200px;
 	}
 
 	.logo-anchor {
@@ -86,8 +97,7 @@
 
 		@media (hover: hover) {
 			&:hover {
-				background-color: $hoverBackgroundColor;
-				color: $hoverTextColor;
+				@apply bg-surface-100-800-token;
 			}
 		}
 	}
@@ -113,10 +123,9 @@
 	}
 
 	.hamburger-button {
-		display: none;
+		// display: none;
 
 		background: none;
-		color: $inactiveTextColor;
 		border: none;
 		padding: 0;
 		font: inherit;
@@ -134,8 +143,7 @@
 
 		@media (hover: hover) {
 			&:hover {
-				background-color: $hoverBackgroundColor;
-				color: $hoverTextColor;
+				@apply bg-surface-100-800-token;
 			}
 		}
 	}
@@ -161,8 +169,7 @@
 
 				@media (hover: hover) {
 					&:hover {
-						background-color: $hoverBackgroundColor;
-						color: $hoverTextColor;
+						@apply bg-surface-100-800-token;
 					}
 				}
 			}
