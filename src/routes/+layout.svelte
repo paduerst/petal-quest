@@ -20,7 +20,7 @@
 		<Header />
 	</svelte:fragment>
 	<main class="text-center">
-		<div class="p-4 mx-auto my-0 w-auto max-w-6xl">
+		<div class="p-4 mx-auto my-0 w-auto max-w-5xl">
 			<slot />
 		</div>
 	</main>

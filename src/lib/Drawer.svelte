@@ -1,6 +1,11 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import { Drawer, drawerStore } from '@skeletonlabs/skeleton';
 	import Logo from './Logo.svelte';
+	import NavLinks from '$lib';
+
+	let path: string;
+	$: path = $page.url.pathname;
 
 	function drawerClose(): void {
 		drawerStore.close();
@@ -16,7 +21,7 @@
 
 <Drawer position="right" width="w-[280px] md:w-[480px]">
 	<div class="px-4 flex justify-between flex-row-reverse">
-		<button class="close-btn" on:click={drawerClose}>
+		<button class="close-btn hover:bg-surface-hover-token" on:click={drawerClose}>
 			<span>
 				<svg class="w-5 h-5" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path
@@ -33,15 +38,18 @@
 	<hr />
 	<nav class="list-nav p-4">
 		<ul>
-			<li>
-				<a class="nav-anchor" href="/prismatic-dragons" on:click={drawerClose}>Prismatic Dragons</a>
-			</li>
-			<li>
-				<a class="nav-anchor" href="/dragon-builder" on:click={drawerClose}>Dragon Builder</a>
-			</li>
-			<li>
-				<a class="nav-anchor" href="/about" on:click={drawerClose}>About</a>
-			</li>
+			{#each NavLinks as link}
+				<li>
+					<a
+						class="nav-anchor hover:bg-surface-hover-token"
+						class:active={path === link.href}
+						href={link.href}
+						on:click={drawerClose}
+					>
+						{link.text}
+					</a>
+				</li>
+			{/each}
 		</ul>
 	</nav>
 </Drawer>
@@ -51,13 +59,12 @@
 		@apply no-underline text-white;
 	}
 
+	.nav-anchor.active {
+		@apply bg-surface-active-token;
+	}
+
 	.close-btn {
 		@apply p-3;
 		margin: 6px 0 6px 16px;
-	}
-
-	.nav-anchor:hover,
-	.close-btn:hover {
-		@apply bg-surface-200-700-token;
 	}
 </style>
