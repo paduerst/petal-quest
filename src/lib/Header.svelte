@@ -29,9 +29,9 @@
 		<button class="lg:hidden menu-btn" on:click={drawerOpen}>
 			<span>
 				<svg viewBox="0 0 80 80" class="fill-token w-5 h-5">
-					<rect y="0" width="80" height="10" />
-					<rect y="35" width="80" height="10" />
-					<rect y="70" width="80" height="10" />
+					<rect y="0" width="80" height="10" rx="2" />
+					<rect y="35" width="80" height="10" rx="2" />
+					<rect y="70" width="80" height="10" rx="2" />
 				</svg>
 			</span>
 		</button>

@@ -1,4 +1,14 @@
-<a href="/" aria-label="Home" class="logo-anchor">
+<script>
+	import { createEventDispatcher } from 'svelte';
+
+	const dispatch = createEventDispatcher();
+
+	function dispatchClick() {
+		dispatch('click');
+	}
+</script>
+
+<a href="/" aria-label="Home" class="logo-anchor" on:click={dispatchClick}>
 	<img src="favicon.png" alt="Petal Quest logo" class="logo-img" />
 	<span class="logo-txt">Petal Quest</span>
 </a>
