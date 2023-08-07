@@ -14,7 +14,11 @@ const config = {
 	plugins: [
 		require('@tailwindcss/forms'),
 		...require('@skeletonlabs/skeleton/tailwind/skeleton.cjs')()
-	]
+	],
+
+	future: {
+		hoverOnlyWhenSupported: true
+	}
 };
 
 module.exports = config;

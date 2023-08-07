@@ -22,14 +22,18 @@
 			<ul class="list-none flex items-center flex-row">
 				{#each NavLinks as link}
 					<li>
-						<a class="nav-anchor" class:active={path === link.href} href={link.href}>
+						<a
+							class="nav-anchor hover:bg-surface-hover-token"
+							class:active={path === link.href}
+							href={link.href}
+						>
 							{link.text}
 						</a>
 					</li>
 				{/each}
 			</ul>
 		</nav>
-		<button class="lg:hidden menu-btn" on:click={drawerOpen}>
+		<button class="lg:hidden menu-btn hover:bg-surface-hover-token" on:click={drawerOpen}>
 			<span>
 				<svg viewBox="0 0 80 80" class="fill-token w-5 h-5">
 					<rect y="0" width="80" height="10" rx="2" />
@@ -52,10 +56,5 @@
 
 	.menu-btn {
 		@apply p-3;
-	}
-
-	.nav-anchor:hover,
-	.menu-btn:hover {
-		@apply bg-surface-hover-token;
 	}
 </style>
