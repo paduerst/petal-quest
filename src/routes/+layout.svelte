@@ -1,29 +1,30 @@
-<script>
-	import '../app.css';
-	import Header from '$lib/header/Header.svelte';
-	import Footer from '$lib/footer/Footer.svelte';
+<script lang="ts">
+	// Your selected Skeleton theme:
+	import '../theme.postcss';
+
+	// This contains the bulk of Skeletons required styles:
+	import '@skeletonlabs/skeleton/styles/skeleton.css';
+
+	import '../app.postcss';
+
+	import { AppShell } from '@skeletonlabs/skeleton';
+	import Drawer from '$lib/Drawer.svelte';
+	import Header from '$lib/Header.svelte';
+	import Footer from '$lib/Footer.svelte';
 </script>
 
-<Header />
+<Drawer />
 
-<main>
-	<div class="main-contents-wrapper">
-		<slot />
-	</div>
-</main>
-
-<Footer />
-
-<style lang="scss">
-	main {
-		width: 100%;
-		background-color: rgb(127, 50, 118);
-	}
-
-	.main-contents-wrapper {
-		padding: 0 16px;
-		margin: 0 auto;
-		width: auto;
-		max-width: 1200px;
-	}
-</style>
+<AppShell>
+	<svelte:fragment slot="header">
+		<Header />
+	</svelte:fragment>
+	<main class="text-center">
+		<div class="p-4 mx-auto my-0 w-auto max-w-6xl">
+			<slot />
+		</div>
+	</main>
+	<svelte:fragment slot="pageFooter">
+		<Footer />
+	</svelte:fragment>
+</AppShell>

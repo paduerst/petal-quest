@@ -38,6 +38,6 @@
 
 <style>
 	.filler {
-		font-size: 32px;
+		@apply text-4xl p-4;
 	}
 </style>
