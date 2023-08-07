@@ -1,6 +1,11 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import { AppBar, drawerStore } from '@skeletonlabs/skeleton';
-	import Logo from './Logo.svelte';
+	import Logo from '$lib/Logo.svelte';
+	import NavLinks from '$lib';
+
+	let path: string;
+	$: path = $page.url.pathname;
 
 	function drawerOpen(): void {
 		drawerStore.open({});
@@ -15,15 +20,13 @@
 	<svelte:fragment slot="trail">
 		<nav class="hidden lg:flex">
 			<ul class="list-none flex items-center flex-row">
-				<li>
-					<a class="nav-anchor" href="/prismatic-dragons">Prismatic Dragons</a>
-				</li>
-				<li>
-					<a class="nav-anchor" href="/dragon-builder">Dragon Builder</a>
-				</li>
-				<li>
-					<a class="nav-anchor" href="/about">About</a>
-				</li>
+				{#each NavLinks as link}
+					<li>
+						<a class="nav-anchor" class:active={path === link.href} href={link.href}>
+							{link.text}
+						</a>
+					</li>
+				{/each}
 			</ul>
 		</nav>
 		<button class="lg:hidden menu-btn" on:click={drawerOpen}>
@@ -43,12 +46,16 @@
 		@apply p-3 m-2 text-lg no-underline text-white;
 	}
 
+	.nav-anchor.active {
+		@apply bg-surface-active-token;
+	}
+
 	.menu-btn {
 		@apply p-3;
 	}
 
 	.nav-anchor:hover,
 	.menu-btn:hover {
-		@apply bg-surface-200-700-token;
+		@apply bg-surface-hover-token;
 	}
 </style>

@@ -1,6 +1,11 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import { Drawer, drawerStore } from '@skeletonlabs/skeleton';
 	import Logo from './Logo.svelte';
+	import NavLinks from '$lib';
+
+	let path: string;
+	$: path = $page.url.pathname;
 
 	function drawerClose(): void {
 		drawerStore.close();
@@ -33,15 +38,18 @@
 	<hr />
 	<nav class="list-nav p-4">
 		<ul>
-			<li>
-				<a class="nav-anchor" href="/prismatic-dragons" on:click={drawerClose}>Prismatic Dragons</a>
-			</li>
-			<li>
-				<a class="nav-anchor" href="/dragon-builder" on:click={drawerClose}>Dragon Builder</a>
-			</li>
-			<li>
-				<a class="nav-anchor" href="/about" on:click={drawerClose}>About</a>
-			</li>
+			{#each NavLinks as link}
+				<li>
+					<a
+						class="nav-anchor"
+						class:active={path === link.href}
+						href={link.href}
+						on:click={drawerClose}
+					>
+						{link.text}
+					</a>
+				</li>
+			{/each}
 		</ul>
 	</nav>
 </Drawer>
@@ -51,6 +59,10 @@
 		@apply no-underline text-white;
 	}
 
+	.nav-anchor.active {
+		@apply bg-surface-active-token;
+	}
+
 	.close-btn {
 		@apply p-3;
 		margin: 6px 0 6px 16px;
@@ -58,6 +70,6 @@
 
 	.nav-anchor:hover,
 	.close-btn:hover {
-		@apply bg-surface-200-700-token;
+		@apply bg-surface-hover-token;
 	}
 </style>

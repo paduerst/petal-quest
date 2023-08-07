@@ -19,7 +19,7 @@
 	}
 
 	.logo-anchor:hover {
-		@apply bg-surface-200-700-token;
+		@apply bg-surface-hover-token;
 	}
 
 	.logo-img {
