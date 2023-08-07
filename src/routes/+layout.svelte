@@ -1,12 +1,18 @@
 <script lang="ts">
-	import '../app.css';
+	// Your selected Skeleton theme:
+	import '../theme.postcss';
+
+	// This contains the bulk of Skeletons required styles:
+	import '@skeletonlabs/skeleton/styles/skeleton.css';
+
+	import '../app.postcss';
 	import Header from '$lib/header/Header.svelte';
 	import Footer from '$lib/footer/Footer.svelte';
 </script>
 
 <Header />
 
-<main>
+<main class="bg-surface-500">
 	<div class="main-contents-wrapper">
 		<slot />
 	</div>
@@ -17,7 +23,6 @@
 <style lang="scss">
 	main {
 		width: 100%;
-		background-color: rgb(40, 42, 54);
 	}
 
 	.main-contents-wrapper {

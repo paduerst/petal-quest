@@ -1,4 +1,7 @@
 module.exports = {
+	rules: {
+		'@typescript-eslint/no-var-requires': 'off'
+	},
 	root: true,
 	extends: [
 		'eslint:recommended',
