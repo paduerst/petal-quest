@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { fade } from 'svelte/transition';
 	import { createEventDispatcher } from 'svelte';
 
 	const dispatch = createEventDispatcher();
@@ -25,15 +26,15 @@
 		dispatchClick('EDIT');
 	}
 
-	function dispatchClickCopy() {
-		dispatchClick('COPY');
+	function dispatchClickShare() {
+		dispatchClick('SHARE');
 	}
 </script>
 
-<div class="btn-group variant-filled m-1 print:hidden">
+<div transition:fade class="btn-group variant-filled m-1 print:hidden">
 	<button on:click={dispatchClickLoading}>LOADING</button>
 	<button on:click={dispatchClickWelcome}>WELCOME</button>
 	<button on:click={dispatchClickDisplay}>DISPLAY</button>
 	<button on:click={dispatchClickEdit}>EDIT</button>
-	<button on:click={dispatchClickCopy}>COPY</button>
+	<button on:click={dispatchClickShare}>SHARE</button>
 </div>
