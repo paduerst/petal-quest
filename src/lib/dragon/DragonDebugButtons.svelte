@@ -30,7 +30,7 @@
 	}
 </script>
 
-<div class="btn-group variant-filled m-1">
+<div class="btn-group variant-filled m-1 print:hidden">
 	<button on:click={dispatchClickLoading}>LOADING</button>
 	<button on:click={dispatchClickWelcome}>WELCOME</button>
 	<button on:click={dispatchClickDisplay}>DISPLAY</button>

@@ -9,10 +9,14 @@
 
 	const debugEnabled: boolean = true;
 	function handleDebugClick(event: { detail: { debugText: string } }): void {
-		console.log(event.detail.debugText);
 		const inputState = DragonStates.find((validState) => validState === event.detail.debugText);
 		if (inputState) {
 			currentState = inputState;
+		} else if (event.detail.debugText === 'COPY') {
+			console.log('You pressed the COPY button!');
+			// TODO
+		} else {
+			console.log(`Unhandled debugText of ${event.detail.debugText}`);
 		}
 	}
 </script>
