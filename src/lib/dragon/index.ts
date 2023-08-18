@@ -1,7 +1,7 @@
-export const STATES = ['LOADING', 'WELCOME', 'DISPLAY', 'EDIT'] as const;
-export type State = (typeof STATES)[number];
-export function toState(state_string: string): State | undefined {
-	return STATES.find((state) => state === state_string);
+export const BUILDER_STATES = ['LOADING', 'WELCOME', 'DISPLAY', 'EDIT'] as const;
+export type BuilderState = (typeof BUILDER_STATES)[number];
+export function stringToBuilderState(state_string: string): BuilderState | undefined {
+	return BUILDER_STATES.find((state) => state === state_string);
 }
 
 export const AGES = ['wyrmling', 'young', 'adult', 'ancient'] as const;

@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { dev } from '$app/environment';
 
-	import { type State, toState } from '.';
+	import { type BuilderState, stringToBuilderState } from '.';
 
 	import DragonContainer from './DragonContainer.svelte';
 	import DragonLoadingAnimation from './DragonLoadingAnimation.svelte';
 	import DragonControlButtons from './DragonControlButtons.svelte';
 	import DragonDebugButtons from './DragonDebugButtons.svelte';
 
-	let currentState: State = 'LOADING';
+	let currentState: BuilderState = 'LOADING';
 
 	function handleShareClick() {
 		console.log('You pressed the SHARE button!');
@@ -28,8 +28,8 @@
 	const debugEnabled: boolean = true && dev;
 	function handleDebugClick(event: { detail: { debugText: string } }): void {
 		if (debugEnabled) {
-			const inputState = toState(event.detail.debugText);
-			if (inputState) {
+			const inputState = stringToBuilderState(event.detail.debugText);
+			if (inputState !== undefined) {
 				currentState = inputState;
 			} else if (event.detail.debugText === 'SHARE') {
 				handleShareClick();

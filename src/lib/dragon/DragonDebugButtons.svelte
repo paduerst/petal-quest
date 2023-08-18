@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import { createEventDispatcher } from 'svelte';
-	import { STATES } from '.';
+	import { BUILDER_STATES } from '.';
 
 	const dispatch = createEventDispatcher();
 
@@ -11,11 +11,11 @@
 		});
 	}
 
-	const debugTexts = [...STATES, 'SHARE'];
+	const DEBUG_TEXTS = [...BUILDER_STATES, 'SHARE'] as const;
 </script>
 
 <div transition:fade class="btn-group variant-filled m-1 print:hidden">
-	{#each debugTexts as debugText}
+	{#each DEBUG_TEXTS as debugText}
 		<button
 			on:click={() => {
 				dispatchClick(debugText);
