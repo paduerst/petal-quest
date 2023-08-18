@@ -2,7 +2,7 @@
 	import { page } from '$app/stores';
 	import { AppBar, drawerStore } from '@skeletonlabs/skeleton';
 	import Logo from '$lib/Logo.svelte';
-	import NavLinks from '$lib';
+	import { NAV_LINKS } from '$lib';
 
 	let path: string;
 	$: path = $page.url.pathname;
@@ -21,7 +21,7 @@
 		<svelte:fragment slot="trail">
 			<nav class="hidden lg:flex">
 				<ul class="list-none flex items-center flex-row">
-					{#each NavLinks as link}
+					{#each NAV_LINKS as link}
 						<li>
 							<a
 								class="nav-anchor hover:bg-surface-hover-token"

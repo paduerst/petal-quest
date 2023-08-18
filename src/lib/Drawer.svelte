@@ -2,7 +2,7 @@
 	import { page } from '$app/stores';
 	import { Drawer, drawerStore } from '@skeletonlabs/skeleton';
 	import Logo from './Logo.svelte';
-	import NavLinks from '$lib';
+	import { NAV_LINKS } from '$lib';
 
 	let path: string;
 	$: path = $page.url.pathname;
@@ -38,7 +38,7 @@
 	<hr />
 	<nav class="list-nav p-4">
 		<ul>
-			{#each NavLinks as link}
+			{#each NAV_LINKS as link}
 				<li>
 					<a
 						class="nav-anchor hover:bg-surface-hover-token"
