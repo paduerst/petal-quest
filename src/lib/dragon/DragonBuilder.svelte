@@ -27,13 +27,17 @@
 
 	const debugEnabled: boolean = true && dev;
 	function handleDebugClick(event: { detail: { debugText: string } }): void {
-		const inputState = toState(event.detail.debugText);
-		if (inputState) {
-			currentState = inputState;
-		} else if (event.detail.debugText === 'SHARE') {
-			handleShareClick();
+		if (debugEnabled) {
+			const inputState = toState(event.detail.debugText);
+			if (inputState) {
+				currentState = inputState;
+			} else if (event.detail.debugText === 'SHARE') {
+				handleShareClick();
+			} else {
+				console.log(`Unhandled debugText of ${event.detail.debugText}`);
+			}
 		} else {
-			console.log(`Unhandled debugText of ${event.detail.debugText}`);
+			console.log('Warning: Debug events not currently handled!');
 		}
 	}
 </script>

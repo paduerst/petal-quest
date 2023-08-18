@@ -1,5 +1,5 @@
 <script>
-	import Dragon from '$lib/dragon/Dragon.svelte';
+	import DragonBuilder from '$lib/dragon/DragonBuilder.svelte';
 </script>
 
-<Dragon />
+<DragonBuilder />
