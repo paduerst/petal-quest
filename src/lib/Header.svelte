@@ -50,6 +50,7 @@
 <style>
 	.nav-anchor {
 		@apply p-3 m-2 text-lg no-underline text-white;
+		border-radius: var(--theme-rounded-base);
 	}
 
 	.nav-anchor.active {
@@ -58,5 +59,6 @@
 
 	.menu-btn {
 		@apply p-3;
+		border-radius: var(--theme-rounded-base);
 	}
 </style>

@@ -57,6 +57,7 @@
 <style>
 	.nav-anchor {
 		@apply no-underline text-white;
+		border-radius: var(--theme-rounded-base);
 	}
 
 	.nav-anchor.active {
@@ -66,5 +67,6 @@
 	.close-btn {
 		@apply p-3;
 		margin: 6px 0 6px 16px;
+		border-radius: var(--theme-rounded-base);
 	}
 </style>

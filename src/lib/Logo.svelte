@@ -21,6 +21,7 @@
 <style>
 	.logo-anchor {
 		@apply flex items-center no-underline text-white p-2 m-1;
+		border-radius: var(--theme-rounded-base);
 	}
 
 	.logo-img {

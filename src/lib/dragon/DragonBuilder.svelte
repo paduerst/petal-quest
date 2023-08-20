@@ -42,18 +42,24 @@
 	}
 </script>
 
-<DragonContainer>
-	{#if currentState === 'LOADING'}
-		<DragonLoadingAnimation />
-	{:else}
-		<p>The currentState of {currentState} is unhandled right now!</p>
+<div class="flex flex-col items-center">
+	<DragonContainer>
+		{#if currentState === 'LOADING'}
+			<DragonLoadingAnimation />
+		{:else}
+			<p>The currentState of {currentState} is unhandled right now!</p>
+		{/if}
+	</DragonContainer>
+
+	{#if currentState !== 'LOADING' && currentState !== 'WELCOME'}
+		<div class="w-fit">
+			<DragonControlButtons on:click={handleControlClick} />
+		</div>
 	{/if}
-</DragonContainer>
 
-{#if currentState !== 'LOADING' && currentState !== 'WELCOME'}
-	<DragonControlButtons on:click={handleControlClick} />
-{/if}
-
-{#if debugEnabled}
-	<DragonDebugButtons on:click={handleDebugClick} />
-{/if}
+	{#if debugEnabled}
+		<div class="w-fit">
+			<DragonDebugButtons on:click={handleDebugClick} />
+		</div>
+	{/if}
+</div>
