@@ -19,12 +19,16 @@
 	} else {
 		dragonTheme = COLOR_TO_THEME[config.color];
 	}
+
+	let innerClientHeight: number;
 </script>
 
 <div class="dragon-container" style="--theme-dragon: {dragonTheme};">
 	<div class="dragon-container-top-edge" />
-	<div class="p-3 min-h-[310px]">
-		<slot />
+	<div class="outer-wrapper" style="height: {innerClientHeight}px;">
+		<div class="inner-wrapper" bind:clientHeight={innerClientHeight}>
+			<slot />
+		</div>
 	</div>
 	<div class="dragon-container-bot-edge" />
 </div>
@@ -66,5 +70,14 @@
 	.dragon-container-bot-edge {
 		bottom: calc(-1 * var(--y-edge-height));
 		margin-top: calc(-1 * var(--y-edge-height));
+	}
+
+	.outer-wrapper {
+		@apply min-h-[300px] overflow-hidden;
+		transition: height 600ms ease-out;
+	}
+
+	.inner-wrapper {
+		@apply p-3 h-fit w-full inline-block;
 	}
 </style>

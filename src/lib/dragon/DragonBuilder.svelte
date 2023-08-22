@@ -5,6 +5,8 @@
 
 	import DragonContainer from './DragonContainer.svelte';
 	import DragonLoadingAnimation from './DragonLoadingAnimation.svelte';
+	import DragonWelcomeContents from './DragonWelcomeContents.svelte';
+	import DragonDebugContents from './DragonDebugContents.svelte';
 	import DragonControlButtons from './DragonControlButtons.svelte';
 	import DragonDebugButtons from './DragonDebugButtons.svelte';
 
@@ -57,6 +59,10 @@
 	<DragonContainer config={currentDragonConfig}>
 		{#if currentState === 'LOADING'}
 			<DragonLoadingAnimation />
+		{:else if currentState === 'WELCOME'}
+			<DragonWelcomeContents />
+		{:else if currentState === 'DEBUG'}
+			<DragonDebugContents {currentDragonConfig} />
 		{:else}
 			<p>The currentState of {currentState} is unhandled right now!</p>
 		{/if}
