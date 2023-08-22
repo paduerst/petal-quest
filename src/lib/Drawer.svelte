@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { Drawer, drawerStore } from '@skeletonlabs/skeleton';
-	import Logo from './Logo.svelte';
 	import { NAV_LINKS } from '$lib';
 
 	let path: string;
@@ -20,7 +19,8 @@
 <svelte:window bind:innerWidth />
 
 <Drawer position="right" width="w-[280px] md:w-[480px]">
-	<div class="px-4 flex justify-between flex-row-reverse">
+	<div class="px-4 flex justify-between flex-row">
+		<div />
 		<button class="close-btn hover:bg-surface-hover-token" on:click={drawerClose}>
 			<span>
 				<svg class="w-5 h-5" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -33,7 +33,6 @@
 				</svg>
 			</span>
 		</button>
-		<Logo on:click={drawerClose} />
 	</div>
 	<hr />
 	<nav class="list-nav p-4">
@@ -66,7 +65,7 @@
 
 	.close-btn {
 		@apply p-3;
-		margin: 6px 0 6px 16px;
+		margin: 6px 0;
 		border-radius: var(--theme-rounded-base);
 	}
 </style>
