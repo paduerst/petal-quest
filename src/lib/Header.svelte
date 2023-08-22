@@ -13,7 +13,7 @@
 </script>
 
 <div class="print:hidden">
-	<AppBar padding="px-4 py-0">
+	<AppBar padding="px-4 py-0" border="border-b border-surface-300-600-token">
 		<svelte:fragment slot="lead">
 			<Logo />
 		</svelte:fragment>
@@ -49,7 +49,7 @@
 
 <style>
 	.nav-anchor {
-		@apply p-3 m-2 text-lg no-underline text-white;
+		@apply p-3 m-2 text-lg no-underline text-token;
 		border-radius: var(--theme-rounded-base);
 	}
 

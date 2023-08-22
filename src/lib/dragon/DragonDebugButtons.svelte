@@ -14,7 +14,7 @@
 	const DEBUG_TEXTS = [...BUILDER_STATES, 'SHARE'] as const;
 </script>
 
-<div transition:fade class="btn-group variant-filled m-1 print:hidden">
+<div transition:fade class="btn-group variant-filled-surface flex-wrap m-1 print:hidden">
 	{#each DEBUG_TEXTS as debugText}
 		<button
 			on:click={() => {
