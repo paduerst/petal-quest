@@ -1,13 +1,7 @@
 <script lang="ts">
 	import { dev } from '$app/environment';
 
-	import {
-		type BuilderState,
-		stringToBuilderState,
-		DragonConfig,
-		type RGB,
-		COLOR_TO_THEME
-	} from '.';
+	import { type BuilderState, stringToBuilderState, DragonConfig } from '.';
 
 	import DragonContainer from './DragonContainer.svelte';
 	import DragonLoadingAnimation from './DragonLoadingAnimation.svelte';
@@ -57,17 +51,10 @@
 			color: 'green'
 		};
 	}
-
-	let dragonTheme: RGB | undefined = undefined;
-	$: if (currentDragonConfig === undefined) {
-		dragonTheme = undefined;
-	} else {
-		dragonTheme = COLOR_TO_THEME[currentDragonConfig.color];
-	}
 </script>
 
 <div class="flex flex-col items-center">
-	<DragonContainer {dragonTheme}>
+	<DragonContainer config={currentDragonConfig}>
 		{#if currentState === 'LOADING'}
 			<DragonLoadingAnimation />
 		{:else}
