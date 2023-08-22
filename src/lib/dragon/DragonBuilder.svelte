@@ -1,7 +1,13 @@
 <script lang="ts">
 	import { dev } from '$app/environment';
 
-	import { type BuilderState, stringToBuilderState } from '.';
+	import {
+		type BuilderState,
+		stringToBuilderState,
+		DragonConfig,
+		type RGB,
+		COLOR_TO_THEME
+	} from '.';
 
 	import DragonContainer from './DragonContainer.svelte';
 	import DragonLoadingAnimation from './DragonLoadingAnimation.svelte';
@@ -40,10 +46,28 @@
 			console.log('Warning: Debug events not currently handled!');
 		}
 	}
+
+	let currentDragonConfig: DragonConfig | undefined = undefined;
+	$: if (currentState === 'LOADING' || currentState === 'WELCOME') {
+		currentDragonConfig = undefined;
+	} else {
+		// TODO: Replace this placeholder config.
+		currentDragonConfig = {
+			age: 'wyrmling',
+			color: 'green'
+		};
+	}
+
+	let dragonTheme: RGB | undefined = undefined;
+	$: if (currentDragonConfig === undefined) {
+		dragonTheme = undefined;
+	} else {
+		dragonTheme = COLOR_TO_THEME[currentDragonConfig.color];
+	}
 </script>
 
 <div class="flex flex-col items-center">
-	<DragonContainer>
+	<DragonContainer {dragonTheme}>
 		{#if currentState === 'LOADING'}
 			<DragonLoadingAnimation />
 		{:else}

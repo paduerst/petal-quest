@@ -1,4 +1,4 @@
-<div class="w-full text-center overflow-hidden py-8">
+<div class="w-full text-center overflow-hidden py-8 print:hidden">
 	<p class="text-3xl">Loading...</p>
 	<div class="loadingio-spinner-bars-segxihspibr">
 		<!-- Based on code from https://loading.io/ -->
