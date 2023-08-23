@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { dev } from '$app/environment';
+	import { fade } from 'svelte/transition';
 
 	import { type BuilderState, stringToBuilderState, DragonConfig } from '.';
 
@@ -11,6 +12,19 @@
 	import DragonDebugButtons from './DragonDebugButtons.svelte';
 
 	let currentState: BuilderState = 'LOADING';
+	let nextState: BuilderState | undefined = undefined;
+	function setNextState(nextStateIn: BuilderState): void {
+		if (nextStateIn !== currentState) {
+			nextState = nextStateIn;
+		}
+	}
+	function finishStateTransition(): void {
+		if (nextState === undefined) {
+			return; // no transition to finish
+		}
+		currentState = nextState;
+		nextState = undefined;
+	}
 
 	function handleShareClick() {
 		console.log('You pressed the SHARE button!');
@@ -19,7 +33,7 @@
 
 	function handleControlClick(event: { detail: { buttonText: string } }): void {
 		if (event.detail.buttonText === 'EDIT') {
-			currentState = 'EDIT';
+			setNextState('EDIT');
 		} else if (event.detail.buttonText === 'SHARE') {
 			handleShareClick();
 		} else {
@@ -32,7 +46,7 @@
 		if (debugEnabled) {
 			const inputState = stringToBuilderState(event.detail.debugText);
 			if (inputState !== undefined) {
-				currentState = inputState;
+				setNextState(inputState);
 			} else if (event.detail.debugText === 'SHARE') {
 				handleShareClick();
 			} else {
@@ -57,14 +71,24 @@
 
 <div class="flex flex-col items-center">
 	<DragonContainer config={currentDragonConfig}>
-		{#if currentState === 'LOADING'}
-			<DragonLoadingAnimation />
-		{:else if currentState === 'WELCOME'}
-			<DragonWelcomeContents />
-		{:else if currentState === 'DEBUG'}
-			<DragonDebugContents {currentDragonConfig} />
+		{#if currentState === 'LOADING' && nextState === undefined}
+			<div transition:fade on:outroend={finishStateTransition}>
+				<DragonLoadingAnimation />
+			</div>
+		{:else if currentState === 'WELCOME' && nextState === undefined}
+			<div transition:fade on:outroend={finishStateTransition}>
+				<DragonWelcomeContents />
+			</div>
+		{:else if currentState === 'DEBUG' && nextState === undefined}
+			<div transition:fade on:outroend={finishStateTransition}>
+				<DragonDebugContents {currentDragonConfig} />
+			</div>
+		{:else if nextState !== undefined}
+			<!-- We are transitioning. Keep it empty. -->
 		{:else}
-			<p>The currentState of {currentState} is unhandled right now!</p>
+			<div transition:fade on:outroend={finishStateTransition}>
+				<p>The currentState of {currentState} is unhandled right now!</p>
+			</div>
 		{/if}
 	</DragonContainer>
 

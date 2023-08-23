@@ -21,11 +21,18 @@
 	}
 
 	let innerClientHeight: number;
+	const minHeight: number = 300;
+	let outerWrapperHeight: number;
+	$: if (innerClientHeight < minHeight) {
+		outerWrapperHeight = minHeight;
+	} else {
+		outerWrapperHeight = innerClientHeight;
+	}
 </script>
 
 <div class="dragon-container" style="--theme-dragon: {dragonTheme};">
 	<div class="dragon-container-top-edge" />
-	<div class="outer-wrapper" style="height: {innerClientHeight}px;">
+	<div class="outer-wrapper" style="height: {outerWrapperHeight}px; min-height: {minHeight}px;">
 		<div class="inner-wrapper" bind:clientHeight={innerClientHeight}>
 			<slot />
 		</div>
@@ -74,7 +81,7 @@
 
 	.outer-wrapper {
 		@apply min-h-[300px] overflow-hidden;
-		transition: height 600ms ease-out;
+		transition: height 250ms ease;
 	}
 
 	.inner-wrapper {
