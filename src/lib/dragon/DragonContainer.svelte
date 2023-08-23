@@ -80,7 +80,7 @@
 	}
 
 	.outer-wrapper {
-		@apply min-h-[300px] overflow-hidden;
+		@apply overflow-hidden;
 		transition: height 250ms ease;
 	}
 

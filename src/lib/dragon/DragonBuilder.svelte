@@ -7,6 +7,8 @@
 	import DragonContainer from './DragonContainer.svelte';
 	import DragonLoadingAnimation from './DragonLoadingAnimation.svelte';
 	import DragonWelcomeContents from './DragonWelcomeContents.svelte';
+	import DragonDisplayContents from './DragonDisplayContents.svelte';
+	import DragonEditContents from './DragonEditContents.svelte';
 	import DragonDebugContents from './DragonDebugContents.svelte';
 	import DragonControlButtons from './DragonControlButtons.svelte';
 	import DragonDebugButtons from './DragonDebugButtons.svelte';
@@ -78,6 +80,14 @@
 		{:else if currentState === 'WELCOME' && nextState === undefined}
 			<div transition:fade on:outroend={finishStateTransition}>
 				<DragonWelcomeContents />
+			</div>
+		{:else if currentState === 'DISPLAY' && nextState === undefined}
+			<div transition:fade on:outroend={finishStateTransition}>
+				<DragonDisplayContents />
+			</div>
+		{:else if currentState === 'EDIT' && nextState === undefined}
+			<div transition:fade on:outroend={finishStateTransition}>
+				<DragonEditContents />
 			</div>
 		{:else if currentState === 'DEBUG' && nextState === undefined}
 			<div transition:fade on:outroend={finishStateTransition}>
