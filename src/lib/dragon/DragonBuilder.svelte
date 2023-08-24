@@ -102,7 +102,7 @@
 		{/if}
 	</DragonContainer>
 
-	{#if currentState !== 'LOADING' && currentState !== 'WELCOME'}
+	{#if currentState === 'DISPLAY'}
 		<div class="w-fit">
 			<DragonControlButtons on:click={handleControlClick} />
 		</div>
