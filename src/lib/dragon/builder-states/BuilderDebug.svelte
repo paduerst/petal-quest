@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { DragonConfig } from '.';
+	import type { DragonConfig } from '..';
 	export let currentDragonConfig: DragonConfig | undefined;
 </script>
 

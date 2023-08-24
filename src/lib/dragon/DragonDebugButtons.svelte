@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import { createEventDispatcher } from 'svelte';
-	import { BUILDER_STATES } from '.';
+	import { BUILDER_STATES } from './builder-states';
 
 	const dispatch = createEventDispatcher();
 

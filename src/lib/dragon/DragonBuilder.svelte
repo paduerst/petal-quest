@@ -2,14 +2,15 @@
 	import { dev } from '$app/environment';
 	import { fade } from 'svelte/transition';
 
-	import { type BuilderState, stringToBuilderState, DragonConfig } from '.';
+	import type { DragonConfig } from '.';
+	import { type BuilderState, stringToBuilderState } from './builder-states';
 
 	import DragonContainer from './DragonContainer.svelte';
-	import DragonLoadingAnimation from './DragonLoadingAnimation.svelte';
-	import DragonWelcomeContents from './DragonWelcomeContents.svelte';
-	import DragonDisplayContents from './DragonDisplayContents.svelte';
-	import DragonEditContents from './DragonEditContents.svelte';
-	import DragonDebugContents from './DragonDebugContents.svelte';
+	import BuilderLoading from './builder-states/BuilderLoading.svelte';
+	import BuilderWelcome from './builder-states/BuilderWelcome.svelte';
+	import BuilderDisplay from './builder-states/BuilderDisplay.svelte';
+	import BuilderEdit from './builder-states/BuilderEdit.svelte';
+	import BuilderDebug from './builder-states/BuilderDebug.svelte';
 	import DragonControlButtons from './DragonControlButtons.svelte';
 	import DragonDebugButtons from './DragonDebugButtons.svelte';
 
@@ -75,23 +76,23 @@
 	<DragonContainer config={currentDragonConfig}>
 		{#if currentState === 'LOADING' && nextState === undefined}
 			<div transition:fade on:outroend={finishStateTransition}>
-				<DragonLoadingAnimation />
+				<BuilderLoading />
 			</div>
 		{:else if currentState === 'WELCOME' && nextState === undefined}
 			<div transition:fade on:outroend={finishStateTransition}>
-				<DragonWelcomeContents />
+				<BuilderWelcome />
 			</div>
 		{:else if currentState === 'DISPLAY' && nextState === undefined}
 			<div transition:fade on:outroend={finishStateTransition}>
-				<DragonDisplayContents />
+				<BuilderDisplay />
 			</div>
 		{:else if currentState === 'EDIT' && nextState === undefined}
 			<div transition:fade on:outroend={finishStateTransition}>
-				<DragonEditContents />
+				<BuilderEdit />
 			</div>
 		{:else if currentState === 'DEBUG' && nextState === undefined}
 			<div transition:fade on:outroend={finishStateTransition}>
-				<DragonDebugContents {currentDragonConfig} />
+				<BuilderDebug {currentDragonConfig} />
 			</div>
 		{:else if nextState !== undefined}
 			<!-- We are transitioning. Keep it empty. -->
