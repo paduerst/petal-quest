@@ -2,7 +2,7 @@
 	import { fade } from 'svelte/transition';
 	import { createEventDispatcher } from 'svelte';
 
-	const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher<{ click: { buttonText: string } }>();
 
 	function dispatchClick(buttonText: string) {
 		dispatch('click', {

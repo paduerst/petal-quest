@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { dev } from '$app/environment';
 	import { fade } from 'svelte/transition';
+	import { onMount } from 'svelte';
 
 	import type { DragonConfig } from '.';
 	import { type BuilderState, stringToBuilderState } from './builder-states';
@@ -44,7 +45,7 @@
 		}
 	}
 
-	const debugEnabled: boolean = true && dev;
+	const debugEnabled: boolean = false && dev;
 	function handleDebugClick(event: { detail: { debugText: string } }): void {
 		if (debugEnabled) {
 			const inputState = stringToBuilderState(event.detail.debugText);
@@ -61,14 +62,14 @@
 	}
 
 	let currentDragonConfig: DragonConfig | undefined = undefined;
-	$: if (currentState === 'LOADING' || currentState === 'WELCOME') {
-		currentDragonConfig = undefined;
-	} else {
-		// TODO: Replace this placeholder config.
-		currentDragonConfig = {
-			age: 'wyrmling',
-			color: 'green'
-		};
+
+	onMount(() => {
+		setNextState('WELCOME');
+	});
+
+	function onNewDragonConfig(event: { detail: DragonConfig }) {
+		currentDragonConfig = event.detail;
+		setNextState('DISPLAY');
 	}
 </script>
 
@@ -80,15 +81,15 @@
 			</div>
 		{:else if currentState === 'WELCOME' && nextState === undefined}
 			<div transition:fade on:outroend={finishStateTransition}>
-				<BuilderWelcome />
+				<BuilderWelcome on:newDragonConfig={onNewDragonConfig} />
 			</div>
 		{:else if currentState === 'DISPLAY' && nextState === undefined}
 			<div transition:fade on:outroend={finishStateTransition}>
-				<BuilderDisplay />
+				<BuilderDisplay {currentDragonConfig} />
 			</div>
 		{:else if currentState === 'EDIT' && nextState === undefined}
 			<div transition:fade on:outroend={finishStateTransition}>
-				<BuilderEdit />
+				<BuilderEdit {currentDragonConfig} on:newDragonConfig={onNewDragonConfig} />
 			</div>
 		{:else if currentState === 'DEBUG' && nextState === undefined}
 			<div transition:fade on:outroend={finishStateTransition}>

@@ -3,7 +3,7 @@
 	import { createEventDispatcher } from 'svelte';
 	import { BUILDER_STATES } from './builder-states';
 
-	const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher<{ click: { debugText: string } }>();
 
 	function dispatchClick(debugText: string) {
 		dispatch('click', {
