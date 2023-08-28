@@ -71,6 +71,11 @@
 		currentDragonConfig = event.detail;
 		setNextState('DISPLAY');
 	}
+
+	function onResetDragon() {
+		setNextState('WELCOME');
+		currentDragonConfig = undefined;
+	}
 </script>
 
 <div class="flex flex-col items-center">
@@ -89,7 +94,11 @@
 			</div>
 		{:else if currentState === 'EDIT' && nextState === undefined}
 			<div transition:fade on:outroend={finishStateTransition}>
-				<BuilderEdit {currentDragonConfig} on:newDragonConfig={onNewDragonConfig} />
+				<BuilderEdit
+					{currentDragonConfig}
+					on:newDragonConfig={onNewDragonConfig}
+					on:resetDragon={onResetDragon}
+				/>
 			</div>
 		{:else if currentState === 'DEBUG' && nextState === undefined}
 			<div transition:fade on:outroend={finishStateTransition}>
