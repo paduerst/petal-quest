@@ -17,17 +17,18 @@
 
 	let currentState: BuilderState = 'LOADING';
 	let nextState: BuilderState | undefined = undefined;
+
 	function setNextState(nextStateIn: BuilderState): void {
 		if (nextStateIn !== currentState) {
 			nextState = nextStateIn;
 		}
 	}
+
 	function finishStateTransition(): void {
-		if (nextState === undefined) {
-			return; // no transition to finish
+		if (nextState !== undefined) {
+			currentState = nextState;
+			nextState = undefined;
 		}
-		currentState = nextState;
-		nextState = undefined;
 	}
 
 	function handleShareClick() {
@@ -46,6 +47,7 @@
 	}
 
 	const debugEnabled: boolean = false && dev;
+
 	function handleDebugClick(event: { detail: { debugText: string } }): void {
 		if (debugEnabled) {
 			const inputState = stringToBuilderState(event.detail.debugText);

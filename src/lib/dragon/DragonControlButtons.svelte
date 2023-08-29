@@ -19,7 +19,7 @@
 	}
 </script>
 
-<div transition:fade class="flex flex-wrap print:hidden">
+<div transition:fade class="flex flex-wrap justify-center print:hidden">
 	<button class="btn variant-filled-surface m-1" on:click={dispatchClickEdit}>Edit Dragon</button>
 	<!-- <button class="btn variant-filled-surface m-1" on:click={dispatchClickShare}>Share</button> -->
 </div>
