@@ -1,7 +1,7 @@
-<script>
+<script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 
-	const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher<{ click: null }>();
 
 	function dispatchClick() {
 		dispatch('click');
@@ -20,7 +20,8 @@
 
 <style>
 	.logo-anchor {
-		@apply flex items-center no-underline text-white p-2 m-1;
+		@apply flex items-center no-underline text-token p-2 m-1;
+		border-radius: var(--theme-rounded-base);
 	}
 
 	.logo-img {
