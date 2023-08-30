@@ -32,7 +32,10 @@
 
 <div class="dragon-container" style="--theme-dragon: {dragonTheme};">
 	<div class="dragon-container-top-edge" />
-	<div class="outer-wrapper" style="height: {outerWrapperHeight}px; min-height: {minHeight}px;">
+	<div
+		class="outer-wrapper"
+		style="--outer-wrapper-height: {outerWrapperHeight}px; min-height: {minHeight}px;"
+	>
 		<div class="inner-wrapper" bind:clientHeight={innerClientHeight}>
 			<slot />
 		</div>
@@ -81,7 +84,14 @@
 
 	.outer-wrapper {
 		@apply overflow-hidden;
+		height: var(--outer-wrapper-height);
 		transition: height 250ms ease;
+	}
+
+	@media print {
+		.outer-wrapper {
+			height: fit-content;
+		}
 	}
 
 	.inner-wrapper {
