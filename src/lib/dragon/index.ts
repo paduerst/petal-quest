@@ -1,3 +1,13 @@
+export function capitalizeFirstLetter(string: string) {
+	if (string.length < 1) {
+		return string;
+	} else if (string.length === 1) {
+		return string.toUpperCase();
+	} else {
+		return string.charAt(0).toUpperCase() + string.slice(1);
+	}
+}
+
 export const AGES = ['wyrmling', 'young', 'adult', 'ancient'] as const;
 export type Age = (typeof AGES)[number];
 

@@ -35,6 +35,7 @@
 	<div
 		class="outer-wrapper"
 		style="--outer-wrapper-height: {outerWrapperHeight}px; min-height: {minHeight}px;"
+		data-theme="statBlockContents"
 	>
 		<div class="inner-wrapper" bind:clientHeight={innerClientHeight}>
 			<slot />

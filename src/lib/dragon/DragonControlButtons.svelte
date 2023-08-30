@@ -20,6 +20,7 @@
 </script>
 
 <div transition:fade class="flex flex-wrap justify-center print:hidden">
-	<button class="btn variant-filled-surface m-1" on:click={dispatchClickEdit}>Edit Dragon</button>
-	<button class="btn variant-filled-surface m-1" on:click={dispatchClickShare}>Share Dragon</button>
+	<button class="daisy-btn daisy-btn-neutral m-1" on:click={dispatchClickEdit}>Edit Dragon</button>
+	<button class="daisy-btn daisy-btn-neutral m-1" on:click={dispatchClickShare}>Share Dragon</button
+	>
 </div>

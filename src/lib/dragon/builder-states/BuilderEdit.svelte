@@ -2,7 +2,7 @@
 	import { createEventDispatcher } from 'svelte';
 	import { onMount } from 'svelte';
 
-	import { DragonConfig, COLORS, AGES } from '..';
+	import { DragonConfig, COLORS, AGES, capitalizeFirstLetter } from '..';
 
 	export let currentDragonConfig: DragonConfig | undefined = undefined;
 
@@ -23,27 +23,49 @@
 	}
 </script>
 
+<p class="font-bold text-xl">Edit</p>
+
 <div class="flex flex-col items-center">
-	<select bind:value={editedConfig.age} class="m-1">
-		{#each AGES as age}
-			<option value={age}>{age}</option>
-		{/each}
-	</select>
+	<div class="daisy-form-control w-full max-w-xs m-1">
+		<label class="daisy-label" for="age">
+			<span class="daisy-label-text">Age</span>
+		</label>
+		<select
+			bind:value={editedConfig.age}
+			class="daisy-select daisy-select-bordered bg-white"
+			name="age"
+		>
+			{#each AGES as age}
+				<option value={age}>{capitalizeFirstLetter(age)}</option>
+			{/each}
+		</select>
+	</div>
 
-	<select bind:value={editedConfig.color} class="m-1">
-		{#each COLORS as color}
-			<option value={color}>{color}</option>
-		{/each}
-	</select>
+	<div class="daisy-form-control w-full max-w-xs m-1">
+		<label class="daisy-label" for="color">
+			<span class="daisy-label-text">Color</span>
+		</label>
+		<select
+			bind:value={editedConfig.color}
+			class="daisy-select daisy-select-bordered bg-white"
+			name="color"
+		>
+			{#each COLORS as color}
+				<option value={color}>{capitalizeFirstLetter(color)}</option>
+			{/each}
+		</select>
+	</div>
 
-	<button class="btn variant-filled-surface m-1" on:click={updateDragon}>Update the dragon!</button>
+	<button class="daisy-btn daisy-btn-neutral m-2 mt-6 mb-1" on:click={updateDragon}>
+		Update the Dragon
+	</button>
 
 	<button
-		class="btn variant-filled-surface m-1"
+		class="daisy-btn daisy-btn-neutral m-2 mt-1"
 		on:click={() => {
 			dispatch('resetDragon');
 		}}
 	>
-		Reset the dragon.
+		Reset the Dragon
 	</button>
 </div>

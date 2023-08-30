@@ -29,7 +29,15 @@ const config = {
 					info: '#0ea5e9',
 					success: '#84cc16',
 					warning: '#eab308',
-					error: '#d41976'
+					error: '#d41976',
+					'--btn-text-case': 'none'
+				}
+			},
+			{
+				statBlockContents: {
+					...require('daisyui/src/theming/themes')['[data-theme=light]'],
+					'base-100': '#eee',
+					'--btn-text-case': 'none'
 				}
 			}
 		],
