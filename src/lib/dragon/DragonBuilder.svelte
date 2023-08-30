@@ -12,6 +12,7 @@
 	import BuilderDisplay from './builder-states/BuilderDisplay.svelte';
 	import BuilderEdit from './builder-states/BuilderEdit.svelte';
 	import BuilderDebug from './builder-states/BuilderDebug.svelte';
+	import DragonShareModal, { openShareDialog } from './DragonShareModal.svelte';
 	import DragonControlButtons from './DragonControlButtons.svelte';
 	import DragonDebugButtons from './DragonDebugButtons.svelte';
 
@@ -32,8 +33,7 @@
 	}
 
 	function handleShareClick() {
-		console.log('You pressed the SHARE button!');
-		// TODO
+		openShareDialog();
 	}
 
 	function handleControlClick(event: { detail: { buttonText: string } }): void {
@@ -114,6 +114,8 @@
 			</div>
 		{/if}
 	</DragonContainer>
+
+	<DragonShareModal {currentDragonConfig} />
 
 	{#if currentState === 'DISPLAY'}
 		<div class="w-fit">
