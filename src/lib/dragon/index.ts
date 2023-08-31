@@ -1,7 +1,15 @@
+export function capitalizeFirstLetter(string: string): string {
+	return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 export const AGES = ['wyrmling', 'young', 'adult', 'ancient'] as const;
+export const AGES_UPPER = AGES.map(capitalizeFirstLetter) as ReadonlyArray<string>;
+export const AGES_CAPS = AGES.map((age) => age.toUpperCase()) as ReadonlyArray<string>;
 export type Age = (typeof AGES)[number];
 
 export const COLORS = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'] as const;
+export const COLORS_UPPER = COLORS.map(capitalizeFirstLetter) as ReadonlyArray<string>;
+export const COLORS_CAPS = COLORS.map((color) => color.toUpperCase()) as ReadonlyArray<string>;
 export type Color = (typeof COLORS)[number];
 
 export type RGB = `rgb(${number}, ${number}, ${number})`;
