@@ -50,6 +50,6 @@
 	</div>
 
 	<button class="daisy-btn daisy-btn-neutral m-2 mt-6" on:click={buildDragon}>
-		Build the Dragon
+		Build Dragon
 	</button>
 </div>

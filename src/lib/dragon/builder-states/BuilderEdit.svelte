@@ -57,7 +57,7 @@
 	</div>
 
 	<button class="daisy-btn daisy-btn-neutral m-2 mt-6 mb-1" on:click={updateDragon}>
-		Update the Dragon
+		Update Dragon
 	</button>
 
 	<button
@@ -66,6 +66,6 @@
 			dispatch('resetDragon');
 		}}
 	>
-		Reset the Dragon
+		Build a New Dragon
 	</button>
 </div>
