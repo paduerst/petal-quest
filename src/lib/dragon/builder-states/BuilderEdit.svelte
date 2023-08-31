@@ -56,6 +56,32 @@
 		</select>
 	</div>
 
+	<div class="daisy-form-control w-full max-w-xs m-1">
+		<label class="daisy-label" for="name">
+			<span class="daisy-label-text">Name</span>
+		</label>
+		<input
+			type="text"
+			bind:value={editedConfig.name}
+			class="daisy-input daisy-input-bordered bg-white"
+			name="name"
+			data-1p-ignore
+		/>
+	</div>
+
+	<div class="daisy-form-control w-full max-w-xs m-1">
+		<label class="daisy-label" for="alignment">
+			<span class="daisy-label-text">Alignment</span>
+		</label>
+		<input
+			type="text"
+			bind:value={editedConfig.alignment}
+			class="daisy-input daisy-input-bordered bg-white"
+			name="alignment"
+			data-1p-ignore
+		/>
+	</div>
+
 	<button class="daisy-btn daisy-btn-neutral m-2 mt-6 mb-1" on:click={updateDragon}>
 		Update Dragon
 	</button>
