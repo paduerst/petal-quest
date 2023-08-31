@@ -66,7 +66,6 @@
 	let currentDragonConfig: DragonConfig | undefined = undefined;
 
 	onMount(() => {
-		console.log('Test');
 		setNextState('WELCOME');
 	});
 
