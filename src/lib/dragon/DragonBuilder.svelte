@@ -119,7 +119,7 @@
 
 	{#if currentState === 'DISPLAY'}
 		<div class="w-fit">
-			<DragonControlButtons on:click={handleControlClick} />
+			<DragonControlButtons on:click={handleControlClick} on:resetDragon={onResetDragon} />
 		</div>
 	{/if}
 

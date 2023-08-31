@@ -82,16 +82,7 @@
 		/>
 	</div>
 
-	<button class="daisy-btn daisy-btn-neutral m-2 mt-6 mb-1" on:click={updateDragon}>
+	<button class="daisy-btn daisy-btn-neutral m-2 mt-6" on:click={updateDragon}>
 		Update Dragon
-	</button>
-
-	<button
-		class="daisy-btn daisy-btn-neutral m-2 mt-1"
-		on:click={() => {
-			dispatch('resetDragon');
-		}}
-	>
-		Build a New Dragon
 	</button>
 </div>
