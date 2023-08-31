@@ -30,4 +30,17 @@ export class DragonConfig {
 	color: Color = 'red';
 	name?: string;
 	alignment?: string;
+
+	/**
+	 * Deletes unneeded members of this DragonConfig
+	 * @memberof DragonConfig
+	 */
+	cleanup(): void {
+		if (this.name === '') {
+			delete this.name;
+		}
+		if (this.alignment === '') {
+			delete this.alignment;
+		}
+	}
 }

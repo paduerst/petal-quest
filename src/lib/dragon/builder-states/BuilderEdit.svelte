@@ -19,6 +19,7 @@
 		}
 	});
 	function updateDragon() {
+		editedConfig.cleanup();
 		dispatchDragonConfig(editedConfig);
 	}
 </script>
@@ -26,7 +27,7 @@
 <p class="font-bold text-xl">Edit</p>
 
 <div class="flex flex-col items-center">
-	<div class="daisy-form-control w-full max-w-xs m-1">
+	<div class="daisy-form-control w-full max-w-sm m-1">
 		<label class="daisy-label" for="age">
 			<span class="daisy-label-text">Age</span>
 		</label>
@@ -41,7 +42,7 @@
 		</select>
 	</div>
 
-	<div class="daisy-form-control w-full max-w-xs m-1">
+	<div class="daisy-form-control w-full max-w-sm m-1">
 		<label class="daisy-label" for="color">
 			<span class="daisy-label-text">Color</span>
 		</label>
@@ -56,26 +57,28 @@
 		</select>
 	</div>
 
-	<div class="daisy-form-control w-full max-w-xs m-1">
+	<div class="daisy-form-control w-full max-w-sm m-1">
 		<label class="daisy-label" for="name">
 			<span class="daisy-label-text">Name</span>
 		</label>
 		<input
 			type="text"
 			bind:value={editedConfig.name}
+			placeholder={'Referred to as "the dragon" by default'}
 			class="daisy-input daisy-input-bordered bg-white"
 			name="name"
 			data-1p-ignore
 		/>
 	</div>
 
-	<div class="daisy-form-control w-full max-w-xs m-1">
+	<div class="daisy-form-control w-full max-w-sm m-1">
 		<label class="daisy-label" for="alignment">
 			<span class="daisy-label-text">Alignment</span>
 		</label>
 		<input
 			type="text"
 			bind:value={editedConfig.alignment}
+			placeholder="Defaults to typical alignment for this color"
 			class="daisy-input daisy-input-bordered bg-white"
 			name="alignment"
 			data-1p-ignore
