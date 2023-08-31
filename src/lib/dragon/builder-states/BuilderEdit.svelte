@@ -2,7 +2,7 @@
 	import { createEventDispatcher } from 'svelte';
 	import { onMount } from 'svelte';
 
-	import { DragonConfig, COLORS, AGES, capitalizeFirstLetter } from '..';
+	import { DragonConfig, COLORS, COLORS_UPPER, AGES, AGES_UPPER } from '..';
 
 	export let currentDragonConfig: DragonConfig | undefined = undefined;
 
@@ -35,8 +35,8 @@
 			class="daisy-select daisy-select-bordered bg-white"
 			name="age"
 		>
-			{#each AGES as age}
-				<option value={age}>{capitalizeFirstLetter(age)}</option>
+			{#each AGES as age, index}
+				<option value={age}>{AGES_UPPER[index]}</option>
 			{/each}
 		</select>
 	</div>
@@ -50,8 +50,8 @@
 			class="daisy-select daisy-select-bordered bg-white"
 			name="color"
 		>
-			{#each COLORS as color}
-				<option value={color}>{capitalizeFirstLetter(color)}</option>
+			{#each COLORS as color, index}
+				<option value={color}>{COLORS_UPPER[index]}</option>
 			{/each}
 		</select>
 	</div>
