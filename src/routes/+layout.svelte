@@ -1,16 +1,13 @@
 <script lang="ts">
-	// Your selected Skeleton theme:
-	import '../theme.postcss';
-
-	// This contains the bulk of Skeletons required styles:
-	import '@skeletonlabs/skeleton/styles/skeleton.css';
-
 	import '../app.postcss';
 
+	import { initializeStores } from '@skeletonlabs/skeleton';
 	import { AppShell } from '@skeletonlabs/skeleton';
 	import Drawer from '$lib/Drawer.svelte';
 	import Header from '$lib/Header.svelte';
 	import Footer from '$lib/Footer.svelte';
+
+	initializeStores();
 </script>
 
 <Drawer />

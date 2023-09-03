@@ -1,10 +1,16 @@
-/** @type {import('tailwindcss').Config}*/
+import { join } from 'path';
+import type { Config } from 'tailwindcss';
+
+import { skeleton } from '@skeletonlabs/tw-plugin';
+
+import { myCustomTheme } from './my-custom-theme';
+
 const config = {
 	darkMode: 'class',
 
 	content: [
 		'./src/**/*.{html,js,svelte,ts}',
-		require('path').join(require.resolve('@skeletonlabs/skeleton'), '../**/*.{html,js,svelte,ts}')
+		join(require.resolve('@skeletonlabs/skeleton'), '../**/*.{html,js,svelte,ts}')
 	],
 
 	theme: {
@@ -13,9 +19,17 @@ const config = {
 
 	plugins: [
 		require('@tailwindcss/forms'),
-		...require('@skeletonlabs/skeleton/tailwind/skeleton.cjs')(),
-		require('daisyui')
+		require('daisyui'),
+		skeleton({
+			themes: {
+				custom: [myCustomTheme]
+			}
+		})
 	],
+
+	future: {
+		hoverOnlyWhenSupported: true
+	},
 
 	daisyui: {
 		themes: [
@@ -43,11 +57,7 @@ const config = {
 		],
 		logs: false,
 		prefix: 'daisy-'
-	},
-
-	future: {
-		hoverOnlyWhenSupported: true
 	}
-};
+} satisfies Config;
 
-module.exports = config;
+export default config;
