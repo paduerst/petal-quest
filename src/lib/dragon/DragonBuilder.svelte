@@ -16,8 +16,13 @@
 	import DragonControlButtons from './DragonControlButtons.svelte';
 	import DragonDebugButtons from './DragonDebugButtons.svelte';
 
+	// Builder State Management
 	let currentState: BuilderState = 'LOADING';
 	let nextState: BuilderState | undefined = undefined;
+
+	const fadeConfig: FadeParams = {
+		duration: 200
+	};
 
 	function setNextState(nextStateIn: BuilderState): void {
 		if (nextStateIn !== currentState) {
@@ -32,6 +37,7 @@
 		}
 	}
 
+	// Click Handling
 	function handleShareClick() {
 		openShareDialog();
 	}
@@ -63,25 +69,27 @@
 		}
 	}
 
+	// Dragon Config Management
 	let currentDragonConfig: DragonConfig | undefined = undefined;
 
-	onMount(() => {
-		setNextState('WELCOME');
-	});
+	function setCurrentDragonConfig(currentDragonConfigIn: DragonConfig | undefined): void {
+		currentDragonConfig = currentDragonConfigIn;
+	}
 
 	function onNewDragonConfig(event: { detail: DragonConfig }) {
-		currentDragonConfig = event.detail;
+		setCurrentDragonConfig(event.detail);
 		setNextState('DISPLAY');
 	}
 
 	function onResetDragon() {
 		setNextState('WELCOME');
-		currentDragonConfig = undefined;
+		setCurrentDragonConfig(undefined);
 	}
 
-	const fadeConfig: FadeParams = {
-		duration: 200
-	};
+	// Initialization
+	onMount(() => {
+		setNextState('WELCOME');
+	});
 </script>
 
 <div class="flex flex-col items-center">
