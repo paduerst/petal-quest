@@ -24,8 +24,6 @@
 	}
 </script>
 
-<p class="font-bold text-xl">Edit</p>
-
 <div class="flex flex-col items-center">
 	<div class="daisy-form-control w-full max-w-sm m-1">
 		<label class="daisy-label" for="age">
@@ -86,6 +84,6 @@
 	</div>
 
 	<button class="daisy-btn daisy-btn-neutral m-2 mt-6" on:click={updateDragon}>
-		Update Dragon
+		{currentDragonConfig === undefined ? 'Build' : 'Update'} Dragon
 	</button>
 </div>

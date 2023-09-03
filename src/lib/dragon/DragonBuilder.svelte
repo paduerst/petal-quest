@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { dev } from '$app/environment';
-	import { fade } from 'svelte/transition';
+	import { fade, type FadeParams } from 'svelte/transition';
 	import { onMount } from 'svelte';
 
 	import type { DragonConfig } from '.';
@@ -78,24 +78,28 @@
 		setNextState('WELCOME');
 		currentDragonConfig = undefined;
 	}
+
+	const fadeConfig: FadeParams = {
+		duration: 200
+	};
 </script>
 
 <div class="flex flex-col items-center">
 	<DragonContainer config={currentDragonConfig}>
 		{#if currentState === 'LOADING' && nextState === undefined}
-			<div transition:fade on:outroend={finishStateTransition}>
+			<div transition:fade={fadeConfig} on:outroend={finishStateTransition}>
 				<BuilderLoading />
 			</div>
 		{:else if currentState === 'WELCOME' && nextState === undefined}
-			<div transition:fade on:outroend={finishStateTransition}>
-				<BuilderWelcome on:newDragonConfig={onNewDragonConfig} />
+			<div transition:fade={fadeConfig} on:outroend={finishStateTransition}>
+				<BuilderWelcome on:newDragonConfig={onNewDragonConfig} on:click={handleControlClick} />
 			</div>
 		{:else if currentState === 'DISPLAY' && nextState === undefined}
-			<div transition:fade on:outroend={finishStateTransition}>
+			<div transition:fade={fadeConfig} on:outroend={finishStateTransition}>
 				<BuilderDisplay {currentDragonConfig} />
 			</div>
 		{:else if currentState === 'EDIT' && nextState === undefined}
-			<div transition:fade on:outroend={finishStateTransition}>
+			<div transition:fade={fadeConfig} on:outroend={finishStateTransition}>
 				<BuilderEdit
 					{currentDragonConfig}
 					on:newDragonConfig={onNewDragonConfig}
@@ -103,13 +107,13 @@
 				/>
 			</div>
 		{:else if currentState === 'DEBUG' && nextState === undefined}
-			<div transition:fade on:outroend={finishStateTransition}>
+			<div transition:fade={fadeConfig} on:outroend={finishStateTransition}>
 				<BuilderDebug {currentDragonConfig} />
 			</div>
 		{:else if nextState !== undefined}
 			<!-- We are transitioning. Keep it empty. -->
 		{:else}
-			<div transition:fade on:outroend={finishStateTransition}>
+			<div transition:fade={fadeConfig} on:outroend={finishStateTransition}>
 				<p>The currentState of {currentState} is unhandled right now!</p>
 			</div>
 		{/if}
@@ -117,7 +121,7 @@
 
 	<DragonShareModal {currentDragonConfig} />
 
-	{#if currentState === 'DISPLAY'}
+	{#if currentState === 'DISPLAY' && nextState === undefined}
 		<div class="w-fit">
 			<DragonControlButtons on:click={handleControlClick} on:resetDragon={onResetDragon} />
 		</div>
