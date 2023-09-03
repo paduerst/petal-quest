@@ -1,12 +1,13 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { AppBar, drawerStore } from '@skeletonlabs/skeleton';
+	import { AppBar, getDrawerStore } from '@skeletonlabs/skeleton';
 	import Logo from '$lib/Logo.svelte';
 	import { NAV_LINKS } from '$lib';
 
 	let path: string;
 	$: path = $page.url.pathname;
 
+	const drawerStore = getDrawerStore();
 	function drawerOpen(): void {
 		drawerStore.open({});
 	}

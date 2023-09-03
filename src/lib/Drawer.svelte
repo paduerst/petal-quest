@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { Drawer, drawerStore } from '@skeletonlabs/skeleton';
+	import { Drawer, getDrawerStore } from '@skeletonlabs/skeleton';
 	import { NAV_LINKS } from '$lib';
 
 	let path: string;
 	$: path = $page.url.pathname;
 
+	const drawerStore = getDrawerStore();
 	function drawerClose(): void {
 		drawerStore.close();
 	}
