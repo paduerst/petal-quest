@@ -1,5 +1,14 @@
 import { expect, test } from 'vitest';
-import { capitalizeFirstLetter, AGES_UPPER, COLORS_UPPER, DragonConfig } from '.';
+import {
+	capitalizeFirstLetter,
+	AGES,
+	AGES_UPPER,
+	stringToAge,
+	COLORS,
+	COLORS_UPPER,
+	stringToColor,
+	DragonConfig
+} from '.';
 
 test('capitalizeFirstLetter only does the first letter', () => {
 	expect(capitalizeFirstLetter('aa')).toBe('Aa');
@@ -13,6 +22,14 @@ test('AGES_UPPER are Wyrmling, Young, Adult, and Ancient', () => {
 	expect(AGES_UPPER).toStrictEqual(['Wyrmling', 'Young', 'Adult', 'Ancient']);
 });
 
+test('stringToAge() behavior', () => {
+	expect(stringToAge('This is not a valid age.')).toBe(undefined);
+
+	for (const age of AGES) {
+		expect(stringToAge(age)).toBe(age);
+	}
+});
+
 test('COLORS_UPPER are Red, Orange, Yellow, Green, Blue, Indigo, and Violet', () => {
 	expect(COLORS_UPPER).toStrictEqual([
 		'Red',
@@ -23,6 +40,14 @@ test('COLORS_UPPER are Red, Orange, Yellow, Green, Blue, Indigo, and Violet', ()
 		'Indigo',
 		'Violet'
 	]);
+});
+
+test('stringToColor() behavior', () => {
+	expect(stringToColor('This is not a valid color.')).toBe(undefined);
+
+	for (const color of COLORS) {
+		expect(stringToColor(color)).toBe(color);
+	}
 });
 
 test('DragonConfig.toString() behavior', () => {
@@ -42,4 +67,23 @@ test('DragonConfig.toString() behavior', () => {
 
 	dragonConfig.cleanup();
 	expect(dragonConfig.toString()).toBe(defaultString);
+});
+
+test('DragonConfig.fromURLSearchParams() behavior', () => {
+	const dragonConfig = new DragonConfig();
+	const params1 = new URLSearchParams();
+	expect(dragonConfig.fromURLSearchParams(params1)).toBe(false);
+
+	params1.set('age', 'young'); // valid age
+	params1.set('color', 'Jeremy'); // invalid color
+	expect(dragonConfig.fromURLSearchParams(params1)).toBe(false);
+
+	params1.append('color', 'blue'); // valid color, appended after invalid color
+	expect(dragonConfig.fromURLSearchParams(params1)).toBe(false);
+
+	params1.set('color', 'blue'); // valid color, replacing all other color values
+	expect(dragonConfig.fromURLSearchParams(params1)).toBe(true);
+
+	params1.append('color', 'Jeremy'); // invalid color, appended after valid color
+	expect(dragonConfig.fromURLSearchParams(params1)).toBe(true);
 });

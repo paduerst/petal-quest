@@ -5,7 +5,7 @@
 	import { fade, type FadeParams } from 'svelte/transition';
 	import { onMount } from 'svelte';
 
-	import type { DragonConfig } from '.';
+	import { DragonConfig } from '.';
 	import { type BuilderState, stringToBuilderState } from './builder-states';
 
 	import DragonContainer from './DragonContainer.svelte';
@@ -96,7 +96,13 @@
 
 	// Initialization
 	onMount(() => {
-		setNextState('WELCOME');
+		const URLDragonConfig = new DragonConfig();
+		if (URLDragonConfig.fromURLSearchParams($page.url.searchParams)) {
+			setCurrentDragonConfig(URLDragonConfig);
+			setNextState('DISPLAY');
+		} else {
+			setNextState('WELCOME');
+		}
 	});
 </script>
 
