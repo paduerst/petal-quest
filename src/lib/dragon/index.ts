@@ -32,7 +32,7 @@ export class DragonConfig {
 	alignment?: string;
 
 	/**
-	 * Deletes unneeded members of this DragonConfig
+	 * Deletes unneeded members of this DragonConfig.
 	 * @memberof DragonConfig
 	 */
 	cleanup(): void {
@@ -42,5 +42,34 @@ export class DragonConfig {
 		if (this.alignment === '') {
 			delete this.alignment;
 		}
+	}
+
+	/**
+	 * Returns a URLSearchParams containing all defined members of this DragonConfig.
+	 * @return {*}  {URLSearchParams}
+	 * @memberof DragonConfig
+	 */
+	toURLSearchParams(): URLSearchParams {
+		const output = new URLSearchParams();
+
+		output.set('age', this.age);
+		output.set('color', this.color);
+		if (this.name !== undefined) {
+			output.set('name', this.name);
+		}
+		if (this.alignment !== undefined) {
+			output.set('alignment', this.alignment);
+		}
+
+		return output;
+	}
+
+	/**
+	 * Returns a query string version of this DragonConfig suitable for a URL. Does not include the question mark.
+	 * @return {*}  {string}
+	 * @memberof DragonConfig
+	 */
+	toString(): string {
+		return this.toURLSearchParams().toString();
 	}
 }

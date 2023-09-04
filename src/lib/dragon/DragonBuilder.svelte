@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { dev } from '$app/environment';
+	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 	import { fade, type FadeParams } from 'svelte/transition';
 	import { onMount } from 'svelte';
 
@@ -74,6 +76,12 @@
 
 	function setCurrentDragonConfig(currentDragonConfigIn: DragonConfig | undefined): void {
 		currentDragonConfig = currentDragonConfigIn;
+
+		if (currentDragonConfig === undefined) {
+			goto(`${$page.url.pathname}`);
+		} else {
+			goto(`?${currentDragonConfig.toString()}`);
+		}
 	}
 
 	function onNewDragonConfig(event: { detail: DragonConfig }) {
@@ -130,7 +138,7 @@
 	<DragonShareModal {currentDragonConfig} />
 
 	{#if currentState === 'DISPLAY' && nextState === undefined}
-		<div class="w-fit">
+		<div transition:fade={fadeConfig} class="w-fit">
 			<DragonControlButtons on:click={handleControlClick} on:resetDragon={onResetDragon} />
 		</div>
 	{/if}

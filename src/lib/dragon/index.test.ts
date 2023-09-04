@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { capitalizeFirstLetter, AGES_UPPER, COLORS_UPPER } from '.';
+import { capitalizeFirstLetter, AGES_UPPER, COLORS_UPPER, DragonConfig } from '.';
 
 test('capitalizeFirstLetter only does the first letter', () => {
 	expect(capitalizeFirstLetter('aa')).toBe('Aa');
@@ -23,4 +23,23 @@ test('COLORS_UPPER are Red, Orange, Yellow, Green, Blue, Indigo, and Violet', ()
 		'Indigo',
 		'Violet'
 	]);
+});
+
+test('DragonConfig.toString() behavior', () => {
+	const dragonConfig = new DragonConfig();
+	const defaultString = 'age=wyrmling&color=red';
+	expect(dragonConfig.toString()).toBe(defaultString);
+
+	const testName = 'Amara';
+	const testAlignment = 'Chaotic';
+	dragonConfig.name = testName;
+	dragonConfig.alignment = testAlignment;
+	expect(dragonConfig.toString()).toBe(`${defaultString}&name=Amara&alignment=Chaotic`);
+
+	dragonConfig.name = '';
+	dragonConfig.alignment = '';
+	expect(dragonConfig.toString()).toBe(`${defaultString}&name=&alignment=`);
+
+	dragonConfig.cleanup();
+	expect(dragonConfig.toString()).toBe(defaultString);
 });

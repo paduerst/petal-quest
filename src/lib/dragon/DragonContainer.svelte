@@ -86,7 +86,7 @@
 	.outer-wrapper {
 		@apply overflow-hidden;
 		height: var(--outer-wrapper-height);
-		transition: height 250ms ease;
+		transition: height 200ms ease;
 	}
 
 	@media print {
