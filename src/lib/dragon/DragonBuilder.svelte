@@ -1,9 +1,8 @@
 <script lang="ts">
 	import { dev } from '$app/environment';
-	import { goto } from '$app/navigation';
+	import { goto, afterNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { fade, type FadeParams } from 'svelte/transition';
-	import { onMount } from 'svelte';
 
 	import { DragonConfig } from '.';
 	import { type BuilderState, stringToBuilderState } from './builder-states';
@@ -98,7 +97,7 @@
 	}
 
 	// Initialization
-	onMount(() => {
+	afterNavigate(() => {
 		const URLDragonConfig = new DragonConfig();
 		if (URLDragonConfig.fromURLSearchParams($page.url.searchParams)) {
 			setCurrentDragonConfig(URLDragonConfig);
