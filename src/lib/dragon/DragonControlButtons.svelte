@@ -19,7 +19,7 @@
 	}
 </script>
 
-<div transition:fade class="flex flex-wrap justify-center print:hidden">
+<div class="flex flex-wrap justify-center print:hidden">
 	<button class="daisy-btn daisy-btn-neutral text-token m-1" on:click={dispatchClickEdit}>
 		Edit Dragon
 	</button>

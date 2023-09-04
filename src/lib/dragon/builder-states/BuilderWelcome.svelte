@@ -3,7 +3,10 @@
 
 	import { DragonConfig, AGES, AGES_UPPER, COLORS, COLORS_UPPER } from '..';
 
-	const dispatch = createEventDispatcher<{ newDragonConfig: DragonConfig }>();
+	const dispatch = createEventDispatcher<{
+		newDragonConfig: DragonConfig;
+		click: { buttonText: string };
+	}>();
 
 	function dispatchDragonConfig(newDragonConfig: DragonConfig) {
 		dispatch('newDragonConfig', newDragonConfig);
@@ -51,5 +54,16 @@
 
 	<button class="daisy-btn daisy-btn-neutral m-2 mt-6" on:click={buildDragon}>
 		Build Dragon
+	</button>
+
+	<button
+		class="daisy-btn daisy-btn-outline m-2"
+		on:click={() => {
+			dispatch('click', {
+				buttonText: 'EDIT'
+			});
+		}}
+	>
+		Advanced Options
 	</button>
 </div>
