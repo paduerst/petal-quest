@@ -80,7 +80,10 @@
 		if (currentDragonConfig === undefined) {
 			goto(`${$page.url.pathname}`);
 		} else {
-			goto(`?${currentDragonConfig.toString()}`);
+			const configSearchString = `?${currentDragonConfig.toString()}`;
+			if (configSearchString !== $page.url.search) {
+				goto(configSearchString);
+			}
 		}
 	}
 
