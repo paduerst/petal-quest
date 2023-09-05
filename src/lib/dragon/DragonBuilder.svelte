@@ -6,6 +6,7 @@
 
 	import { DragonConfig } from '.';
 	import { type BuilderState, stringToBuilderState } from './builder-states';
+	import { dragonBuilderHistory } from './builder-history';
 
 	import DragonContainer from './DragonContainer.svelte';
 	import BuilderLoading from './builder-states/BuilderLoading.svelte';
@@ -72,13 +73,32 @@
 
 	// Dragon Config Management
 	let currentDragonConfig: DragonConfig | undefined = undefined;
+	let pastConfigStrings: string[] = [];
+
+	dragonBuilderHistory.subscribe((value) => {
+		pastConfigStrings = value;
+	});
 
 	function setCurrentDragonConfig(currentDragonConfigIn: DragonConfig | undefined): void {
 		currentDragonConfig = currentDragonConfigIn;
 
 		if (currentDragonConfig !== undefined) {
+			const currentConfigString = currentDragonConfig.toString();
+
+			// check to see if this config is the latest config in builder history
+			const configIndexInHistory = pastConfigStrings.findIndex((configString: string) => {
+				return configString === currentConfigString;
+			});
+			if (configIndexInHistory !== 0) {
+				if (configIndexInHistory > 0) {
+					pastConfigStrings.splice(configIndexInHistory, 1);
+				}
+				pastConfigStrings.unshift(currentConfigString);
+				dragonBuilderHistory.set(pastConfigStrings);
+			}
+
 			// update the current URL search params to match this config
-			const configSearchString = `?${currentDragonConfig.toString()}`;
+			const configSearchString = `?${currentConfigString}`;
 			if (configSearchString !== $page.url.search) {
 				goto(configSearchString);
 			}

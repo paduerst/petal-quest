@@ -10,11 +10,11 @@ export type Age = (typeof AGES)[number];
 /**
  * Converts input string to Age if possible, returning undefined if not.
  * @export
- * @param {string} age_string
+ * @param {string} ageString
  * @return {*}  {(Age | undefined)}
  */
-export function stringToAge(age_string: string): Age | undefined {
-	return AGES.find((age) => age === age_string);
+export function stringToAge(ageString: string): Age | undefined {
+	return AGES.find((age) => age === ageString);
 }
 
 export const COLORS = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'] as const;
@@ -25,11 +25,11 @@ export type Color = (typeof COLORS)[number];
 /**
  * Converts input string to Color if possible, returning undefined if not.
  * @export
- * @param {string} color_string
+ * @param {string} colorString
  * @return {*}  {(Color | undefined)}
  */
-export function stringToColor(color_string: string): Color | undefined {
-	return COLORS.find((color) => color === color_string);
+export function stringToColor(colorString: string): Color | undefined {
+	return COLORS.find((color) => color === colorString);
 }
 
 export type RGB = `rgb(${number}, ${number}, ${number})`;
@@ -127,5 +127,16 @@ export class DragonConfig {
 		}
 
 		return true;
+	}
+
+	/**
+	 * If given string has valid DragonConfig values, sets this DragonConfig from them and returns true.
+	 * @param {string} paramsString
+	 * @return {*}  {boolean} If given string has valid DragonConfig values, true. Otherwise false.
+	 * @memberof DragonConfig
+	 */
+	fromString(paramsString: string): boolean {
+		const params = new URLSearchParams(paramsString);
+		return this.fromURLSearchParams(params);
 	}
 }

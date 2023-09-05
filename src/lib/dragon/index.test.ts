@@ -87,3 +87,32 @@ test('DragonConfig.fromURLSearchParams() behavior', () => {
 	params1.append('color', 'Jeremy'); // invalid color, appended after valid color
 	expect(dragonConfig.fromURLSearchParams(params1)).toBe(true);
 });
+
+test('DragonConfig.fromString() behavior', () => {
+	const dragonConfig = new DragonConfig();
+
+	// empty string is not valid
+	let testString = '';
+	expect(dragonConfig.fromString(testString)).toBe(false);
+	expect(dragonConfig.fromString(`?${testString}`)).toBe(false);
+
+	// valid age, invalid color
+	testString = 'age=young&color=Jeremy';
+	expect(dragonConfig.fromString(testString)).toBe(false);
+	expect(dragonConfig.fromString(`?${testString}`)).toBe(false);
+
+	// valid color after invalid color
+	testString = 'age=young&color=Jeremy&color=blue';
+	expect(dragonConfig.fromString(testString)).toBe(false);
+	expect(dragonConfig.fromString(`?${testString}`)).toBe(false);
+
+	// valid age and color
+	testString = 'age=young&color=blue';
+	expect(dragonConfig.fromString(testString)).toBe(true);
+	expect(dragonConfig.fromString(`?${testString}`)).toBe(true);
+
+	// invalid color after valid color
+	testString = 'age=young&color=blue&color=Jeremy';
+	expect(dragonConfig.fromString(testString)).toBe(true);
+	expect(dragonConfig.fromString(`?${testString}`)).toBe(true);
+});
