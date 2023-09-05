@@ -76,9 +76,8 @@
 	function setCurrentDragonConfig(currentDragonConfigIn: DragonConfig | undefined): void {
 		currentDragonConfig = currentDragonConfigIn;
 
-		if (currentDragonConfig === undefined) {
-			goto(`${$page.url.pathname}`);
-		} else {
+		if (currentDragonConfig !== undefined) {
+			// update the current URL search params to match this config
 			const configSearchString = `?${currentDragonConfig.toString()}`;
 			if (configSearchString !== $page.url.search) {
 				goto(configSearchString);
@@ -104,6 +103,7 @@
 			setNextState('DISPLAY');
 		} else {
 			setNextState('WELCOME');
+			setCurrentDragonConfig(undefined);
 		}
 	});
 </script>
