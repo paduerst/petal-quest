@@ -77,42 +77,87 @@ test('DragonConfig.fromURLSearchParams() behavior', () => {
 	params1.set('age', 'young'); // valid age
 	params1.set('color', 'Jeremy'); // invalid color
 	expect(dragonConfig.fromURLSearchParams(params1)).toBe(false);
+	let testStringOutput = dragonConfig.toString();
+	let expectedStringOutput = 'age=wyrmling&color=red';
+	expect(testStringOutput).toBe(expectedStringOutput);
 
 	params1.append('color', 'blue'); // valid color, appended after invalid color
 	expect(dragonConfig.fromURLSearchParams(params1)).toBe(false);
+	testStringOutput = dragonConfig.toString();
+	expectedStringOutput = 'age=wyrmling&color=red';
+	expect(testStringOutput).toBe(expectedStringOutput);
 
 	params1.set('color', 'blue'); // valid color, replacing all other color values
 	expect(dragonConfig.fromURLSearchParams(params1)).toBe(true);
+	testStringOutput = dragonConfig.toString();
+	expectedStringOutput = 'age=young&color=blue';
+	expect(testStringOutput).toBe(expectedStringOutput);
 
 	params1.append('color', 'Jeremy'); // invalid color, appended after valid color
 	expect(dragonConfig.fromURLSearchParams(params1)).toBe(true);
+	testStringOutput = dragonConfig.toString();
+	expectedStringOutput = 'age=young&color=blue';
+	expect(testStringOutput).toBe(expectedStringOutput);
+
+	const params2 = new URLSearchParams();
+	// valid age and color, but in opposite order, which doesn't matter
+	params2.set('color', 'indigo');
+	params2.set('age', 'adult');
+	expect(dragonConfig.fromURLSearchParams(params2)).toBe(true);
+	testStringOutput = dragonConfig.toString();
+	expectedStringOutput = 'age=adult&color=indigo';
+	expect(testStringOutput).toBe(expectedStringOutput);
 });
 
 test('DragonConfig.fromString() behavior', () => {
 	const dragonConfig = new DragonConfig();
 
 	// empty string is not valid
-	let testString = '';
-	expect(dragonConfig.fromString(testString)).toBe(false);
-	expect(dragonConfig.fromString(`?${testString}`)).toBe(false);
+	let testStringInput = '';
+	expect(dragonConfig.fromString(testStringInput)).toBe(false);
+	// results are unchanged by adding a '?' at the start of the string
+	expect(dragonConfig.fromString(`?${testStringInput}`)).toBe(false);
+	let testStringOutput = dragonConfig.toString();
+	let expectedStringOutput = 'age=wyrmling&color=red';
+	expect(testStringOutput).toBe(expectedStringOutput);
 
 	// valid age, invalid color
-	testString = 'age=young&color=Jeremy';
-	expect(dragonConfig.fromString(testString)).toBe(false);
-	expect(dragonConfig.fromString(`?${testString}`)).toBe(false);
+	testStringInput = 'age=young&color=Jeremy';
+	expect(dragonConfig.fromString(testStringInput)).toBe(false);
+	expect(dragonConfig.fromString(`?${testStringInput}`)).toBe(false);
+	testStringOutput = dragonConfig.toString();
+	expectedStringOutput = 'age=wyrmling&color=red';
+	expect(testStringOutput).toBe(expectedStringOutput);
 
 	// valid color after invalid color
-	testString = 'age=young&color=Jeremy&color=blue';
-	expect(dragonConfig.fromString(testString)).toBe(false);
-	expect(dragonConfig.fromString(`?${testString}`)).toBe(false);
+	testStringInput = 'age=young&color=Jeremy&color=blue';
+	expect(dragonConfig.fromString(testStringInput)).toBe(false);
+	expect(dragonConfig.fromString(`?${testStringInput}`)).toBe(false);
+	testStringOutput = dragonConfig.toString();
+	expectedStringOutput = 'age=wyrmling&color=red';
+	expect(testStringOutput).toBe(expectedStringOutput);
 
 	// valid age and color
-	testString = 'age=young&color=blue';
-	expect(dragonConfig.fromString(testString)).toBe(true);
-	expect(dragonConfig.fromString(`?${testString}`)).toBe(true);
+	testStringInput = 'age=young&color=blue';
+	expect(dragonConfig.fromString(testStringInput)).toBe(true);
+	expect(dragonConfig.fromString(`?${testStringInput}`)).toBe(true);
+	testStringOutput = dragonConfig.toString();
+	expectedStringOutput = testStringInput; // input and output should be equal
+	expect(testStringOutput).toBe(expectedStringOutput);
 
 	// invalid color after valid color
-	testString = 'age=young&color=blue&color=Jeremy';
-	expect(dragonConfig.fromString(testString)).toBe(true);
-	expect(dragonConfig.fromString(`?${testString}`)).toBe(true);
+	testStringInput = 'age=young&color=blue&color=Jeremy';
+	expect(dragonConfig.fromString(testStringInput)).toBe(true);
+	expect(dragonConfig.fromString(`?${testStringInput}`)).toBe(true);
+	testStringOutput = dragonConfig.toString();
+	expectedStringOutput = 'age=young&color=blue'; // Jeremy is gone!
+	expect(testStringOutput).toBe(expectedStringOutput);
+
+	// swap the order of age and color, still valid
+	testStringInput = 'color=indigo&age=adult';
+	expect(dragonConfig.fromString(testStringInput)).toBe(true);
+	expect(dragonConfig.fromString(`?${testStringInput}`)).toBe(true);
+	testStringOutput = dragonConfig.toString();
+	expectedStringOutput = 'age=adult&color=indigo'; // back in the normal order
+	expect(testStringOutput).toBe(expectedStringOutput);
 });
