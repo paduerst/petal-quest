@@ -18,7 +18,6 @@
 		}
 	});
 	function updateDragon() {
-		editedConfig.cleanup();
 		dispatchDragonConfig(editedConfig);
 	}
 </script>
