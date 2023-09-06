@@ -1,10 +1,9 @@
 <script lang="ts">
-	import type { DragonConfig } from '..';
-	export let currentDragonConfig: DragonConfig | undefined;
+	import { currentDragonConfig } from '.';
 </script>
 
 <p>We're in the DEBUG state!</p>
-<p>currentDragonConfig = {JSON.stringify(currentDragonConfig)}</p>
+<p>currentDragonConfig = {JSON.stringify($currentDragonConfig)}</p>
 <p>
 	For testing with lots of content: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Omnis
 	recusandae corporis dolores veniam ipsam nostrum consequuntur, soluta magnam doloremque quisquam

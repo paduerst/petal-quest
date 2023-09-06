@@ -3,8 +3,7 @@
 	import { onMount } from 'svelte';
 
 	import { DragonConfig, COLORS, COLORS_UPPER, AGES, AGES_UPPER } from '..';
-
-	export let currentDragonConfig: DragonConfig | undefined = undefined;
+	import { currentDragonConfig } from '.';
 
 	const dispatch = createEventDispatcher<{ newDragonConfig: DragonConfig; resetDragon: null }>();
 
@@ -14,8 +13,8 @@
 
 	let editedConfig: DragonConfig = new DragonConfig();
 	onMount(() => {
-		if (currentDragonConfig !== undefined) {
-			editedConfig = currentDragonConfig;
+		if ($currentDragonConfig !== undefined) {
+			editedConfig = $currentDragonConfig;
 		}
 	});
 	function updateDragon() {
@@ -84,6 +83,6 @@
 	</div>
 
 	<button class="daisy-btn daisy-btn-neutral m-2 mt-6" on:click={updateDragon}>
-		{currentDragonConfig === undefined ? 'Build' : 'Update'} Dragon
+		{$currentDragonConfig === undefined ? 'Build' : 'Update'} Dragon
 	</button>
 </div>

@@ -5,8 +5,12 @@
 	import { fade, type FadeParams } from 'svelte/transition';
 
 	import { DragonConfig } from '.';
-	import { type BuilderState, stringToBuilderState } from './builder-states';
-	import { dragonBuilderHistory } from './builder-history';
+	import {
+		type BuilderState,
+		stringToBuilderState,
+		dragonBuilderHistory,
+		currentDragonConfig
+	} from './builder-states';
 
 	import DragonContainer from './DragonContainer.svelte';
 	import BuilderLoading from './builder-states/BuilderLoading.svelte';
@@ -72,34 +76,29 @@
 	}
 
 	// Dragon Config Management
-	let currentDragonConfig: DragonConfig | undefined = undefined;
-	let pastConfigStrings: string[] = [];
+	function setCurrentDragonConfig(
+		newConfig: DragonConfig | undefined,
+		redirect: boolean = true
+	): void {
+		$currentDragonConfig = newConfig;
 
-	dragonBuilderHistory.subscribe((value) => {
-		pastConfigStrings = value;
-	});
-
-	function setCurrentDragonConfig(currentDragonConfigIn: DragonConfig | undefined): void {
-		currentDragonConfig = currentDragonConfigIn;
-
-		if (currentDragonConfig !== undefined) {
-			const currentConfigString = currentDragonConfig.toString();
+		if ($currentDragonConfig !== undefined) {
+			const currentConfigString = $currentDragonConfig.toString();
 
 			// check to see if this config is the latest config in builder history
-			const configIndexInHistory = pastConfigStrings.findIndex((configString: string) => {
+			const configIndexInHistory = $dragonBuilderHistory.findIndex((configString: string) => {
 				return configString === currentConfigString;
 			});
 			if (configIndexInHistory !== 0) {
 				if (configIndexInHistory > 0) {
-					pastConfigStrings.splice(configIndexInHistory, 1);
+					$dragonBuilderHistory.splice(configIndexInHistory, 1);
 				}
-				pastConfigStrings.unshift(currentConfigString);
-				dragonBuilderHistory.set(pastConfigStrings);
+				$dragonBuilderHistory.unshift(currentConfigString);
 			}
 
 			// update the current URL search params to match this config
 			const configSearchString = `?${currentConfigString}`;
-			if (configSearchString !== $page.url.search) {
+			if (redirect && configSearchString !== $page.url.search) {
 				goto(configSearchString);
 			}
 		}
@@ -119,17 +118,17 @@
 	afterNavigate(() => {
 		const URLDragonConfig = new DragonConfig();
 		if (URLDragonConfig.fromURLSearchParams($page.url.searchParams)) {
-			setCurrentDragonConfig(URLDragonConfig);
+			setCurrentDragonConfig(URLDragonConfig, false);
 			setNextState('DISPLAY');
 		} else {
 			setNextState('WELCOME');
-			setCurrentDragonConfig(undefined);
+			setCurrentDragonConfig(undefined, false);
 		}
 	});
 </script>
 
 <div class="flex flex-col items-center">
-	<DragonContainer config={currentDragonConfig}>
+	<DragonContainer config={$currentDragonConfig}>
 		{#if currentState === 'LOADING' && nextState === undefined}
 			<div transition:fade={fadeConfig} on:outroend={finishStateTransition}>
 				<BuilderLoading />
@@ -140,19 +139,15 @@
 			</div>
 		{:else if currentState === 'DISPLAY' && nextState === undefined}
 			<div transition:fade={fadeConfig} on:outroend={finishStateTransition}>
-				<BuilderDisplay {currentDragonConfig} />
+				<BuilderDisplay />
 			</div>
 		{:else if currentState === 'EDIT' && nextState === undefined}
 			<div transition:fade={fadeConfig} on:outroend={finishStateTransition}>
-				<BuilderEdit
-					{currentDragonConfig}
-					on:newDragonConfig={onNewDragonConfig}
-					on:resetDragon={onResetDragon}
-				/>
+				<BuilderEdit on:newDragonConfig={onNewDragonConfig} on:resetDragon={onResetDragon} />
 			</div>
 		{:else if currentState === 'DEBUG' && nextState === undefined}
 			<div transition:fade={fadeConfig} on:outroend={finishStateTransition}>
-				<BuilderDebug {currentDragonConfig} />
+				<BuilderDebug />
 			</div>
 		{:else if nextState !== undefined}
 			<!-- We are transitioning. Keep it empty. -->
@@ -163,7 +158,7 @@
 		{/if}
 	</DragonContainer>
 
-	<DragonShareModal {currentDragonConfig} />
+	<DragonShareModal config={$currentDragonConfig} />
 
 	{#if currentState === 'DISPLAY' && nextState === undefined}
 		<div transition:fade={fadeConfig} class="w-fit">
