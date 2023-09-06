@@ -101,6 +101,10 @@
 			if (redirect && configSearchString !== $page.url.search) {
 				goto(configSearchString);
 			}
+		} else {
+			if (redirect) {
+				goto($page.url.pathname);
+			}
 		}
 	}
 
