@@ -1,35 +1,38 @@
 <script lang="ts">
-	import { fade } from 'svelte/transition';
 	import { createEventDispatcher } from 'svelte';
 
-	const dispatch = createEventDispatcher<{ click: { buttonText: string }; resetDragon: null }>();
+	import { currentDragonConfig } from './builder-states';
+
+	const dispatch = createEventDispatcher<{ click: { buttonText: string } }>();
 
 	function dispatchClick(buttonText: string) {
 		dispatch('click', {
 			buttonText: buttonText
 		});
 	}
-
-	function dispatchClickEdit() {
-		dispatchClick('EDIT');
-	}
-
-	function dispatchClickShare() {
-		dispatchClick('SHARE');
-	}
 </script>
 
 <div class="flex flex-wrap justify-center print:hidden">
-	<button class="daisy-btn daisy-btn-neutral text-token m-1" on:click={dispatchClickEdit}>
+	<button
+		class="daisy-btn daisy-btn-neutral text-token m-1"
+		on:click={() => {
+			dispatchClick('EDIT');
+		}}
+	>
 		Edit Dragon
 	</button>
-	<button class="daisy-btn daisy-btn-neutral text-token m-1" on:click={dispatchClickShare}>
+	<button
+		class="daisy-btn daisy-btn-neutral text-token m-1"
+		on:click={() => {
+			dispatchClick('SHARE');
+		}}
+	>
 		Share Dragon
 	</button>
 	<button
 		class="daisy-btn daisy-btn-neutral text-token m-1"
 		on:click={() => {
-			dispatch('resetDragon');
+			$currentDragonConfig = undefined;
 		}}
 	>
 		Build a New Dragon

@@ -1,17 +1,23 @@
 <script lang="ts">
 	import { dev } from '$app/environment';
-	import { goto, afterNavigate } from '$app/navigation';
+	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { fade, type FadeParams } from 'svelte/transition';
+	import { fade } from 'svelte/transition';
 
 	import { DragonConfig } from '.';
-	import { type BuilderState, stringToBuilderState } from './builder-states';
+	import {
+		type BuilderState,
+		stringToBuilderState,
+		currentDragonConfig,
+		builderFadeParams
+	} from './builder-states';
 
 	import DragonContainer from './DragonContainer.svelte';
 	import BuilderLoading from './builder-states/BuilderLoading.svelte';
 	import BuilderWelcome from './builder-states/BuilderWelcome.svelte';
 	import BuilderDisplay from './builder-states/BuilderDisplay.svelte';
 	import BuilderEdit from './builder-states/BuilderEdit.svelte';
+	import BuilderHistory from './builder-states/BuilderHistory.svelte';
 	import BuilderDebug from './builder-states/BuilderDebug.svelte';
 	import DragonShareModal, { openShareDialog } from './DragonShareModal.svelte';
 	import DragonControlButtons from './DragonControlButtons.svelte';
@@ -20,10 +26,6 @@
 	// Builder State Management
 	let currentState: BuilderState = 'LOADING';
 	let nextState: BuilderState | undefined = undefined;
-
-	const fadeConfig: FadeParams = {
-		duration: 200
-	};
 
 	function setNextState(nextStateIn: BuilderState): void {
 		if (nextStateIn !== currentState) {
@@ -46,6 +48,8 @@
 	function handleControlClick(event: { detail: { buttonText: string } }): void {
 		if (event.detail.buttonText === 'EDIT') {
 			setNextState('EDIT');
+		} else if (event.detail.buttonText === 'HISTORY') {
+			setNextState('HISTORY');
 		} else if (event.detail.buttonText === 'SHARE') {
 			handleShareClick();
 		} else {
@@ -70,84 +74,59 @@
 		}
 	}
 
-	// Dragon Config Management
-	let currentDragonConfig: DragonConfig | undefined = undefined;
-
-	function setCurrentDragonConfig(currentDragonConfigIn: DragonConfig | undefined): void {
-		currentDragonConfig = currentDragonConfigIn;
-
-		if (currentDragonConfig === undefined) {
-			goto(`${$page.url.pathname}`);
-		} else {
-			const configSearchString = `?${currentDragonConfig.toString()}`;
-			if (configSearchString !== $page.url.search) {
-				goto(configSearchString);
-			}
-		}
-	}
-
-	function onNewDragonConfig(event: { detail: DragonConfig }) {
-		setCurrentDragonConfig(event.detail);
-		setNextState('DISPLAY');
-	}
-
-	function onResetDragon() {
-		setNextState('WELCOME');
-		setCurrentDragonConfig(undefined);
-	}
-
-	// Initialization
+	// Initialization / Dragon Config Management
 	afterNavigate(() => {
 		const URLDragonConfig = new DragonConfig();
 		if (URLDragonConfig.fromURLSearchParams($page.url.searchParams)) {
-			setCurrentDragonConfig(URLDragonConfig);
+			currentDragonConfig.set(URLDragonConfig, true);
 			setNextState('DISPLAY');
 		} else {
 			setNextState('WELCOME');
+			currentDragonConfig.set(undefined, true);
 		}
 	});
 </script>
 
 <div class="flex flex-col items-center">
-	<DragonContainer config={currentDragonConfig}>
+	<DragonContainer config={$currentDragonConfig}>
 		{#if currentState === 'LOADING' && nextState === undefined}
-			<div transition:fade={fadeConfig} on:outroend={finishStateTransition}>
+			<div transition:fade={builderFadeParams} on:outroend={finishStateTransition}>
 				<BuilderLoading />
 			</div>
 		{:else if currentState === 'WELCOME' && nextState === undefined}
-			<div transition:fade={fadeConfig} on:outroend={finishStateTransition}>
-				<BuilderWelcome on:newDragonConfig={onNewDragonConfig} on:click={handleControlClick} />
+			<div transition:fade={builderFadeParams} on:outroend={finishStateTransition}>
+				<BuilderWelcome on:click={handleControlClick} />
 			</div>
 		{:else if currentState === 'DISPLAY' && nextState === undefined}
-			<div transition:fade={fadeConfig} on:outroend={finishStateTransition}>
-				<BuilderDisplay {currentDragonConfig} />
+			<div transition:fade={builderFadeParams} on:outroend={finishStateTransition}>
+				<BuilderDisplay />
 			</div>
 		{:else if currentState === 'EDIT' && nextState === undefined}
-			<div transition:fade={fadeConfig} on:outroend={finishStateTransition}>
-				<BuilderEdit
-					{currentDragonConfig}
-					on:newDragonConfig={onNewDragonConfig}
-					on:resetDragon={onResetDragon}
-				/>
+			<div transition:fade={builderFadeParams} on:outroend={finishStateTransition}>
+				<BuilderEdit />
+			</div>
+		{:else if currentState === 'HISTORY' && nextState === undefined}
+			<div transition:fade={builderFadeParams} on:outroend={finishStateTransition}>
+				<BuilderHistory />
 			</div>
 		{:else if currentState === 'DEBUG' && nextState === undefined}
-			<div transition:fade={fadeConfig} on:outroend={finishStateTransition}>
-				<BuilderDebug {currentDragonConfig} />
+			<div transition:fade={builderFadeParams} on:outroend={finishStateTransition}>
+				<BuilderDebug />
 			</div>
 		{:else if nextState !== undefined}
 			<!-- We are transitioning. Keep it empty. -->
 		{:else}
-			<div transition:fade={fadeConfig} on:outroend={finishStateTransition}>
+			<div transition:fade={builderFadeParams} on:outroend={finishStateTransition}>
 				<p>The currentState of {currentState} is unhandled right now!</p>
 			</div>
 		{/if}
 	</DragonContainer>
 
-	<DragonShareModal {currentDragonConfig} />
+	<DragonShareModal config={$currentDragonConfig} />
 
 	{#if currentState === 'DISPLAY' && nextState === undefined}
-		<div transition:fade={fadeConfig} class="w-fit">
-			<DragonControlButtons on:click={handleControlClick} on:resetDragon={onResetDragon} />
+		<div transition:fade={builderFadeParams} class="w-fit">
+			<DragonControlButtons on:click={handleControlClick} />
 		</div>
 	{/if}
 

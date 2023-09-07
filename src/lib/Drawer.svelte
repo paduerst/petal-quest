@@ -22,7 +22,7 @@
 <Drawer position="right" width="w-[280px] md:w-[480px]">
 	<div class="px-4 flex justify-between flex-row">
 		<div />
-		<button class="close-btn hover:bg-surface-hover-token" on:click={drawerClose}>
+		<button class="close-btn hover:bg-primary-hover-token" on:click={drawerClose}>
 			<span>
 				<svg class="w-5 h-5" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path
@@ -41,7 +41,7 @@
 			{#each NAV_LINKS as link}
 				<li>
 					<a
-						class="nav-anchor hover:bg-surface-hover-token"
+						class="nav-anchor hover:bg-primary-hover-token"
 						class:active={path === link.href}
 						href={link.href}
 						on:click={drawerClose}
