@@ -86,9 +86,6 @@
 		if ($currentDragonConfig !== undefined) {
 			const currentConfigString = $currentDragonConfig.toString();
 
-			// add this config to the Builder History
-			dragonBuilderHistory.add($currentDragonConfig);
-
 			// update the current URL search params to match this config
 			const configSearchString = `?${currentConfigString}`;
 			if (redirect && configSearchString !== $page.url.search) {

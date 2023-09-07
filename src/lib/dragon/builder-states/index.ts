@@ -79,6 +79,7 @@ export const currentDragonConfig = (() => {
 		set: (value: DragonConfig | undefined) => {
 			if (value !== undefined) {
 				value.cleanup();
+				dragonBuilderHistory.add(value);
 			}
 			set(value);
 		}
