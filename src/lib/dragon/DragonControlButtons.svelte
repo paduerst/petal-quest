@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 
-	import { currentDragonConfig } from './builder-states';
+	import { currentDragonConfig, nextBuilderState } from './builder-states';
 
 	const dispatch = createEventDispatcher<{ click: { buttonText: string } }>();
 
@@ -16,7 +16,7 @@
 	<button
 		class="daisy-btn daisy-btn-neutral text-token m-1"
 		on:click={() => {
-			dispatchClick('EDIT');
+			$nextBuilderState = 'EDIT';
 		}}
 	>
 		Edit Dragon

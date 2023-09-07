@@ -1,10 +1,6 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
-
-	import { currentDragonConfig, dragonBuilderHistory } from '.';
+	import { nextBuilderState, currentDragonConfig, dragonBuilderHistory } from '.';
 	import { DragonConfig, AGES, AGES_UPPER, COLORS, COLORS_UPPER } from '..';
-
-	const dispatch = createEventDispatcher<{ click: { buttonText: string } }>();
 
 	let newConfig: DragonConfig = new DragonConfig();
 </script>
@@ -54,9 +50,7 @@
 	<button
 		class="daisy-btn daisy-btn-outline m-2"
 		on:click={() => {
-			dispatch('click', {
-				buttonText: 'EDIT'
-			});
+			$nextBuilderState = 'EDIT';
 		}}
 	>
 		Advanced Options
@@ -75,9 +69,7 @@
 		<button
 			class="daisy-btn daisy-btn-outline m-2"
 			on:click={() => {
-				dispatch('click', {
-					buttonText: 'HISTORY'
-				});
+				$nextBuilderState = 'HISTORY';
 			}}
 		>
 			View Builder History
