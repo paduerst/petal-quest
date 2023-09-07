@@ -1,6 +1,6 @@
 import { writable, type Writable, derived, get } from 'svelte/store';
 import { localStorageStore } from '@skeletonlabs/skeleton';
-import type { DragonConfig } from '..';
+import { DragonConfig } from '..';
 
 export const BUILDER_STATES = ['LOADING', 'WELCOME', 'DISPLAY', 'EDIT', 'DEBUG'] as const;
 export type BuilderState = (typeof BUILDER_STATES)[number];
@@ -20,28 +20,46 @@ export const dragonBuilderHistory = (() => {
 		'dragonBuilderHistory',
 		'[]'
 	);
-	const _dragonBuilderHistory = derived<typeof _dragonBuilderHistoryAsString, string[]>(
+	const _dragonBuilderHistoryStrings = derived<typeof _dragonBuilderHistoryAsString, string[]>(
 		_dragonBuilderHistoryAsString,
 		($dragonBuilderHistoryAsString) => JSON.parse($dragonBuilderHistoryAsString)
+	);
+	const _dragonBuilderHistory = derived<typeof _dragonBuilderHistoryStrings, DragonConfig[]>(
+		_dragonBuilderHistoryStrings,
+		($_dragonBuilderHistoryStrings) =>
+			$_dragonBuilderHistoryStrings.map((string: string) => {
+				const stringAsConfig = new DragonConfig();
+				stringAsConfig.fromString(string);
+				return stringAsConfig;
+			})
 	);
 
 	return {
 		subscribe: _dragonBuilderHistory.subscribe,
-		set: (value: string[]) => {
-			_dragonBuilderHistoryAsString.set(JSON.stringify(value));
+		set: (configs: DragonConfig[]) => {
+			const configsAsStrings = configs.map((config) => {
+				config.cleanup();
+				return config.toString();
+			});
+			_dragonBuilderHistoryAsString.set(JSON.stringify(configsAsStrings));
 		},
-		add: (value: string) => {
-			const history = get(_dragonBuilderHistory);
+		add: (config: DragonConfig) => {
+			config.cleanup();
+			const configAsString = config.toString();
+			const history = get(_dragonBuilderHistoryStrings);
 			const valueIndexInHistory = history.findIndex((string: string) => {
-				return string === value;
+				return string === configAsString;
 			});
 			if (valueIndexInHistory !== 0) {
 				if (valueIndexInHistory > 0) {
 					history.splice(valueIndexInHistory, 1);
 				}
-				history.unshift(value);
+				history.unshift(configAsString);
 				_dragonBuilderHistoryAsString.set(JSON.stringify(history));
 			}
+		},
+		asStrings: () => {
+			return get(_dragonBuilderHistoryStrings);
 		}
 	};
 })();
