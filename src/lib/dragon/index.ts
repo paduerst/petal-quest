@@ -51,11 +51,57 @@ export const COLOR_TO_THEME: {
 	violet: 'rgb(118, 43, 158)'
 } as const;
 
+/**
+ * Returns an RGBA string with the given RGB and A value.
+ * @export
+ * @param {RGB} rgb
+ * @param {number} a
+ * @return {*}  {string}
+ */
+export function RGBToRGBA(rgb: RGB, a: number): string {
+	return `rgba(${rgb.substring(4, rgb.length - 1)}, ${a})`;
+}
+
 export class DragonConfig {
 	age: Age = 'wyrmling';
 	color: Color = 'red';
 	name?: string;
 	alignment?: string;
+
+	/**
+	 * Returns the title for this DragonConfig.
+	 * @return {*}  {string}
+	 * @memberof DragonConfig
+	 */
+	getTitle(): string {
+		let output = '';
+
+		let descriptiveTitle = '';
+		const capitalizedAge = capitalizeFirstLetter(this.age);
+		const capitalizedColor = capitalizeFirstLetter(this.color);
+		if (this.age === 'wyrmling') {
+			descriptiveTitle = `${capitalizedColor} Dragon ${capitalizedAge}`;
+		} else {
+			descriptiveTitle = `${capitalizedAge} ${capitalizedColor} Dragon`;
+		}
+
+		if (this.name === undefined || this.name === '') {
+			output = descriptiveTitle;
+		} else {
+			output = `${this.name} (${descriptiveTitle})`;
+		}
+
+		return output;
+	}
+
+	/**
+	 * Returns the RGB theme for this DragonConfig.
+	 * @return {*}  {RGB}
+	 * @memberof DragonConfig
+	 */
+	getTheme(): RGB {
+		return COLOR_TO_THEME[this.color];
+	}
 
 	/**
 	 * Deletes unneeded members of this DragonConfig.

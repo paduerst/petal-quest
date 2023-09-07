@@ -50,6 +50,7 @@ const config = {
 			{
 				statBlockContents: {
 					...require('daisyui/src/theming/themes')['[data-theme=light]'],
+					primary: '#0fba81',
 					'base-100': '#eee',
 					'--btn-text-case': 'none'
 				}

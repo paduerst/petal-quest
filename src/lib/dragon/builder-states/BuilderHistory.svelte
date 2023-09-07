@@ -3,7 +3,7 @@
 	import DragonConfigPreview from '../DragonConfigPreview.svelte';
 </script>
 
-<div>
+<div class="flex flex-col items-center">
 	{#each $dragonBuilderHistory as config}
 		<DragonConfigPreview {config} />
 	{/each}

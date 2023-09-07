@@ -18,7 +18,7 @@
 	$: if (config == undefined) {
 		dragonTheme = COLOR_TO_THEME[COLORS[iColor]];
 	} else {
-		dragonTheme = COLOR_TO_THEME[config.color];
+		dragonTheme = config.getTheme();
 	}
 
 	let innerClientHeight: number;
