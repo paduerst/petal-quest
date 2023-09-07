@@ -85,16 +85,8 @@
 		if ($currentDragonConfig !== undefined) {
 			const currentConfigString = $currentDragonConfig.toString();
 
-			// check to see if this config is the latest config in builder history
-			const configIndexInHistory = $dragonBuilderHistory.findIndex((configString: string) => {
-				return configString === currentConfigString;
-			});
-			if (configIndexInHistory !== 0) {
-				if (configIndexInHistory > 0) {
-					$dragonBuilderHistory.splice(configIndexInHistory, 1);
-				}
-				$dragonBuilderHistory.unshift(currentConfigString);
-			}
+			// add this config string to the Builder History
+			dragonBuilderHistory.add(currentConfigString);
 
 			// update the current URL search params to match this config
 			const configSearchString = `?${currentConfigString}`;
