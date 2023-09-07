@@ -17,6 +17,7 @@
 	import BuilderWelcome from './builder-states/BuilderWelcome.svelte';
 	import BuilderDisplay from './builder-states/BuilderDisplay.svelte';
 	import BuilderEdit from './builder-states/BuilderEdit.svelte';
+	import BuilderHistory from './builder-states/BuilderHistory.svelte';
 	import BuilderDebug from './builder-states/BuilderDebug.svelte';
 	import DragonShareModal, { openShareDialog } from './DragonShareModal.svelte';
 	import DragonControlButtons from './DragonControlButtons.svelte';
@@ -58,7 +59,7 @@
 		}
 	}
 
-	const debugEnabled: boolean = false && dev;
+	const debugEnabled: boolean = true && dev;
 
 	function handleDebugClick(event: { detail: { debugText: string } }): void {
 		if (debugEnabled) {
@@ -140,6 +141,10 @@
 		{:else if currentState === 'EDIT' && nextState === undefined}
 			<div transition:fade={fadeConfig} on:outroend={finishStateTransition}>
 				<BuilderEdit on:newDragonConfig={onNewDragonConfig} on:resetDragon={onResetDragon} />
+			</div>
+		{:else if currentState === 'HISTORY' && nextState === undefined}
+			<div transition:fade={fadeConfig} on:outroend={finishStateTransition}>
+				<BuilderHistory />
 			</div>
 		{:else if currentState === 'DEBUG' && nextState === undefined}
 			<div transition:fade={fadeConfig} on:outroend={finishStateTransition}>

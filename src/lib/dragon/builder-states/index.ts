@@ -2,7 +2,14 @@ import { writable, type Writable, derived, get } from 'svelte/store';
 import { localStorageStore } from '@skeletonlabs/skeleton';
 import { DragonConfig } from '..';
 
-export const BUILDER_STATES = ['LOADING', 'WELCOME', 'DISPLAY', 'EDIT', 'DEBUG'] as const;
+export const BUILDER_STATES = [
+	'LOADING',
+	'WELCOME',
+	'DISPLAY',
+	'EDIT',
+	'HISTORY',
+	'DEBUG'
+] as const;
 export type BuilderState = (typeof BUILDER_STATES)[number];
 
 /**
