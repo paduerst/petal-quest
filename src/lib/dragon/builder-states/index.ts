@@ -1,7 +1,12 @@
 import { writable, type Writable, derived, get } from 'svelte/store';
+import type { FadeParams } from 'svelte/transition';
 import { goto } from '$app/navigation';
 import { localStorageStore } from '@skeletonlabs/skeleton';
 import { DragonConfig } from '..';
+
+export const builderFadeParams: FadeParams = {
+	duration: 200
+};
 
 export const BUILDER_STATES = [
 	'LOADING',

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { type RGB, COLOR_TO_THEME, COLORS, DragonConfig } from '.';
+	import { builderFadeParams } from './builder-states';
 	export let config: DragonConfig | undefined = undefined;
 	let dragonTheme: RGB;
 
@@ -34,7 +35,7 @@
 	<div class="dragon-container-top-edge" />
 	<div
 		class="outer-wrapper"
-		style="--outer-wrapper-height: {outerWrapperHeight}px; min-height: {minHeight}px;"
+		style="--outer-wrapper-height: {outerWrapperHeight}px; min-height: {minHeight}px; transition: height {builderFadeParams.duration}ms ease;"
 		data-theme="statBlockContents"
 	>
 		<div class="inner-wrapper" bind:clientHeight={innerClientHeight}>
@@ -86,7 +87,6 @@
 	.outer-wrapper {
 		@apply overflow-hidden;
 		height: var(--outer-wrapper-height);
-		transition: height 200ms ease;
 	}
 
 	@media print {

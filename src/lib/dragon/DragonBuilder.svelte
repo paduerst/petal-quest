@@ -2,10 +2,15 @@
 	import { dev } from '$app/environment';
 	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { fade, type FadeParams } from 'svelte/transition';
+	import { fade } from 'svelte/transition';
 
 	import { DragonConfig } from '.';
-	import { type BuilderState, stringToBuilderState, currentDragonConfig } from './builder-states';
+	import {
+		type BuilderState,
+		stringToBuilderState,
+		currentDragonConfig,
+		builderFadeParams
+	} from './builder-states';
 
 	import DragonContainer from './DragonContainer.svelte';
 	import BuilderLoading from './builder-states/BuilderLoading.svelte';
@@ -21,10 +26,6 @@
 	// Builder State Management
 	let currentState: BuilderState = 'LOADING';
 	let nextState: BuilderState | undefined = undefined;
-
-	const fadeConfig: FadeParams = {
-		duration: 200
-	};
 
 	function setNextState(nextStateIn: BuilderState): void {
 		if (nextStateIn !== currentState) {
@@ -87,33 +88,33 @@
 <div class="flex flex-col items-center">
 	<DragonContainer config={$currentDragonConfig}>
 		{#if currentState === 'LOADING' && nextState === undefined}
-			<div transition:fade={fadeConfig} on:outroend={finishStateTransition}>
+			<div transition:fade={builderFadeParams} on:outroend={finishStateTransition}>
 				<BuilderLoading />
 			</div>
 		{:else if currentState === 'WELCOME' && nextState === undefined}
-			<div transition:fade={fadeConfig} on:outroend={finishStateTransition}>
+			<div transition:fade={builderFadeParams} on:outroend={finishStateTransition}>
 				<BuilderWelcome on:click={handleControlClick} />
 			</div>
 		{:else if currentState === 'DISPLAY' && nextState === undefined}
-			<div transition:fade={fadeConfig} on:outroend={finishStateTransition}>
+			<div transition:fade={builderFadeParams} on:outroend={finishStateTransition}>
 				<BuilderDisplay />
 			</div>
 		{:else if currentState === 'EDIT' && nextState === undefined}
-			<div transition:fade={fadeConfig} on:outroend={finishStateTransition}>
+			<div transition:fade={builderFadeParams} on:outroend={finishStateTransition}>
 				<BuilderEdit />
 			</div>
 		{:else if currentState === 'HISTORY' && nextState === undefined}
-			<div transition:fade={fadeConfig} on:outroend={finishStateTransition}>
+			<div transition:fade={builderFadeParams} on:outroend={finishStateTransition}>
 				<BuilderHistory />
 			</div>
 		{:else if currentState === 'DEBUG' && nextState === undefined}
-			<div transition:fade={fadeConfig} on:outroend={finishStateTransition}>
+			<div transition:fade={builderFadeParams} on:outroend={finishStateTransition}>
 				<BuilderDebug />
 			</div>
 		{:else if nextState !== undefined}
 			<!-- We are transitioning. Keep it empty. -->
 		{:else}
-			<div transition:fade={fadeConfig} on:outroend={finishStateTransition}>
+			<div transition:fade={builderFadeParams} on:outroend={finishStateTransition}>
 				<p>The currentState of {currentState} is unhandled right now!</p>
 			</div>
 		{/if}
@@ -122,7 +123,7 @@
 	<DragonShareModal config={$currentDragonConfig} />
 
 	{#if currentState === 'DISPLAY' && nextState === undefined}
-		<div transition:fade={fadeConfig} class="w-fit">
+		<div transition:fade={builderFadeParams} class="w-fit">
 			<DragonControlButtons on:click={handleControlClick} />
 		</div>
 	{/if}
