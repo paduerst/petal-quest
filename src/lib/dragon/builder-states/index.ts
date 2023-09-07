@@ -71,6 +71,21 @@ export const dragonBuilderHistory = (() => {
 				_dragonBuilderHistoryAsString.set(JSON.stringify(history));
 			}
 		},
+		remove: (config: DragonConfig) => {
+			config.cleanup();
+			const configAsString = config.toString();
+			const history = get(_dragonBuilderHistoryStrings);
+			const valueIndexInHistory = history.findIndex((string: string) => {
+				return string === configAsString;
+			});
+			if (valueIndexInHistory >= 0) {
+				history.splice(valueIndexInHistory, 1);
+				_dragonBuilderHistoryAsString.set(JSON.stringify(history));
+			}
+		},
+		clear: () => {
+			_dragonBuilderHistoryAsString.set('[]');
+		},
 		toStrings: () => {
 			return get(_dragonBuilderHistoryStrings);
 		}

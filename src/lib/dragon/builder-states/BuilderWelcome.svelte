@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 
-	import { currentDragonConfig } from '.';
+	import { currentDragonConfig, dragonBuilderHistory } from '.';
 	import { DragonConfig, AGES, AGES_UPPER, COLORS, COLORS_UPPER } from '..';
 
 	const dispatch = createEventDispatcher<{ click: { buttonText: string } }>();
@@ -61,4 +61,26 @@
 	>
 		Advanced Options
 	</button>
+
+	{#if $dragonBuilderHistory.length > 0}
+		<p class="font-bold text-lg mt-6">Build from History</p>
+		<button
+			class="daisy-btn daisy-btn-neutral m-2"
+			on:click={() => {
+				$currentDragonConfig = $dragonBuilderHistory[0];
+			}}
+		>
+			Rebuild Last Dragon
+		</button>
+		<button
+			class="daisy-btn daisy-btn-outline m-2"
+			on:click={() => {
+				dispatch('click', {
+					buttonText: 'HISTORY'
+				});
+			}}
+		>
+			View Builder History
+		</button>
+	{/if}
 </div>

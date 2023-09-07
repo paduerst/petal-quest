@@ -1,5 +1,9 @@
 <script lang="ts">
+	import { createEventDispatcher } from 'svelte';
 	import { type DragonConfig, RGBToRGBA } from '.';
+	import { currentDragonConfig } from './builder-states';
+
+	const dispatch = createEventDispatcher<{ clickDelete: DragonConfig }>();
 
 	export let config: DragonConfig;
 </script>
@@ -15,7 +19,7 @@
 			<button
 				class="daisy-btn daisy-btn-outline hover:daisy-btn-error"
 				on:click={() => {
-					console.log('You clicked delete!');
+					dispatch('clickDelete', config);
 				}}
 			>
 				Delete Dragon
@@ -23,7 +27,7 @@
 			<button
 				class="daisy-btn daisy-btn-neutral text-white"
 				on:click={() => {
-					console.log('You clicked rebuild!');
+					$currentDragonConfig = config;
 				}}
 			>
 				Rebuild Dragon

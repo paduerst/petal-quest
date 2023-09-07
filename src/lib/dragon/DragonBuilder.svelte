@@ -48,6 +48,8 @@
 	function handleControlClick(event: { detail: { buttonText: string } }): void {
 		if (event.detail.buttonText === 'EDIT') {
 			setNextState('EDIT');
+		} else if (event.detail.buttonText === 'HISTORY') {
+			setNextState('HISTORY');
 		} else if (event.detail.buttonText === 'SHARE') {
 			handleShareClick();
 		} else {
@@ -55,7 +57,7 @@
 		}
 	}
 
-	const debugEnabled: boolean = true && dev;
+	const debugEnabled: boolean = false && dev;
 
 	function handleDebugClick(event: { detail: { debugText: string } }): void {
 		if (debugEnabled) {
