@@ -1,4 +1,5 @@
 import { writable, type Writable, derived, get } from 'svelte/store';
+import { goto } from '$app/navigation';
 import { localStorageStore } from '@skeletonlabs/skeleton';
 import { DragonConfig } from '..';
 
@@ -65,23 +66,36 @@ export const dragonBuilderHistory = (() => {
 				_dragonBuilderHistoryAsString.set(JSON.stringify(history));
 			}
 		},
-		asStrings: () => {
+		toStrings: () => {
 			return get(_dragonBuilderHistoryStrings);
 		}
 	};
 })();
 
 export const currentDragonConfig = (() => {
-	const { subscribe, set } = writable<DragonConfig | undefined>(undefined);
+	const _currentDragonConfig = writable<DragonConfig | undefined>(undefined);
 
 	return {
-		subscribe,
-		set: (value: DragonConfig | undefined) => {
+		subscribe: _currentDragonConfig.subscribe,
+		set: (value: DragonConfig | undefined, fromURL = false) => {
 			if (value !== undefined) {
 				value.cleanup();
-				dragonBuilderHistory.add(value);
 			}
-			set(value);
+			if (fromURL) {
+				// we got this new value from the URL, update to use it
+				if (value !== undefined) {
+					dragonBuilderHistory.add(value);
+				}
+				_currentDragonConfig.set(value);
+			} else {
+				// we should navigate to the URL for this new value
+				const builderPath = '/dragon-builder';
+				if (value !== undefined) {
+					goto(`${builderPath}?${value.toString()}`);
+				} else {
+					goto(builderPath);
+				}
+			}
 		}
 	};
 })();

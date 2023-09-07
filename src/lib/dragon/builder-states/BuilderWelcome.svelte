@@ -1,22 +1,12 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 
+	import { currentDragonConfig } from '.';
 	import { DragonConfig, AGES, AGES_UPPER, COLORS, COLORS_UPPER } from '..';
 
-	const dispatch = createEventDispatcher<{
-		newDragonConfig: DragonConfig;
-		click: { buttonText: string };
-	}>();
-
-	function dispatchDragonConfig(newDragonConfig: DragonConfig) {
-		dispatch('newDragonConfig', newDragonConfig);
-	}
+	const dispatch = createEventDispatcher<{ click: { buttonText: string } }>();
 
 	let newConfig: DragonConfig = new DragonConfig();
-
-	function buildDragon() {
-		dispatchDragonConfig(newConfig);
-	}
 </script>
 
 <p class="font-bold text-xl">Welcome to the Prismatic Dragon Builder!</p>
@@ -52,7 +42,12 @@
 		</select>
 	</div>
 
-	<button class="daisy-btn daisy-btn-neutral m-2 mt-6" on:click={buildDragon}>
+	<button
+		class="daisy-btn daisy-btn-neutral m-2 mt-6"
+		on:click={() => {
+			$currentDragonConfig = newConfig;
+		}}
+	>
 		Build Dragon
 	</button>
 

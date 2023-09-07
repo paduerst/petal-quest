@@ -1,16 +1,11 @@
 <script lang="ts">
 	import { dev } from '$app/environment';
-	import { goto, afterNavigate } from '$app/navigation';
+	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { fade, type FadeParams } from 'svelte/transition';
 
 	import { DragonConfig } from '.';
-	import {
-		type BuilderState,
-		stringToBuilderState,
-		dragonBuilderHistory,
-		currentDragonConfig
-	} from './builder-states';
+	import { type BuilderState, stringToBuilderState, currentDragonConfig } from './builder-states';
 
 	import DragonContainer from './DragonContainer.svelte';
 	import BuilderLoading from './builder-states/BuilderLoading.svelte';
@@ -76,47 +71,15 @@
 		}
 	}
 
-	// Dragon Config Management
-	function setCurrentDragonConfig(
-		newConfig: DragonConfig | undefined,
-		redirect: boolean = true
-	): void {
-		$currentDragonConfig = newConfig;
-
-		if ($currentDragonConfig !== undefined) {
-			const currentConfigString = $currentDragonConfig.toString();
-
-			// update the current URL search params to match this config
-			const configSearchString = `?${currentConfigString}`;
-			if (redirect && configSearchString !== $page.url.search) {
-				goto(configSearchString);
-			}
-		} else {
-			if (redirect) {
-				goto($page.url.pathname);
-			}
-		}
-	}
-
-	function onNewDragonConfig(event: { detail: DragonConfig }) {
-		setCurrentDragonConfig(event.detail);
-		setNextState('DISPLAY');
-	}
-
-	function onResetDragon() {
-		setNextState('WELCOME');
-		setCurrentDragonConfig(undefined);
-	}
-
-	// Initialization
+	// Initialization / Dragon Config Management
 	afterNavigate(() => {
 		const URLDragonConfig = new DragonConfig();
 		if (URLDragonConfig.fromURLSearchParams($page.url.searchParams)) {
-			setCurrentDragonConfig(URLDragonConfig, false);
+			currentDragonConfig.set(URLDragonConfig, true);
 			setNextState('DISPLAY');
 		} else {
 			setNextState('WELCOME');
-			setCurrentDragonConfig(undefined, false);
+			currentDragonConfig.set(undefined, true);
 		}
 	});
 </script>
@@ -129,7 +92,7 @@
 			</div>
 		{:else if currentState === 'WELCOME' && nextState === undefined}
 			<div transition:fade={fadeConfig} on:outroend={finishStateTransition}>
-				<BuilderWelcome on:newDragonConfig={onNewDragonConfig} on:click={handleControlClick} />
+				<BuilderWelcome on:click={handleControlClick} />
 			</div>
 		{:else if currentState === 'DISPLAY' && nextState === undefined}
 			<div transition:fade={fadeConfig} on:outroend={finishStateTransition}>
@@ -137,7 +100,7 @@
 			</div>
 		{:else if currentState === 'EDIT' && nextState === undefined}
 			<div transition:fade={fadeConfig} on:outroend={finishStateTransition}>
-				<BuilderEdit on:newDragonConfig={onNewDragonConfig} on:resetDragon={onResetDragon} />
+				<BuilderEdit />
 			</div>
 		{:else if currentState === 'HISTORY' && nextState === undefined}
 			<div transition:fade={fadeConfig} on:outroend={finishStateTransition}>
@@ -160,7 +123,7 @@
 
 	{#if currentState === 'DISPLAY' && nextState === undefined}
 		<div transition:fade={fadeConfig} class="w-fit">
-			<DragonControlButtons on:click={handleControlClick} on:resetDragon={onResetDragon} />
+			<DragonControlButtons on:click={handleControlClick} />
 		</div>
 	{/if}
 

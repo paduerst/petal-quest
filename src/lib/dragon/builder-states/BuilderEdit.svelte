@@ -1,15 +1,8 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
 	import { onMount } from 'svelte';
 
-	import { DragonConfig, COLORS, COLORS_UPPER, AGES, AGES_UPPER } from '..';
 	import { currentDragonConfig } from '.';
-
-	const dispatch = createEventDispatcher<{ newDragonConfig: DragonConfig; resetDragon: null }>();
-
-	function dispatchDragonConfig(newDragonConfig: DragonConfig) {
-		dispatch('newDragonConfig', newDragonConfig);
-	}
+	import { DragonConfig, COLORS, COLORS_UPPER, AGES, AGES_UPPER } from '..';
 
 	let editedConfig: DragonConfig = new DragonConfig();
 	onMount(() => {
@@ -17,9 +10,6 @@
 			editedConfig = $currentDragonConfig;
 		}
 	});
-	function updateDragon() {
-		dispatchDragonConfig(editedConfig);
-	}
 </script>
 
 <div class="flex flex-col items-center">
@@ -81,7 +71,12 @@
 		/>
 	</div>
 
-	<button class="daisy-btn daisy-btn-neutral m-2 mt-6" on:click={updateDragon}>
+	<button
+		class="daisy-btn daisy-btn-neutral m-2 mt-6"
+		on:click={() => {
+			$currentDragonConfig = editedConfig;
+		}}
+	>
 		{$currentDragonConfig === undefined ? 'Build' : 'Update'} Dragon
 	</button>
 </div>
