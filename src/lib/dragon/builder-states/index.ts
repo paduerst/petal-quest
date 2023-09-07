@@ -46,8 +46,8 @@ export const dragonBuilderHistory = (() => {
 	};
 })();
 
-function createDragonConfigStore(initialValue: DragonConfig | undefined = undefined) {
-	const { subscribe, set } = writable<DragonConfig | undefined>(initialValue);
+export const currentDragonConfig = (() => {
+	const { subscribe, set } = writable<DragonConfig | undefined>(undefined);
 
 	return {
 		subscribe,
@@ -58,6 +58,4 @@ function createDragonConfigStore(initialValue: DragonConfig | undefined = undefi
 			set(value);
 		}
 	};
-}
-
-export const currentDragonConfig = createDragonConfigStore();
+})();
