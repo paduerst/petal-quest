@@ -9,7 +9,7 @@
 </script>
 
 <div
-	class="daisy-card daisy-card-compact w-full shadow-xl"
+	class="daisy-card daisy-card-compact w-full"
 	style="background: {RGBToRGBA(config.getTheme(), 0.1)};"
 >
 	<div class="daisy-card-body">

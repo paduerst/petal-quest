@@ -52,10 +52,7 @@
 
 	function handleDebugClick(event: { detail: { debugText: string } }): void {
 		if (debugEnabled) {
-			const inputState = stringToBuilderState(event.detail.debugText);
-			if (inputState !== undefined) {
-				$nextBuilderState = inputState;
-			} else if (event.detail.debugText === 'SHARE') {
+			if (event.detail.debugText === 'SHARE') {
 				handleShareClick();
 			} else {
 				console.log(`Unhandled debugText of ${event.detail.debugText}`);

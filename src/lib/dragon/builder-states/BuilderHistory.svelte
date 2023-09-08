@@ -17,6 +17,15 @@
 		$lastBuilderState !== undefined && $lastBuilderState !== 'LOADING'
 			? $lastBuilderState
 			: 'WELCOME';
+
+	let innerClientHeight: number;
+	let outerWrapperHeight: number;
+	$: outerWrapperHeight = innerClientHeight;
+
+	let heightTransitionDuration =
+		typeof historyFlipParams.duration === 'number'
+			? Math.round(0.75 * historyFlipParams.duration)
+			: 100;
 </script>
 
 <p class="font-bold text-xl">Builder History</p>
@@ -30,22 +39,44 @@
 	>
 		Return to Builder {capitalizeFirstLetter(returnState.toLowerCase())}
 	</button>
-	<div class="max-w-xl w-full">
-		{#each $dragonBuilderHistory as config, index (config.toString())}
-			<div animate:flip={historyFlipParams} class="my-4">
-				<DragonConfigPreview {config} on:clickDelete={onClickDelete} />
-				{#if index === $dragonBuilderHistory.length - 1}
-					<button
-						class="daisy-btn daisy-btn-outline hover:daisy-btn-error m-2 mt-6"
-						on:click={() => {
-							dragonBuilderHistory.clear();
-							$currentDragonConfig = undefined;
-						}}
-					>
-						Clear History
-					</button>
-				{/if}
-			</div>
-		{/each}
+	<div
+		class="outer-wrapper max-w-xl w-full"
+		style="--outer-wrapper-height: {outerWrapperHeight}px; transition: height {heightTransitionDuration}ms ease;"
+	>
+		<div class="inner-wrapper w-full" bind:clientHeight={innerClientHeight}>
+			<ul class="w-full">
+				{#each $dragonBuilderHistory as config (config.toString())}
+					<li animate:flip={historyFlipParams} class="my-4">
+						<DragonConfigPreview {config} on:clickDelete={onClickDelete} />
+					</li>
+				{/each}
+			</ul>
+		</div>
 	</div>
+	<button
+		class="daisy-btn daisy-btn-outline hover:daisy-btn-error m-2 mt-6"
+		on:click={() => {
+			dragonBuilderHistory.clear();
+			$currentDragonConfig = undefined;
+		}}
+	>
+		Clear History
+	</button>
 </div>
+
+<style>
+	.outer-wrapper {
+		@apply overflow-hidden;
+		height: var(--outer-wrapper-height);
+	}
+
+	@media print {
+		.outer-wrapper {
+			height: fit-content;
+		}
+	}
+
+	.inner-wrapper {
+		@apply h-fit inline-block;
+	}
+</style>

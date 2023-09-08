@@ -29,13 +29,18 @@
 	} else {
 		outerWrapperHeight = innerClientHeight;
 	}
+
+	let heightTransitionDuration =
+		typeof builderFadeParams.duration === 'number'
+			? Math.round(0.9 * builderFadeParams.duration)
+			: 100;
 </script>
 
 <div class="dragon-container" style="--theme-dragon: {dragonTheme};">
 	<div class="dragon-container-top-edge" />
 	<div
 		class="outer-wrapper"
-		style="--outer-wrapper-height: {outerWrapperHeight}px; min-height: {minHeight}px; transition: height {builderFadeParams.duration}ms ease;"
+		style="--outer-wrapper-height: {outerWrapperHeight}px; min-height: {minHeight}px; transition: height {heightTransitionDuration}ms ease;"
 		data-theme="statBlockContents"
 	>
 		<div class="inner-wrapper" bind:clientHeight={innerClientHeight}>
