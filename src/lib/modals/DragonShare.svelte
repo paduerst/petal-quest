@@ -7,11 +7,12 @@
 	import { getModalStore, clipboard } from '@skeletonlabs/skeleton';
 	const modalStore = getModalStore();
 
-	import { page } from '$app/stores';
+	import { BASE_SHARE_URL } from '$lib';
 
-	const baseShareURL = `${$page.url.origin}/dragon-builder`;
 	let shareURL =
-		$modalStore[0].value === undefined ? baseShareURL : `${baseShareURL}?${$modalStore[0].value}`;
+		$modalStore[0].value === undefined
+			? BASE_SHARE_URL
+			: `${BASE_SHARE_URL}?${$modalStore[0].value}`;
 </script>
 
 {#if $modalStore[0]}
