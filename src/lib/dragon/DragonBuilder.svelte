@@ -4,9 +4,10 @@
 	import { page } from '$app/stores';
 	import { fade } from 'svelte/transition';
 
+	import { getModalStore, type ModalSettings } from '@skeletonlabs/skeleton';
+
 	import { DragonConfig } from '.';
 	import {
-		stringToBuilderState,
 		lastBuilderState,
 		currentBuilderState,
 		nextBuilderState,
@@ -21,9 +22,14 @@
 	import BuilderEdit from './builder-states/BuilderEdit.svelte';
 	import BuilderHistory from './builder-states/BuilderHistory.svelte';
 	import BuilderDebug from './builder-states/BuilderDebug.svelte';
-	import DragonShareModal, { openShareDialog } from './DragonShareModal.svelte';
 	import DragonControlButtons from './DragonControlButtons.svelte';
 	import DragonDebugButtons from './DragonDebugButtons.svelte';
+
+	const modalStore = getModalStore();
+	const shareModal: ModalSettings = {
+		type: 'component',
+		component: 'dragonShare'
+	};
 
 	// Builder State Management
 	function transition(): void {
@@ -37,7 +43,8 @@
 
 	// Click Handling
 	function handleShareClick() {
-		openShareDialog();
+		shareModal.value = $currentDragonConfig;
+		modalStore.trigger(shareModal);
 	}
 
 	function handleControlClick(event: { detail: { buttonText: string } }): void {
@@ -107,8 +114,6 @@
 			</div>
 		{/if}
 	</DragonContainer>
-
-	<DragonShareModal config={$currentDragonConfig} />
 
 	{#if $currentBuilderState === 'DISPLAY' && $nextBuilderState === undefined}
 		<div transition:fade={builderFadeParams} class="w-fit">

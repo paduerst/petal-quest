@@ -1,14 +1,23 @@
 <script lang="ts">
 	import '../app.postcss';
 
-	import { initializeStores } from '@skeletonlabs/skeleton';
-	import { AppShell } from '@skeletonlabs/skeleton';
+	import { initializeStores, type ModalComponent } from '@skeletonlabs/skeleton';
+	import { AppShell, Modal } from '@skeletonlabs/skeleton';
+	import DragonShare from '$lib/modals/DragonShare.svelte';
 	import Drawer from '$lib/Drawer.svelte';
 	import Header from '$lib/Header.svelte';
 	import Footer from '$lib/Footer.svelte';
 
 	initializeStores();
+
+	const modalComponentRegistry: Record<string, ModalComponent> = {
+		dragonShare: {
+			ref: DragonShare
+		}
+	};
 </script>
+
+<Modal components={modalComponentRegistry} />
 
 <Drawer />
 
