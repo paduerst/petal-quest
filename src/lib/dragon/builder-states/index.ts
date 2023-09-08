@@ -28,6 +28,25 @@ export function stringToBuilderState(state_string: string): BuilderState | undef
 	return BUILDER_STATES.find((state) => state === state_string);
 }
 
+export const lastBuilderState = writable<BuilderState | undefined>(undefined);
+
+export const currentBuilderState = writable<BuilderState>('LOADING');
+
+export const nextBuilderState = (() => {
+	const _nextBuilderState = writable<BuilderState | undefined>(undefined);
+
+	return {
+		subscribe: _nextBuilderState.subscribe,
+		set: (value: BuilderState | undefined, force = false) => {
+			if (value !== get(currentBuilderState) || force) {
+				_nextBuilderState.set(value);
+			}
+		}
+	};
+})();
+
+export const dragonBuilderHistoryMaxLength = 20;
+
 export const dragonBuilderHistory = (() => {
 	const _dragonBuilderHistoryAsString: Writable<string> = localStorageStore(
 		'dragonBuilderHistory',
@@ -54,6 +73,9 @@ export const dragonBuilderHistory = (() => {
 				config.cleanup();
 				return config.toString();
 			});
+			while (configsAsStrings.length > dragonBuilderHistoryMaxLength) {
+				configsAsStrings.pop();
+			}
 			_dragonBuilderHistoryAsString.set(JSON.stringify(configsAsStrings));
 		},
 		add: (config: DragonConfig) => {
@@ -68,6 +90,9 @@ export const dragonBuilderHistory = (() => {
 					history.splice(valueIndexInHistory, 1);
 				}
 				history.unshift(configAsString);
+				while (history.length > dragonBuilderHistoryMaxLength) {
+					history.pop();
+				}
 				_dragonBuilderHistoryAsString.set(JSON.stringify(history));
 			}
 		},
@@ -94,6 +119,7 @@ export const dragonBuilderHistory = (() => {
 
 export const currentDragonConfig = (() => {
 	const _currentDragonConfig = writable<DragonConfig | undefined>(undefined);
+	const _nextDragonConfig = writable<DragonConfig | undefined | null>(null);
 
 	return {
 		subscribe: _currentDragonConfig.subscribe,
@@ -103,10 +129,8 @@ export const currentDragonConfig = (() => {
 			}
 			if (fromURL) {
 				// we got this new value from the URL, update to use it
-				if (value !== undefined) {
-					dragonBuilderHistory.add(value);
-				}
-				_currentDragonConfig.set(value);
+				_nextDragonConfig.set(value);
+				nextBuilderState.set(value === undefined ? 'WELCOME' : 'DISPLAY', true);
 			} else {
 				// we should navigate to the URL for this new value
 				const builderPath = '/dragon-builder';
@@ -115,6 +139,16 @@ export const currentDragonConfig = (() => {
 				} else {
 					goto(builderPath);
 				}
+			}
+		},
+		transition: () => {
+			const nextConfig = get(_nextDragonConfig);
+			if (nextConfig !== null) {
+				if (nextConfig !== undefined) {
+					dragonBuilderHistory.add(nextConfig);
+				}
+				_currentDragonConfig.set(nextConfig);
+				_nextDragonConfig.set(null);
 			}
 		}
 	};
