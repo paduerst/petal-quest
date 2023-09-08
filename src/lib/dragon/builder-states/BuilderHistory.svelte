@@ -7,7 +7,7 @@
 
 	const historyFlipParams: FlipParams = { duration: 150 };
 	const historyFlyXDistance = 600;
-	const historyFlyDuration = 200;
+	const historyFlyDuration = 300;
 	const historyFlyInParams: FlyParams = { x: historyFlyXDistance, duration: historyFlyDuration };
 	const historyFadeParams: FadeParams = { duration: 50 };
 

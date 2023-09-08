@@ -8,11 +8,11 @@
 	export let config: DragonConfig;
 </script>
 
-<div
-	class="daisy-card daisy-card-compact w-full"
-	style="background: {RGBToRGBA(config.getTheme(), 0.1)};"
->
-	<div class="daisy-card-body">
+<div class="daisy-card daisy-card-compact w-full bg-white">
+	<div
+		class="daisy-card-body rounded-[inherit]"
+		style="background: {RGBToRGBA(config.getTheme(), 0.35)};"
+	>
 		<h2 class="daisy-card-title">{config.getTitle()}</h2>
 		<p>{config.toString()}</p>
 		<div class="daisy-card-actions justify-end">
