@@ -21,7 +21,8 @@
 		'age=adult&color=green&name=Brondelyn&alignment=Neutral+Evil',
 		'age=adult&color=blue&name=Calliope&alignment=Chaotic+Evil',
 		'age=ancient&color=indigo&name=Tonitra&alignment=Chaotic+Good',
-		'age=ancient&color=violet&name=Imperator+Magna&alignment=Lawful+Evil'
+		'age=ancient&color=violet&name=Imperator+Emeritus+Magna&alignment=Lawful+Evil',
+		'age=wyrmling&color=blue&name=The+Dragon+with+the+Obnoxiously+Long+Name&alignment=A+Lengthy+Alignment+Description'
 	];
 	const debugConfigs: DragonConfig[] = [];
 	for (const configString of debugConfigStrings) {

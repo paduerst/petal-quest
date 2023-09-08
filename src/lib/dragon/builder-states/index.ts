@@ -45,6 +45,8 @@ export const nextBuilderState = (() => {
 	};
 })();
 
+export const dragonBuilderHistoryMaxLength = 20;
+
 export const dragonBuilderHistory = (() => {
 	const _dragonBuilderHistoryAsString: Writable<string> = localStorageStore(
 		'dragonBuilderHistory',
@@ -71,6 +73,9 @@ export const dragonBuilderHistory = (() => {
 				config.cleanup();
 				return config.toString();
 			});
+			while (configsAsStrings.length > dragonBuilderHistoryMaxLength) {
+				configsAsStrings.pop();
+			}
 			_dragonBuilderHistoryAsString.set(JSON.stringify(configsAsStrings));
 		},
 		add: (config: DragonConfig) => {
@@ -85,6 +90,9 @@ export const dragonBuilderHistory = (() => {
 					history.splice(valueIndexInHistory, 1);
 				}
 				history.unshift(configAsString);
+				while (history.length > dragonBuilderHistoryMaxLength) {
+					history.pop();
+				}
 				_dragonBuilderHistoryAsString.set(JSON.stringify(history));
 			}
 		},
