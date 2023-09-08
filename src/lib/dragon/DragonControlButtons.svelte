@@ -37,4 +37,12 @@
 	>
 		Build a New Dragon
 	</button>
+	<button
+		class="daisy-btn daisy-btn-neutral text-token m-1"
+		on:click={() => {
+			$nextBuilderState = 'HISTORY';
+		}}
+	>
+		View Builder History
+	</button>
 </div>

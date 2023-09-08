@@ -28,6 +28,8 @@ export function stringToBuilderState(state_string: string): BuilderState | undef
 	return BUILDER_STATES.find((state) => state === state_string);
 }
 
+export const lastBuilderState = writable<BuilderState | undefined>(undefined);
+
 export const currentBuilderState = writable<BuilderState>('LOADING');
 
 export const nextBuilderState = (() => {

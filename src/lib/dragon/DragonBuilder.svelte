@@ -7,6 +7,7 @@
 	import { DragonConfig } from '.';
 	import {
 		stringToBuilderState,
+		lastBuilderState,
 		currentBuilderState,
 		nextBuilderState,
 		currentDragonConfig,
@@ -28,6 +29,7 @@
 	function transition(): void {
 		currentDragonConfig.transition();
 		if ($nextBuilderState !== undefined) {
+			$lastBuilderState = $currentBuilderState;
 			$currentBuilderState = $nextBuilderState;
 			$nextBuilderState = undefined;
 		}
