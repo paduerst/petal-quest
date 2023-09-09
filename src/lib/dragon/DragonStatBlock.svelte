@@ -12,6 +12,7 @@
 	<p>
 		Eventually this will be the dragon stat block. For now, we're just displaying the dragon config: {dragon.config}
 	</p>
+	<p>Here are the dragon stats: {JSON.stringify(dragon)}</p>
 	<p>
 		Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita aut praesentium consectetur
 		cum. Non corrupti aliquid maiores, corporis ducimus suscipit. A asperiores illum sapiente
