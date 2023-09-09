@@ -133,7 +133,7 @@ export const currentDragonConfig = (() => {
 				nextBuilderState.set(value === undefined ? 'WELCOME' : 'DISPLAY', true);
 			} else {
 				// we should navigate to the URL for this new value
-				const builderPath = '/dragon-builder';
+				const builderPath = '/dragon-builder/';
 				if (value !== undefined) {
 					goto(`${builderPath}?${value.toString()}`);
 				} else {

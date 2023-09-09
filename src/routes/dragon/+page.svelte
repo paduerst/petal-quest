@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte';
 
 	onMount(() => {
-		const redirectURL = `/dragon-builder${$page.url.search}`;
+		const redirectURL = `/dragon-builder/${$page.url.search}`;
 		window.history.replaceState(history.state, '', redirectURL);
 		location.reload();
 	});
