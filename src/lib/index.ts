@@ -7,4 +7,4 @@ export const NAV_LINKS: readonly {
 	{ href: '/about', text: 'About' }
 ] as const;
 
-export const BASE_SHARE_URL = 'petal.palladiumturtle.com/dragon';
+export const BASE_SHARE_URL = 'https://dragon.petal.quest/';
