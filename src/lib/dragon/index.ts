@@ -191,4 +191,17 @@ export class DragonConfig {
 		const params = new URLSearchParams(paramsString);
 		return this.fromURLSearchParams(params);
 	}
+
+	/**
+	 * Returns a new DragonConfig with the same params as the given one.
+	 * @static
+	 * @param {DragonConfig} configIn
+	 * @return {*}  {DragonConfig}
+	 * @memberof DragonConfig
+	 */
+	static newFromDragonConfig(configIn: DragonConfig): DragonConfig {
+		const config = new DragonConfig();
+		config.fromURLSearchParams(configIn.toURLSearchParams());
+		return config;
+	}
 }

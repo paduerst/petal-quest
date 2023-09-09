@@ -97,6 +97,9 @@ test('DragonConfig.toString() behavior', () => {
 	const defaultString = 'age=wyrmling&color=red';
 	expect(dragonConfig.toString()).toBe(defaultString);
 
+	// toString is called when a DragonConfig is put into a string like so
+	expect(`${dragonConfig}`).toBe(defaultString);
+
 	const testName = 'Amara';
 	const testAlignment = 'Chaotic';
 	dragonConfig.name = testName;
@@ -202,4 +205,16 @@ test('DragonConfig.fromString() behavior', () => {
 	testStringOutput = dragonConfig.toString();
 	expectedStringOutput = 'age=adult&color=indigo'; // back in the normal order
 	expect(testStringOutput).toBe(expectedStringOutput);
+});
+
+test('DragonConfig.newFromDragonConfig() behavior', () => {
+	const dragonConfig1 = new DragonConfig();
+	dragonConfig1.name = 'Amara'; // making sure at least one value isn't default
+	const dragonConfig2 = dragonConfig1;
+	expect(dragonConfig2).toBe(dragonConfig1);
+	expect(dragonConfig2.toString()).toBe(dragonConfig1.toString());
+
+	const dragonConfig3 = DragonConfig.newFromDragonConfig(dragonConfig1);
+	expect(dragonConfig3).not.toBe(dragonConfig1);
+	expect(dragonConfig3.toString()).toBe(dragonConfig1.toString());
 });
