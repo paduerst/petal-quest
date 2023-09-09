@@ -1,13 +1,16 @@
 <script lang="ts">
 	import type { DragonConfig } from '.';
+	import { DragonStats } from './dragon-stats';
 
 	export let config: DragonConfig;
+
+	const dragon: DragonStats = new DragonStats(config);
 </script>
 
-<div class="columns-1 md:columns-2 h-full text-left">
-	<p class="font-bold text-xl mt-0">{config.getTitle()}</p>
+<div class="columns-1 md:columns-2 text-left">
+	<p class="font-bold text-xl mt-0">{dragon.title}</p>
 	<p>
-		Eventually this will be the dragon stat block. For now, we're just displaying the dragon config: {config}
+		Eventually this will be the dragon stat block. For now, we're just displaying the dragon config: {dragon.config}
 	</p>
 	<p>
 		Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita aut praesentium consectetur
