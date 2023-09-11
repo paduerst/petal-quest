@@ -22,25 +22,9 @@ export class DragonStats {
 		this.#vals = JSON.parse(JSON.stringify(DRAGON_VALS[this.color][this.age]));
 
 		this.theme = this.#config.getTheme();
-		this.name = this.#getName();
+		this.name = this.#config.name ?? 'the dragon';
 		this.title = this.#config.getTitle();
-		this.alignment = this.#getAlignment();
-	}
-
-	#getName(): string {
-		if (this.#config.name !== undefined) {
-			return this.#config.name;
-		} else {
-			return 'the dragon';
-		}
-	}
-
-	#getAlignment(): string {
-		if (this.#config.alignment !== undefined) {
-			return this.#config.alignment;
-		} else {
-			return this.#vals.alignment;
-		}
+		this.alignment = this.#config.alignment ?? this.#vals.alignment;
 	}
 
 	readonly #config: DragonConfig;
