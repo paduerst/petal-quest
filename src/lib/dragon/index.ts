@@ -38,6 +38,18 @@ export function stringToColor(colorString: string): Color | undefined {
 	return COLORS.find((color) => color === colorString);
 }
 
+export const COLOR_TO_ALIGNMENT: {
+	[key in Color]: string;
+} = {
+	red: 'Typically Chaotic',
+	orange: 'Typically Lawful',
+	yellow: 'Typically Lawful',
+	green: 'Typically Neutral',
+	blue: 'Typically Chaotic',
+	indigo: 'Typically Chaotic',
+	violet: 'Typically Lawful'
+} as const;
+
 export type RGB = `rgb(${number}, ${number}, ${number})`;
 export const COLOR_TO_THEME: {
 	[key in Color]: RGB;
@@ -50,6 +62,83 @@ export const COLOR_TO_THEME: {
 	indigo: 'rgb(31, 0, 156)',
 	violet: 'rgb(118, 43, 158)'
 } as const;
+
+export const SIZES = ['Tiny', 'Small', 'Medium', 'Large', 'Huge', 'Gargantuan'] as const;
+export type Size = (typeof SIZES)[number];
+
+export const AGE_TO_SIZE: {
+	[key in Age]: Size;
+} = {
+	wyrmling: 'Medium',
+	young: 'Large',
+	adult: 'Huge',
+	ancient: 'Gargantuan'
+} as const;
+
+export const DICE = [4, 6, 8, 10, 12, 20] as const;
+export type Die = (typeof DICE)[number];
+
+export const SIZE_TO_HIT_DIE: {
+	[key in Size]: Die;
+} = {
+	Tiny: 4,
+	Small: 6,
+	Medium: 8,
+	Large: 10,
+	Huge: 12,
+	Gargantuan: 20
+} as const;
+
+export const ABILITIES = [
+	['strength', 'str'],
+	['dexterity', 'dex'],
+	['constitution', 'con'],
+	['intelligence', 'int'],
+	['wisdom', 'wis'],
+	['charisma', 'cha']
+] as const;
+
+/**
+ * Calculates the ability modifier given the ability score.
+ * @export
+ * @param {number} score
+ * @return {*}  {number}
+ */
+export function scoreToMod(score: number): number {
+	return Math.floor((score - 10) / 2);
+}
+
+/**
+ * Returns '-' for a negative number. Otherwise returns '+'.
+ * @export
+ * @param {number} number
+ * @return {*}  {('+' | '-')}
+ */
+export function signFromNumber(number: number): '+' | '-' {
+	if (number < 0) {
+		return '-';
+	} else {
+		return '+';
+	}
+}
+
+/**
+ * Calculates the expected value of a dice roll, with an optional modifier and minimumResult
+ * @export
+ * @param {number} numberOfDice
+ * @param {Die} typeOfDice
+ * @param {number} [modifier=0]
+ * @param {number} [minimumResult=0]
+ * @return {*}  {number}
+ */
+export function expectedDiceResult(
+	numberOfDice: number,
+	typeOfDice: Die,
+	modifier = 0,
+	minimumResult = 0
+): number {
+	return Math.max(minimumResult, Math.floor(numberOfDice * (0.5 + typeOfDice / 2) + modifier));
+}
 
 /**
  * Returns an RGBA string with the given RGB and A value.

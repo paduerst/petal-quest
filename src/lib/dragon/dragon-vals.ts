@@ -1,4 +1,11 @@
-import type { Color, Age } from '.';
+import type { Color, Age, Die } from '.';
+
+// TODO: Remove the following values, as they are not needed:
+// - color
+// - age
+// - size
+// - alignment
+// END of TODO list
 
 export type DragonVals = {
 	color: string;
@@ -47,7 +54,7 @@ export type DragonVals = {
 	languages: string;
 	altVulnerabilitySaveDcBaseValue: number;
 	altVulnerabilityDiceCount: number;
-	altVulnerabilityDiceType: number;
+	altVulnerabilityDiceType: Die;
 	amphibious: number;
 	legendaryResistances: number;
 	rawCantrip: string;
@@ -58,22 +65,22 @@ export type DragonVals = {
 	oncePerDaySpellsHaveSave: number;
 	biteReach: number;
 	biteDiceCount: number;
-	biteDiceType: number;
+	biteDiceType: Die;
 	biteElementDiceCount: number;
-	biteElementDiceType: number;
+	biteElementDiceType: Die;
 	clawReach: number;
 	clawDiceCount: number;
-	clawDiceType: number;
+	clawDiceType: Die | 0;
 	tailReach: number;
 	tailDiceCount: number;
-	tailDiceType: number;
+	tailDiceType: Die | 0;
 	breathConeSize: number;
 	breathLineLength: number;
 	breathLineWidth: number;
 	breath1Name: string;
 	breath1Shape: string;
 	breath1DiceCount: number;
-	breath1DiceType: number;
+	breath1DiceType: Die;
 	breath2Name: string;
 	breath2Shape: string;
 	breath2DiceCount: number;
@@ -82,7 +89,7 @@ export type DragonVals = {
 	wallLayers: string;
 	wingAttackRadius: number;
 	wingAttackDiceCount: number;
-	wingAttackDiceType: number;
+	wingAttackDiceType: Die | 0;
 };
 
 export const DRAGON_VALS: {

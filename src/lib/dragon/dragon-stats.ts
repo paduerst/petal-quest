@@ -1,15 +1,13 @@
-import { DragonConfig } from '.';
-import type { Age, Color, RGB } from '.';
+import {
+	DragonConfig,
+	COLOR_TO_ALIGNMENT,
+	AGE_TO_SIZE,
+	SIZE_TO_HIT_DIE,
+	scoreToMod,
+	expectedDiceResult
+} from '.';
+import type { Age, Color, RGB, Size, Die } from '.';
 import { DRAGON_VALS, type DragonVals } from './dragon-vals';
-
-const SIZE_FROM_AGE: {
-	[key in Age]: string;
-} = {
-	wyrmling: 'Medium',
-	young: 'Large',
-	adult: 'Huge',
-	ancient: 'Gargantuan'
-};
 
 /**
  * This class defines all the dragon stats needed for a stat block given a DragonConfig.
@@ -33,8 +31,57 @@ export class DragonStats {
 		this.theme = this.#config.getTheme();
 		this.name = this.#config.name ?? 'the dragon';
 		this.title = this.#config.getTitle();
-		this.alignment = this.#config.alignment ?? this.#vals.alignment;
-		this.size = SIZE_FROM_AGE[this.age];
+		this.alignment = this.#config.alignment ?? COLOR_TO_ALIGNMENT[this.color];
+
+		this.size = AGE_TO_SIZE[this.age];
+		this.ac = this.#vals.ac;
+		this.numberOfHitDice = this.#vals.numberOfHitDice;
+		this.hitDie = SIZE_TO_HIT_DIE[this.size];
+
+		this.speed = this.#vals.walkingSpeed;
+		this.burrowSpeed = this.#vals.burrowSpeed;
+		this.climbSpeed = this.#vals.climbSpeed;
+		this.flySpeed = this.#vals.flyingSpeed;
+		this.swimSpeed = this.#vals.swimSpeed;
+		this.speeds = this.#getSpeeds();
+
+		this.strength = this.#vals.strength;
+		this.dexterity = this.#vals.dexterity;
+		this.constitution = this.#vals.constitution;
+		this.intelligence = this.#vals.intelligence;
+		this.wisdom = this.#vals.wisdom;
+		this.charisma = this.#vals.charisma;
+
+		this.str = scoreToMod(this.strength);
+		this.dex = scoreToMod(this.dexterity);
+		this.con = scoreToMod(this.constitution);
+		this.int = scoreToMod(this.intelligence);
+		this.wis = scoreToMod(this.wisdom);
+		this.cha = scoreToMod(this.charisma);
+
+		this.expectedHitPoints = expectedDiceResult(
+			this.numberOfHitDice,
+			this.hitDie,
+			this.numberOfHitDice * this.con,
+			1
+		);
+	}
+
+	#getSpeeds(): string {
+		let output = `${this.speed} ft.`;
+		if (this.burrowSpeed > 0) {
+			output = output + `, burrow ${this.burrowSpeed} ft.`;
+		}
+		if (this.climbSpeed > 0) {
+			output = output + `, climb ${this.climbSpeed} ft.`;
+		}
+		if (this.flySpeed > 0) {
+			output = output + `, fly ${this.flySpeed} ft.`;
+		}
+		if (this.swimSpeed > 0) {
+			output = output + `, swim ${this.swimSpeed} ft.`;
+		}
+		return output;
 	}
 
 	readonly #config: DragonConfig;
@@ -46,5 +93,32 @@ export class DragonStats {
 	name: string;
 	title: string;
 	alignment: string;
-	size: string;
+
+	size: Size;
+	ac: number;
+	numberOfHitDice: number;
+	hitDie: Die;
+
+	speed: number;
+	burrowSpeed: number;
+	climbSpeed: number;
+	flySpeed: number;
+	swimSpeed: number;
+	speeds: string;
+
+	strength: number;
+	dexterity: number;
+	constitution: number;
+	intelligence: number;
+	wisdom: number;
+	charisma: number;
+
+	str: number;
+	dex: number;
+	con: number;
+	int: number;
+	wis: number;
+	cha: number;
+
+	expectedHitPoints: number;
 }

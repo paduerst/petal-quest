@@ -1,7 +1,8 @@
 <script lang="ts">
-	import type { DragonConfig } from '.';
-	import { DragonStats } from './dragon-stats';
-	import DragonHeader from './features/DragonHeader.svelte';
+	import type { DragonConfig } from '..';
+	import { DragonStats } from '../dragon-stats';
+	import StatBlockHeader from './sections/StatBlockHeader.svelte';
+	import StatBlockPreamble from './sections/StatBlockPreamble.svelte';
 
 	export let config: DragonConfig;
 
@@ -9,7 +10,8 @@
 </script>
 
 <div class="columns-1 md:columns-2 text-left">
-	<DragonHeader {dragon} />
+	<StatBlockHeader {dragon} />
+	<StatBlockPreamble {dragon} />
 	<p>
 		Eventually this will be the dragon stat block. For now, here's the dragon config: {config}
 	</p>
