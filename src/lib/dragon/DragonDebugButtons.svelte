@@ -2,8 +2,12 @@
 	import { fade } from 'svelte/transition';
 	import { createEventDispatcher } from 'svelte';
 	import { DragonConfig } from '.';
-	import { BUILDER_STATES, nextBuilderState, dragonBuilderHistory } from './builder-states';
-	import DragonConfigPreview from './DragonConfigPreview.svelte';
+	import {
+		BUILDER_STATES,
+		nextBuilderState,
+		dragonBuilderHistory,
+		currentDragonConfig
+	} from './builder-states';
 
 	const dispatch = createEventDispatcher<{ click: { debugText: string } }>();
 
@@ -60,5 +64,13 @@
 		}}
 	>
 		Fill History
+	</button>
+	<button
+		class="btn variant-filled-surface m-1"
+		on:click={() => {
+			$currentDragonConfig = undefined;
+		}}
+	>
+		Reset Dragon
 	</button>
 </div>
