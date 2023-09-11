@@ -10,7 +10,7 @@
 <div class="columns-1 md:columns-2 text-left">
 	<p class="font-bold text-xl mt-0">{dragon.title}</p>
 	<p>
-		Eventually this will be the dragon stat block. For now, we're just displaying the dragon config: {dragon.config}
+		Eventually this will be the dragon stat block. For now, we're just displaying the dragon config: {config}
 	</p>
 	<p>Here are the dragon stats: {JSON.stringify(dragon)}</p>
 	<p>
