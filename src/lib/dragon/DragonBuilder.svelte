@@ -2,6 +2,7 @@
 	import { dev } from '$app/environment';
 	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { onDestroy } from 'svelte';
 	import { fade } from 'svelte/transition';
 
 	import { getModalStore, type ModalSettings } from '@skeletonlabs/skeleton';
@@ -77,6 +78,14 @@
 		} else {
 			currentDragonConfig.set(undefined, true);
 		}
+	});
+
+	// Reset the Builder States and Dragon Config when we leave the Dragon Builder
+	onDestroy(() => {
+		currentDragonConfig.set(undefined, true);
+		lastBuilderState.set(undefined);
+		currentBuilderState.set('LOADING');
+		nextBuilderState.set(undefined, true);
 	});
 </script>
 

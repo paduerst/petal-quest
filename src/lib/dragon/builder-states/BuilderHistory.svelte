@@ -19,7 +19,9 @@
 	}
 
 	let returnState =
-		$lastBuilderState !== undefined && $lastBuilderState !== 'LOADING'
+		$lastBuilderState !== undefined &&
+		$lastBuilderState !== 'LOADING' &&
+		$lastBuilderState !== 'HISTORY'
 			? $lastBuilderState
 			: 'WELCOME';
 
