@@ -1,4 +1,5 @@
 import type { Color, Age, Die } from '.';
+import type { CRNumber } from './challenge-rating';
 
 // TODO: Remove the following values, as they are not needed:
 // - color
@@ -10,7 +11,7 @@ import type { Color, Age, Die } from '.';
 export type DragonVals = {
 	color: string;
 	age: string;
-	cr: number;
+	cr: CRNumber;
 	size: string;
 	alignment: string;
 	immunity: string;

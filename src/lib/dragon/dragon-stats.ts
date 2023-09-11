@@ -8,6 +8,7 @@ import {
 } from '.';
 import type { Age, Color, RGB, Size, Die } from '.';
 import { DRAGON_VALS, type DragonVals } from './dragon-vals';
+import { type CR, CRNumberToString, CR_TABLE } from './challenge-rating';
 
 /**
  * This class defines all the dragon stats needed for a stat block given a DragonConfig.
@@ -65,6 +66,10 @@ export class DragonStats {
 			this.numberOfHitDice * this.con,
 			1
 		);
+
+		this.cr = CRNumberToString(this.#vals.cr);
+		this.xp = CR_TABLE[this.cr].xp;
+		this.proficiencyBonus = CR_TABLE[this.cr].proficiencyBonus;
 	}
 
 	#getSpeeds(): string {
@@ -121,4 +126,8 @@ export class DragonStats {
 	cha: number;
 
 	expectedHitPoints: number;
+
+	cr: CR;
+	xp: number;
+	proficiencyBonus: number;
 }

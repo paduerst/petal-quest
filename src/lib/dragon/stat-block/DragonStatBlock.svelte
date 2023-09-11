@@ -13,10 +13,6 @@
 	<StatBlockHeader {dragon} />
 	<StatBlockPreamble {dragon} />
 	<p>
-		Eventually this will be the dragon stat block. For now, here's the dragon config: {config}
-	</p>
-	<p>Here are the dragon stats: {JSON.stringify(dragon)}</p>
-	<p>
 		Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita aut praesentium consectetur
 		cum. Non corrupti aliquid maiores, corporis ducimus suscipit. A asperiores illum sapiente
 		accusantium cum iusto ea! Esse, ut! Lorem ipsum dolor sit, amet consectetur adipisicing elit.
