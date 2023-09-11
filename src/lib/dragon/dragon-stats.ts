@@ -1,21 +1,5 @@
 import { DragonConfig } from '.';
-
-function nameFromConfig(config: DragonConfig): string {
-	if (config.name !== undefined) {
-		return config.name;
-	} else {
-		return 'the dragon';
-	}
-}
-
-function alignmentFromConfig(config: DragonConfig): string {
-	if (config.alignment !== undefined) {
-		return config.alignment;
-	} else {
-		// TODO: Get this from dragonVals
-		return 'Some Alignment';
-	}
-}
+import { dragonVals } from './dragon-vals';
 
 export class DragonStats {
 	constructor(configIn: DragonConfig) {
@@ -23,8 +7,24 @@ export class DragonStats {
 		this.config.cleanup();
 
 		this.title = this.config.getTitle();
-		this.name = nameFromConfig(this.config);
-		this.alignment = alignmentFromConfig(this.config);
+		this.name = this.#getName();
+		this.alignment = this.#getAlignment();
+	}
+
+	#getName(): string {
+		if (this.config.name !== undefined) {
+			return this.config.name;
+		} else {
+			return 'the dragon';
+		}
+	}
+
+	#getAlignment(): string {
+		if (this.config.alignment !== undefined) {
+			return this.config.alignment;
+		} else {
+			return dragonVals[this.config.color][this.config.age].alignment;
+		}
 	}
 
 	readonly config: DragonConfig;
