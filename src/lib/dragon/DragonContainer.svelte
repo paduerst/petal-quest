@@ -101,6 +101,6 @@
 	}
 
 	.inner-wrapper {
-		@apply p-3 h-fit w-full inline-block;
+		@apply p-4 h-fit w-full inline-block;
 	}
 </style>

@@ -2,6 +2,15 @@ import { DragonConfig } from '.';
 import type { Age, Color, RGB } from '.';
 import { DRAGON_VALS, type DragonVals } from './dragon-vals';
 
+const SIZE_FROM_AGE: {
+	[key in Age]: string;
+} = {
+	wyrmling: 'Medium',
+	young: 'Large',
+	adult: 'Huge',
+	ancient: 'Gargantuan'
+};
+
 /**
  * This class defines all the dragon stats needed for a stat block given a DragonConfig.
  * @export
@@ -25,6 +34,7 @@ export class DragonStats {
 		this.name = this.#config.name ?? 'the dragon';
 		this.title = this.#config.getTitle();
 		this.alignment = this.#config.alignment ?? this.#vals.alignment;
+		this.size = SIZE_FROM_AGE[this.age];
 	}
 
 	readonly #config: DragonConfig;
@@ -36,4 +46,5 @@ export class DragonStats {
 	name: string;
 	title: string;
 	alignment: string;
+	size: string;
 }
