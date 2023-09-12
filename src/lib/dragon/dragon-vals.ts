@@ -8,6 +8,12 @@ import type { CRNumber } from './challenge-rating';
 // - alignment
 // END of TODO list
 
+// TODO: Add the following values to DragonStats once they are needed:
+// - altVulnerabilitySaveDcBaseValue
+// - altVulnerabilityDiceCount
+// - altVulnerabilityDiceType
+// END of TODO list
+
 export type DragonVals = {
 	color: string;
 	age: string;

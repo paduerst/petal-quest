@@ -9,7 +9,7 @@
 	if (dragon.spellcastingDisplayAttack || dragon.spellcastingDisplaySave) {
 		spellsDCString = spellsDCString + ' (';
 		if (dragon.spellcastingDisplaySave) {
-			spellsDCString = spellsDCString + `spell save DC ${8 + dragon.proficiencyBonus + dragon.cha}`;
+			spellsDCString = spellsDCString + `spell save DC ${dragon.saveDCCha}`;
 		}
 		if (dragon.spellcastingDisplaySave && dragon.spellcastingDisplayAttack) {
 			spellsDCString = spellsDCString + ', ';

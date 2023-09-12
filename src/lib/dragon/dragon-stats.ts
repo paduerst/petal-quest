@@ -97,6 +97,13 @@ export class DragonStats {
 
 		this.savingThrows = this.#getSavingThrows();
 
+		this.saveDCStr = 8 + this.str + this.proficiencyBonus;
+		this.saveDCDex = 8 + this.dex + this.proficiencyBonus;
+		this.saveDCCon = 8 + this.con + this.proficiencyBonus;
+		this.saveDCInt = 8 + this.int + this.proficiencyBonus;
+		this.saveDCWis = 8 + this.wis + this.proficiencyBonus;
+		this.saveDCCha = 8 + this.cha + this.proficiencyBonus;
+
 		this.skillAcrobatics = this.#vals.skillAcrobatics;
 		this.skillAnimalHandling = this.#vals.skillAnimalHandling;
 		this.skillArcana = this.#vals.skillArcana;
@@ -144,6 +151,28 @@ export class DragonStats {
 		this.tailReach = this.#vals.tailReach;
 		this.tailDiceCount = this.#vals.tailDiceCount;
 		this.tailDiceType = this.#vals.tailDiceType;
+
+		this.breathConeSize = this.#vals.breathConeSize;
+		this.breathLineLength = this.#vals.breathLineLength;
+		this.breathLineWidth = this.#vals.breathLineWidth;
+
+		this.breath1Name = this.#vals.breath1Name;
+		this.breath1Shape = this.#vals.breath1Shape;
+		this.breath1DiceCount = this.#vals.breath1DiceCount;
+		this.breath1DiceType = this.#vals.breath1DiceType;
+
+		this.breath2Name = this.#vals.breath2Name;
+		this.breath2Shape = this.#vals.breath2Shape;
+		this.breath2DiceCount = this.#vals.breath2DiceCount;
+		this.breath2SpecialValue = this.#vals.breath2SpecialValue;
+
+		this.wallLayers = this.#vals.wallLayers;
+
+		this.prismaticRadianceRadius = this.#vals.prismaticRadianceRadius;
+
+		this.wingAttackRadius = this.#vals.wingAttackRadius;
+		this.wingAttackDiceCount = this.#vals.wingAttackDiceCount;
+		this.wingAttackDiceType = this.#vals.wingAttackDiceType;
 	}
 
 	#getSpeeds(): string {
@@ -280,6 +309,13 @@ export class DragonStats {
 
 	savingThrows: string;
 
+	saveDCStr: number;
+	saveDCDex: number;
+	saveDCCon: number;
+	saveDCInt: number;
+	saveDCWis: number;
+	saveDCCha: number;
+
 	skillAcrobatics: number;
 	skillAnimalHandling: number;
 	skillArcana: number;
@@ -327,4 +363,26 @@ export class DragonStats {
 	tailReach: number;
 	tailDiceCount: number;
 	tailDiceType: Die;
+
+	breathConeSize: number;
+	breathLineLength: number;
+	breathLineWidth: number;
+
+	breath1Name: string;
+	breath1Shape: string;
+	breath1DiceCount: number;
+	breath1DiceType: Die;
+
+	breath2Name: string;
+	breath2Shape: string;
+	breath2DiceCount: number;
+	breath2SpecialValue: string;
+
+	wallLayers: string;
+
+	prismaticRadianceRadius: number;
+
+	wingAttackRadius: number;
+	wingAttackDiceCount: number;
+	wingAttackDiceType: Die;
 }
