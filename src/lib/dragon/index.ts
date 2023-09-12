@@ -8,6 +8,54 @@ export function capitalizeFirstLetter(string: string): string {
 	return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+/**
+ * Returns true if the given character is a digit. False otherwise.
+ * @param {string} char
+ * @return {*}  {boolean}
+ */
+export function isDigit(char: string): boolean {
+	return char >= '0' && char <= '9';
+}
+
+/**
+ * Returns true if the given character is a-z, A-Z, or 0-9. False otherwise.
+ * @param {string} char
+ * @return {*}  {boolean}
+ */
+export function isAlnum(char: string): boolean {
+	return (char >= 'A' && char <= 'Z') || (char >= 'a' && char <= 'z') || isDigit(char);
+}
+
+/**
+ * Returns a normalized copy of the given string, with no non-alphanumeric characters.
+ * @param {string} stringIn
+ * @return {*}  {string} Normalized string. Starts with a lowercase letter.
+ */
+export function normalizeString(stringIn: string): string {
+	let key = '';
+	let upperCase = false;
+	for (let i = 0; i < stringIn.length; ++i) {
+		const letter = stringIn[i];
+		if (letter == ' ' && key.length > 0) {
+			upperCase = true;
+			continue;
+		}
+		if (!isAlnum(letter)) {
+			continue;
+		}
+		if (key.length === 0 && isDigit(letter)) {
+			continue; // first character must be a letter
+		}
+		if (upperCase) {
+			upperCase = false;
+			key += letter.toUpperCase();
+		} else {
+			key += letter.toLowerCase();
+		}
+	}
+	return key;
+}
+
 export const AGES = ['wyrmling', 'young', 'adult', 'ancient'] as const;
 export const AGES_UPPER = AGES.map(capitalizeFirstLetter) as ReadonlyArray<string>;
 export const AGES_CAPS = AGES.map((age) => age.toUpperCase()) as ReadonlyArray<string>;
@@ -98,6 +146,27 @@ export const ABILITIES = [
 	['charisma', 'cha']
 ] as const;
 
+export const SKILLS = [
+	{ name: 'Acrobatics', key: 'skillAcrobatics', ability: 'dex' },
+	{ name: 'Animal Handling', key: 'skillAnimalHandling', ability: 'wis' },
+	{ name: 'Arcana', key: 'skillArcana', ability: 'int' },
+	{ name: 'Athletics', key: 'skillAthletics', ability: 'str' },
+	{ name: 'Deception', key: 'skillDeception', ability: 'cha' },
+	{ name: 'History', key: 'skillHistory', ability: 'int' },
+	{ name: 'Insight', key: 'skillInsight', ability: 'wis' },
+	{ name: 'Intimidation', key: 'skillIntimidation', ability: 'cha' },
+	{ name: 'Investigation', key: 'skillInvestigation', ability: 'int' },
+	{ name: 'Medicine', key: 'skillMedicine', ability: 'wis' },
+	{ name: 'Nature', key: 'skillNature', ability: 'int' },
+	{ name: 'Perception', key: 'skillPerception', ability: 'wis' },
+	{ name: 'Performance', key: 'skillPerformance', ability: 'cha' },
+	{ name: 'Persuasion', key: 'skillPersuasion', ability: 'cha' },
+	{ name: 'Religion', key: 'skillReligion', ability: 'int' },
+	{ name: 'Sleight of Hand', key: 'skillSleightOfHand', ability: 'dex' },
+	{ name: 'Stealth', key: 'skillStealth', ability: 'dex' },
+	{ name: 'Survival', key: 'skillSurvival', ability: 'wis' }
+] as const;
+
 /**
  * Calculates the ability modifier given the ability score.
  * @export
@@ -119,6 +188,20 @@ export function signFromNumber(number: number): '+' | '-' {
 		return '-';
 	} else {
 		return '+';
+	}
+}
+
+/**
+ * Returns the given number as a string with + or - in front of it.
+ * @export
+ * @param {number} number
+ * @return {*}  {string}
+ */
+export function numberWithSign(number: number): string {
+	if (number < 0) {
+		return number.toString();
+	} else {
+		return `+${number.toString()}`;
 	}
 }
 

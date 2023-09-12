@@ -12,12 +12,19 @@
 		</p>
 	</li>
 
-	<li class="dragon-skills">
-		<p>
-			<span class="label">Skills</span>
-			<span>${'Skills'}</span>
-		</p>
-	</li>
+	{#if dragon.skills.length > 0}
+		<li class="dragon-skills">
+			<p>
+				<span class="label">Skills</span>
+				<span>
+					{#each dragon.skills as skill, index}
+						<span class="whitespace-nowrap">{skill}</span
+						>{#if index < dragon.skills.length - 1}{', '}{/if}
+					{/each}
+				</span>
+			</p>
+		</li>
+	{/if}
 
 	<li class="dragon-vulnerabilities">
 		<p>
@@ -53,19 +60,21 @@
 			<span
 				><span class="whitespace-nowrap">
 					<a
+						class="no-underline"
 						target="_blank"
 						href="https://www.dndbeyond.com/sources/basic-rules/monsters#Blindsight">blindsight</a
 					>
-					${'Blindsight'} ft.,
+					{dragon.blindsight} ft.,
 				</span>
 				<span class="whitespace-nowrap">
 					<a
+						class="no-underline"
 						target="_blank"
 						href="https://www.dndbeyond.com/sources/basic-rules/monsters#Darkvision">darkvision</a
 					>
-					${'Darkvision'} ft.,
+					{dragon.darkvision} ft.,
 				</span>
-				<span class="whitespace-nowrap">passive Perception ${'Passive Perception'}</span></span
+				<span class="whitespace-nowrap">passive Perception {dragon.passivePerception}</span></span
 			>
 		</p>
 	</li>
@@ -73,7 +82,7 @@
 	<li class="dragon-languages">
 		<p>
 			<span class="label">Languages</span>
-			<span>${'Languages'}</span>
+			<span>{dragon.languages}</span>
 		</p>
 	</li>
 

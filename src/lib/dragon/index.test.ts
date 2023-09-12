@@ -1,6 +1,9 @@
 import { expect, test } from 'vitest';
 import {
 	capitalizeFirstLetter,
+	isDigit,
+	isAlnum,
+	normalizeString,
 	AGES,
 	AGES_UPPER,
 	stringToAge,
@@ -9,6 +12,7 @@ import {
 	stringToColor,
 	scoreToMod,
 	signFromNumber,
+	numberWithSign,
 	expectedDiceResult,
 	type RGB,
 	COLOR_TO_THEME,
@@ -22,6 +26,41 @@ test('capitalizeFirstLetter only does the first letter', () => {
 
 test('capitalizing an empty string does nothing', () => {
 	expect(capitalizeFirstLetter('')).toBe('');
+});
+
+test('isDigit() behavior', () => {
+	expect(isDigit('0')).toBe(true);
+	expect(isDigit('1')).toBe(true);
+	expect(isDigit('9')).toBe(true);
+	expect(isDigit('11')).toBe(true);
+	expect(isDigit('-1')).toBe(false);
+	expect(isDigit('a')).toBe(false);
+	expect(isDigit('A')).toBe(false);
+	expect(isDigit('A9')).toBe(false);
+	expect(isDigit(' ')).toBe(false);
+	expect(isDigit('-')).toBe(false);
+	expect(isDigit('_')).toBe(false);
+});
+
+test('isAlnum() behavior', () => {
+	expect(isAlnum('0')).toBe(true);
+	expect(isAlnum('1')).toBe(true);
+	expect(isAlnum('9')).toBe(true);
+	expect(isAlnum('11')).toBe(true);
+	expect(isAlnum('-1')).toBe(false);
+	expect(isAlnum('a')).toBe(true);
+	expect(isAlnum('A')).toBe(true);
+	expect(isAlnum('A9')).toBe(true);
+	expect(isAlnum(' ')).toBe(false);
+	expect(isAlnum('-')).toBe(false);
+	expect(isAlnum('_')).toBe(false);
+});
+
+test('normalizeString() behavior', () => {
+	expect(normalizeString('0')).toBe('');
+	expect(normalizeString('0 And stuff')).toBe('andStuff'); // ' ' resets uppercase
+	expect(normalizeString('0-And-stuff')).toBe('andstuff'); // '-' does not
+	expect(normalizeString('This is a string.')).toBe('thisIsAString');
 });
 
 test('AGES_UPPER are Wyrmling, Young, Adult, and Ancient', () => {
@@ -81,6 +120,13 @@ test('signFromNumber() behavior', () => {
 	expect(signFromNumber(1)).toBe('+');
 	expect(signFromNumber(0)).toBe('+');
 	expect(signFromNumber(-0)).toBe('+');
+});
+
+test('numberWithSign() behavior', () => {
+	expect(numberWithSign(-1)).toBe('-1');
+	expect(numberWithSign(1)).toBe('+1');
+	expect(numberWithSign(0)).toBe('+0');
+	expect(numberWithSign(-0)).toBe('+0');
 });
 
 test('expectedDiceResult() behavior', () => {

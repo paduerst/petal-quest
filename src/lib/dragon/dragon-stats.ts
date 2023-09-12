@@ -3,7 +3,9 @@ import {
 	COLOR_TO_ALIGNMENT,
 	AGE_TO_SIZE,
 	SIZE_TO_HIT_DIE,
+	SKILLS,
 	scoreToMod,
+	numberWithSign,
 	expectedDiceResult
 } from '.';
 import type { Age, Color, RGB, Size, Die } from '.';
@@ -67,9 +69,39 @@ export class DragonStats {
 			1
 		);
 
+		this.blindsight = this.#vals.blindsight;
+		this.darkvision = this.#vals.darkvision;
+
+		this.languages = this.#vals.languages;
+
 		this.cr = CRNumberToString(this.#vals.cr);
 		this.xp = CR_TABLE[this.cr].xp;
 		this.proficiencyBonus = CR_TABLE[this.cr].proficiencyBonus;
+
+		this.skillAcrobatics = this.#vals.skillAcrobatics;
+		this.skillAnimalHandling = this.#vals.skillAnimalHandling;
+		this.skillArcana = this.#vals.skillArcana;
+		this.skillAthletics = this.#vals.skillAthletics;
+		this.skillDeception = this.#vals.skillDeception;
+		this.skillHistory = this.#vals.skillHistory;
+		this.skillInsight = this.#vals.skillInsight;
+		this.skillIntimidation = this.#vals.skillIntimidation;
+		this.skillInvestigation = this.#vals.skillInvestigation;
+		this.skillMedicine = this.#vals.skillMedicine;
+		this.skillNature = this.#vals.skillNature;
+		this.skillPerception = this.#vals.skillPerception;
+		this.skillPerformance = this.#vals.skillPerformance;
+		this.skillPersuasion = this.#vals.skillPersuasion;
+		this.skillReligion = this.#vals.skillReligion;
+		this.skillSleightOfHand = this.#vals.skillSleightOfHand;
+		this.skillStealth = this.#vals.skillStealth;
+		this.skillSurvival = this.#vals.skillSurvival;
+
+		this.skills = this.#getSkills();
+
+		this.passiveInsight = 10 + this.wis + this.skillInsight * this.proficiencyBonus;
+		this.passiveInvestigation = 10 + this.int + this.skillInvestigation * this.proficiencyBonus;
+		this.passivePerception = 10 + this.wis + this.skillPerception * this.proficiencyBonus;
 	}
 
 	#getSpeeds(): string {
@@ -87,6 +119,18 @@ export class DragonStats {
 			output = output + `, swim ${this.swimSpeed} ft.`;
 		}
 		return output;
+	}
+
+	#getSkills(): string[] {
+		const skillsOutput: string[] = [];
+		for (const skill of SKILLS) {
+			const skillProf = this[skill.key];
+			if (skillProf > 0) {
+				const skillMod = Math.floor(this[skill.ability] + skillProf * this.proficiencyBonus);
+				skillsOutput.push(`${skill.name} ${numberWithSign(skillMod)}`);
+			}
+		}
+		return skillsOutput;
 	}
 
 	readonly #config: DragonConfig;
@@ -127,7 +171,44 @@ export class DragonStats {
 
 	expectedHitPoints: number;
 
+	blindsight: number;
+	darkvision: number;
+
+	languages: string;
+
 	cr: CR;
 	xp: number;
 	proficiencyBonus: number;
+
+	skillAcrobatics: number;
+	skillAnimalHandling: number;
+	skillArcana: number;
+	skillAthletics: number;
+	skillDeception: number;
+	skillHistory: number;
+	skillInsight: number;
+	skillIntimidation: number;
+	skillInvestigation: number;
+	skillMedicine: number;
+	skillNature: number;
+	skillPerception: number;
+	skillPerformance: number;
+	skillPersuasion: number;
+	skillReligion: number;
+	skillSleightOfHand: number;
+	skillStealth: number;
+	skillSurvival: number;
+
+	skills: string[];
+
+	passiveInsight: number;
+	passiveInvestigation: number;
+	passivePerception: number;
 }
+
+// dragon.passiveInsight =
+// 10 + dragon.wis + dragon.skillInsight * dragon.proficiencyBonus;
+// dragon.passiveInvestigation =
+// 10 + dragon.int + dragon.skillInvestigation * dragon.proficiencyBonus;
+// dragon.passivePerception =
+// 10 + dragon.wis + dragon.skillPerception * dragon.proficiencyBonus;
