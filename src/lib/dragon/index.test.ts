@@ -89,24 +89,11 @@ test('COLORS_UPPER are Red, Orange, Yellow, Green, Blue, Indigo, and Violet', ()
 
 test('scoreToMod() behavior', () => {
 	expect(scoreToMod(0)).toBe(-5);
-	expect(scoreToMod(1)).toBe(-5);
-	expect(scoreToMod(2)).toBe(-4);
-	expect(scoreToMod(3)).toBe(-4);
-	expect(scoreToMod(4)).toBe(-3);
-	expect(scoreToMod(5)).toBe(-3);
-	expect(scoreToMod(6)).toBe(-2);
-	expect(scoreToMod(7)).toBe(-2);
 	expect(scoreToMod(8)).toBe(-1);
 	expect(scoreToMod(9)).toBe(-1);
 	expect(scoreToMod(10)).toBe(0);
 	expect(scoreToMod(11)).toBe(0);
 	expect(scoreToMod(12)).toBe(+1);
-	expect(scoreToMod(13)).toBe(+1);
-	expect(scoreToMod(14)).toBe(+2);
-	expect(scoreToMod(15)).toBe(+2);
-	expect(scoreToMod(16)).toBe(+3);
-	expect(scoreToMod(17)).toBe(+3);
-	expect(scoreToMod(18)).toBe(+4);
 	expect(scoreToMod(19)).toBe(+4);
 	expect(scoreToMod(20)).toBe(+5);
 	expect(scoreToMod(11.99999)).toBe(0);

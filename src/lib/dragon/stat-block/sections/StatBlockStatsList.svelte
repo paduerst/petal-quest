@@ -96,7 +96,7 @@
 		<p>
 			<span class="label">Challenge</span>
 			<span>
-				{dragon.cr} ({dragon.xp} XP)
+				{dragon.cr} ({dragon.xp.toLocaleString()} XP)
 			</span>
 			<span class="label">Proficiency Bonus</span>
 			<span>
