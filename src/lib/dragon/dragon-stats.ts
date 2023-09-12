@@ -69,6 +69,14 @@ export class DragonStats {
 			1
 		);
 
+		this.immunity = this.#vals.immunity;
+		this.additionalImmunities = this.#vals.additionalImmunities;
+		this.immunities = this.immunity + this.additionalImmunities;
+		this.resistances = this.#vals.resistances;
+		this.vulnerability = this.#vals.vulnerability;
+		this.vulnerabilities = this.vulnerability;
+		this.conditionImmunities = this.#vals.conditionImmunities;
+
 		this.blindsight = this.#vals.blindsight;
 		this.darkvision = this.#vals.darkvision;
 
@@ -77,6 +85,8 @@ export class DragonStats {
 		this.cr = CRNumberToString(this.#vals.cr);
 		this.xp = CR_TABLE[this.cr].xp;
 		this.proficiencyBonus = CR_TABLE[this.cr].proficiencyBonus;
+
+		this.savingThrows = this.#getSavingThrows();
 
 		this.skillAcrobatics = this.#vals.skillAcrobatics;
 		this.skillAnimalHandling = this.#vals.skillAnimalHandling;
@@ -119,6 +129,15 @@ export class DragonStats {
 			output = output + `, swim ${this.swimSpeed} ft.`;
 		}
 		return output;
+	}
+
+	#getSavingThrows(): string {
+		const savingThrowProficiencies = ['dex', 'con', 'wis', 'cha'] as const;
+		const outputArr: string[] = [];
+		for (const prof of savingThrowProficiencies) {
+			outputArr.push(`${prof.toUpperCase()} ${numberWithSign(this.proficiencyBonus + this[prof])}`);
+		}
+		return outputArr.join(', ');
 	}
 
 	#getSkills(): string[] {
@@ -171,6 +190,14 @@ export class DragonStats {
 
 	expectedHitPoints: number;
 
+	immunity: string;
+	additionalImmunities: string;
+	immunities: string;
+	resistances: string;
+	vulnerability: string;
+	vulnerabilities: string;
+	conditionImmunities: string;
+
 	blindsight: number;
 	darkvision: number;
 
@@ -179,6 +206,8 @@ export class DragonStats {
 	cr: CR;
 	xp: number;
 	proficiencyBonus: number;
+
+	savingThrows: string;
 
 	skillAcrobatics: number;
 	skillAnimalHandling: number;
@@ -205,10 +234,3 @@ export class DragonStats {
 	passiveInvestigation: number;
 	passivePerception: number;
 }
-
-// dragon.passiveInsight =
-// 10 + dragon.wis + dragon.skillInsight * dragon.proficiencyBonus;
-// dragon.passiveInvestigation =
-// 10 + dragon.int + dragon.skillInvestigation * dragon.proficiencyBonus;
-// dragon.passivePerception =
-// 10 + dragon.wis + dragon.skillPerception * dragon.proficiencyBonus;

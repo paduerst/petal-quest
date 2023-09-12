@@ -8,7 +8,7 @@
 	<li class="dragon-saves">
 		<p>
 			<span class="label">Saving Throws</span>
-			<span>${'Saving Throws'}</span>
+			<span>{dragon.savingThrows}</span>
 		</p>
 	</li>
 
@@ -26,33 +26,39 @@
 		</li>
 	{/if}
 
-	<li class="dragon-vulnerabilities">
-		<p>
-			<span class="label">Damage Vulnerabilities</span>
-			<span>${'vulnerability lower'}</span>
-		</p>
-	</li>
+	{#if dragon.vulnerabilities.length > 0}
+		<li class="dragon-vulnerabilities">
+			<p>
+				<span class="label">Damage Vulnerabilities</span>
+				<span class="lowercase">{dragon.vulnerabilities}</span>
+			</p>
+		</li>
+	{/if}
 
-	<li class="dragon-resistances">
-		<p>
-			<span class="label">Damage Resistances</span>
-			<span>${'resistances lower'}</span>
-		</p>
-	</li>
+	{#if dragon.resistances.length > 0}
+		<li class="dragon-resistances">
+			<p>
+				<span class="label">Damage Resistances</span>
+				<span class="lowercase">{dragon.resistances}</span>
+			</p>
+		</li>
+	{/if}
 
 	<li class="dragon-immunities">
 		<p>
 			<span class="label">Damage Immunities</span>
-			<span>${'immunities lower'}</span>
+			<span class="lowercase">{dragon.immunities}</span>
 		</p>
 	</li>
 
-	<li class="dragon-conditions">
-		<p>
-			<span class="label">Condition Immunities</span>
-			<span>${'Condition Immunities'}</span>
-		</p>
-	</li>
+	{#if dragon.conditionImmunities.length > 0}
+		<li class="dragon-conditions">
+			<p>
+				<span class="label">Condition Immunities</span>
+				<span class="lowercase">{dragon.conditionImmunities}</span>
+			</p>
+		</li>
+	{/if}
 
 	<li class="dragon-senses">
 		<p>
