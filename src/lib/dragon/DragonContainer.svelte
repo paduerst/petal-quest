@@ -57,9 +57,10 @@
 		--y-edge-border-width: calc(0.5 * var(--y-edge-height));
 		--y-edge-x-offset: 2px;
 		--x-border-width: 2px;
+		--y-border-width: 4px;
 		--extra-margin: 2px;
 		border-color: var(--theme-dragon);
-		border-width: var(--x-border-width);
+		border-width: var(--y-border-width) var(--x-border-width);
 		margin: calc(var(--extra-margin) + var(--y-edge-height))
 			calc(var(--extra-margin) + var(--y-edge-x-offset));
 		width: calc(100% - 2 * var(--extra-margin));
@@ -87,6 +88,13 @@
 	.dragon-container-bot-edge {
 		bottom: calc(-1 * var(--y-edge-height));
 		margin-top: calc(-1 * var(--y-edge-height));
+	}
+
+	@media print {
+		.dragon-container-top-edge,
+		.dragon-container-bot-edge {
+			display: none;
+		}
 	}
 
 	.outer-wrapper {

@@ -16,10 +16,6 @@ body {
 }
 
 @layer base {
-	p {
-		@apply my-2;
-	}
-
 	a {
 		@apply anchor;
 	}
@@ -82,6 +78,7 @@ body {
 		@apply m-0 text-3xl leading-none;
 
 		font-family: 'AlegreyaSansSC-Bold', var(--theme-font-family-heading);
+		color: var(--dragon-theme);
 	}
 
 	.dragon-heading-font {
@@ -90,5 +87,19 @@ body {
 
 	.dragon-subheading {
 		@apply m-0 italic text-sm;
+	}
+
+	.dragon-abilities {
+		@apply flex flex-row justify-around;
+	}
+
+	.dragon-ability {
+		@apply flex flex-col items-center;
+	}
+
+	.dragon-label {
+		@apply font-bold;
+
+		color: var(--dragon-theme);
 	}
 }

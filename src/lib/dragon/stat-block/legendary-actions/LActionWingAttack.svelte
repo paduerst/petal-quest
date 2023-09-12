@@ -9,9 +9,10 @@
 	<p>
 		<b>Wing Attack (Costs 2 Actions).</b>
 		{dragon.nameUpper} beats {dragon.her} wings. Each creature within {dragon.wingAttackRadius}
-		feet of {dragon.name} must succeed on a <span class="nowrap">DC {dragon.saveDCStr}</span>
+		feet of {dragon.name} must succeed on a
+		<span class="whitespace-nowrap">DC {dragon.saveDCStr}</span>
 		Dexterity saving throw or take
-		<span class="nowrap"
+		<span class="whitespace-nowrap"
 			>{dragon.wingAttackExpectedDamage} ({dragon.wingAttackDiceCount}d{dragon.wingAttackDiceType}
 			{numberWithSign(dragon.str, ' ')})</span
 		>

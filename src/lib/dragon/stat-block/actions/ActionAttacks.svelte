@@ -22,14 +22,14 @@
 			<i><b>Bite.</b> Melee Weapon Attack:</i>
 			{proficiencyPlusStrWithSign} to hit, reach {dragon.biteReach}
 			ft., one target.
-			<span class="nowrap"
+			<span class="whitespace-nowrap"
 				><i>Hit:</i>
 				{dragon.biteExpectedDamage} ({dragon.biteDiceCount}d{dragon.biteDiceType}
 				{numberWithSign(dragon.str, ' ')})</span
 			>
 			piercing damage{#if dragon.biteElementDiceCount > 0}
 				{' plus'}
-				<span class="nowrap"
+				<span class="whitespace-nowrap"
 					>{dragon.biteElementExpectedDamage} ({dragon.biteElementDiceCount}d{dragon.biteElementDiceType})</span
 				>
 				{dragon.immunity.toLowerCase()} damage{/if}.
@@ -43,7 +43,7 @@
 			<i><b>Claw.</b> Melee Weapon Attack:</i>
 			{proficiencyPlusStrWithSign} to hit, reach {dragon.clawReach}
 			ft., one target.
-			<span class="nowrap"
+			<span class="whitespace-nowrap"
 				><i>Hit:</i>
 				{dragon.clawExpectedDamage} ({dragon.clawDiceCount}d{dragon.clawDiceType}
 				{numberWithSign(dragon.str, ' ')})</span
@@ -59,7 +59,7 @@
 			<i><b>Tail.</b> Melee Weapon Attack:</i>
 			{proficiencyPlusStrWithSign} to hit, reach {dragon.tailReach}
 			ft., one target.
-			<span class="nowrap"
+			<span class="whitespace-nowrap"
 				><i>Hit:</i>
 				{dragon.tailExpectedDamage} ({dragon.tailDiceCount}d{dragon.tailDiceType}
 				{numberWithSign(dragon.str, ' ')})</span

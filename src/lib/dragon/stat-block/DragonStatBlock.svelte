@@ -12,7 +12,10 @@
 	const dragon: DragonStats = new DragonStats(config);
 </script>
 
-<div class="columns-1 sm:columns-2 text-left">
+<div
+	class="columns-1 sm:columns-2 text-left text-sm leading-[1.25]"
+	style="--dragon-theme: {dragon.theme}"
+>
 	<StatBlockPreamble {dragon} />
 	<StatBlockFeatures {dragon} />
 	<StatBlockActions {dragon} />
