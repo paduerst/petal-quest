@@ -191,6 +191,7 @@ export class DragonStats {
 		this.breath2DiceCount = this.#vals.breath2DiceCount;
 		this.breath2SpecialValue = this.#vals.breath2SpecialValue;
 
+		this.hasWallOfLight = this.age !== 'wyrmling' && this.age !== 'young';
 		this.wallLayers = this.#vals.wallLayers;
 
 		this.prismaticRadianceRadius = this.#vals.prismaticRadianceRadius;
@@ -414,6 +415,7 @@ export class DragonStats {
 	breath2DiceCount: number;
 	breath2SpecialValue: string;
 
+	hasWallOfLight: boolean;
 	wallLayers: string;
 
 	prismaticRadianceRadius: number;
