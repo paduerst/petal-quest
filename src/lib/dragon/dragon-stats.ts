@@ -130,6 +130,20 @@ export class DragonStats {
 		this.spellcastingDisplaySave = this.#getSpellcastingDisplaySave();
 
 		this.legendaryResistances = this.#vals.legendaryResistances;
+
+		this.biteReach = this.#vals.biteReach;
+		this.biteDiceCount = this.#vals.biteDiceCount;
+		this.biteDiceType = this.#vals.biteDiceType;
+		this.biteElementDiceCount = this.#vals.biteElementDiceCount;
+		this.biteElementDiceType = this.#vals.biteElementDiceType;
+
+		this.clawReach = this.#vals.clawReach;
+		this.clawDiceCount = this.#vals.clawDiceCount;
+		this.clawDiceType = this.#vals.clawDiceType;
+
+		this.tailReach = this.#vals.tailReach;
+		this.tailDiceCount = this.#vals.tailDiceCount;
+		this.tailDiceType = this.#vals.tailDiceType;
 	}
 
 	#getSpeeds(): string {
@@ -299,4 +313,18 @@ export class DragonStats {
 	spellcastingDisplaySave: boolean;
 
 	legendaryResistances: number;
+
+	biteReach: number;
+	biteDiceCount: number;
+	biteDiceType: Die;
+	biteElementDiceCount: number;
+	biteElementDiceType: Die;
+
+	clawReach: number;
+	clawDiceCount: number;
+	clawDiceType: Die;
+
+	tailReach: number;
+	tailDiceCount: number;
+	tailDiceType: Die;
 }

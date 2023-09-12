@@ -1,5 +1,11 @@
 module.exports = {
 	rules: {
+		'@typescript-eslint/no-inferrable-types': [
+			'error',
+			{
+				ignoreParameters: true
+			}
+		],
 		'@typescript-eslint/no-var-requires': 'off'
 	},
 	root: true,

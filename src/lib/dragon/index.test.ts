@@ -114,6 +114,9 @@ test('numberWithSign() behavior', () => {
 	expect(numberWithSign(1)).toBe('+1');
 	expect(numberWithSign(0)).toBe('+0');
 	expect(numberWithSign(-0)).toBe('+0');
+
+	expect(numberWithSign(1, ' ')).toBe('+ 1');
+	expect(numberWithSign(1, ' anything-can_g0 here ')).toBe('+ anything-can_g0 here 1');
 });
 
 test('expectedDiceResult() behavior', () => {

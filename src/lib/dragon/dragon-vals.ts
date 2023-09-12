@@ -71,10 +71,10 @@ export type DragonVals = {
 	biteElementDiceType: Die;
 	clawReach: number;
 	clawDiceCount: number;
-	clawDiceType: Die | 0;
+	clawDiceType: Die;
 	tailReach: number;
 	tailDiceCount: number;
-	tailDiceType: Die | 0;
+	tailDiceType: Die;
 	breathConeSize: number;
 	breathLineLength: number;
 	breathLineWidth: number;
@@ -90,7 +90,7 @@ export type DragonVals = {
 	wallLayers: string;
 	wingAttackRadius: number;
 	wingAttackDiceCount: number;
-	wingAttackDiceType: Die | 0;
+	wingAttackDiceType: Die;
 };
 
 export const DRAGON_VALS: {
@@ -162,10 +162,10 @@ export const DRAGON_VALS: {
 			biteElementDiceType: 6,
 			clawReach: 0,
 			clawDiceCount: 0,
-			clawDiceType: 0,
+			clawDiceType: 6,
 			tailReach: 0,
 			tailDiceCount: 0,
-			tailDiceType: 0,
+			tailDiceType: 8,
 			breathConeSize: 15,
 			breathLineLength: 20,
 			breathLineWidth: 5,
@@ -181,7 +181,7 @@ export const DRAGON_VALS: {
 			wallLayers: 'red layer (2d6 fire damage instead of 10d6)',
 			wingAttackRadius: 0,
 			wingAttackDiceCount: 0,
-			wingAttackDiceType: 0
+			wingAttackDiceType: 6
 		},
 		young: {
 			color: 'Red',
@@ -249,7 +249,7 @@ export const DRAGON_VALS: {
 			clawDiceType: 6,
 			tailReach: 0,
 			tailDiceCount: 0,
-			tailDiceType: 0,
+			tailDiceType: 8,
 			breathConeSize: 30,
 			breathLineLength: 30,
 			breathLineWidth: 5,
@@ -265,7 +265,7 @@ export const DRAGON_VALS: {
 			wallLayers: 'red layer (4d6 fire damage instead of 10d6)',
 			wingAttackRadius: 0,
 			wingAttackDiceCount: 0,
-			wingAttackDiceType: 0
+			wingAttackDiceType: 6
 		},
 		adult: {
 			color: 'Red',
@@ -501,10 +501,10 @@ export const DRAGON_VALS: {
 			biteElementDiceType: 6,
 			clawReach: 0,
 			clawDiceCount: 0,
-			clawDiceType: 0,
+			clawDiceType: 6,
 			tailReach: 0,
 			tailDiceCount: 0,
-			tailDiceType: 0,
+			tailDiceType: 8,
 			breathConeSize: 15,
 			breathLineLength: 20,
 			breathLineWidth: 5,
@@ -520,7 +520,7 @@ export const DRAGON_VALS: {
 			wallLayers: 'orange layer (2d6 acid damage instead of 10d6)',
 			wingAttackRadius: 0,
 			wingAttackDiceCount: 0,
-			wingAttackDiceType: 0
+			wingAttackDiceType: 6
 		},
 		young: {
 			color: 'Orange',
@@ -588,7 +588,7 @@ export const DRAGON_VALS: {
 			clawDiceType: 6,
 			tailReach: 0,
 			tailDiceCount: 0,
-			tailDiceType: 0,
+			tailDiceType: 8,
 			breathConeSize: 30,
 			breathLineLength: 30,
 			breathLineWidth: 5,
@@ -604,7 +604,7 @@ export const DRAGON_VALS: {
 			wallLayers: 'orange layer (4d6 acid damage instead of 10d6)',
 			wingAttackRadius: 0,
 			wingAttackDiceCount: 0,
-			wingAttackDiceType: 0
+			wingAttackDiceType: 6
 		},
 		adult: {
 			color: 'Orange',
@@ -839,10 +839,10 @@ export const DRAGON_VALS: {
 			biteElementDiceType: 6,
 			clawReach: 0,
 			clawDiceCount: 0,
-			clawDiceType: 0,
+			clawDiceType: 6,
 			tailReach: 0,
 			tailDiceCount: 0,
-			tailDiceType: 0,
+			tailDiceType: 8,
 			breathConeSize: 15,
 			breathLineLength: 20,
 			breathLineWidth: 5,
@@ -858,7 +858,7 @@ export const DRAGON_VALS: {
 			wallLayers: 'yellow layer (2d6 lightning damage instead of 10d6)',
 			wingAttackRadius: 0,
 			wingAttackDiceCount: 0,
-			wingAttackDiceType: 0
+			wingAttackDiceType: 6
 		},
 		young: {
 			color: 'Yellow',
@@ -926,7 +926,7 @@ export const DRAGON_VALS: {
 			clawDiceType: 6,
 			tailReach: 0,
 			tailDiceCount: 0,
-			tailDiceType: 0,
+			tailDiceType: 8,
 			breathConeSize: 30,
 			breathLineLength: 30,
 			breathLineWidth: 5,
@@ -942,7 +942,7 @@ export const DRAGON_VALS: {
 			wallLayers: 'yellow layer (4d6 lightning damage instead of 10d6)',
 			wingAttackRadius: 0,
 			wingAttackDiceCount: 0,
-			wingAttackDiceType: 0
+			wingAttackDiceType: 6
 		},
 		adult: {
 			color: 'Yellow',
@@ -1177,10 +1177,10 @@ export const DRAGON_VALS: {
 			biteElementDiceType: 6,
 			clawReach: 0,
 			clawDiceCount: 0,
-			clawDiceType: 0,
+			clawDiceType: 6,
 			tailReach: 0,
 			tailDiceCount: 0,
-			tailDiceType: 0,
+			tailDiceType: 8,
 			breathConeSize: 15,
 			breathLineLength: 20,
 			breathLineWidth: 5,
@@ -1196,7 +1196,7 @@ export const DRAGON_VALS: {
 			wallLayers: 'green layer (2d6 poison damage instead of 10d6)',
 			wingAttackRadius: 0,
 			wingAttackDiceCount: 0,
-			wingAttackDiceType: 0
+			wingAttackDiceType: 6
 		},
 		young: {
 			color: 'Green',
@@ -1264,7 +1264,7 @@ export const DRAGON_VALS: {
 			clawDiceType: 6,
 			tailReach: 0,
 			tailDiceCount: 0,
-			tailDiceType: 0,
+			tailDiceType: 8,
 			breathConeSize: 30,
 			breathLineLength: 30,
 			breathLineWidth: 5,
@@ -1280,7 +1280,7 @@ export const DRAGON_VALS: {
 			wallLayers: 'green layer (4d6 poison damage instead of 10d6)',
 			wingAttackRadius: 0,
 			wingAttackDiceCount: 0,
-			wingAttackDiceType: 0
+			wingAttackDiceType: 6
 		},
 		adult: {
 			color: 'Green',
@@ -1518,10 +1518,10 @@ export const DRAGON_VALS: {
 			biteElementDiceType: 6,
 			clawReach: 0,
 			clawDiceCount: 0,
-			clawDiceType: 0,
+			clawDiceType: 6,
 			tailReach: 0,
 			tailDiceCount: 0,
-			tailDiceType: 0,
+			tailDiceType: 8,
 			breathConeSize: 15,
 			breathLineLength: 20,
 			breathLineWidth: 5,
@@ -1538,7 +1538,7 @@ export const DRAGON_VALS: {
 			wallLayers: 'blue layer (2d6 cold damage instead of 10d6)',
 			wingAttackRadius: 0,
 			wingAttackDiceCount: 0,
-			wingAttackDiceType: 0
+			wingAttackDiceType: 6
 		},
 		young: {
 			color: 'Blue',
@@ -1606,7 +1606,7 @@ export const DRAGON_VALS: {
 			clawDiceType: 6,
 			tailReach: 0,
 			tailDiceCount: 0,
-			tailDiceType: 0,
+			tailDiceType: 8,
 			breathConeSize: 30,
 			breathLineLength: 30,
 			breathLineWidth: 5,
@@ -1623,7 +1623,7 @@ export const DRAGON_VALS: {
 			wallLayers: 'blue layer (4d6 cold damage instead of 10d6)',
 			wingAttackRadius: 0,
 			wingAttackDiceCount: 0,
-			wingAttackDiceType: 0
+			wingAttackDiceType: 6
 		},
 		adult: {
 			color: 'Blue',
@@ -1861,10 +1861,10 @@ export const DRAGON_VALS: {
 			biteElementDiceType: 6,
 			clawReach: 0,
 			clawDiceCount: 0,
-			clawDiceType: 0,
+			clawDiceType: 6,
 			tailReach: 0,
 			tailDiceCount: 0,
-			tailDiceType: 0,
+			tailDiceType: 8,
 			breathConeSize: 15,
 			breathLineLength: 20,
 			breathLineWidth: 5,
@@ -1880,7 +1880,7 @@ export const DRAGON_VALS: {
 			wallLayers: 'indigo layer (petrification ends after 1 minute)',
 			wingAttackRadius: 0,
 			wingAttackDiceCount: 0,
-			wingAttackDiceType: 0
+			wingAttackDiceType: 6
 		},
 		young: {
 			color: 'Indigo',
@@ -1948,7 +1948,7 @@ export const DRAGON_VALS: {
 			clawDiceType: 6,
 			tailReach: 0,
 			tailDiceCount: 0,
-			tailDiceType: 0,
+			tailDiceType: 8,
 			breathConeSize: 30,
 			breathLineLength: 30,
 			breathLineWidth: 5,
@@ -1964,7 +1964,7 @@ export const DRAGON_VALS: {
 			wallLayers: 'indigo layer (petrification ends after 1 hour)',
 			wingAttackRadius: 0,
 			wingAttackDiceCount: 0,
-			wingAttackDiceType: 0
+			wingAttackDiceType: 6
 		},
 		adult: {
 			color: 'Indigo',
@@ -2200,10 +2200,10 @@ export const DRAGON_VALS: {
 			biteElementDiceType: 6,
 			clawReach: 0,
 			clawDiceCount: 0,
-			clawDiceType: 0,
+			clawDiceType: 6,
 			tailReach: 0,
 			tailDiceCount: 0,
-			tailDiceType: 0,
+			tailDiceType: 8,
 			breathConeSize: 15,
 			breathLineLength: 20,
 			breathLineWidth: 5,
@@ -2220,7 +2220,7 @@ export const DRAGON_VALS: {
 				"violet layer (a banished creature is returned 1 minute later if it hasn't left that plane)",
 			wingAttackRadius: 0,
 			wingAttackDiceCount: 0,
-			wingAttackDiceType: 0
+			wingAttackDiceType: 6
 		},
 		young: {
 			color: 'Violet',
@@ -2288,7 +2288,7 @@ export const DRAGON_VALS: {
 			clawDiceType: 6,
 			tailReach: 0,
 			tailDiceCount: 0,
-			tailDiceType: 0,
+			tailDiceType: 8,
 			breathConeSize: 30,
 			breathLineLength: 30,
 			breathLineWidth: 5,
@@ -2305,7 +2305,7 @@ export const DRAGON_VALS: {
 				"violet layer (a banished creature is returned 1 hour later if it hasn't left that plane)",
 			wingAttackRadius: 0,
 			wingAttackDiceCount: 0,
-			wingAttackDiceType: 0
+			wingAttackDiceType: 6
 		},
 		adult: {
 			color: 'Violet',
