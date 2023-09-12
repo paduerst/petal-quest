@@ -10,7 +10,7 @@
 	const dragon: DragonStats = new DragonStats(config);
 </script>
 
-<div class="columns-1 md:columns-2 text-left">
+<div class="columns-1 sm:columns-2 text-left">
 	<StatBlockPreamble {dragon} />
 	<StatBlockFeatures {dragon} />
 	<StatBlockActions {dragon} />

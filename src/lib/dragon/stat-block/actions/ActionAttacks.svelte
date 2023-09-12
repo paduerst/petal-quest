@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { expectedDiceResult, numberWithSign } from '$lib/dragon';
+	import { numberWithSign } from '$lib/dragon';
 	import type { DragonStats } from '$lib/dragon/dragon-stats';
 
 	export let dragon: DragonStats;
@@ -24,13 +24,13 @@
 			ft., one target.
 			<span class="nowrap"
 				><i>Hit:</i>
-				{expectedDiceResult(dragon.biteDiceCount, dragon.biteDiceType, dragon.str, 1)} ({dragon.biteDiceCount}d{dragon.biteDiceType}
+				{dragon.biteExpectedDamage} ({dragon.biteDiceCount}d{dragon.biteDiceType}
 				{numberWithSign(dragon.str, ' ')})</span
 			>
 			piercing damage{#if dragon.biteElementDiceCount > 0}
 				{' plus'}
 				<span class="nowrap"
-					>{expectedDiceResult(dragon.biteElementDiceCount, dragon.biteElementDiceType, 0, 1)} ({dragon.biteElementDiceCount}d{dragon.biteElementDiceType})</span
+					>{dragon.biteElementExpectedDamage} ({dragon.biteElementDiceCount}d{dragon.biteElementDiceType})</span
 				>
 				{dragon.immunity.toLowerCase()} damage{/if}.
 		</p>
@@ -45,7 +45,7 @@
 			ft., one target.
 			<span class="nowrap"
 				><i>Hit:</i>
-				{expectedDiceResult(dragon.clawDiceCount, dragon.clawDiceType, dragon.str, 1)} ({dragon.clawDiceCount}d{dragon.clawDiceType}
+				{dragon.clawExpectedDamage} ({dragon.clawDiceCount}d{dragon.clawDiceType}
 				{numberWithSign(dragon.str, ' ')})</span
 			>
 			slashing damage.
@@ -61,7 +61,7 @@
 			ft., one target.
 			<span class="nowrap"
 				><i>Hit:</i>
-				{expectedDiceResult(dragon.tailDiceCount, dragon.tailDiceType, dragon.str, 1)} ({dragon.tailDiceCount}d{dragon.tailDiceType}
+				{dragon.tailExpectedDamage} ({dragon.tailDiceCount}d{dragon.tailDiceType}
 				{numberWithSign(dragon.str, ' ')})</span
 			>
 			bludgeoning damage.

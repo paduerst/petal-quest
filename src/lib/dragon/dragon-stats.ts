@@ -141,16 +141,40 @@ export class DragonStats {
 		this.biteReach = this.#vals.biteReach;
 		this.biteDiceCount = this.#vals.biteDiceCount;
 		this.biteDiceType = this.#vals.biteDiceType;
+		this.biteExpectedDamage = expectedDiceResult(
+			this.biteDiceCount,
+			this.biteDiceType,
+			this.str,
+			1
+		);
 		this.biteElementDiceCount = this.#vals.biteElementDiceCount;
 		this.biteElementDiceType = this.#vals.biteElementDiceType;
+		this.biteElementExpectedDamage = expectedDiceResult(
+			this.biteElementDiceCount,
+			this.biteElementDiceType,
+			0,
+			1
+		);
 
 		this.clawReach = this.#vals.clawReach;
 		this.clawDiceCount = this.#vals.clawDiceCount;
 		this.clawDiceType = this.#vals.clawDiceType;
+		this.clawExpectedDamage = expectedDiceResult(
+			this.clawDiceCount,
+			this.clawDiceType,
+			this.str,
+			1
+		);
 
 		this.tailReach = this.#vals.tailReach;
 		this.tailDiceCount = this.#vals.tailDiceCount;
 		this.tailDiceType = this.#vals.tailDiceType;
+		this.tailExpectedDamage = expectedDiceResult(
+			this.tailDiceCount,
+			this.tailDiceType,
+			this.str,
+			1
+		);
 
 		this.breathConeSize = this.#vals.breathConeSize;
 		this.breathLineLength = this.#vals.breathLineLength;
@@ -160,6 +184,7 @@ export class DragonStats {
 		this.breath1Shape = this.#vals.breath1Shape;
 		this.breath1DiceCount = this.#vals.breath1DiceCount;
 		this.breath1DiceType = this.#vals.breath1DiceType;
+		this.breath1ExpectedDamage = expectedDiceResult(this.breath1DiceCount, this.breath1DiceType);
 
 		this.breath2Name = this.#vals.breath2Name;
 		this.breath2Shape = this.#vals.breath2Shape;
@@ -173,6 +198,12 @@ export class DragonStats {
 		this.wingAttackRadius = this.#vals.wingAttackRadius;
 		this.wingAttackDiceCount = this.#vals.wingAttackDiceCount;
 		this.wingAttackDiceType = this.#vals.wingAttackDiceType;
+		this.wingAttackExpectedDamage = expectedDiceResult(
+			this.wingAttackDiceCount,
+			this.wingAttackDiceType,
+			this.str,
+			1
+		);
 	}
 
 	#getSpeeds(): string {
@@ -353,16 +384,20 @@ export class DragonStats {
 	biteReach: number;
 	biteDiceCount: number;
 	biteDiceType: Die;
+	biteExpectedDamage: number;
 	biteElementDiceCount: number;
 	biteElementDiceType: Die;
+	biteElementExpectedDamage: number;
 
 	clawReach: number;
 	clawDiceCount: number;
 	clawDiceType: Die;
+	clawExpectedDamage: number;
 
 	tailReach: number;
 	tailDiceCount: number;
 	tailDiceType: Die;
+	tailExpectedDamage: number;
 
 	breathConeSize: number;
 	breathLineLength: number;
@@ -372,6 +407,7 @@ export class DragonStats {
 	breath1Shape: string;
 	breath1DiceCount: number;
 	breath1DiceType: Die;
+	breath1ExpectedDamage: number;
 
 	breath2Name: string;
 	breath2Shape: string;
@@ -385,4 +421,5 @@ export class DragonStats {
 	wingAttackRadius: number;
 	wingAttackDiceCount: number;
 	wingAttackDiceType: Die;
+	wingAttackExpectedDamage: number;
 }

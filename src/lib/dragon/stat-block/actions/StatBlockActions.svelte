@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { DragonStats } from '$lib/dragon/dragon-stats';
 	import ActionAttacks from './ActionAttacks.svelte';
+	import ActionBreathWeapons from './breath-weapons/ActionBreathWeapons.svelte';
 
 	export let dragon: DragonStats;
 </script>
@@ -11,3 +12,5 @@
 </div>
 
 <ActionAttacks {dragon} />
+
+<ActionBreathWeapons {dragon} />
