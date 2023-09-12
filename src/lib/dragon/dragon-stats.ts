@@ -6,11 +6,15 @@ import {
 	SKILLS,
 	scoreToMod,
 	numberWithSign,
-	expectedDiceResult
+	expectedDiceResult,
+	capitalizeFirstLetter
 } from '.';
 import type { Age, Color, RGB, Size, Die } from '.';
 import { DRAGON_VALS, type DragonVals } from './dragon-vals';
 import { type CR, CRNumberToString, CR_TABLE } from './challenge-rating';
+
+// copied from https://stackoverflow.com/a/9030062
+const spellcastingCommaRegex = /,(?![^(]*\))/g;
 
 /**
  * This class defines all the dragon stats needed for a stat block given a DragonConfig.
@@ -33,8 +37,13 @@ export class DragonStats {
 
 		this.theme = this.#config.getTheme();
 		this.name = this.#config.name ?? 'the dragon';
+		this.nameUpper = capitalizeFirstLetter(this.name);
 		this.title = this.#config.getTitle();
 		this.alignment = this.#config.alignment ?? COLOR_TO_ALIGNMENT[this.color];
+
+		this.she = 'she';
+		this.her = 'her';
+		this.hers = 'hers';
 
 		this.size = AGE_TO_SIZE[this.age];
 		this.ac = this.#vals.ac;
@@ -112,6 +121,15 @@ export class DragonStats {
 		this.passiveInsight = 10 + this.wis + this.skillInsight * this.proficiencyBonus;
 		this.passiveInvestigation = 10 + this.int + this.skillInvestigation * this.proficiencyBonus;
 		this.passivePerception = 10 + this.wis + this.skillPerception * this.proficiencyBonus;
+
+		this.amphibious = this.#vals.amphibious > 0;
+
+		this.cantrips = this.#getCantrips();
+		this.spells = this.#getSpells();
+		this.spellcastingDisplayAttack = this.#getSpellcastingDisplayAttack();
+		this.spellcastingDisplaySave = this.#getSpellcastingDisplaySave();
+
+		this.legendaryResistances = this.#vals.legendaryResistances;
 	}
 
 	#getSpeeds(): string {
@@ -152,6 +170,40 @@ export class DragonStats {
 		return skillsOutput;
 	}
 
+	#getCantrips(): string[] {
+		let cantrips: string[] = [];
+		const rawCantrips = this.#vals.rawCantrip;
+		if (rawCantrips.length > 0) {
+			cantrips = rawCantrips.split(spellcastingCommaRegex);
+			// TODO: more processing
+		}
+		return cantrips;
+	}
+
+	#getSpells(): string[] {
+		let spells: string[] = [];
+		const rawSpells = this.#vals.rawSpells;
+		if (rawSpells.length > 0) {
+			spells = rawSpells.split(spellcastingCommaRegex);
+			// TODO: more processing
+		}
+		return spells;
+	}
+
+	#getSpellcastingDisplayAttack(): boolean {
+		return (
+			(this.cantrips.length > 0 && this.#vals.atWillSpellsHaveAttack > 0) ||
+			(this.spells.length > 0 && this.#vals.oncePerDaySpellsHaveAttack > 0)
+		);
+	}
+
+	#getSpellcastingDisplaySave(): boolean {
+		return (
+			(this.cantrips.length > 0 && this.#vals.atWillSpellsHaveSave > 0) ||
+			(this.spells.length > 0 && this.#vals.oncePerDaySpellsHaveSave > 0)
+		);
+	}
+
 	readonly #config: DragonConfig;
 	readonly #vals: DragonVals;
 
@@ -159,8 +211,13 @@ export class DragonStats {
 	color: Color;
 	theme: RGB;
 	name: string;
+	nameUpper: string;
 	title: string;
 	alignment: string;
+
+	she: string;
+	her: string;
+	hers: string;
 
 	size: Size;
 	ac: number;
@@ -233,4 +290,13 @@ export class DragonStats {
 	passiveInsight: number;
 	passiveInvestigation: number;
 	passivePerception: number;
+
+	amphibious: boolean;
+
+	cantrips: string[];
+	spells: string[];
+	spellcastingDisplayAttack: boolean;
+	spellcastingDisplaySave: boolean;
+
+	legendaryResistances: number;
 }

@@ -3,6 +3,7 @@
 	import { DragonStats } from '../dragon-stats';
 	import StatBlockHeader from './sections/StatBlockHeader.svelte';
 	import StatBlockPreamble from './sections/StatBlockPreamble.svelte';
+	import StatBlockFeatures from './sections/StatBlockFeatures.svelte';
 
 	export let config: DragonConfig;
 
@@ -12,6 +13,7 @@
 <div class="columns-1 md:columns-2 text-left">
 	<StatBlockHeader {dragon} />
 	<StatBlockPreamble {dragon} />
+	<StatBlockFeatures {dragon} />
 	<p>
 		Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita aut praesentium consectetur
 		cum. Non corrupti aliquid maiores, corporis ducimus suscipit. A asperiores illum sapiente
