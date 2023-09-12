@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { currentDragonConfig } from '.';
-	import DragonStatBlock from '../DragonStatBlock.svelte';
+	import DragonStatBlock from '../stat-block/DragonStatBlock.svelte';
 </script>
 
 {#if $currentDragonConfig === undefined}

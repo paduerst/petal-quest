@@ -1,6 +1,16 @@
-import { DragonConfig } from '.';
-import type { Age, Color, RGB } from '.';
+import {
+	DragonConfig,
+	COLOR_TO_ALIGNMENT,
+	AGE_TO_SIZE,
+	SIZE_TO_HIT_DIE,
+	SKILLS,
+	scoreToMod,
+	numberWithSign,
+	expectedDiceResult
+} from '.';
+import type { Age, Color, RGB, Size, Die } from '.';
 import { DRAGON_VALS, type DragonVals } from './dragon-vals';
+import { type CR, CRNumberToString, CR_TABLE } from './challenge-rating';
 
 /**
  * This class defines all the dragon stats needed for a stat block given a DragonConfig.
@@ -24,7 +34,122 @@ export class DragonStats {
 		this.theme = this.#config.getTheme();
 		this.name = this.#config.name ?? 'the dragon';
 		this.title = this.#config.getTitle();
-		this.alignment = this.#config.alignment ?? this.#vals.alignment;
+		this.alignment = this.#config.alignment ?? COLOR_TO_ALIGNMENT[this.color];
+
+		this.size = AGE_TO_SIZE[this.age];
+		this.ac = this.#vals.ac;
+		this.numberOfHitDice = this.#vals.numberOfHitDice;
+		this.hitDie = SIZE_TO_HIT_DIE[this.size];
+
+		this.speed = this.#vals.walkingSpeed;
+		this.burrowSpeed = this.#vals.burrowSpeed;
+		this.climbSpeed = this.#vals.climbSpeed;
+		this.flySpeed = this.#vals.flyingSpeed;
+		this.swimSpeed = this.#vals.swimSpeed;
+		this.speeds = this.#getSpeeds();
+
+		this.strength = this.#vals.strength;
+		this.dexterity = this.#vals.dexterity;
+		this.constitution = this.#vals.constitution;
+		this.intelligence = this.#vals.intelligence;
+		this.wisdom = this.#vals.wisdom;
+		this.charisma = this.#vals.charisma;
+
+		this.str = scoreToMod(this.strength);
+		this.dex = scoreToMod(this.dexterity);
+		this.con = scoreToMod(this.constitution);
+		this.int = scoreToMod(this.intelligence);
+		this.wis = scoreToMod(this.wisdom);
+		this.cha = scoreToMod(this.charisma);
+
+		this.expectedHitPoints = expectedDiceResult(
+			this.numberOfHitDice,
+			this.hitDie,
+			this.numberOfHitDice * this.con,
+			1
+		);
+
+		this.immunity = this.#vals.immunity;
+		this.additionalImmunities = this.#vals.additionalImmunities;
+		this.immunities = this.immunity + this.additionalImmunities;
+		this.resistances = this.#vals.resistances;
+		this.vulnerability = this.#vals.vulnerability;
+		this.vulnerabilities = this.vulnerability;
+		this.conditionImmunities = this.#vals.conditionImmunities;
+
+		this.blindsight = this.#vals.blindsight;
+		this.darkvision = this.#vals.darkvision;
+
+		this.languages = this.#vals.languages;
+
+		this.cr = CRNumberToString(this.#vals.cr);
+		this.xp = CR_TABLE[this.cr].xp;
+		this.proficiencyBonus = CR_TABLE[this.cr].proficiencyBonus;
+
+		this.savingThrows = this.#getSavingThrows();
+
+		this.skillAcrobatics = this.#vals.skillAcrobatics;
+		this.skillAnimalHandling = this.#vals.skillAnimalHandling;
+		this.skillArcana = this.#vals.skillArcana;
+		this.skillAthletics = this.#vals.skillAthletics;
+		this.skillDeception = this.#vals.skillDeception;
+		this.skillHistory = this.#vals.skillHistory;
+		this.skillInsight = this.#vals.skillInsight;
+		this.skillIntimidation = this.#vals.skillIntimidation;
+		this.skillInvestigation = this.#vals.skillInvestigation;
+		this.skillMedicine = this.#vals.skillMedicine;
+		this.skillNature = this.#vals.skillNature;
+		this.skillPerception = this.#vals.skillPerception;
+		this.skillPerformance = this.#vals.skillPerformance;
+		this.skillPersuasion = this.#vals.skillPersuasion;
+		this.skillReligion = this.#vals.skillReligion;
+		this.skillSleightOfHand = this.#vals.skillSleightOfHand;
+		this.skillStealth = this.#vals.skillStealth;
+		this.skillSurvival = this.#vals.skillSurvival;
+
+		this.skills = this.#getSkills();
+
+		this.passiveInsight = 10 + this.wis + this.skillInsight * this.proficiencyBonus;
+		this.passiveInvestigation = 10 + this.int + this.skillInvestigation * this.proficiencyBonus;
+		this.passivePerception = 10 + this.wis + this.skillPerception * this.proficiencyBonus;
+	}
+
+	#getSpeeds(): string {
+		let output = `${this.speed} ft.`;
+		if (this.burrowSpeed > 0) {
+			output = output + `, burrow ${this.burrowSpeed} ft.`;
+		}
+		if (this.climbSpeed > 0) {
+			output = output + `, climb ${this.climbSpeed} ft.`;
+		}
+		if (this.flySpeed > 0) {
+			output = output + `, fly ${this.flySpeed} ft.`;
+		}
+		if (this.swimSpeed > 0) {
+			output = output + `, swim ${this.swimSpeed} ft.`;
+		}
+		return output;
+	}
+
+	#getSavingThrows(): string {
+		const savingThrowProficiencies = ['dex', 'con', 'wis', 'cha'] as const;
+		const outputArr: string[] = [];
+		for (const prof of savingThrowProficiencies) {
+			outputArr.push(`${prof.toUpperCase()} ${numberWithSign(this.proficiencyBonus + this[prof])}`);
+		}
+		return outputArr.join(', ');
+	}
+
+	#getSkills(): string[] {
+		const skillsOutput: string[] = [];
+		for (const skill of SKILLS) {
+			const skillProf = this[skill.key];
+			if (skillProf > 0) {
+				const skillMod = Math.floor(this[skill.ability] + skillProf * this.proficiencyBonus);
+				skillsOutput.push(`${skill.name} ${numberWithSign(skillMod)}`);
+			}
+		}
+		return skillsOutput;
 	}
 
 	readonly #config: DragonConfig;
@@ -36,4 +161,76 @@ export class DragonStats {
 	name: string;
 	title: string;
 	alignment: string;
+
+	size: Size;
+	ac: number;
+	numberOfHitDice: number;
+	hitDie: Die;
+
+	speed: number;
+	burrowSpeed: number;
+	climbSpeed: number;
+	flySpeed: number;
+	swimSpeed: number;
+	speeds: string;
+
+	strength: number;
+	dexterity: number;
+	constitution: number;
+	intelligence: number;
+	wisdom: number;
+	charisma: number;
+
+	str: number;
+	dex: number;
+	con: number;
+	int: number;
+	wis: number;
+	cha: number;
+
+	expectedHitPoints: number;
+
+	immunity: string;
+	additionalImmunities: string;
+	immunities: string;
+	resistances: string;
+	vulnerability: string;
+	vulnerabilities: string;
+	conditionImmunities: string;
+
+	blindsight: number;
+	darkvision: number;
+
+	languages: string;
+
+	cr: CR;
+	xp: number;
+	proficiencyBonus: number;
+
+	savingThrows: string;
+
+	skillAcrobatics: number;
+	skillAnimalHandling: number;
+	skillArcana: number;
+	skillAthletics: number;
+	skillDeception: number;
+	skillHistory: number;
+	skillInsight: number;
+	skillIntimidation: number;
+	skillInvestigation: number;
+	skillMedicine: number;
+	skillNature: number;
+	skillPerception: number;
+	skillPerformance: number;
+	skillPersuasion: number;
+	skillReligion: number;
+	skillSleightOfHand: number;
+	skillStealth: number;
+	skillSurvival: number;
+
+	skills: string[];
+
+	passiveInsight: number;
+	passiveInvestigation: number;
+	passivePerception: number;
 }
