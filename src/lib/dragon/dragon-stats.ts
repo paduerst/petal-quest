@@ -34,6 +34,7 @@ export class DragonStats {
 		this.age = this.#config.age;
 		this.color = this.#config.color;
 		this.#vals = JSON.parse(JSON.stringify(DRAGON_VALS[this.color][this.age]));
+		this.aVsAnColor = this.#getAVsAnColor();
 
 		this.theme = this.#config.getTheme();
 		this.name = this.#config.name ?? 'the dragon';
@@ -207,6 +208,15 @@ export class DragonStats {
 		);
 	}
 
+	#getAVsAnColor(): 'a' | 'an' {
+		// "A vs An Color" is hard-coded
+		if (this.color === 'orange' || this.color === 'indigo') {
+			return 'an';
+		} else {
+			return 'a';
+		}
+	}
+
 	#getSpeeds(): string {
 		let output = `${this.speed} ft.`;
 		if (this.burrowSpeed > 0) {
@@ -284,6 +294,7 @@ export class DragonStats {
 
 	age: Age;
 	color: Color;
+	aVsAnColor: 'a' | 'an';
 	theme: RGB;
 	name: string;
 	nameUpper: string;

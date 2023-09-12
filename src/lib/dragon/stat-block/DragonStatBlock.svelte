@@ -4,6 +4,8 @@
 	import StatBlockPreamble from './preamble/StatBlockPreamble.svelte';
 	import StatBlockFeatures from './features/StatBlockFeatures.svelte';
 	import StatBlockActions from './actions/StatBlockActions.svelte';
+	import StatBlockBonusActions from './bonus-actions/StatBlockBonusActions.svelte';
+	import StatBlockLegendaryActions from './legendary-actions/StatBlockLegendaryActions.svelte';
 
 	export let config: DragonConfig;
 
@@ -14,4 +16,6 @@
 	<StatBlockPreamble {dragon} />
 	<StatBlockFeatures {dragon} />
 	<StatBlockActions {dragon} />
+	<StatBlockBonusActions {dragon} />
+	<StatBlockLegendaryActions {dragon} />
 </div>
