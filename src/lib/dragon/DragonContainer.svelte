@@ -61,8 +61,7 @@
 		--extra-margin: 2px;
 		border-color: var(--theme-dragon);
 		border-width: var(--y-border-width) var(--x-border-width);
-		margin: calc(var(--extra-margin) + var(--y-edge-height))
-			calc(var(--extra-margin) + var(--y-edge-x-offset));
+		margin: calc(var(--extra-margin)) calc(var(--extra-margin) + var(--y-edge-x-offset));
 		width: calc(100% - 2 * var(--extra-margin));
 
 		transition: border-color linear 700ms;
