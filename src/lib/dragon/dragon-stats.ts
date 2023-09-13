@@ -234,13 +234,13 @@ export class DragonStats {
 		return output;
 	}
 
-	#getSavingThrows(): string {
+	#getSavingThrows(): string[] {
 		const savingThrowProficiencies = ['dex', 'con', 'wis', 'cha'] as const;
 		const outputArr: string[] = [];
 		for (const prof of savingThrowProficiencies) {
 			outputArr.push(`${prof.toUpperCase()} ${numberWithSign(this.proficiencyBonus + this[prof])}`);
 		}
-		return outputArr.join(', ');
+		return outputArr;
 	}
 
 	#getSkills(): string[] {
@@ -260,7 +260,6 @@ export class DragonStats {
 		const rawCantrips = this.#vals.rawCantrip;
 		if (rawCantrips.length > 0) {
 			cantrips = rawCantrips.split(spellcastingCommaRegex);
-			// TODO: more processing
 		}
 		return cantrips;
 	}
@@ -270,7 +269,6 @@ export class DragonStats {
 		const rawSpells = this.#vals.rawSpells;
 		if (rawSpells.length > 0) {
 			spells = rawSpells.split(spellcastingCommaRegex);
-			// TODO: more processing
 		}
 		return spells;
 	}
@@ -350,7 +348,7 @@ export class DragonStats {
 	xp: number;
 	proficiencyBonus: number;
 
-	savingThrows: string;
+	savingThrows: string[];
 
 	saveDCStr: number;
 	saveDCDex: number;

@@ -8,7 +8,12 @@
 	<li class="dragon-saves my-1">
 		<p class="-indent-4 pl-4">
 			<span class="dragon-label">Saving Throws</span>
-			<span>{dragon.savingThrows}</span>
+			<span>
+				{#each dragon.savingThrows as save, index}
+					<span class="whitespace-nowrap">{save}</span
+					>{#if index < dragon.savingThrows.length - 1}{', '}{/if}
+				{/each}
+			</span>
 		</p>
 	</li>
 
