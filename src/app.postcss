@@ -74,15 +74,13 @@ body {
 		@apply inline-flex w-full justify-between items-end;
 	}
 
-	.dragon-title {
-		@apply m-0 text-3xl leading-none;
-
+	.dragon-heading-font {
 		font-family: 'AlegreyaSansSC-Bold', var(--theme-font-family-heading);
 		color: var(--dragon-theme);
 	}
 
-	.dragon-heading-font {
-		font-family: 'AlegreyaSansSC-Bold', var(--theme-font-family-heading);
+	.dragon-title {
+		@apply m-0 text-3xl leading-none dragon-heading-font;
 	}
 
 	.dragon-subheading {

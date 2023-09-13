@@ -9,7 +9,7 @@
 </script>
 
 <div class="break-inside-avoid break-after-avoid">
-	<h5 class="dragon-heading-font text-xl" style="color: {dragon.theme};">Bonus Actions</h5>
+	<h5 class="dragon-heading-font text-xl">Bonus Actions</h5>
 	<StatBlockDivider color={dragon.theme} height={dividerHeightThin} classes={'mt-0'} />
 </div>
 
