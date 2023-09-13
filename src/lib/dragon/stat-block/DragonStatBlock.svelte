@@ -1,32 +1,24 @@
 <script lang="ts">
 	import type { DragonConfig } from '..';
 	import { DragonStats } from '../dragon-stats';
-	import StatBlockHeader from './sections/StatBlockHeader.svelte';
-	import StatBlockPreamble from './sections/StatBlockPreamble.svelte';
+	import StatBlockPreamble from './preamble/StatBlockPreamble.svelte';
+	import StatBlockFeatures from './features/StatBlockFeatures.svelte';
+	import StatBlockActions from './actions/StatBlockActions.svelte';
+	import StatBlockBonusActions from './bonus-actions/StatBlockBonusActions.svelte';
+	import StatBlockLegendaryActions from './legendary-actions/StatBlockLegendaryActions.svelte';
 
 	export let config: DragonConfig;
 
 	const dragon: DragonStats = new DragonStats(config);
 </script>
 
-<div class="columns-1 md:columns-2 text-left">
-	<StatBlockHeader {dragon} />
+<div
+	class="columns-1 md:columns-2 print:sm:columns-2 text-left text-sm leading-[1.2]"
+	style="--dragon-theme: {dragon.theme}"
+>
 	<StatBlockPreamble {dragon} />
-	<p>
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita aut praesentium consectetur
-		cum. Non corrupti aliquid maiores, corporis ducimus suscipit. A asperiores illum sapiente
-		accusantium cum iusto ea! Esse, ut! Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-		Odit totam beatae exercitationem velit animi labore non quos nam eos? Optio ipsum quasi incidunt
-		dolor unde, vero expedita! Totam, quam molestias! Lorem ipsum dolor sit amet consectetur
-		adipisicing elit. Quae repellendus laboriosam qui iste. Non consequatur soluta deleniti rem!
-		Quia dolor eius explicabo quas atque rem amet earum incidunt exercitationem ducimus? Lorem ipsum
-		dolor sit amet consectetur adipisicing elit. Modi id, provident blanditiis cumque distinctio
-		eum, eligendi obcaecati illum cupiditate molestias consequuntur quos ea asperiores tempore
-		magnam eaque perspiciatis odit quidem. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-		Nesciunt, veritatis in voluptate recusandae dignissimos dolore fugiat nobis reiciendis vero
-		eaque veniam illo. Animi eveniet temporibus quisquam, veritatis fugit esse cumque. Lorem ipsum
-		dolor sit amet consectetur adipisicing elit. Laudantium, dolores exercitationem cumque minima
-		sunt beatae, soluta nobis quisquam sed illo laboriosam pariatur deleniti aut adipisci sequi
-		totam atque suscipit illum.
-	</p>
+	<StatBlockFeatures {dragon} />
+	<StatBlockActions {dragon} />
+	<StatBlockBonusActions {dragon} />
+	<StatBlockLegendaryActions {dragon} />
 </div>

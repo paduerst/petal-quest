@@ -16,10 +16,6 @@ body {
 }
 
 @layer base {
-	p {
-		@apply my-2;
-	}
-
 	a {
 		@apply anchor;
 	}
@@ -78,13 +74,48 @@ body {
 		@apply inline-flex w-full justify-between items-end;
 	}
 
-	.dragon-title {
-		@apply m-0 text-3xl leading-none;
-
+	.dragon-heading-font {
 		font-family: 'AlegreyaSansSC-Bold', var(--theme-font-family-heading);
+		color: var(--dragon-theme);
+	}
+
+	.dragon-title {
+		@apply m-0 text-3xl leading-none dragon-heading-font;
 	}
 
 	.dragon-subheading {
 		@apply m-0 italic text-sm;
+	}
+
+	.dragon-abilities {
+		@apply flex flex-row flex-wrap justify-around;
+	}
+
+	.dragon-ability {
+		@apply flex flex-col items-center w-1/3 md:w-1/6 print:w-fit my-1;
+	}
+
+	.dragon-modifier {
+		@apply whitespace-nowrap;
+	}
+
+	.dragon-label {
+		@apply font-bold;
+
+		color: var(--dragon-theme);
+	}
+
+	.dragon-trait,
+	.dragon-action,
+	.dragon-legendary-action {
+		@apply my-1;
+	}
+
+	.dragon-legendary-action {
+		@apply -indent-4 pl-4;
+	}
+
+	.breath-option p {
+		@apply indent-4;
 	}
 }

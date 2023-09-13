@@ -192,16 +192,17 @@ export function signFromNumber(number: number): '+' | '-' {
 }
 
 /**
- * Returns the given number as a string with + or - in front of it.
+ * Returns the given number as a string with + or - in front of it. Optional spacing parameter is placed between number and sign.
  * @export
  * @param {number} number
+ * @param {string} [spacing='']
  * @return {*}  {string}
  */
-export function numberWithSign(number: number): string {
+export function numberWithSign(number: number, spacing: string = ''): string {
 	if (number < 0) {
 		return number.toString();
 	} else {
-		return `+${number.toString()}`;
+		return `+${spacing}${number.toString()}`;
 	}
 }
 
@@ -217,8 +218,8 @@ export function numberWithSign(number: number): string {
 export function expectedDiceResult(
 	numberOfDice: number,
 	typeOfDice: Die,
-	modifier = 0,
-	minimumResult = 0
+	modifier: number = 0,
+	minimumResult: number = 0
 ): number {
 	return Math.max(minimumResult, Math.floor(numberOfDice * (0.5 + typeOfDice / 2) + modifier));
 }

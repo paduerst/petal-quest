@@ -1,30 +1,29 @@
 <script lang="ts">
 	import type { DragonStats } from '$lib/dragon/dragon-stats';
-	import { signFromNumber } from '$lib/dragon';
+	import { numberWithSign } from '$lib/dragon';
 
 	export let dragon: DragonStats;
 </script>
 
 <ul>
-	<li class="dragon-ac">
+	<li class="dragon-ac my-1">
 		<p>
-			<span class="label">Armor Class</span>
+			<span class="dragon-label">Armor Class</span>
 			<span>{dragon.ac} (Natural Armor)</span>
 		</p>
 	</li>
-	<li class="dragon-hp">
+	<li class="dragon-hp my-1">
 		<p>
-			<span class="label">Hit Points</span>
+			<span class="dragon-label">Hit Points</span>
 			<span
 				>{dragon.expectedHitPoints} ({dragon.numberOfHitDice}d{dragon.hitDie}
-				{signFromNumber(dragon.con)}
-				{Math.abs(dragon.con * dragon.numberOfHitDice)})</span
+				{numberWithSign(dragon.con * dragon.numberOfHitDice, ' ')})</span
 			>
 		</p>
 	</li>
-	<li class="dragon-speed">
+	<li class="dragon-speed my-1">
 		<p>
-			<span class="label">Speed</span>
+			<span class="dragon-label">Speed</span>
 			<span>{dragon.speeds}</span>
 		</p>
 	</li>

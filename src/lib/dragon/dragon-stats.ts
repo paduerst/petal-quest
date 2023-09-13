@@ -6,11 +6,15 @@ import {
 	SKILLS,
 	scoreToMod,
 	numberWithSign,
-	expectedDiceResult
+	expectedDiceResult,
+	capitalizeFirstLetter
 } from '.';
 import type { Age, Color, RGB, Size, Die } from '.';
 import { DRAGON_VALS, type DragonVals } from './dragon-vals';
 import { type CR, CRNumberToString, CR_TABLE } from './challenge-rating';
+
+// copied from https://stackoverflow.com/a/9030062
+const spellcastingCommaRegex = /,(?![^(]*\))/g;
 
 /**
  * This class defines all the dragon stats needed for a stat block given a DragonConfig.
@@ -30,11 +34,17 @@ export class DragonStats {
 		this.age = this.#config.age;
 		this.color = this.#config.color;
 		this.#vals = JSON.parse(JSON.stringify(DRAGON_VALS[this.color][this.age]));
+		this.aVsAnColor = this.#getAVsAnColor();
 
 		this.theme = this.#config.getTheme();
 		this.name = this.#config.name ?? 'the dragon';
+		this.nameUpper = capitalizeFirstLetter(this.name);
 		this.title = this.#config.getTitle();
 		this.alignment = this.#config.alignment ?? COLOR_TO_ALIGNMENT[this.color];
+
+		this.she = 'she';
+		this.her = 'her';
+		this.hers = 'hers';
 
 		this.size = AGE_TO_SIZE[this.age];
 		this.ac = this.#vals.ac;
@@ -88,6 +98,13 @@ export class DragonStats {
 
 		this.savingThrows = this.#getSavingThrows();
 
+		this.saveDCStr = 8 + this.str + this.proficiencyBonus;
+		this.saveDCDex = 8 + this.dex + this.proficiencyBonus;
+		this.saveDCCon = 8 + this.con + this.proficiencyBonus;
+		this.saveDCInt = 8 + this.int + this.proficiencyBonus;
+		this.saveDCWis = 8 + this.wis + this.proficiencyBonus;
+		this.saveDCCha = 8 + this.cha + this.proficiencyBonus;
+
 		this.skillAcrobatics = this.#vals.skillAcrobatics;
 		this.skillAnimalHandling = this.#vals.skillAnimalHandling;
 		this.skillArcana = this.#vals.skillArcana;
@@ -112,6 +129,92 @@ export class DragonStats {
 		this.passiveInsight = 10 + this.wis + this.skillInsight * this.proficiencyBonus;
 		this.passiveInvestigation = 10 + this.int + this.skillInvestigation * this.proficiencyBonus;
 		this.passivePerception = 10 + this.wis + this.skillPerception * this.proficiencyBonus;
+
+		this.amphibious = this.#vals.amphibious > 0;
+
+		this.cantrips = this.#getCantrips();
+		this.spells = this.#getSpells();
+		this.spellcastingDisplayAttack = this.#getSpellcastingDisplayAttack();
+		this.spellcastingDisplaySave = this.#getSpellcastingDisplaySave();
+
+		this.legendaryResistances = this.#vals.legendaryResistances;
+
+		this.biteReach = this.#vals.biteReach;
+		this.biteDiceCount = this.#vals.biteDiceCount;
+		this.biteDiceType = this.#vals.biteDiceType;
+		this.biteExpectedDamage = expectedDiceResult(
+			this.biteDiceCount,
+			this.biteDiceType,
+			this.str,
+			1
+		);
+		this.biteElementDiceCount = this.#vals.biteElementDiceCount;
+		this.biteElementDiceType = this.#vals.biteElementDiceType;
+		this.biteElementExpectedDamage = expectedDiceResult(
+			this.biteElementDiceCount,
+			this.biteElementDiceType,
+			0,
+			1
+		);
+
+		this.clawReach = this.#vals.clawReach;
+		this.clawDiceCount = this.#vals.clawDiceCount;
+		this.clawDiceType = this.#vals.clawDiceType;
+		this.clawExpectedDamage = expectedDiceResult(
+			this.clawDiceCount,
+			this.clawDiceType,
+			this.str,
+			1
+		);
+
+		this.tailReach = this.#vals.tailReach;
+		this.tailDiceCount = this.#vals.tailDiceCount;
+		this.tailDiceType = this.#vals.tailDiceType;
+		this.tailExpectedDamage = expectedDiceResult(
+			this.tailDiceCount,
+			this.tailDiceType,
+			this.str,
+			1
+		);
+
+		this.breathConeSize = this.#vals.breathConeSize;
+		this.breathLineLength = this.#vals.breathLineLength;
+		this.breathLineWidth = this.#vals.breathLineWidth;
+
+		this.breath1Name = this.#vals.breath1Name;
+		this.breath1Shape = this.#vals.breath1Shape;
+		this.breath1DiceCount = this.#vals.breath1DiceCount;
+		this.breath1DiceType = this.#vals.breath1DiceType;
+		this.breath1ExpectedDamage = expectedDiceResult(this.breath1DiceCount, this.breath1DiceType);
+
+		this.breath2Name = this.#vals.breath2Name;
+		this.breath2Shape = this.#vals.breath2Shape;
+		this.breath2DiceCount = this.#vals.breath2DiceCount;
+		this.breath2SpecialValue = this.#vals.breath2SpecialValue;
+
+		this.hasWallOfLight = this.age !== 'wyrmling' && this.age !== 'young';
+		this.wallLayers = this.#vals.wallLayers;
+
+		this.prismaticRadianceRadius = this.#vals.prismaticRadianceRadius;
+
+		this.wingAttackRadius = this.#vals.wingAttackRadius;
+		this.wingAttackDiceCount = this.#vals.wingAttackDiceCount;
+		this.wingAttackDiceType = this.#vals.wingAttackDiceType;
+		this.wingAttackExpectedDamage = expectedDiceResult(
+			this.wingAttackDiceCount,
+			this.wingAttackDiceType,
+			this.str,
+			1
+		);
+	}
+
+	#getAVsAnColor(): 'a' | 'an' {
+		// "A vs An Color" is hard-coded
+		if (this.color === 'orange' || this.color === 'indigo') {
+			return 'an';
+		} else {
+			return 'a';
+		}
 	}
 
 	#getSpeeds(): string {
@@ -131,13 +234,13 @@ export class DragonStats {
 		return output;
 	}
 
-	#getSavingThrows(): string {
+	#getSavingThrows(): string[] {
 		const savingThrowProficiencies = ['dex', 'con', 'wis', 'cha'] as const;
 		const outputArr: string[] = [];
 		for (const prof of savingThrowProficiencies) {
 			outputArr.push(`${prof.toUpperCase()} ${numberWithSign(this.proficiencyBonus + this[prof])}`);
 		}
-		return outputArr.join(', ');
+		return outputArr;
 	}
 
 	#getSkills(): string[] {
@@ -152,15 +255,53 @@ export class DragonStats {
 		return skillsOutput;
 	}
 
+	#getCantrips(): string[] {
+		let cantrips: string[] = [];
+		const rawCantrips = this.#vals.rawCantrip;
+		if (rawCantrips.length > 0) {
+			cantrips = rawCantrips.split(spellcastingCommaRegex);
+		}
+		return cantrips;
+	}
+
+	#getSpells(): string[] {
+		let spells: string[] = [];
+		const rawSpells = this.#vals.rawSpells;
+		if (rawSpells.length > 0) {
+			spells = rawSpells.split(spellcastingCommaRegex);
+		}
+		return spells;
+	}
+
+	#getSpellcastingDisplayAttack(): boolean {
+		return (
+			(this.cantrips.length > 0 && this.#vals.atWillSpellsHaveAttack > 0) ||
+			(this.spells.length > 0 && this.#vals.oncePerDaySpellsHaveAttack > 0)
+		);
+	}
+
+	#getSpellcastingDisplaySave(): boolean {
+		return (
+			(this.cantrips.length > 0 && this.#vals.atWillSpellsHaveSave > 0) ||
+			(this.spells.length > 0 && this.#vals.oncePerDaySpellsHaveSave > 0)
+		);
+	}
+
 	readonly #config: DragonConfig;
 	readonly #vals: DragonVals;
 
 	age: Age;
 	color: Color;
+	aVsAnColor: 'a' | 'an';
 	theme: RGB;
 	name: string;
+	nameUpper: string;
 	title: string;
 	alignment: string;
+
+	she: string;
+	her: string;
+	hers: string;
 
 	size: Size;
 	ac: number;
@@ -207,7 +348,14 @@ export class DragonStats {
 	xp: number;
 	proficiencyBonus: number;
 
-	savingThrows: string;
+	savingThrows: string[];
+
+	saveDCStr: number;
+	saveDCDex: number;
+	saveDCCon: number;
+	saveDCInt: number;
+	saveDCWis: number;
+	saveDCCha: number;
 
 	skillAcrobatics: number;
 	skillAnimalHandling: number;
@@ -233,4 +381,56 @@ export class DragonStats {
 	passiveInsight: number;
 	passiveInvestigation: number;
 	passivePerception: number;
+
+	amphibious: boolean;
+
+	cantrips: string[];
+	spells: string[];
+	spellcastingDisplayAttack: boolean;
+	spellcastingDisplaySave: boolean;
+
+	legendaryResistances: number;
+
+	biteReach: number;
+	biteDiceCount: number;
+	biteDiceType: Die;
+	biteExpectedDamage: number;
+	biteElementDiceCount: number;
+	biteElementDiceType: Die;
+	biteElementExpectedDamage: number;
+
+	clawReach: number;
+	clawDiceCount: number;
+	clawDiceType: Die;
+	clawExpectedDamage: number;
+
+	tailReach: number;
+	tailDiceCount: number;
+	tailDiceType: Die;
+	tailExpectedDamage: number;
+
+	breathConeSize: number;
+	breathLineLength: number;
+	breathLineWidth: number;
+
+	breath1Name: string;
+	breath1Shape: string;
+	breath1DiceCount: number;
+	breath1DiceType: Die;
+	breath1ExpectedDamage: number;
+
+	breath2Name: string;
+	breath2Shape: string;
+	breath2DiceCount: number;
+	breath2SpecialValue: string;
+
+	hasWallOfLight: boolean;
+	wallLayers: string;
+
+	prismaticRadianceRadius: number;
+
+	wingAttackRadius: number;
+	wingAttackDiceCount: number;
+	wingAttackDiceType: Die;
+	wingAttackExpectedDamage: number;
 }
