@@ -11,7 +11,7 @@
 			<span class="dragon-label uppercase">{ABILITY[1]}</span>
 			<span>
 				{dragon[ABILITY[0]]}
-				<span class="modifier">
+				<span class="dragon-modifier">
 					({numberWithSign(dragon[ABILITY[1]])})
 				</span>
 			</span>

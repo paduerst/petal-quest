@@ -3,6 +3,8 @@
 	import LActionTailAttack from './LActionTailAttack.svelte';
 	import LActionWingAttack from './LActionWingAttack.svelte';
 	import LActionBreathBeam from './LActionBreathBeam.svelte';
+	import StatBlockDivider from '../StatBlockDivider.svelte';
+	import { dividerHeightThin } from '..';
 
 	export let dragon: DragonStats;
 </script>
@@ -10,7 +12,7 @@
 {#if dragon.age !== 'wyrmling' && dragon.age !== 'young'}
 	<div class="break-inside-avoid break-after-avoid">
 		<h5 class="dragon-heading-font text-xl" style="color: {dragon.theme};">Legendary Actions</h5>
-		<hr />
+		<StatBlockDivider color={dragon.theme} height={dividerHeightThin} classes={'mt-0'} />
 	</div>
 
 	<p>

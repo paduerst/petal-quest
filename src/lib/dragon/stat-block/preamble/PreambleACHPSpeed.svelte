@@ -6,13 +6,13 @@
 </script>
 
 <ul>
-	<li class="dragon-ac">
+	<li class="dragon-ac my-1">
 		<p>
 			<span class="dragon-label">Armor Class</span>
 			<span>{dragon.ac} (Natural Armor)</span>
 		</p>
 	</li>
-	<li class="dragon-hp">
+	<li class="dragon-hp my-1">
 		<p>
 			<span class="dragon-label">Hit Points</span>
 			<span
@@ -21,7 +21,7 @@
 			>
 		</p>
 	</li>
-	<li class="dragon-speed">
+	<li class="dragon-speed my-1">
 		<p>
 			<span class="dragon-label">Speed</span>
 			<span>{dragon.speeds}</span>

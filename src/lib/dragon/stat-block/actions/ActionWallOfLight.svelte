@@ -6,7 +6,7 @@
 </script>
 
 {#if dragon.hasWallOfLight}
-	<div class="monster-action">
+	<div class="dragon-action">
 		<p>
 			<i><b>Wall of {capitalizeFirstLetter(dragon.color)} Light (1/Day).</b></i>
 			{dragon.nameUpper} casts <i>prismatic wall</i> using Charisma as the spellcasting ability

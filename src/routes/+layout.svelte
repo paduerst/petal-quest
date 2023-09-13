@@ -26,7 +26,7 @@
 		<Header />
 	</svelte:fragment>
 	<main class="text-center">
-		<div class="p-2 pb-4 mx-auto my-0 w-auto max-w-5xl">
+		<div class="p-2 pb-4 print:p-0 mx-auto my-0 w-auto max-w-5xl">
 			<slot />
 		</div>
 	</main>

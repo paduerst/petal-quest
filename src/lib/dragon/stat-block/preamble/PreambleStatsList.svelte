@@ -5,16 +5,16 @@
 </script>
 
 <ul class="dragon-stats">
-	<li class="dragon-saves">
-		<p>
+	<li class="dragon-saves my-1">
+		<p class="-indent-4 pl-4">
 			<span class="dragon-label">Saving Throws</span>
 			<span>{dragon.savingThrows}</span>
 		</p>
 	</li>
 
 	{#if dragon.skills.length > 0}
-		<li class="dragon-skills">
-			<p>
+		<li class="dragon-skills my-1">
+			<p class="-indent-4 pl-4">
 				<span class="dragon-label">Skills</span>
 				<span>
 					{#each dragon.skills as skill, index}
@@ -27,8 +27,8 @@
 	{/if}
 
 	{#if dragon.vulnerabilities.length > 0}
-		<li class="dragon-vulnerabilities">
-			<p>
+		<li class="dragon-vulnerabilities my-1">
+			<p class="-indent-4 pl-4">
 				<span class="dragon-label">Damage Vulnerabilities</span>
 				<span class="lowercase">{dragon.vulnerabilities}</span>
 			</p>
@@ -36,32 +36,32 @@
 	{/if}
 
 	{#if dragon.resistances.length > 0}
-		<li class="dragon-resistances">
-			<p>
+		<li class="dragon-resistances my-1">
+			<p class="-indent-4 pl-4">
 				<span class="dragon-label">Damage Resistances</span>
 				<span class="lowercase">{dragon.resistances}</span>
 			</p>
 		</li>
 	{/if}
 
-	<li class="dragon-immunities">
-		<p>
+	<li class="dragon-immunities my-1">
+		<p class="-indent-4 pl-4">
 			<span class="dragon-label">Damage Immunities</span>
 			<span class="lowercase">{dragon.immunities}</span>
 		</p>
 	</li>
 
 	{#if dragon.conditionImmunities.length > 0}
-		<li class="dragon-conditions">
-			<p>
+		<li class="dragon-conditions my-1">
+			<p class="-indent-4 pl-4">
 				<span class="dragon-label">Condition Immunities</span>
 				<span class="lowercase">{dragon.conditionImmunities}</span>
 			</p>
 		</li>
 	{/if}
 
-	<li class="dragon-senses">
-		<p>
+	<li class="dragon-senses my-1">
+		<p class="-indent-4 pl-4">
 			<span class="dragon-label">Senses</span>
 			<span
 				><span class="whitespace-nowrap">
@@ -77,23 +77,27 @@
 		</p>
 	</li>
 
-	<li class="dragon-languages">
-		<p>
+	<li class="dragon-languages my-1">
+		<p class="-indent-4 pl-4">
 			<span class="dragon-label">Languages</span>
 			<span>{dragon.languages}</span>
 		</p>
 	</li>
 
 	<li class="dragon-challenge">
-		<p>
-			<span class="dragon-label">Challenge</span>
-			<span>
-				{dragon.cr} ({dragon.xp.toLocaleString()} XP)
-			</span>
-			<span class="dragon-label">Proficiency Bonus</span>
-			<span>
-				+{dragon.proficiencyBonus}
-			</span>
-		</p>
+		<div class="flex flex-wrap justify-between">
+			<div class="pr-2 my-1">
+				<span class="dragon-label">Challenge</span>
+				<span>
+					{dragon.cr} ({dragon.xp.toLocaleString()} XP)
+				</span>
+			</div>
+			<div class="pr-2 my-1">
+				<span class="dragon-label">Proficiency Bonus</span>
+				<span>
+					+{dragon.proficiencyBonus}
+				</span>
+			</div>
+		</div>
 	</li>
 </ul>

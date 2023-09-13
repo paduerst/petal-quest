@@ -3,13 +3,15 @@
 	import ActionAttacks from './ActionAttacks.svelte';
 	import ActionBreathWeapons from './breath-weapons/ActionBreathWeapons.svelte';
 	import ActionWallOfLight from './ActionWallOfLight.svelte';
+	import StatBlockDivider from '../StatBlockDivider.svelte';
+	import { dividerHeightThin } from '..';
 
 	export let dragon: DragonStats;
 </script>
 
 <div class="break-inside-avoid break-after-avoid">
 	<h5 class="dragon-heading-font text-xl" style="color: {dragon.theme};">Actions</h5>
-	<hr />
+	<StatBlockDivider color={dragon.theme} height={dividerHeightThin} classes={'mt-0'} />
 </div>
 
 <ActionAttacks {dragon} />

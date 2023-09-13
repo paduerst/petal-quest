@@ -4,7 +4,7 @@
 	export let dragon: DragonStats;
 </script>
 
-<div class="monster-action breath-option">
+<div class="dragon-action breath-option">
 	<p>
 		<b>{dragon.breath1Name} Breath.</b>
 		{dragon.nameUpper} exhales an icy blast in a {dragon.breathConeSize}-foot cone. Each creature in

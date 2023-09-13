@@ -13,7 +13,7 @@
 </script>
 
 <div
-	class="columns-1 sm:columns-2 text-left text-sm leading-[1.25]"
+	class="columns-1 md:columns-2 print:sm:columns-2 text-left text-sm leading-[1.2]"
 	style="--dragon-theme: {dragon.theme}"
 >
 	<StatBlockPreamble {dragon} />

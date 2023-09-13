@@ -5,7 +5,7 @@
 	export let dragon: DragonStats;
 </script>
 
-<div class="monster-action breath-option">
+<div class="dragon-action breath-option">
 	<p>
 		<b>{dragon.breath2Name} Breath.</b>
 		{capitalizeFirstLetter(dragon.color)} rays of magical light flash from {dragon.name}'s mouth in

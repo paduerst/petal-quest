@@ -5,7 +5,7 @@
 	export let dragon: DragonStats;
 </script>
 
-<div class="monster-legendary-action">
+<div class="dragon-legendary-action">
 	<p>
 		<b>Wing Attack (Costs 2 Actions).</b>
 		{dragon.nameUpper} beats {dragon.her} wings. Each creature within {dragon.wingAttackRadius}

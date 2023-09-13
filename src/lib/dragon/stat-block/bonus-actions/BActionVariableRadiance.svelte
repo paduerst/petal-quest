@@ -4,7 +4,7 @@
 	export let dragon: DragonStats;
 </script>
 
-<div class="monster-action">
+<div class="dragon-action">
 	<p>
 		<i><b>Variable Radiance.</b></i>
 		{dragon.nameUpper} chooses a radius up to {dragon.prismaticRadianceRadius}

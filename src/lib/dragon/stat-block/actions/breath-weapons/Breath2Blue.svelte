@@ -5,7 +5,7 @@
 	export let dragon: DragonStats;
 </script>
 
-<div class="monster-action breath-option">
+<div class="dragon-action breath-option">
 	<p>
 		<b>{dragon.breath2Name} Breath.</b>
 		{capitalizeFirstLetter(dragon.color)} rays of magical light flash from {dragon.name}'s mouth in
@@ -31,6 +31,6 @@
 </div>
 \n
 <p class="blue-breath-option">
-	<i>4. Froggy Jinx.</i> The creature is transformed into a [monster]frog[/monster], as if by the
+	<i>4. Froggy Jinx.</i> The creature is transformed into a frog, as if by the
 	<i>polymorph</i> spell.
 </p>

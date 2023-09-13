@@ -90,25 +90,27 @@
 		margin-top: calc(-1 * var(--y-edge-height));
 	}
 
-	@media print {
-		.dragon-container-top-edge,
-		.dragon-container-bot-edge {
-			display: none;
-		}
-	}
-
 	.outer-wrapper {
 		@apply overflow-hidden;
 		height: var(--outer-wrapper-height);
 	}
 
+	.inner-wrapper {
+		@apply p-4 h-fit w-full inline-block;
+	}
+
 	@media print {
+		.dragon-container {
+			margin: 0;
+		}
+
+		.dragon-container-top-edge,
+		.dragon-container-bot-edge {
+			display: none;
+		}
+
 		.outer-wrapper {
 			height: fit-content;
 		}
-	}
-
-	.inner-wrapper {
-		@apply p-4 h-fit w-full inline-block;
 	}
 </style>

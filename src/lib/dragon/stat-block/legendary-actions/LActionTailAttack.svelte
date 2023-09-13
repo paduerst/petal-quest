@@ -4,6 +4,6 @@
 	export let dragon: DragonStats;
 </script>
 
-<div class="monster-legendary-action">
+<div class="dragon-legendary-action">
 	<p><b>Tail Attack.</b> {dragon.nameUpper} makes a Tail attack.</p>
 </div>

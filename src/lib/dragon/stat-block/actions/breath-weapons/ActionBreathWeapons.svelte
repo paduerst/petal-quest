@@ -28,10 +28,12 @@
 	} as const;
 </script>
 
-<p>
-	<i><b>Breath Weapons (Recharge 5–6).</b></i>
-	{dragon.nameUpper} uses one of the following breath weapons.
-</p>
+<div class="dragon-action">
+	<p>
+		<i><b>Breath Weapons (Recharge 5–6).</b></i>
+		{dragon.nameUpper} uses one of the following breath weapons.
+	</p>
+</div>
 
 <svelte:component this={breathsByColor[dragon.color][0]} {dragon} />
 

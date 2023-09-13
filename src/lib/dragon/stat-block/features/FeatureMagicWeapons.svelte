@@ -4,7 +4,7 @@
 	export let dragon: DragonStats;
 </script>
 
-<div class="monster-trait">
+<div class="dragon-trait">
 	<p>
 		<i><b>Magic Weapons.</b></i>
 		{dragon.nameUpper}'s weapon attacks are magical.

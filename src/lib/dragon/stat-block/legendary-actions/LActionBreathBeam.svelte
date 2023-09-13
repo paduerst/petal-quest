@@ -5,7 +5,7 @@
 	export let dragon: DragonStats;
 </script>
 
-<div class="monster-legendary-action">
+<div class="dragon-legendary-action">
 	<p>
 		<b>{dragon.breath2Name} Beam (Costs 3 Actions).</b>
 		{capitalizeFirstLetter(dragon.aVsAnColor)}

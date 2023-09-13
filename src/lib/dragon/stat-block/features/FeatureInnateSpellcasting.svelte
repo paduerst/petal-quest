@@ -25,7 +25,7 @@
 
 {#if dragon.cantrips.length > 0 || dragon.spells.length > 0}
 	<div class="break-inside-avoid-column">
-		<div class="monster-trait">
+		<div class="dragon-trait">
 			<p>
 				<i><b>Innate Spellcasting.</b></i>
 				{dragon.nameUpper}'s innate spellcasting ability is Charisma{spellsDCString}. {dragon.nameUpper}
@@ -36,8 +36,8 @@
 		</div>
 
 		{#if dragon.cantrips.length > 0}
-			<div class="monster-spells monster-list">
-				<p>
+			<div class="dragon-spells dragon-list">
+				<p class="-indent-4 pl-4">
 					At will:
 					{#each dragon.cantrips as cantrip, index}
 						<FeatureInnateSpellcastingSpell
@@ -49,8 +49,8 @@
 		{/if}
 
 		{#if dragon.spells.length > 0}
-			<div class="monster-spells monster-list">
-				<p>
+			<div class="dragon-spells dragon-list">
+				<p class="-indent-4 pl-4">
 					1/day{dragon.spells.length > 0 ? ' each' : ''}:
 					{#each dragon.spells as spell, index}
 						<FeatureInnateSpellcastingSpell

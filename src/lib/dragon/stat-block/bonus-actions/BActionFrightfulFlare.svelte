@@ -5,7 +5,7 @@
 </script>
 
 {#if dragon.age !== 'wyrmling' && dragon.age !== 'young'}
-	<div class="monster-action">
+	<div class="dragon-action">
 		<p>
 			<i><b>Frightful Flare (1/Day).</b></i>
 			{dragon.nameUpper} unleashes {dragon.her} inner light, maxing out {dragon.her} Variable Radiance
