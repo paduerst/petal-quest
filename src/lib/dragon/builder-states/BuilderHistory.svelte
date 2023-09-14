@@ -15,6 +15,13 @@
 		dragonBuilderHistory.remove(event.detail);
 		if ($dragonBuilderHistory.length === 0) {
 			$currentDragonConfig = undefined;
+		} else if (
+			Math.ceil($dragonBuilderHistory.length / historyEntriesPerPage) <
+			currentHistoryPage + 1
+		) {
+			setHistoryPage(currentHistoryPage - 1);
+		} else {
+			// no extra action needed
 		}
 	}
 
