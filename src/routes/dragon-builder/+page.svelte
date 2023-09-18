@@ -6,7 +6,7 @@
 	import { currentDragonConfig } from '$lib/dragon/builder-states';
 
 	const defaultTitle = 'Dragon Builder - Petal Quest';
-	let pageTitle: string;
+	let pageTitle: string = defaultTitle;
 	$: pageTitle =
 		$currentDragonConfig === undefined
 			? defaultTitle
