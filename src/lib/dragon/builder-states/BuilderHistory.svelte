@@ -28,12 +28,32 @@
 		}
 
 		if (dragonIndex >= 0) {
-			// show a toast to the user which allows them to undo this deletion
+			// show a toast to the user which allows them to undo this action
 			const t: ToastSettings = {
 				message: 'Dragon deleted.',
 				action: {
 					label: 'Undo',
 					response: () => dragonBuilderHistory.add(event.detail, dragonIndex)
+				},
+				timeout: 10000,
+				hoverable: true
+			};
+			toastStore.clear();
+			toastStore.trigger(t);
+		}
+	}
+
+	function onClickClearHistory() {
+		const previousValues = dragonBuilderHistory.clear();
+		$currentDragonConfig = undefined;
+
+		if (previousValues.length > 0) {
+			// show a toast to the user which allows them to undo this action
+			const t: ToastSettings = {
+				message: 'History cleared.',
+				action: {
+					label: 'Undo',
+					response: () => dragonBuilderHistory.set(previousValues)
 				},
 				timeout: 10000,
 				hoverable: true
@@ -126,10 +146,7 @@
 	{#if $dragonBuilderHistory.length > 0}
 		<button
 			class="daisy-btn daisy-btn-outline hover:daisy-btn-error m-2 mt-6"
-			on:click={() => {
-				dragonBuilderHistory.clear();
-				$currentDragonConfig = undefined;
-			}}
+			on:click={onClickClearHistory}
 		>
 			Clear History
 		</button>

@@ -111,8 +111,10 @@ export const dragonBuilderHistory = (() => {
 			}
 			return valueIndexInHistory;
 		},
-		clear: () => {
+		clear: (): DragonConfig[] => {
+			const previousValues = get(_dragonBuilderHistory);
 			_dragonBuilderHistoryAsString.set('[]');
+			return previousValues;
 		},
 		toStrings: () => {
 			return get(_dragonBuilderHistoryStrings);
