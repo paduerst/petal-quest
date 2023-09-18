@@ -25,8 +25,8 @@
 </script>
 
 <div class="flex flex-col items-center">
-	<div class="daisy-tabs daisy-tabs-boxed font-semibold border border-black gap-1">
-		{#each FORM_SECTION_NAMES as name, index}
+	<div class="daisy-tabs daisy-tabs-boxed font-semibold border border-black gap-1 mb-3">
+		{#each FORM_SECTION_NAMES as name}
 			<button
 				class="daisy-tab"
 				class:daisy-btn-ghost={currentSectionName !== name}
