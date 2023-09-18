@@ -1,6 +1,12 @@
-<svelte:head>
-	<title>About - Petal Quest</title>
-</svelte:head>
+<script lang="ts">
+	import PageMeta from '$lib/PageMeta.svelte';
+</script>
+
+<PageMeta
+	title="About - Petal Quest"
+	description="Petal Quest is the publishing title used by Peter and Tal: Peter + Tal = Petal."
+	url="https://www.petalquest.com/about/"
+/>
 
 <h1>About Petal Quest</h1>
 <p>This page will contain info about who we are.</p>
