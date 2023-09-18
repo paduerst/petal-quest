@@ -15,25 +15,24 @@
 	const historyFadeParams: FadeParams = { duration: 50 };
 
 	function onClickDelete(event: { detail: DragonConfig }) {
-		const dragonIndex = dragonBuilderHistory.remove(event.detail);
+		const previousIndex = dragonBuilderHistory.remove(event.detail);
 		if ($dragonBuilderHistory.length === 0) {
 			$currentDragonConfig = undefined;
 		} else if (
-			Math.ceil($dragonBuilderHistory.length / historyEntriesPerPage) <
-			currentHistoryPage + 1
+			currentHistoryPage >= Math.ceil($dragonBuilderHistory.length / historyEntriesPerPage)
 		) {
 			setHistoryPage(currentHistoryPage - 1);
 		} else {
 			// no extra action needed
 		}
 
-		if (dragonIndex >= 0) {
+		if (previousIndex >= 0) {
 			// show a toast to the user which allows them to undo this action
 			const t: ToastSettings = {
 				message: 'Dragon deleted.',
 				action: {
 					label: 'Undo',
-					response: () => dragonBuilderHistory.add(event.detail, dragonIndex)
+					response: () => dragonBuilderHistory.add(event.detail, previousIndex)
 				},
 				timeout: 10000,
 				hoverable: true
@@ -44,16 +43,16 @@
 	}
 
 	function onClickClearHistory() {
-		const previousValues = dragonBuilderHistory.clear();
+		const previousHistory = dragonBuilderHistory.clear();
 		$currentDragonConfig = undefined;
 
-		if (previousValues.length > 0) {
+		if (previousHistory.length > 0) {
 			// show a toast to the user which allows them to undo this action
 			const t: ToastSettings = {
 				message: 'History cleared.',
 				action: {
 					label: 'Undo',
-					response: () => dragonBuilderHistory.set(previousValues)
+					response: () => dragonBuilderHistory.set(previousHistory)
 				},
 				timeout: 10000,
 				hoverable: true
