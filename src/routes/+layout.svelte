@@ -2,7 +2,7 @@
 	import '../app.postcss';
 
 	import { initializeStores, type ModalComponent } from '@skeletonlabs/skeleton';
-	import { AppShell, Modal } from '@skeletonlabs/skeleton';
+	import { AppShell, Modal, Toast } from '@skeletonlabs/skeleton';
 	import DragonShare from '$lib/modals/DragonShare.svelte';
 	import Drawer from '$lib/Drawer.svelte';
 	import Header from '$lib/Header.svelte';
@@ -16,6 +16,8 @@
 		}
 	};
 </script>
+
+<Toast transitionOutParams={{ duration: 50 }} buttonDismiss="btn btn-icon-sm variant-filled" />
 
 <Modal components={modalComponentRegistry} />
 

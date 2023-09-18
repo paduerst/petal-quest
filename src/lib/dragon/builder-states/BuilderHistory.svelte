@@ -4,6 +4,9 @@
 	import { currentDragonConfig, dragonBuilderHistory, lastBuilderState, nextBuilderState } from '.';
 	import { type DragonConfig, capitalizeFirstLetter } from '..';
 	import DragonConfigPreview from '../DragonConfigPreview.svelte';
+	import { getToastStore, type ToastSettings } from '@skeletonlabs/skeleton';
+
+	const toastStore = getToastStore();
 
 	const historyFlipParams: FlipParams = { duration: 150 };
 	const historyFlyXDistance = 600;
@@ -12,7 +15,7 @@
 	const historyFadeParams: FadeParams = { duration: 50 };
 
 	function onClickDelete(event: { detail: DragonConfig }) {
-		dragonBuilderHistory.remove(event.detail);
+		const dragonIndex = dragonBuilderHistory.remove(event.detail);
 		if ($dragonBuilderHistory.length === 0) {
 			$currentDragonConfig = undefined;
 		} else if (
@@ -22,6 +25,21 @@
 			setHistoryPage(currentHistoryPage - 1);
 		} else {
 			// no extra action needed
+		}
+
+		if (dragonIndex >= 0) {
+			// show a toast to the user which allows them to undo this deletion
+			const t: ToastSettings = {
+				message: 'Dragon deleted.',
+				action: {
+					label: 'Undo',
+					response: () => dragonBuilderHistory.add(event.detail, dragonIndex)
+				},
+				timeout: 10000,
+				hoverable: true
+			};
+			toastStore.clear();
+			toastStore.trigger(t);
 		}
 	}
 
