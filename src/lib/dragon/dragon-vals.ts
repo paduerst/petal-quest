@@ -1,4 +1,4 @@
-import type { Color, Age, Die } from '.';
+import type { Color, Age, Die, ProficiencyLevel } from '.';
 import type { CRNumber } from './challenge-rating';
 
 // TODO: Remove the following values, as they are not needed:
@@ -33,24 +33,24 @@ export type DragonVals = {
 	intelligence: number;
 	wisdom: number;
 	charisma: number;
-	skillAcrobatics: number;
-	skillAnimalHandling: number;
-	skillArcana: number;
-	skillAthletics: number;
-	skillDeception: number;
-	skillHistory: number;
-	skillInsight: number;
-	skillIntimidation: number;
-	skillInvestigation: number;
-	skillMedicine: number;
-	skillNature: number;
-	skillPerception: number;
-	skillPerformance: number;
-	skillPersuasion: number;
-	skillReligion: number;
-	skillSleightOfHand: number;
-	skillStealth: number;
-	skillSurvival: number;
+	skillAcrobatics: ProficiencyLevel;
+	skillAnimalHandling: ProficiencyLevel;
+	skillArcana: ProficiencyLevel;
+	skillAthletics: ProficiencyLevel;
+	skillDeception: ProficiencyLevel;
+	skillHistory: ProficiencyLevel;
+	skillInsight: ProficiencyLevel;
+	skillIntimidation: ProficiencyLevel;
+	skillInvestigation: ProficiencyLevel;
+	skillMedicine: ProficiencyLevel;
+	skillNature: ProficiencyLevel;
+	skillPerception: ProficiencyLevel;
+	skillPerformance: ProficiencyLevel;
+	skillPersuasion: ProficiencyLevel;
+	skillReligion: ProficiencyLevel;
+	skillSleightOfHand: ProficiencyLevel;
+	skillStealth: ProficiencyLevel;
+	skillSurvival: ProficiencyLevel;
 	conditionImmunities: string;
 	blindsight: number;
 	darkvision: number;

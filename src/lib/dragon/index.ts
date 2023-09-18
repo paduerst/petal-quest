@@ -166,6 +166,9 @@ export const SKILLS = [
 	{ name: 'Stealth', key: 'skillStealth', ability: 'dex' },
 	{ name: 'Survival', key: 'skillSurvival', ability: 'wis' }
 ] as const;
+export type SkillKey = (typeof SKILLS)[number]['key'];
+
+export type ProficiencyLevel = 0.0 | 0.5 | 1.0 | 2.0;
 
 /**
  * Calculates the ability modifier given the ability score.
@@ -241,6 +244,25 @@ export class DragonConfig {
 	name?: string;
 	alignment?: string;
 
+	skillAcrobatics?: ProficiencyLevel;
+	skillAnimalHandling?: ProficiencyLevel;
+	skillArcana?: ProficiencyLevel;
+	skillAthletics?: ProficiencyLevel;
+	skillDeception?: ProficiencyLevel;
+	skillHistory?: ProficiencyLevel;
+	skillInsight?: ProficiencyLevel;
+	skillIntimidation?: ProficiencyLevel;
+	skillInvestigation?: ProficiencyLevel;
+	skillMedicine?: ProficiencyLevel;
+	skillNature?: ProficiencyLevel;
+	skillPerception?: ProficiencyLevel;
+	skillPerformance?: ProficiencyLevel;
+	skillPersuasion?: ProficiencyLevel;
+	skillReligion?: ProficiencyLevel;
+	skillSleightOfHand?: ProficiencyLevel;
+	skillStealth?: ProficiencyLevel;
+	skillSurvival?: ProficiencyLevel;
+
 	/**
 	 * Returns the title for this DragonConfig.
 	 * @return {*}  {string}
@@ -306,6 +328,13 @@ export class DragonConfig {
 			output.set('alignment', this.alignment);
 		}
 
+		for (const skill of SKILLS) {
+			const thisSkillValue = this[skill.key];
+			if (thisSkillValue !== undefined) {
+				output.set(skill.key, thisSkillValue.toString());
+			}
+		}
+
 		return output;
 	}
 
@@ -351,7 +380,26 @@ export class DragonConfig {
 			this.alignment = paramsAlignmentVal;
 		}
 
+		for (const skill of SKILLS) {
+			this.#skillFromURLSearchParams(skill.key, params);
+		}
+
 		return true;
+	}
+
+	#skillFromURLSearchParams(skillKey: SkillKey, params: URLSearchParams) {
+		const paramsSkillVal = params.get(skillKey);
+		if (paramsSkillVal !== null) {
+			const paramsSkillFloat = parseFloat(paramsSkillVal);
+			if (
+				paramsSkillFloat === 0.0 ||
+				paramsSkillFloat === 0.5 ||
+				paramsSkillFloat === 1.0 ||
+				paramsSkillFloat === 2.0
+			) {
+				this[skillKey] = paramsSkillFloat;
+			}
+		}
 	}
 
 	/**

@@ -9,7 +9,7 @@ import {
 	expectedDiceResult,
 	capitalizeFirstLetter
 } from '.';
-import type { Age, Color, RGB, Size, Die } from '.';
+import type { Age, Color, RGB, Size, Die, ProficiencyLevel } from '.';
 import { DRAGON_VALS, type DragonVals } from './dragon-vals';
 import { type CR, CRNumberToString, CR_TABLE } from './challenge-rating';
 
@@ -105,24 +105,24 @@ export class DragonStats {
 		this.saveDCWis = 8 + this.wis + this.proficiencyBonus;
 		this.saveDCCha = 8 + this.cha + this.proficiencyBonus;
 
-		this.skillAcrobatics = this.#vals.skillAcrobatics;
-		this.skillAnimalHandling = this.#vals.skillAnimalHandling;
-		this.skillArcana = this.#vals.skillArcana;
-		this.skillAthletics = this.#vals.skillAthletics;
-		this.skillDeception = this.#vals.skillDeception;
-		this.skillHistory = this.#vals.skillHistory;
-		this.skillInsight = this.#vals.skillInsight;
-		this.skillIntimidation = this.#vals.skillIntimidation;
-		this.skillInvestigation = this.#vals.skillInvestigation;
-		this.skillMedicine = this.#vals.skillMedicine;
-		this.skillNature = this.#vals.skillNature;
-		this.skillPerception = this.#vals.skillPerception;
-		this.skillPerformance = this.#vals.skillPerformance;
-		this.skillPersuasion = this.#vals.skillPersuasion;
-		this.skillReligion = this.#vals.skillReligion;
-		this.skillSleightOfHand = this.#vals.skillSleightOfHand;
-		this.skillStealth = this.#vals.skillStealth;
-		this.skillSurvival = this.#vals.skillSurvival;
+		this.skillAcrobatics = this.#config.skillAcrobatics ?? this.#vals.skillAcrobatics;
+		this.skillAnimalHandling = this.#config.skillAnimalHandling ?? this.#vals.skillAnimalHandling;
+		this.skillArcana = this.#config.skillArcana ?? this.#vals.skillArcana;
+		this.skillAthletics = this.#config.skillAthletics ?? this.#vals.skillAthletics;
+		this.skillDeception = this.#config.skillDeception ?? this.#vals.skillDeception;
+		this.skillHistory = this.#config.skillHistory ?? this.#vals.skillHistory;
+		this.skillInsight = this.#config.skillInsight ?? this.#vals.skillInsight;
+		this.skillIntimidation = this.#config.skillIntimidation ?? this.#vals.skillIntimidation;
+		this.skillInvestigation = this.#config.skillInvestigation ?? this.#vals.skillInvestigation;
+		this.skillMedicine = this.#config.skillMedicine ?? this.#vals.skillMedicine;
+		this.skillNature = this.#config.skillNature ?? this.#vals.skillNature;
+		this.skillPerception = this.#config.skillPerception ?? this.#vals.skillPerception;
+		this.skillPerformance = this.#config.skillPerformance ?? this.#vals.skillPerformance;
+		this.skillPersuasion = this.#config.skillPersuasion ?? this.#vals.skillPersuasion;
+		this.skillReligion = this.#config.skillReligion ?? this.#vals.skillReligion;
+		this.skillSleightOfHand = this.#config.skillSleightOfHand ?? this.#vals.skillSleightOfHand;
+		this.skillStealth = this.#config.skillStealth ?? this.#vals.skillStealth;
+		this.skillSurvival = this.#config.skillSurvival ?? this.#vals.skillSurvival;
 
 		this.skills = this.#getSkills();
 
@@ -357,24 +357,24 @@ export class DragonStats {
 	saveDCWis: number;
 	saveDCCha: number;
 
-	skillAcrobatics: number;
-	skillAnimalHandling: number;
-	skillArcana: number;
-	skillAthletics: number;
-	skillDeception: number;
-	skillHistory: number;
-	skillInsight: number;
-	skillIntimidation: number;
-	skillInvestigation: number;
-	skillMedicine: number;
-	skillNature: number;
-	skillPerception: number;
-	skillPerformance: number;
-	skillPersuasion: number;
-	skillReligion: number;
-	skillSleightOfHand: number;
-	skillStealth: number;
-	skillSurvival: number;
+	skillAcrobatics: ProficiencyLevel;
+	skillAnimalHandling: ProficiencyLevel;
+	skillArcana: ProficiencyLevel;
+	skillAthletics: ProficiencyLevel;
+	skillDeception: ProficiencyLevel;
+	skillHistory: ProficiencyLevel;
+	skillInsight: ProficiencyLevel;
+	skillIntimidation: ProficiencyLevel;
+	skillInvestigation: ProficiencyLevel;
+	skillMedicine: ProficiencyLevel;
+	skillNature: ProficiencyLevel;
+	skillPerception: ProficiencyLevel;
+	skillPerformance: ProficiencyLevel;
+	skillPersuasion: ProficiencyLevel;
+	skillReligion: ProficiencyLevel;
+	skillSleightOfHand: ProficiencyLevel;
+	skillStealth: ProficiencyLevel;
+	skillSurvival: ProficiencyLevel;
 
 	skills: string[];
 
