@@ -1,3 +1,7 @@
+<svelte:head>
+	<title>About - Petal Quest</title>
+</svelte:head>
+
 <h1>About Petal Quest</h1>
 <p>This page will contain info about who we are.</p>
 <p>
