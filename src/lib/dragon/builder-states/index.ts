@@ -78,25 +78,27 @@ export const dragonBuilderHistory = (() => {
 			}
 			_dragonBuilderHistoryAsString.set(JSON.stringify(configsAsStrings));
 		},
-		add: (config: DragonConfig) => {
+		add: (config: DragonConfig, targetIndex: number = 0) => {
 			config.cleanup();
 			const configAsString = config.toString();
 			const history = get(_dragonBuilderHistoryStrings);
 			const valueIndexInHistory = history.findIndex((string: string) => {
 				return string === configAsString;
 			});
-			if (valueIndexInHistory !== 0) {
-				if (valueIndexInHistory > 0) {
+			targetIndex = Math.round(targetIndex);
+			targetIndex = Math.max(0, Math.min(dragonBuilderHistoryMaxLength - 1, targetIndex));
+			if (valueIndexInHistory !== targetIndex) {
+				if (valueIndexInHistory >= 0) {
 					history.splice(valueIndexInHistory, 1);
 				}
-				history.unshift(configAsString);
+				history.splice(targetIndex, 0, configAsString);
 				while (history.length > dragonBuilderHistoryMaxLength) {
 					history.pop();
 				}
 				_dragonBuilderHistoryAsString.set(JSON.stringify(history));
 			}
 		},
-		remove: (config: DragonConfig) => {
+		remove: (config: DragonConfig): number => {
 			config.cleanup();
 			const configAsString = config.toString();
 			const history = get(_dragonBuilderHistoryStrings);
@@ -107,9 +109,12 @@ export const dragonBuilderHistory = (() => {
 				history.splice(valueIndexInHistory, 1);
 				_dragonBuilderHistoryAsString.set(JSON.stringify(history));
 			}
+			return valueIndexInHistory;
 		},
-		clear: () => {
+		clear: (): DragonConfig[] => {
+			const previousValues = get(_dragonBuilderHistory);
 			_dragonBuilderHistoryAsString.set('[]');
+			return previousValues;
 		},
 		toStrings: () => {
 			return get(_dragonBuilderHistoryStrings);

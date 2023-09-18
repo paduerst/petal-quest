@@ -24,7 +24,7 @@
 </script>
 
 {#if dragon.cantrips.length > 0 || dragon.spells.length > 0}
-	<div class="break-inside-avoid-column">
+	<div class="break-inside-avoid">
 		<div class="dragon-trait">
 			<p>
 				<i><b>Innate Spellcasting.</b></i>

@@ -5,7 +5,7 @@
 </script>
 
 {#if dragon.amphibious}
-	<div class="dragon-trait">
+	<div class="dragon-trait break-inside-avoid">
 		<p>
 			<i><b>Amphibious.</b></i>
 			{dragon.nameUpper} can breathe air and water.

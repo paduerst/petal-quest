@@ -7,7 +7,7 @@
 </script>
 
 {#if dragon.biteDiceCount > 0 && dragon.clawDiceCount > 0}
-	<div class="dragon-action">
+	<div class="dragon-action break-inside-avoid">
 		<p>
 			<i><b>Multiattack.</b></i>
 			{dragon.nameUpper} makes three attacks: one with {dragon.her}
@@ -17,7 +17,7 @@
 {/if}
 
 {#if dragon.biteDiceCount > 0}
-	<div class="dragon-action">
+	<div class="dragon-action break-inside-avoid">
 		<p>
 			<i><b>Bite.</b> Melee Weapon Attack:</i>
 			{proficiencyPlusStrWithSign} to hit, reach {dragon.biteReach}
@@ -38,7 +38,7 @@
 {/if}
 
 {#if dragon.clawDiceCount > 0}
-	<div class="dragon-action">
+	<div class="dragon-action break-inside-avoid">
 		<p>
 			<i><b>Claw.</b> Melee Weapon Attack:</i>
 			{proficiencyPlusStrWithSign} to hit, reach {dragon.clawReach}
@@ -54,7 +54,7 @@
 {/if}
 
 {#if dragon.tailDiceCount > 0}
-	<div class="dragon-action">
+	<div class="dragon-action break-inside-avoid">
 		<p>
 			<i><b>Tail.</b> Melee Weapon Attack:</i>
 			{proficiencyPlusStrWithSign} to hit, reach {dragon.tailReach}

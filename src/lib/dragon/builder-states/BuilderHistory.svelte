@@ -4,6 +4,9 @@
 	import { currentDragonConfig, dragonBuilderHistory, lastBuilderState, nextBuilderState } from '.';
 	import { type DragonConfig, capitalizeFirstLetter } from '..';
 	import DragonConfigPreview from '../DragonConfigPreview.svelte';
+	import { getToastStore, type ToastSettings } from '@skeletonlabs/skeleton';
+
+	const toastStore = getToastStore();
 
 	const historyFlipParams: FlipParams = { duration: 150 };
 	const historyFlyXDistance = 600;
@@ -12,9 +15,50 @@
 	const historyFadeParams: FadeParams = { duration: 50 };
 
 	function onClickDelete(event: { detail: DragonConfig }) {
-		dragonBuilderHistory.remove(event.detail);
+		const previousIndex = dragonBuilderHistory.remove(event.detail);
 		if ($dragonBuilderHistory.length === 0) {
 			$currentDragonConfig = undefined;
+		} else if (
+			currentHistoryPage >= Math.ceil($dragonBuilderHistory.length / historyEntriesPerPage)
+		) {
+			setHistoryPage(currentHistoryPage - 1);
+		} else {
+			// no extra action needed
+		}
+
+		if (previousIndex >= 0) {
+			// show a toast to the user which allows them to undo this action
+			const t: ToastSettings = {
+				message: 'Dragon deleted.',
+				action: {
+					label: 'Undo',
+					response: () => dragonBuilderHistory.add(event.detail, previousIndex)
+				},
+				timeout: 10000,
+				hoverable: true
+			};
+			toastStore.clear();
+			toastStore.trigger(t);
+		}
+	}
+
+	function onClickClearHistory() {
+		const previousHistory = dragonBuilderHistory.clear();
+		$currentDragonConfig = undefined;
+
+		if (previousHistory.length > 0) {
+			// show a toast to the user which allows them to undo this action
+			const t: ToastSettings = {
+				message: 'History cleared.',
+				action: {
+					label: 'Undo',
+					response: () => dragonBuilderHistory.set(previousHistory)
+				},
+				timeout: 10000,
+				hoverable: true
+			};
+			toastStore.clear();
+			toastStore.trigger(t);
 		}
 	}
 
@@ -101,10 +145,7 @@
 	{#if $dragonBuilderHistory.length > 0}
 		<button
 			class="daisy-btn daisy-btn-outline hover:daisy-btn-error m-2 mt-6"
-			on:click={() => {
-				dragonBuilderHistory.clear();
-				$currentDragonConfig = undefined;
-			}}
+			on:click={onClickClearHistory}
 		>
 			Clear History
 		</button>

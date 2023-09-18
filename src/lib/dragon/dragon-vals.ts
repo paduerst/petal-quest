@@ -2,8 +2,6 @@ import type { Color, Age, Die } from '.';
 import type { CRNumber } from './challenge-rating';
 
 // TODO: Remove the following values, as they are not needed:
-// - color
-// - age
 // - size
 // - alignment
 // END of TODO list
@@ -15,8 +13,6 @@ import type { CRNumber } from './challenge-rating';
 // END of TODO list
 
 export type DragonVals = {
-	color: string;
-	age: string;
 	cr: CRNumber;
 	size: string;
 	alignment: string;
@@ -106,8 +102,6 @@ export const DRAGON_VALS: {
 } = {
 	red: {
 		wyrmling: {
-			color: 'Red',
-			age: 'Wyrmling',
 			cr: 2,
 			size: 'Medium',
 			alignment: 'Typically Chaotic',
@@ -190,8 +184,6 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		young: {
-			color: 'Red',
-			age: 'Young',
 			cr: 6,
 			size: 'Large',
 			alignment: 'Typically Chaotic',
@@ -274,8 +266,6 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		adult: {
-			color: 'Red',
-			age: 'Adult',
 			cr: 13,
 			size: 'Huge',
 			alignment: 'Typically Chaotic',
@@ -358,8 +348,6 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		ancient: {
-			color: 'Red',
-			age: 'Ancient',
 			cr: 20,
 			size: 'Gargantuan',
 			alignment: 'Typically Chaotic',
@@ -445,8 +433,6 @@ export const DRAGON_VALS: {
 	},
 	orange: {
 		wyrmling: {
-			color: 'Orange',
-			age: 'Wyrmling',
 			cr: 2,
 			size: 'Medium',
 			alignment: 'Typically Lawful',
@@ -529,8 +515,6 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		young: {
-			color: 'Orange',
-			age: 'Young',
 			cr: 7,
 			size: 'Large',
 			alignment: 'Typically Lawful',
@@ -613,8 +597,6 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		adult: {
-			color: 'Orange',
-			age: 'Adult',
 			cr: 14,
 			size: 'Huge',
 			alignment: 'Typically Lawful',
@@ -697,8 +679,6 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		ancient: {
-			color: 'Orange',
-			age: 'Ancient',
 			cr: 21,
 			size: 'Gargantuan',
 			alignment: 'Typically Lawful',
@@ -783,8 +763,6 @@ export const DRAGON_VALS: {
 	},
 	yellow: {
 		wyrmling: {
-			color: 'Yellow',
-			age: 'Wyrmling',
 			cr: 3,
 			size: 'Medium',
 			alignment: 'Typically Lawful',
@@ -867,8 +845,6 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		young: {
-			color: 'Yellow',
-			age: 'Young',
 			cr: 8,
 			size: 'Large',
 			alignment: 'Typically Lawful',
@@ -951,8 +927,6 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		adult: {
-			color: 'Yellow',
-			age: 'Adult',
 			cr: 15,
 			size: 'Huge',
 			alignment: 'Typically Lawful',
@@ -1035,8 +1009,6 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		ancient: {
-			color: 'Yellow',
-			age: 'Ancient',
 			cr: 22,
 			size: 'Gargantuan',
 			alignment: 'Typically Lawful',
@@ -1121,8 +1093,6 @@ export const DRAGON_VALS: {
 	},
 	green: {
 		wyrmling: {
-			color: 'Green',
-			age: 'Wyrmling',
 			cr: 3,
 			size: 'Medium',
 			alignment: 'Typically Neutral',
@@ -1136,7 +1106,7 @@ export const DRAGON_VALS: {
 			burrowSpeed: 0,
 			climbSpeed: 30,
 			flyingSpeed: 60,
-			swimSpeed: 30,
+			swimSpeed: 0,
 			strength: 17,
 			dexterity: 10,
 			constitution: 15,
@@ -1205,8 +1175,6 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		young: {
-			color: 'Green',
-			age: 'Young',
 			cr: 9,
 			size: 'Large',
 			alignment: 'Typically Neutral',
@@ -1220,7 +1188,7 @@ export const DRAGON_VALS: {
 			burrowSpeed: 0,
 			climbSpeed: 40,
 			flyingSpeed: 80,
-			swimSpeed: 40,
+			swimSpeed: 0,
 			strength: 21,
 			dexterity: 10,
 			constitution: 19,
@@ -1289,8 +1257,6 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		adult: {
-			color: 'Green',
-			age: 'Adult',
 			cr: 16,
 			size: 'Huge',
 			alignment: 'Typically Neutral',
@@ -1304,7 +1270,7 @@ export const DRAGON_VALS: {
 			burrowSpeed: 0,
 			climbSpeed: 40,
 			flyingSpeed: 80,
-			swimSpeed: 40,
+			swimSpeed: 0,
 			strength: 25,
 			dexterity: 10,
 			constitution: 23,
@@ -1374,8 +1340,6 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		ancient: {
-			color: 'Green',
-			age: 'Ancient',
 			cr: 23,
 			size: 'Gargantuan',
 			alignment: 'Typically Neutral',
@@ -1389,7 +1353,7 @@ export const DRAGON_VALS: {
 			burrowSpeed: 0,
 			climbSpeed: 40,
 			flyingSpeed: 80,
-			swimSpeed: 40,
+			swimSpeed: 0,
 			strength: 29,
 			dexterity: 10,
 			constitution: 27,
@@ -1462,8 +1426,6 @@ export const DRAGON_VALS: {
 	},
 	blue: {
 		wyrmling: {
-			color: 'Blue',
-			age: 'Wyrmling',
 			cr: 4,
 			size: 'Medium',
 			alignment: 'Typically Chaotic',
@@ -1474,7 +1436,7 @@ export const DRAGON_VALS: {
 			ac: 17,
 			numberOfHitDice: 17,
 			walkingSpeed: 30,
-			burrowSpeed: 15,
+			burrowSpeed: 0,
 			climbSpeed: 0,
 			flyingSpeed: 60,
 			swimSpeed: 30,
@@ -1547,8 +1509,6 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		young: {
-			color: 'Blue',
-			age: 'Young',
 			cr: 10,
 			size: 'Large',
 			alignment: 'Typically Chaotic',
@@ -1559,7 +1519,7 @@ export const DRAGON_VALS: {
 			ac: 18,
 			numberOfHitDice: 21,
 			walkingSpeed: 40,
-			burrowSpeed: 20,
+			burrowSpeed: 0,
 			climbSpeed: 0,
 			flyingSpeed: 80,
 			swimSpeed: 40,
@@ -1632,8 +1592,6 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		adult: {
-			color: 'Blue',
-			age: 'Adult',
 			cr: 17,
 			size: 'Huge',
 			alignment: 'Typically Chaotic',
@@ -1644,7 +1602,7 @@ export const DRAGON_VALS: {
 			ac: 18,
 			numberOfHitDice: 24,
 			walkingSpeed: 40,
-			burrowSpeed: 30,
+			burrowSpeed: 0,
 			climbSpeed: 0,
 			flyingSpeed: 80,
 			swimSpeed: 40,
@@ -1717,8 +1675,6 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		ancient: {
-			color: 'Blue',
-			age: 'Ancient',
 			cr: 24,
 			size: 'Gargantuan',
 			alignment: 'Typically Chaotic',
@@ -1729,7 +1685,7 @@ export const DRAGON_VALS: {
 			ac: 20,
 			numberOfHitDice: 29,
 			walkingSpeed: 40,
-			burrowSpeed: 40,
+			burrowSpeed: 0,
 			climbSpeed: 0,
 			flyingSpeed: 80,
 			swimSpeed: 40,
@@ -1805,8 +1761,6 @@ export const DRAGON_VALS: {
 	},
 	indigo: {
 		wyrmling: {
-			color: 'Indigo',
-			age: 'Wyrmling',
 			cr: 4,
 			size: 'Medium',
 			alignment: 'Typically Chaotic',
@@ -1889,8 +1843,6 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		young: {
-			color: 'Indigo',
-			age: 'Young',
 			cr: 10,
 			size: 'Large',
 			alignment: 'Typically Chaotic',
@@ -1973,8 +1925,6 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		adult: {
-			color: 'Indigo',
-			age: 'Adult',
 			cr: 17,
 			size: 'Huge',
 			alignment: 'Typically Chaotic',
@@ -2057,8 +2007,6 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		ancient: {
-			color: 'Indigo',
-			age: 'Ancient',
 			cr: 24,
 			size: 'Gargantuan',
 			alignment: 'Typically Chaotic',
@@ -2144,8 +2092,6 @@ export const DRAGON_VALS: {
 	},
 	violet: {
 		wyrmling: {
-			color: 'Violet',
-			age: 'Wyrmling',
 			cr: 5,
 			size: 'Medium',
 			alignment: 'Typically Lawful',
@@ -2229,8 +2175,6 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		young: {
-			color: 'Violet',
-			age: 'Young',
 			cr: 11,
 			size: 'Large',
 			alignment: 'Typically Lawful',
@@ -2314,8 +2258,6 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		adult: {
-			color: 'Violet',
-			age: 'Adult',
 			cr: 18,
 			size: 'Huge',
 			alignment: 'Typically Lawful',
@@ -2399,8 +2341,6 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		ancient: {
-			color: 'Violet',
-			age: 'Ancient',
 			cr: 25,
 			size: 'Gargantuan',
 			alignment: 'Typically Lawful',

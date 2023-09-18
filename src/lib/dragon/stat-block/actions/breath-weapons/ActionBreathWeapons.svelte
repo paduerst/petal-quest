@@ -28,7 +28,7 @@
 	} as const;
 </script>
 
-<div class="dragon-action">
+<div class="dragon-action break-inside-avoid break-after-avoid">
 	<p>
 		<i><b>Breath Weapons (Recharge 5–6).</b></i>
 		{dragon.nameUpper} uses one of the following breath weapons.
