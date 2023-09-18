@@ -14,7 +14,7 @@
 			class="daisy-select daisy-select-bordered bg-white"
 			name={skill.key}
 		>
-			<option value={undefined}>Default Proficiency (Varies based on age and color)</option>
+			<option value={undefined}>Default Proficiency ({skill.defaultDescription})</option>
 			<option value={0.0}>Not Proficient</option>
 			<option value={0.5}>Half Proficiency</option>
 			<option value={1.0}>Proficient</option>
