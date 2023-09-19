@@ -4,4 +4,4 @@
 	export let config: DragonConfig;
 </script>
 
-<div>This is the FormSectionHPAbilities. {config}</div>
+<div>Coming soon!</div>

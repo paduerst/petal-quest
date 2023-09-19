@@ -4,4 +4,4 @@
 	export let config: DragonConfig;
 </script>
 
-<div>This is the FormSectionSpells. {config}</div>
+<div>Coming soon!</div>
