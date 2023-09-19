@@ -81,5 +81,22 @@
 		/>
 	</div>
 
-	<!-- Pronouns -->
+	<div class="daisy-form-control w-full max-w-sm m-1">
+		<label class="daisy-label" for="pronouns">
+			<span class="daisy-label-text">Pronouns</span>
+		</label>
+		<select
+			bind:value={config.pronouns}
+			class="daisy-select daisy-select-bordered bg-white"
+			name="pronouns"
+			id="pronouns"
+		>
+			<option value="it-its">It/Its</option>
+			<option value="she-her">She/Her</option>
+			<option value="he-him">He/Him</option>
+			<option value="they-them">They/Them</option>
+			<option value="none">None</option>
+			<option value="custom">Custom</option>
+		</select>
+	</div>
 </div>

@@ -8,7 +8,7 @@
 	<div class="dragon-trait break-inside-avoid">
 		<p>
 			<i><b>Legendary Resistance ({dragon.legendaryResistances}/Day).</b></i> If {dragon.name} fails
-			a saving throw, {dragon.she} can choose to succeed instead.
+			a saving throw, {dragon.pronounNominative} can choose to succeed instead.
 		</p>
 	</div>
 {/if}

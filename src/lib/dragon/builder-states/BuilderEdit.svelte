@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 
 	import { currentDragonConfig, lastBuilderState, nextBuilderState } from '.';
-	import { DragonConfig } from '..';
+	import { DEFAULT_PRONOUNS, DragonConfig } from '..';
 	import FormSectionBasics from './edit-form/FormSectionBasics.svelte';
 	import FormSectionSkills from './edit-form/FormSectionSkills.svelte';
 	import FormSectionSpells from './edit-form/FormSectionSpells.svelte';
@@ -11,6 +11,9 @@
 	onMount(() => {
 		if ($currentDragonConfig !== undefined) {
 			editedConfig = DragonConfig.newFromDragonConfig($currentDragonConfig);
+			if (editedConfig.pronouns === undefined) {
+				editedConfig.pronouns = DEFAULT_PRONOUNS;
+			}
 		}
 	});
 

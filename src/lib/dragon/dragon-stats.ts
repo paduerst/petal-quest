@@ -4,12 +4,14 @@ import {
 	AGE_TO_SIZE,
 	SIZE_TO_HIT_DIE,
 	SKILLS,
+	DEFAULT_PRONOUNS,
+	BASIC_PRONOUN_CONFIGS,
 	scoreToMod,
 	numberWithSign,
 	expectedDiceResult,
 	capitalizeFirstLetter
 } from '.';
-import type { Age, Color, RGB, Size, Die, ProficiencyLevel } from '.';
+import type { Age, Color, RGB, Size, Die, ProficiencyLevel, PronounsConfig } from '.';
 import { DRAGON_VALS, type DragonVals } from './dragon-vals';
 import { type CR, CRNumberToString, CR_TABLE } from './challenge-rating';
 
@@ -45,9 +47,11 @@ export class DragonStats {
 		this.title = this.#config.getTitle();
 		this.alignment = this.#config.alignment ?? COLOR_TO_ALIGNMENT[this.color];
 
-		this.she = 'she';
-		this.her = 'her';
-		this.hers = 'hers';
+		const pronouns = this.#getPronounsConfig();
+		this.pronounsPlural = pronouns.plural;
+		this.pronounNominative = pronouns.nominative;
+		this.pronounObjective = pronouns.objective;
+		this.pronounPossessiveAdjective = pronouns.possessiveAdjective;
 
 		this.size = AGE_TO_SIZE[this.age];
 		this.ac = this.#vals.ac;
@@ -220,6 +224,39 @@ export class DragonStats {
 		}
 	}
 
+	#getPronounsConfig(): PronounsConfig {
+		const nonePronounsConfig: PronounsConfig = {
+			plural: false,
+			nominative: this.name,
+			objective: this.name,
+			possessiveAdjective: `${this.name}'s`
+		};
+		if (this.#config.pronouns === undefined || this.#config.pronouns === DEFAULT_PRONOUNS) {
+			return BASIC_PRONOUN_CONFIGS[DEFAULT_PRONOUNS];
+		} else if (this.#config.pronouns === 'none') {
+			return nonePronounsConfig;
+		} else if (this.#config.pronouns === 'custom') {
+			// for custom options not specified, default to nonePronounsConfig
+			const customPronounsConfig = nonePronounsConfig;
+			if (this.#config.pronounsConfig !== undefined) {
+				customPronounsConfig.plural = this.#config.pronounsConfig.plural;
+				if (this.#config.pronounsConfig.nominative !== '') {
+					customPronounsConfig.nominative = this.#config.pronounsConfig.nominative;
+				}
+				if (this.#config.pronounsConfig.objective !== '') {
+					customPronounsConfig.objective = this.#config.pronounsConfig.objective;
+				}
+				if (this.#config.pronounsConfig.possessiveAdjective !== '') {
+					customPronounsConfig.possessiveAdjective =
+						this.#config.pronounsConfig.possessiveAdjective;
+				}
+			}
+			return customPronounsConfig;
+		} else {
+			return BASIC_PRONOUN_CONFIGS[this.#config.pronouns];
+		}
+	}
+
 	#getSpeeds(): string {
 		let output = `${this.speed} ft.`;
 		if (this.burrowSpeed > 0) {
@@ -302,9 +339,10 @@ export class DragonStats {
 	title: string;
 	alignment: string;
 
-	she: string;
-	her: string;
-	hers: string;
+	pronounsPlural: boolean;
+	pronounNominative: string;
+	pronounObjective: string;
+	pronounPossessiveAdjective: string;
 
 	size: Size;
 	ac: number;

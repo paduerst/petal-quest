@@ -328,6 +328,48 @@ export function RGBToRGBA(rgb: RGB, a: number): string {
 	return `rgba(${rgb.substring(4, rgb.length - 1)}, ${a})`;
 }
 
+export const BASIC_PRONOUN_OPTIONS = ['it-its', 'she-her', 'he-him', 'they-them'] as const;
+export type BasicPronouns = (typeof BASIC_PRONOUN_OPTIONS)[number];
+export const DEFAULT_PRONOUNS = 'she-her'; // assumed to be of type BasicPronouns
+
+export const PRONOUN_OPTIONS = [...BASIC_PRONOUN_OPTIONS, 'none', 'custom'] as const;
+export type Pronouns = (typeof PRONOUN_OPTIONS)[number];
+
+export type PronounsConfig = {
+	plural: boolean;
+	nominative: string;
+	objective: string;
+	possessiveAdjective: string;
+};
+export const BASIC_PRONOUN_CONFIGS: {
+	[key in BasicPronouns]: PronounsConfig;
+} = {
+	'it-its': {
+		plural: false,
+		nominative: 'it',
+		objective: 'it',
+		possessiveAdjective: 'its'
+	},
+	'she-her': {
+		plural: false,
+		nominative: 'she',
+		objective: 'her',
+		possessiveAdjective: 'her'
+	},
+	'he-him': {
+		plural: false,
+		nominative: 'he',
+		objective: 'him',
+		possessiveAdjective: 'his'
+	},
+	'they-them': {
+		plural: true,
+		nominative: 'they',
+		objective: 'them',
+		possessiveAdjective: 'their'
+	}
+} as const;
+
 export class DragonConfig {
 	age: Age = 'wyrmling';
 	color: Color = 'red';
@@ -336,6 +378,8 @@ export class DragonConfig {
 	statBlockTitle?: string;
 	alignment?: string;
 	languages?: string;
+	pronouns?: Pronouns;
+	pronounsConfig?: PronounsConfig; // only needed if using custom pronouns
 
 	skillAcrobatics?: ProficiencyLevel;
 	skillAnimalHandling?: ProficiencyLevel;
@@ -415,6 +459,13 @@ export class DragonConfig {
 		if (this.languages === '') {
 			delete this.languages;
 		}
+		if (this.pronouns === DEFAULT_PRONOUNS) {
+			delete this.pronouns;
+		}
+		if (this.pronounsConfig !== undefined && this.pronouns !== 'custom') {
+			// we only use the pronounsConfig if using custom pronouns
+			delete this.pronounsConfig;
+		}
 	}
 
 	/**
@@ -431,7 +482,7 @@ export class DragonConfig {
 			output.set('name', this.name);
 		}
 		if (this.disableNameCapitalization === true) {
-			output.set('disableNameCapitalization', 'on');
+			output.set('disableNameCapitalization', '1');
 		}
 		if (this.statBlockTitle !== undefined) {
 			output.set('statBlockTitle', this.statBlockTitle);
@@ -441,6 +492,17 @@ export class DragonConfig {
 		}
 		if (this.languages !== undefined) {
 			output.set('languages', this.languages);
+		}
+		if (this.pronouns !== undefined && this.pronouns !== DEFAULT_PRONOUNS) {
+			output.set('pronouns', this.pronouns);
+		}
+		if (this.pronounsConfig !== undefined) {
+			if (this.pronounsConfig.plural) {
+				output.set('pronounsPlural', '1');
+			}
+			output.set('pronounNominative', this.pronounsConfig.nominative);
+			output.set('pronounObjective', this.pronounsConfig.objective);
+			output.set('pronounPossessiveAdjective', this.pronounsConfig.possessiveAdjective);
 		}
 
 		for (const skill of SKILLS) {
@@ -506,6 +568,8 @@ export class DragonConfig {
 			this.languages = paramsLanguagesVal;
 		}
 
+		this.#setPronounsFromURLSearchParams(params);
+
 		this.#setSkillsFromURLSearchParams(params);
 
 		return true;
@@ -520,6 +584,82 @@ export class DragonConfig {
 				this.statBlockTitle = paramsKeyVal;
 				return;
 			}
+		}
+	}
+
+	#setPronounsFromURLSearchParams(params: URLSearchParams) {
+		const paramsPronounsVal = params.get('pronouns');
+		if (paramsPronounsVal !== null) {
+			// we have to check several options here to maintain backwards compatibility
+			if (paramsPronounsVal === DEFAULT_PRONOUNS || paramsPronounsVal === 'default') {
+				this.pronouns = undefined;
+			} else if (paramsPronounsVal === 'it-its' || paramsPronounsVal === 'neutral') {
+				this.pronouns = 'it-its';
+			} else if (paramsPronounsVal === 'she-her' || paramsPronounsVal === 'feminine') {
+				this.pronouns = 'she-her';
+			} else if (paramsPronounsVal === 'he-him' || paramsPronounsVal === 'masculine') {
+				this.pronouns = 'he-him';
+			} else if (paramsPronounsVal === 'they-them' || paramsPronounsVal === 'singularthey') {
+				this.pronouns = 'they-them';
+			} else if (paramsPronounsVal === 'none' || paramsPronounsVal === 'no-pronouns') {
+				this.pronouns = 'none';
+			} else if (paramsPronounsVal === 'custom' || paramsPronounsVal === 'custom-pronouns') {
+				this.pronouns = 'custom';
+			} else {
+				console.log(`Unable to parse URL pronouns value of ${paramsPronounsVal}`);
+				this.pronouns = undefined;
+			}
+		}
+
+		if (this.pronouns === 'custom') {
+			// we only use the PronounsConfig from the URL if we're using custom pronouns
+			let pronounsPlural: boolean;
+			if (params.has('pronounsPlural')) {
+				pronounsPlural = true;
+			} else {
+				pronounsPlural = false;
+			}
+
+			let pronounNominative = '';
+			const pronounNominativeKeys = ['pronounNominative', 'pronoun-nominative'] as const;
+			for (const key of pronounNominativeKeys) {
+				const paramsKeyVal = params.get(key);
+				if (paramsKeyVal !== null) {
+					pronounNominative = paramsKeyVal;
+					break;
+				}
+			}
+
+			let pronounObjective = '';
+			const pronounObjectiveKeys = ['pronounObjective', 'pronoun-objective'] as const;
+			for (const key of pronounObjectiveKeys) {
+				const paramsKeyVal = params.get(key);
+				if (paramsKeyVal !== null) {
+					pronounObjective = paramsKeyVal;
+					break;
+				}
+			}
+
+			let pronounPossessiveAdjective = '';
+			const pronounPossessiveAdjectiveKeys = [
+				'pronounPossessiveAdjective',
+				'pronoun-possessive-adj'
+			] as const;
+			for (const key of pronounPossessiveAdjectiveKeys) {
+				const paramsKeyVal = params.get(key);
+				if (paramsKeyVal !== null) {
+					pronounPossessiveAdjective = paramsKeyVal;
+					break;
+				}
+			}
+
+			const customConfig: PronounsConfig = {
+				plural: pronounsPlural,
+				nominative: pronounNominative,
+				objective: pronounObjective,
+				possessiveAdjective: pronounPossessiveAdjective
+			};
+			this.pronounsConfig = customConfig;
 		}
 	}
 
