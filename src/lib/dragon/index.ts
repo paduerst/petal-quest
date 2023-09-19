@@ -146,26 +146,119 @@ export const ABILITIES = [
 	['charisma', 'cha']
 ] as const;
 
+const standardDefaultSkillDescription = 'Varies with age and color';
 export const SKILLS = [
-	{ name: 'Acrobatics', key: 'skillAcrobatics', ability: 'dex' },
-	{ name: 'Animal Handling', key: 'skillAnimalHandling', ability: 'wis' },
-	{ name: 'Arcana', key: 'skillArcana', ability: 'int' },
-	{ name: 'Athletics', key: 'skillAthletics', ability: 'str' },
-	{ name: 'Deception', key: 'skillDeception', ability: 'cha' },
-	{ name: 'History', key: 'skillHistory', ability: 'int' },
-	{ name: 'Insight', key: 'skillInsight', ability: 'wis' },
-	{ name: 'Intimidation', key: 'skillIntimidation', ability: 'cha' },
-	{ name: 'Investigation', key: 'skillInvestigation', ability: 'int' },
-	{ name: 'Medicine', key: 'skillMedicine', ability: 'wis' },
-	{ name: 'Nature', key: 'skillNature', ability: 'int' },
-	{ name: 'Perception', key: 'skillPerception', ability: 'wis' },
-	{ name: 'Performance', key: 'skillPerformance', ability: 'cha' },
-	{ name: 'Persuasion', key: 'skillPersuasion', ability: 'cha' },
-	{ name: 'Religion', key: 'skillReligion', ability: 'int' },
-	{ name: 'Sleight of Hand', key: 'skillSleightOfHand', ability: 'dex' },
-	{ name: 'Stealth', key: 'skillStealth', ability: 'dex' },
-	{ name: 'Survival', key: 'skillSurvival', ability: 'wis' }
+	{
+		name: 'Acrobatics',
+		key: 'skillAcrobatics',
+		ability: 'dex',
+		defaultDescription: standardDefaultSkillDescription
+	},
+	{
+		name: 'Animal Handling',
+		key: 'skillAnimalHandling',
+		ability: 'wis',
+		defaultDescription: standardDefaultSkillDescription
+	},
+	{
+		name: 'Arcana',
+		key: 'skillArcana',
+		ability: 'int',
+		defaultDescription: standardDefaultSkillDescription
+	},
+	{
+		name: 'Athletics',
+		key: 'skillAthletics',
+		ability: 'str',
+		defaultDescription: standardDefaultSkillDescription
+	},
+	{
+		name: 'Deception',
+		key: 'skillDeception',
+		ability: 'cha',
+		defaultDescription: standardDefaultSkillDescription
+	},
+	{
+		name: 'History',
+		key: 'skillHistory',
+		ability: 'int',
+		defaultDescription: standardDefaultSkillDescription
+	},
+	{
+		name: 'Insight',
+		key: 'skillInsight',
+		ability: 'wis',
+		defaultDescription: standardDefaultSkillDescription
+	},
+	{
+		name: 'Intimidation',
+		key: 'skillIntimidation',
+		ability: 'cha',
+		defaultDescription: standardDefaultSkillDescription
+	},
+	{
+		name: 'Investigation',
+		key: 'skillInvestigation',
+		ability: 'int',
+		defaultDescription: standardDefaultSkillDescription
+	},
+	{
+		name: 'Medicine',
+		key: 'skillMedicine',
+		ability: 'wis',
+		defaultDescription: standardDefaultSkillDescription
+	},
+	{
+		name: 'Nature',
+		key: 'skillNature',
+		ability: 'int',
+		defaultDescription: standardDefaultSkillDescription
+	},
+	{
+		name: 'Perception',
+		key: 'skillPerception',
+		ability: 'wis',
+		defaultDescription: 'Typically 2x proficiency'
+	},
+	{
+		name: 'Performance',
+		key: 'skillPerformance',
+		ability: 'cha',
+		defaultDescription: standardDefaultSkillDescription
+	},
+	{
+		name: 'Persuasion',
+		key: 'skillPersuasion',
+		ability: 'cha',
+		defaultDescription: standardDefaultSkillDescription
+	},
+	{
+		name: 'Religion',
+		key: 'skillReligion',
+		ability: 'int',
+		defaultDescription: standardDefaultSkillDescription
+	},
+	{
+		name: 'Sleight of Hand',
+		key: 'skillSleightOfHand',
+		ability: 'dex',
+		defaultDescription: standardDefaultSkillDescription
+	},
+	{
+		name: 'Stealth',
+		key: 'skillStealth',
+		ability: 'dex',
+		defaultDescription: 'Typically 1x proficiency'
+	},
+	{
+		name: 'Survival',
+		key: 'skillSurvival',
+		ability: 'wis',
+		defaultDescription: standardDefaultSkillDescription
+	}
 ] as const;
+
+export type ProficiencyLevel = 0.0 | 0.5 | 1.0 | 2.0;
 
 /**
  * Calculates the ability modifier given the ability score.
@@ -235,11 +328,77 @@ export function RGBToRGBA(rgb: RGB, a: number): string {
 	return `rgba(${rgb.substring(4, rgb.length - 1)}, ${a})`;
 }
 
+export const BASIC_PRONOUN_OPTIONS = ['it-its', 'she-her', 'he-him', 'they-them'] as const;
+export type BasicPronouns = (typeof BASIC_PRONOUN_OPTIONS)[number];
+export const DEFAULT_PRONOUNS = 'she-her'; // assumed to be of type BasicPronouns
+
+export const PRONOUN_OPTIONS = [...BASIC_PRONOUN_OPTIONS, 'none', 'custom'] as const;
+export type Pronouns = (typeof PRONOUN_OPTIONS)[number];
+
+export type PronounsConfig = {
+	plural: boolean;
+	nominative: string;
+	objective: string;
+	possessiveAdjective: string;
+};
+export const BASIC_PRONOUN_CONFIGS: {
+	[key in BasicPronouns]: PronounsConfig;
+} = {
+	'it-its': {
+		plural: false,
+		nominative: 'it',
+		objective: 'it',
+		possessiveAdjective: 'its'
+	},
+	'she-her': {
+		plural: false,
+		nominative: 'she',
+		objective: 'her',
+		possessiveAdjective: 'her'
+	},
+	'he-him': {
+		plural: false,
+		nominative: 'he',
+		objective: 'him',
+		possessiveAdjective: 'his'
+	},
+	'they-them': {
+		plural: true,
+		nominative: 'they',
+		objective: 'them',
+		possessiveAdjective: 'their'
+	}
+} as const;
+
 export class DragonConfig {
 	age: Age = 'wyrmling';
 	color: Color = 'red';
 	name?: string;
+	disableNameCapitalization?: boolean;
+	statBlockTitle?: string;
 	alignment?: string;
+	languages?: string;
+	pronouns?: Pronouns;
+	pronounsConfig?: PronounsConfig; // only needed if using custom pronouns
+
+	skillAcrobatics?: ProficiencyLevel;
+	skillAnimalHandling?: ProficiencyLevel;
+	skillArcana?: ProficiencyLevel;
+	skillAthletics?: ProficiencyLevel;
+	skillDeception?: ProficiencyLevel;
+	skillHistory?: ProficiencyLevel;
+	skillInsight?: ProficiencyLevel;
+	skillIntimidation?: ProficiencyLevel;
+	skillInvestigation?: ProficiencyLevel;
+	skillMedicine?: ProficiencyLevel;
+	skillNature?: ProficiencyLevel;
+	skillPerception?: ProficiencyLevel;
+	skillPerformance?: ProficiencyLevel;
+	skillPersuasion?: ProficiencyLevel;
+	skillReligion?: ProficiencyLevel;
+	skillSleightOfHand?: ProficiencyLevel;
+	skillStealth?: ProficiencyLevel;
+	skillSurvival?: ProficiencyLevel;
 
 	/**
 	 * Returns the title for this DragonConfig.
@@ -247,6 +406,10 @@ export class DragonConfig {
 	 * @memberof DragonConfig
 	 */
 	getTitle(): string {
+		if (this.statBlockTitle !== undefined) {
+			return this.statBlockTitle;
+		}
+
 		let output = '';
 
 		let descriptiveTitle = '';
@@ -284,8 +447,24 @@ export class DragonConfig {
 		if (this.name === '') {
 			delete this.name;
 		}
+		if (this.disableNameCapitalization === false) {
+			delete this.disableNameCapitalization;
+		}
+		if (this.statBlockTitle === '') {
+			delete this.statBlockTitle;
+		}
 		if (this.alignment === '') {
 			delete this.alignment;
+		}
+		if (this.languages === '') {
+			delete this.languages;
+		}
+		if (this.pronouns === DEFAULT_PRONOUNS) {
+			delete this.pronouns;
+		}
+		if (this.pronounsConfig !== undefined && this.pronouns !== 'custom') {
+			// we only use the pronounsConfig if using custom pronouns
+			delete this.pronounsConfig;
 		}
 	}
 
@@ -302,8 +481,35 @@ export class DragonConfig {
 		if (this.name !== undefined) {
 			output.set('name', this.name);
 		}
+		if (this.disableNameCapitalization === true) {
+			output.set('disableNameCapitalization', '1');
+		}
+		if (this.statBlockTitle !== undefined) {
+			output.set('statBlockTitle', this.statBlockTitle);
+		}
 		if (this.alignment !== undefined) {
 			output.set('alignment', this.alignment);
+		}
+		if (this.languages !== undefined) {
+			output.set('languages', this.languages);
+		}
+		if (this.pronouns !== undefined && this.pronouns !== DEFAULT_PRONOUNS) {
+			output.set('pronouns', this.pronouns);
+		}
+		if (this.pronounsConfig !== undefined) {
+			if (this.pronounsConfig.plural) {
+				output.set('pronounsPlural', '1');
+			}
+			output.set('pronounNominative', this.pronounsConfig.nominative);
+			output.set('pronounObjective', this.pronounsConfig.objective);
+			output.set('pronounPossessiveAdjective', this.pronounsConfig.possessiveAdjective);
+		}
+
+		for (const skill of SKILLS) {
+			const thisSkillValue = this[skill.key];
+			if (thisSkillValue !== undefined) {
+				output.set(skill.key, thisSkillValue.toString());
+			}
 		}
 
 		return output;
@@ -346,12 +552,142 @@ export class DragonConfig {
 			this.name = paramsNameVal;
 		}
 
+		if (params.has('disableNameCapitalization') || params.has('forcelowercasename')) {
+			this.disableNameCapitalization = true;
+		}
+
+		this.#setStatBlockTitleFromURLSearchParams(params);
+
 		const paramsAlignmentVal = params.get('alignment');
 		if (paramsAlignmentVal !== null) {
 			this.alignment = paramsAlignmentVal;
 		}
 
+		const paramsLanguagesVal = params.get('languages');
+		if (paramsLanguagesVal !== null) {
+			this.languages = paramsLanguagesVal;
+		}
+
+		this.#setPronounsFromURLSearchParams(params);
+
+		this.#setSkillsFromURLSearchParams(params);
+
 		return true;
+	}
+
+	#setStatBlockTitleFromURLSearchParams(params: URLSearchParams) {
+		// maintaining backwards compatibility with older param names
+		const keys = ['statBlockTitle', 'dragonTitle'] as const;
+		for (const key of keys) {
+			const paramsKeyVal = params.get(key);
+			if (paramsKeyVal !== null) {
+				this.statBlockTitle = paramsKeyVal;
+				return;
+			}
+		}
+	}
+
+	#setPronounsFromURLSearchParams(params: URLSearchParams) {
+		const paramsPronounsVal = params.get('pronouns');
+		if (paramsPronounsVal !== null) {
+			// we have to check several options here to maintain backwards compatibility
+			if (paramsPronounsVal === DEFAULT_PRONOUNS || paramsPronounsVal === 'default') {
+				this.pronouns = undefined;
+			} else if (paramsPronounsVal === 'it-its' || paramsPronounsVal === 'neutral') {
+				this.pronouns = 'it-its';
+			} else if (paramsPronounsVal === 'she-her' || paramsPronounsVal === 'feminine') {
+				this.pronouns = 'she-her';
+			} else if (paramsPronounsVal === 'he-him' || paramsPronounsVal === 'masculine') {
+				this.pronouns = 'he-him';
+			} else if (paramsPronounsVal === 'they-them' || paramsPronounsVal === 'singularthey') {
+				this.pronouns = 'they-them';
+			} else if (paramsPronounsVal === 'none' || paramsPronounsVal === 'no-pronouns') {
+				this.pronouns = 'none';
+			} else if (paramsPronounsVal === 'custom' || paramsPronounsVal === 'custom-pronouns') {
+				this.pronouns = 'custom';
+			} else if (paramsPronounsVal === 'ey-em' || paramsPronounsVal === 'spivak') {
+				// we want to support these URL options, using them as custom pronouns
+				this.pronouns = 'custom';
+				this.pronounsConfig = {
+					plural: false,
+					nominative: 'ey',
+					objective: 'em',
+					possessiveAdjective: 'eir'
+				};
+				return; // don't check the URL for custom pronouns
+			} else {
+				console.log(`Unable to parse URL pronouns value of ${paramsPronounsVal}`);
+				this.pronouns = undefined;
+			}
+		}
+
+		if (this.pronouns === 'custom') {
+			// we only use the PronounsConfig from the URL if we're using custom pronouns
+			let pronounsPlural: boolean;
+			if (params.has('pronounsPlural')) {
+				pronounsPlural = true;
+			} else {
+				pronounsPlural = false;
+			}
+
+			let pronounNominative = '';
+			const pronounNominativeKeys = ['pronounNominative', 'pronoun-nominative'] as const;
+			for (const key of pronounNominativeKeys) {
+				const paramsKeyVal = params.get(key);
+				if (paramsKeyVal !== null) {
+					pronounNominative = paramsKeyVal;
+					break;
+				}
+			}
+
+			let pronounObjective = '';
+			const pronounObjectiveKeys = ['pronounObjective', 'pronoun-objective'] as const;
+			for (const key of pronounObjectiveKeys) {
+				const paramsKeyVal = params.get(key);
+				if (paramsKeyVal !== null) {
+					pronounObjective = paramsKeyVal;
+					break;
+				}
+			}
+
+			let pronounPossessiveAdjective = '';
+			const pronounPossessiveAdjectiveKeys = [
+				'pronounPossessiveAdjective',
+				'pronoun-possessive-adj'
+			] as const;
+			for (const key of pronounPossessiveAdjectiveKeys) {
+				const paramsKeyVal = params.get(key);
+				if (paramsKeyVal !== null) {
+					pronounPossessiveAdjective = paramsKeyVal;
+					break;
+				}
+			}
+
+			const customConfig: PronounsConfig = {
+				plural: pronounsPlural,
+				nominative: pronounNominative,
+				objective: pronounObjective,
+				possessiveAdjective: pronounPossessiveAdjective
+			};
+			this.pronounsConfig = customConfig;
+		}
+	}
+
+	#setSkillsFromURLSearchParams(params: URLSearchParams) {
+		for (const skill of SKILLS) {
+			const paramsSkillVal = params.get(skill.key);
+			if (paramsSkillVal !== null) {
+				const paramsSkillFloat = parseFloat(paramsSkillVal);
+				if (
+					paramsSkillFloat === 0.0 ||
+					paramsSkillFloat === 0.5 ||
+					paramsSkillFloat === 1.0 ||
+					paramsSkillFloat === 2.0
+				) {
+					this[skill.key] = paramsSkillFloat;
+				}
+			}
+		}
 	}
 
 	/**

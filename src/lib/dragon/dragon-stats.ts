@@ -4,12 +4,14 @@ import {
 	AGE_TO_SIZE,
 	SIZE_TO_HIT_DIE,
 	SKILLS,
+	DEFAULT_PRONOUNS,
+	BASIC_PRONOUN_CONFIGS,
 	scoreToMod,
 	numberWithSign,
 	expectedDiceResult,
 	capitalizeFirstLetter
 } from '.';
-import type { Age, Color, RGB, Size, Die } from '.';
+import type { Age, Color, RGB, Size, Die, ProficiencyLevel, PronounsConfig } from '.';
 import { DRAGON_VALS, type DragonVals } from './dragon-vals';
 import { type CR, CRNumberToString, CR_TABLE } from './challenge-rating';
 
@@ -38,13 +40,18 @@ export class DragonStats {
 
 		this.theme = this.#config.getTheme();
 		this.name = this.#config.name ?? 'the dragon';
-		this.nameUpper = capitalizeFirstLetter(this.name);
+		this.nameUpper =
+			this.#config.disableNameCapitalization === true
+				? this.name
+				: capitalizeFirstLetter(this.name);
 		this.title = this.#config.getTitle();
 		this.alignment = this.#config.alignment ?? COLOR_TO_ALIGNMENT[this.color];
 
-		this.she = 'she';
-		this.her = 'her';
-		this.hers = 'hers';
+		const pronouns = this.#getPronounsConfig();
+		this.pronounsPlural = pronouns.plural;
+		this.pronounNominative = pronouns.nominative;
+		this.pronounObjective = pronouns.objective;
+		this.pronounPossessiveAdjective = pronouns.possessiveAdjective;
 
 		this.size = AGE_TO_SIZE[this.age];
 		this.ac = this.#vals.ac;
@@ -90,7 +97,7 @@ export class DragonStats {
 		this.blindsight = this.#vals.blindsight;
 		this.darkvision = this.#vals.darkvision;
 
-		this.languages = this.#vals.languages;
+		this.languages = this.#config.languages ?? this.#vals.languages;
 
 		this.cr = CRNumberToString(this.#vals.cr);
 		this.xp = CR_TABLE[this.cr].xp;
@@ -105,24 +112,24 @@ export class DragonStats {
 		this.saveDCWis = 8 + this.wis + this.proficiencyBonus;
 		this.saveDCCha = 8 + this.cha + this.proficiencyBonus;
 
-		this.skillAcrobatics = this.#vals.skillAcrobatics;
-		this.skillAnimalHandling = this.#vals.skillAnimalHandling;
-		this.skillArcana = this.#vals.skillArcana;
-		this.skillAthletics = this.#vals.skillAthletics;
-		this.skillDeception = this.#vals.skillDeception;
-		this.skillHistory = this.#vals.skillHistory;
-		this.skillInsight = this.#vals.skillInsight;
-		this.skillIntimidation = this.#vals.skillIntimidation;
-		this.skillInvestigation = this.#vals.skillInvestigation;
-		this.skillMedicine = this.#vals.skillMedicine;
-		this.skillNature = this.#vals.skillNature;
-		this.skillPerception = this.#vals.skillPerception;
-		this.skillPerformance = this.#vals.skillPerformance;
-		this.skillPersuasion = this.#vals.skillPersuasion;
-		this.skillReligion = this.#vals.skillReligion;
-		this.skillSleightOfHand = this.#vals.skillSleightOfHand;
-		this.skillStealth = this.#vals.skillStealth;
-		this.skillSurvival = this.#vals.skillSurvival;
+		this.skillAcrobatics = this.#config.skillAcrobatics ?? this.#vals.skillAcrobatics;
+		this.skillAnimalHandling = this.#config.skillAnimalHandling ?? this.#vals.skillAnimalHandling;
+		this.skillArcana = this.#config.skillArcana ?? this.#vals.skillArcana;
+		this.skillAthletics = this.#config.skillAthletics ?? this.#vals.skillAthletics;
+		this.skillDeception = this.#config.skillDeception ?? this.#vals.skillDeception;
+		this.skillHistory = this.#config.skillHistory ?? this.#vals.skillHistory;
+		this.skillInsight = this.#config.skillInsight ?? this.#vals.skillInsight;
+		this.skillIntimidation = this.#config.skillIntimidation ?? this.#vals.skillIntimidation;
+		this.skillInvestigation = this.#config.skillInvestigation ?? this.#vals.skillInvestigation;
+		this.skillMedicine = this.#config.skillMedicine ?? this.#vals.skillMedicine;
+		this.skillNature = this.#config.skillNature ?? this.#vals.skillNature;
+		this.skillPerception = this.#config.skillPerception ?? this.#vals.skillPerception;
+		this.skillPerformance = this.#config.skillPerformance ?? this.#vals.skillPerformance;
+		this.skillPersuasion = this.#config.skillPersuasion ?? this.#vals.skillPersuasion;
+		this.skillReligion = this.#config.skillReligion ?? this.#vals.skillReligion;
+		this.skillSleightOfHand = this.#config.skillSleightOfHand ?? this.#vals.skillSleightOfHand;
+		this.skillStealth = this.#config.skillStealth ?? this.#vals.skillStealth;
+		this.skillSurvival = this.#config.skillSurvival ?? this.#vals.skillSurvival;
 
 		this.skills = this.#getSkills();
 
@@ -217,6 +224,39 @@ export class DragonStats {
 		}
 	}
 
+	#getPronounsConfig(): PronounsConfig {
+		const nonePronounsConfig: PronounsConfig = {
+			plural: false,
+			nominative: this.name,
+			objective: this.name,
+			possessiveAdjective: `${this.name}'s`
+		};
+		if (this.#config.pronouns === undefined || this.#config.pronouns === DEFAULT_PRONOUNS) {
+			return BASIC_PRONOUN_CONFIGS[DEFAULT_PRONOUNS];
+		} else if (this.#config.pronouns === 'none') {
+			return nonePronounsConfig;
+		} else if (this.#config.pronouns === 'custom') {
+			// for custom options not specified, default to nonePronounsConfig
+			const customPronounsConfig = nonePronounsConfig;
+			if (this.#config.pronounsConfig !== undefined) {
+				customPronounsConfig.plural = this.#config.pronounsConfig.plural;
+				if (this.#config.pronounsConfig.nominative !== '') {
+					customPronounsConfig.nominative = this.#config.pronounsConfig.nominative;
+				}
+				if (this.#config.pronounsConfig.objective !== '') {
+					customPronounsConfig.objective = this.#config.pronounsConfig.objective;
+				}
+				if (this.#config.pronounsConfig.possessiveAdjective !== '') {
+					customPronounsConfig.possessiveAdjective =
+						this.#config.pronounsConfig.possessiveAdjective;
+				}
+			}
+			return customPronounsConfig;
+		} else {
+			return BASIC_PRONOUN_CONFIGS[this.#config.pronouns];
+		}
+	}
+
 	#getSpeeds(): string {
 		let output = `${this.speed} ft.`;
 		if (this.burrowSpeed > 0) {
@@ -299,9 +339,10 @@ export class DragonStats {
 	title: string;
 	alignment: string;
 
-	she: string;
-	her: string;
-	hers: string;
+	pronounsPlural: boolean;
+	pronounNominative: string;
+	pronounObjective: string;
+	pronounPossessiveAdjective: string;
 
 	size: Size;
 	ac: number;
@@ -357,24 +398,24 @@ export class DragonStats {
 	saveDCWis: number;
 	saveDCCha: number;
 
-	skillAcrobatics: number;
-	skillAnimalHandling: number;
-	skillArcana: number;
-	skillAthletics: number;
-	skillDeception: number;
-	skillHistory: number;
-	skillInsight: number;
-	skillIntimidation: number;
-	skillInvestigation: number;
-	skillMedicine: number;
-	skillNature: number;
-	skillPerception: number;
-	skillPerformance: number;
-	skillPersuasion: number;
-	skillReligion: number;
-	skillSleightOfHand: number;
-	skillStealth: number;
-	skillSurvival: number;
+	skillAcrobatics: ProficiencyLevel;
+	skillAnimalHandling: ProficiencyLevel;
+	skillArcana: ProficiencyLevel;
+	skillAthletics: ProficiencyLevel;
+	skillDeception: ProficiencyLevel;
+	skillHistory: ProficiencyLevel;
+	skillInsight: ProficiencyLevel;
+	skillIntimidation: ProficiencyLevel;
+	skillInvestigation: ProficiencyLevel;
+	skillMedicine: ProficiencyLevel;
+	skillNature: ProficiencyLevel;
+	skillPerception: ProficiencyLevel;
+	skillPerformance: ProficiencyLevel;
+	skillPersuasion: ProficiencyLevel;
+	skillReligion: ProficiencyLevel;
+	skillSleightOfHand: ProficiencyLevel;
+	skillStealth: ProficiencyLevel;
+	skillSurvival: ProficiencyLevel;
 
 	skills: string[];
 

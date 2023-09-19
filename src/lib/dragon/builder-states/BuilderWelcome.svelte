@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { nextBuilderState, currentDragonConfig, dragonBuilderHistory } from '.';
-	import { DragonConfig, AGES, AGES_UPPER, COLORS, COLORS_UPPER } from '..';
+	import { DragonConfig } from '..';
+	import FormSubsectionWelcome from './edit-form/FormSubsectionWelcome.svelte';
 
 	let newConfig: DragonConfig = new DragonConfig();
 </script>
@@ -8,35 +9,7 @@
 <p class="font-bold text-xl">Welcome to the Prismatic Dragon Builder!</p>
 
 <div class="flex flex-col items-center">
-	<div class="daisy-form-control w-full max-w-xs m-1">
-		<label class="daisy-label" for="age">
-			<span class="daisy-label-text">Age</span>
-		</label>
-		<select
-			bind:value={newConfig.age}
-			class="daisy-select daisy-select-bordered bg-white"
-			name="age"
-		>
-			{#each AGES as age, index}
-				<option value={age}>{AGES_UPPER[index]}</option>
-			{/each}
-		</select>
-	</div>
-
-	<div class="daisy-form-control w-full max-w-xs m-1">
-		<label class="daisy-label" for="color">
-			<span class="daisy-label-text">Color</span>
-		</label>
-		<select
-			bind:value={newConfig.color}
-			class="daisy-select daisy-select-bordered bg-white"
-			name="color"
-		>
-			{#each COLORS as color, index}
-				<option value={color}>{COLORS_UPPER[index]}</option>
-			{/each}
-		</select>
-	</div>
+	<FormSubsectionWelcome config={newConfig} />
 
 	<button
 		class="daisy-btn daisy-btn-neutral m-2 mt-6"

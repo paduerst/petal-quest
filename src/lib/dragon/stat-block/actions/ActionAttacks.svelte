@@ -10,8 +10,8 @@
 	<div class="dragon-action break-inside-avoid">
 		<p>
 			<i><b>Multiattack.</b></i>
-			{dragon.nameUpper} makes three attacks: one with {dragon.her}
-			bite and two with {dragon.her} claws.
+			{dragon.nameUpper} makes three attacks: one with {dragon.pronounPossessiveAdjective}
+			bite and two with {dragon.pronounPossessiveAdjective} claws.
 		</p>
 	</div>
 {/if}

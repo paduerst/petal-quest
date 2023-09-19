@@ -1,7 +1,13 @@
 <script lang="ts">
 	import { flip, type FlipParams } from 'svelte/animate';
 	import { fade, type FadeParams, fly, type FlyParams } from 'svelte/transition';
-	import { currentDragonConfig, dragonBuilderHistory, lastBuilderState, nextBuilderState } from '.';
+	import {
+		currentDragonConfig,
+		dragonBuilderHistory,
+		lastBuilderState,
+		nextBuilderState,
+		dragonBuilderHistoryMaxLength
+	} from '.';
 	import { type DragonConfig, capitalizeFirstLetter } from '..';
 	import DragonConfigPreview from '../DragonConfigPreview.svelte';
 	import { getToastStore, type ToastSettings } from '@skeletonlabs/skeleton';
@@ -97,17 +103,32 @@
 	}
 </script>
 
-<p class="font-bold text-xl">Builder History</p>
+<p class="font-bold text-xl mb-2">Builder History</p>
+
+<p class="m-2">
+	Dragons are saved in this browser's local storage, up to a maximum of {dragonBuilderHistoryMaxLength}
+	dragons.
+</p>
 
 <div class="flex flex-col items-center">
-	<button
-		class="daisy-btn daisy-btn-neutral m-2"
-		on:click={() => {
-			$nextBuilderState = returnState;
-		}}
-	>
-		Return to Builder {capitalizeFirstLetter(returnState.toLowerCase())}
-	</button>
+	{#if historyPagesNeeded > 1}
+		<div class="daisy-join m-2">
+			{#each Array(historyPagesNeeded) as _, index (index)}
+				<button
+					class="daisy-join-item daisy-btn daisy-btn-outline"
+					class:daisy-btn-active={index === currentHistoryPage}
+					on:click={() => {
+						setHistoryPage(index);
+					}}
+				>
+					{index + 1}
+				</button>
+			{/each}
+		</div>
+	{/if}
+
+	<div class="daisy-divider my-2" />
+
 	<div
 		class="outer-wrapper max-w-xl w-full"
 		style="--outer-wrapper-height: {outerWrapperHeight}px; transition: height {heightTransitionDuration}ms ease;"
@@ -127,24 +148,21 @@
 			</ul>
 		</div>
 	</div>
-	{#if historyPagesNeeded > 1}
-		<div class="daisy-join m-2">
-			{#each Array(historyPagesNeeded) as _, index (index)}
-				<button
-					class="daisy-join-item daisy-btn daisy-btn-outline"
-					class:daisy-btn-active={index === currentHistoryPage}
-					on:click={() => {
-						setHistoryPage(index);
-					}}
-				>
-					{index + 1}
-				</button>
-			{/each}
-		</div>
-	{/if}
+
+	<div class="daisy-divider my-2" />
+
+	<button
+		class="daisy-btn daisy-btn-neutral m-2"
+		on:click={() => {
+			$nextBuilderState = returnState;
+		}}
+	>
+		Return to Builder {capitalizeFirstLetter(returnState.toLowerCase())}
+	</button>
+
 	{#if $dragonBuilderHistory.length > 0}
 		<button
-			class="daisy-btn daisy-btn-outline hover:daisy-btn-error m-2 mt-6"
+			class="daisy-btn daisy-btn-outline hover:daisy-btn-error m-2"
 			on:click={onClickClearHistory}
 		>
 			Clear History
