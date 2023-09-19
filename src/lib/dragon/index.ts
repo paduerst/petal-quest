@@ -381,6 +381,8 @@ export class DragonConfig {
 	pronouns?: Pronouns;
 	pronounsConfig?: PronounsConfig; // only needed if using custom pronouns
 
+	maxHP?: number;
+
 	skillAcrobatics?: ProficiencyLevel;
 	skillAnimalHandling?: ProficiencyLevel;
 	skillArcana?: ProficiencyLevel;
@@ -466,6 +468,12 @@ export class DragonConfig {
 			// we only use the pronounsConfig if using custom pronouns
 			delete this.pronounsConfig;
 		}
+
+		if (this.maxHP !== undefined) {
+			if (!Number.isSafeInteger(this.maxHP)) {
+				delete this.maxHP;
+			}
+		}
 	}
 
 	/**
@@ -503,6 +511,10 @@ export class DragonConfig {
 			output.set('pronounNominative', this.pronounsConfig.nominative);
 			output.set('pronounObjective', this.pronounsConfig.objective);
 			output.set('pronounPossessiveAdjective', this.pronounsConfig.possessiveAdjective);
+		}
+
+		if (this.maxHP !== undefined) {
+			output.set('maxHP', this.#boundMaxHP(this.maxHP).toString());
 		}
 
 		for (const skill of SKILLS) {
@@ -569,6 +581,8 @@ export class DragonConfig {
 		}
 
 		this.#setPronounsFromURLSearchParams(params);
+
+		this.#setMaxHPFromURLSearchParams(params);
 
 		this.#setSkillsFromURLSearchParams(params);
 
@@ -670,6 +684,25 @@ export class DragonConfig {
 				possessiveAdjective: pronounPossessiveAdjective
 			};
 			this.pronounsConfig = customConfig;
+		}
+	}
+
+	#boundMaxHP(maxHP: number): number {
+		return (maxHP = Math.max(1, Math.min(9999, maxHP)));
+	}
+
+	#setMaxHPFromURLSearchParams(params: URLSearchParams) {
+		const keys = ['maxHP', 'hp-override'] as const;
+		for (const key of keys) {
+			const paramsKeyVal = params.get(key);
+			if (paramsKeyVal !== null) {
+				const paramsKeyInt = parseInt(paramsKeyVal);
+				if (!Number.isNaN(paramsKeyInt)) {
+					this.maxHP = paramsKeyInt;
+					this.maxHP = this.#boundMaxHP(this.maxHP);
+					return;
+				}
+			}
 		}
 	}
 

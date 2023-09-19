@@ -79,12 +79,9 @@ export class DragonStats {
 		this.wis = scoreToMod(this.wisdom);
 		this.cha = scoreToMod(this.charisma);
 
-		this.expectedHitPoints = expectedDiceResult(
-			this.numberOfHitDice,
-			this.hitDie,
-			this.numberOfHitDice * this.con,
-			1
-		);
+		this.expectedHitPoints =
+			this.#config.maxHP ??
+			expectedDiceResult(this.numberOfHitDice, this.hitDie, this.numberOfHitDice * this.con, 1);
 
 		this.immunity = this.#vals.immunity;
 		this.additionalImmunities = this.#vals.additionalImmunities;
