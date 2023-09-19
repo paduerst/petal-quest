@@ -334,6 +334,8 @@ export class DragonConfig {
 	color: Color = 'red';
 	name?: string;
 	alignment?: string;
+	disableNameCapitalization?: boolean;
+	statBlockTitle?: string;
 
 	skillAcrobatics?: ProficiencyLevel;
 	skillAnimalHandling?: ProficiencyLevel;
@@ -360,6 +362,10 @@ export class DragonConfig {
 	 * @memberof DragonConfig
 	 */
 	getTitle(): string {
+		if (this.statBlockTitle !== undefined) {
+			return this.statBlockTitle;
+		}
+
 		let output = '';
 
 		let descriptiveTitle = '';
@@ -400,6 +406,12 @@ export class DragonConfig {
 		if (this.alignment === '') {
 			delete this.alignment;
 		}
+		if (this.disableNameCapitalization === false) {
+			delete this.disableNameCapitalization;
+		}
+		if (this.statBlockTitle === '') {
+			delete this.statBlockTitle;
+		}
 	}
 
 	/**
@@ -417,6 +429,12 @@ export class DragonConfig {
 		}
 		if (this.alignment !== undefined) {
 			output.set('alignment', this.alignment);
+		}
+		if (this.disableNameCapitalization === true) {
+			output.set('disableNameCapitalization', 'on');
+		}
+		if (this.statBlockTitle !== undefined) {
+			output.set('statBlockTitle', this.statBlockTitle);
 		}
 
 		for (const skill of SKILLS) {
@@ -469,6 +487,15 @@ export class DragonConfig {
 		const paramsAlignmentVal = params.get('alignment');
 		if (paramsAlignmentVal !== null) {
 			this.alignment = paramsAlignmentVal;
+		}
+
+		if (params.has('disableNameCapitalization') || params.has('forcelowercasename')) {
+			this.disableNameCapitalization = true;
+		}
+
+		const paramsStatBlockTitleVal = params.get('statBlockTitle');
+		if (paramsStatBlockTitleVal !== null) {
+			this.statBlockTitle = paramsStatBlockTitleVal;
 		}
 
 		for (const skill of SKILLS) {

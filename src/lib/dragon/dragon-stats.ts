@@ -38,7 +38,10 @@ export class DragonStats {
 
 		this.theme = this.#config.getTheme();
 		this.name = this.#config.name ?? 'the dragon';
-		this.nameUpper = capitalizeFirstLetter(this.name);
+		this.nameUpper =
+			this.#config.disableNameCapitalization === true
+				? this.name
+				: capitalizeFirstLetter(this.name);
 		this.title = this.#config.getTitle();
 		this.alignment = this.#config.alignment ?? COLOR_TO_ALIGNMENT[this.color];
 

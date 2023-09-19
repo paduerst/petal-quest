@@ -13,6 +13,7 @@
 			bind:value={config[skill.key]}
 			class="daisy-select daisy-select-bordered bg-white w-2/3 sm:w-3/4"
 			name={skill.key}
+			id={skill.key}
 		>
 			<option value={undefined}>Default Proficiency ({skill.defaultDescription})</option>
 			<option value={0.0}>Not Proficient</option>
