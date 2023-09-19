@@ -17,10 +17,10 @@
 				id={skill.key}
 			>
 				<option value={undefined}>Default Proficiency ({skill.defaultDescription})</option>
-				<option value={0.0}>Not Proficient</option>
-				<option value={0.5}>Half Proficiency</option>
-				<option value={1.0}>Proficient</option>
-				<option value={2.0}>Expertise (Double Proficiency)</option>
+				<option value={0.0}>Not Proficient (0x proficiency)</option>
+				<option value={0.5}>Half Proficiency (0.5x proficiency)</option>
+				<option value={1.0}>Proficient (1x proficiency)</option>
+				<option value={2.0}>Expertise (2x proficiency)</option>
 			</select>
 		</div>
 	{/each}

@@ -218,7 +218,7 @@ export const SKILLS = [
 		name: 'Perception',
 		key: 'skillPerception',
 		ability: 'wis',
-		defaultDescription: 'Typically double proficiency'
+		defaultDescription: 'Typically 2x proficiency'
 	},
 	{
 		name: 'Performance',
@@ -248,7 +248,7 @@ export const SKILLS = [
 		name: 'Stealth',
 		key: 'skillStealth',
 		ability: 'dex',
-		defaultDescription: 'Typically proficient'
+		defaultDescription: 'Typically 1x proficiency'
 	},
 	{
 		name: 'Survival',
