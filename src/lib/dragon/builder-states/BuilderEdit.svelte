@@ -25,7 +25,7 @@
 </script>
 
 <div class="flex flex-col items-center">
-	<div class="daisy-tabs daisy-tabs-boxed font-semibold border border-black gap-1 mb-3">
+	<div class="daisy-tabs daisy-tabs-boxed font-semibold border border-black gap-1">
 		{#each FORM_SECTION_NAMES as name}
 			<button
 				class="daisy-tab"
@@ -40,10 +40,14 @@
 		{/each}
 	</div>
 
+	<div class="daisy-divider my-2" />
+
 	<svelte:component this={formSections[currentSectionName]} config={editedConfig} />
 
+	<div class="daisy-divider my-2" />
+
 	<button
-		class="daisy-btn daisy-btn-neutral m-2 mt-6"
+		class="daisy-btn daisy-btn-neutral"
 		on:click={() => {
 			editedConfig.cleanup();
 			if (

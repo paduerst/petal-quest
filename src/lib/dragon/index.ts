@@ -257,7 +257,6 @@ export const SKILLS = [
 		defaultDescription: standardDefaultSkillDescription
 	}
 ] as const;
-export type SkillKey = (typeof SKILLS)[number]['key'];
 
 export type ProficiencyLevel = 0.0 | 0.5 | 1.0 | 2.0;
 
@@ -333,9 +332,10 @@ export class DragonConfig {
 	age: Age = 'wyrmling';
 	color: Color = 'red';
 	name?: string;
-	alignment?: string;
 	disableNameCapitalization?: boolean;
 	statBlockTitle?: string;
+	alignment?: string;
+	languages?: string;
 
 	skillAcrobatics?: ProficiencyLevel;
 	skillAnimalHandling?: ProficiencyLevel;
@@ -403,14 +403,17 @@ export class DragonConfig {
 		if (this.name === '') {
 			delete this.name;
 		}
-		if (this.alignment === '') {
-			delete this.alignment;
-		}
 		if (this.disableNameCapitalization === false) {
 			delete this.disableNameCapitalization;
 		}
 		if (this.statBlockTitle === '') {
 			delete this.statBlockTitle;
+		}
+		if (this.alignment === '') {
+			delete this.alignment;
+		}
+		if (this.languages === '') {
+			delete this.languages;
 		}
 	}
 
@@ -427,14 +430,17 @@ export class DragonConfig {
 		if (this.name !== undefined) {
 			output.set('name', this.name);
 		}
-		if (this.alignment !== undefined) {
-			output.set('alignment', this.alignment);
-		}
 		if (this.disableNameCapitalization === true) {
 			output.set('disableNameCapitalization', 'on');
 		}
 		if (this.statBlockTitle !== undefined) {
 			output.set('statBlockTitle', this.statBlockTitle);
+		}
+		if (this.alignment !== undefined) {
+			output.set('alignment', this.alignment);
+		}
+		if (this.languages !== undefined) {
+			output.set('languages', this.languages);
 		}
 
 		for (const skill of SKILLS) {
@@ -484,38 +490,52 @@ export class DragonConfig {
 			this.name = paramsNameVal;
 		}
 
+		if (params.has('disableNameCapitalization') || params.has('forcelowercasename')) {
+			this.disableNameCapitalization = true;
+		}
+
+		this.#setStatBlockTitleFromURLSearchParams(params);
+
 		const paramsAlignmentVal = params.get('alignment');
 		if (paramsAlignmentVal !== null) {
 			this.alignment = paramsAlignmentVal;
 		}
 
-		if (params.has('disableNameCapitalization') || params.has('forcelowercasename')) {
-			this.disableNameCapitalization = true;
+		const paramsLanguagesVal = params.get('languages');
+		if (paramsLanguagesVal !== null) {
+			this.languages = paramsLanguagesVal;
 		}
 
-		const paramsStatBlockTitleVal = params.get('statBlockTitle');
-		if (paramsStatBlockTitleVal !== null) {
-			this.statBlockTitle = paramsStatBlockTitleVal;
-		}
-
-		for (const skill of SKILLS) {
-			this.#skillFromURLSearchParams(skill.key, params);
-		}
+		this.#setSkillsFromURLSearchParams(params);
 
 		return true;
 	}
 
-	#skillFromURLSearchParams(skillKey: SkillKey, params: URLSearchParams) {
-		const paramsSkillVal = params.get(skillKey);
-		if (paramsSkillVal !== null) {
-			const paramsSkillFloat = parseFloat(paramsSkillVal);
-			if (
-				paramsSkillFloat === 0.0 ||
-				paramsSkillFloat === 0.5 ||
-				paramsSkillFloat === 1.0 ||
-				paramsSkillFloat === 2.0
-			) {
-				this[skillKey] = paramsSkillFloat;
+	#setStatBlockTitleFromURLSearchParams(params: URLSearchParams) {
+		// maintaining backwards compatibility with older param names
+		const keys = ['statBlockTitle', 'dragonTitle'] as const;
+		for (const key of keys) {
+			const paramsKeyVal = params.get(key);
+			if (paramsKeyVal !== null) {
+				this.statBlockTitle = paramsKeyVal;
+				return;
+			}
+		}
+	}
+
+	#setSkillsFromURLSearchParams(params: URLSearchParams) {
+		for (const skill of SKILLS) {
+			const paramsSkillVal = params.get(skill.key);
+			if (paramsSkillVal !== null) {
+				const paramsSkillFloat = parseFloat(paramsSkillVal);
+				if (
+					paramsSkillFloat === 0.0 ||
+					paramsSkillFloat === 0.5 ||
+					paramsSkillFloat === 1.0 ||
+					paramsSkillFloat === 2.0
+				) {
+					this[skill.key] = paramsSkillFloat;
+				}
 			}
 		}
 	}

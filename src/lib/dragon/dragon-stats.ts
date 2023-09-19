@@ -93,7 +93,7 @@ export class DragonStats {
 		this.blindsight = this.#vals.blindsight;
 		this.darkvision = this.#vals.darkvision;
 
-		this.languages = this.#vals.languages;
+		this.languages = this.#config.languages ?? this.#vals.languages;
 
 		this.cr = CRNumberToString(this.#vals.cr);
 		this.xp = CR_TABLE[this.cr].xp;

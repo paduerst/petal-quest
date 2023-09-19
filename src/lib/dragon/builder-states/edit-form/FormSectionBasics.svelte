@@ -9,21 +9,6 @@
 	<FormSubsectionWelcome {config} />
 
 	<div class="daisy-form-control w-full max-w-sm m-1">
-		<label class="daisy-label" for="alignment">
-			<span class="daisy-label-text">Alignment</span>
-		</label>
-		<input
-			type="text"
-			bind:value={config.alignment}
-			placeholder="Defaults to typical alignment for this color"
-			class="daisy-input daisy-input-bordered bg-white"
-			name="alignment"
-			id="alignment"
-			data-1p-ignore
-		/>
-	</div>
-
-	<div class="daisy-form-control w-full max-w-sm m-1">
 		<label class="daisy-label" for="name">
 			<span class="daisy-label-text">Name</span>
 		</label>
@@ -62,6 +47,36 @@
 			class="daisy-input daisy-input-bordered bg-white"
 			name="statBlockTitle"
 			id="statBlockTitle"
+			data-1p-ignore
+		/>
+	</div>
+
+	<div class="daisy-form-control w-full max-w-sm m-1">
+		<label class="daisy-label" for="alignment">
+			<span class="daisy-label-text">Alignment</span>
+		</label>
+		<input
+			type="text"
+			bind:value={config.alignment}
+			placeholder="Defaults to typical alignment for this color"
+			class="daisy-input daisy-input-bordered bg-white"
+			name="alignment"
+			id="alignment"
+			data-1p-ignore
+		/>
+	</div>
+
+	<div class="daisy-form-control w-full max-w-sm m-1">
+		<label class="daisy-label" for="languages">
+			<span class="daisy-label-text">Languages</span>
+		</label>
+		<input
+			type="text"
+			bind:value={config.languages}
+			placeholder="Defaults to typical languages for this age"
+			class="daisy-input daisy-input-bordered bg-white"
+			name="languages"
+			id="languages"
 			data-1p-ignore
 		/>
 	</div>
