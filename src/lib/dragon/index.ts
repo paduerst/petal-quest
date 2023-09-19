@@ -605,6 +605,16 @@ export class DragonConfig {
 				this.pronouns = 'none';
 			} else if (paramsPronounsVal === 'custom' || paramsPronounsVal === 'custom-pronouns') {
 				this.pronouns = 'custom';
+			} else if (paramsPronounsVal === 'ey-em' || paramsPronounsVal === 'spivak') {
+				// we want to support these URL options, using them as custom pronouns
+				this.pronouns = 'custom';
+				this.pronounsConfig = {
+					plural: false,
+					nominative: 'ey',
+					objective: 'em',
+					possessiveAdjective: 'eir'
+				};
+				return; // don't check the URL for custom pronouns
 			} else {
 				console.log(`Unable to parse URL pronouns value of ${paramsPronounsVal}`);
 				this.pronouns = undefined;

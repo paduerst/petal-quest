@@ -1,8 +1,23 @@
 <script lang="ts">
-	import type { DragonConfig } from '$lib/dragon';
+	import type { DragonConfig, PronounsConfig } from '$lib/dragon';
 	import FormSubsectionWelcome from './FormSubsectionWelcome.svelte';
 
 	export let config: DragonConfig;
+
+	let customPronounsConfig: PronounsConfig = {
+		plural: false,
+		nominative: '',
+		objective: '',
+		possessiveAdjective: ''
+	};
+
+	$: if (config.pronouns !== 'custom') {
+		config.pronounsConfig = undefined;
+	} else if (config.pronounsConfig !== undefined) {
+		customPronounsConfig = config.pronounsConfig;
+	} else {
+		config.pronounsConfig = customPronounsConfig;
+	}
 </script>
 
 <div class="flex flex-col items-center w-full">
@@ -99,4 +114,64 @@
 			<option value="custom">Custom</option>
 		</select>
 	</div>
+
+	{#if config.pronouns === 'custom'}
+		<div class="daisy-form-control flex-row gap-2 items-center m-1 w-full max-w-sm">
+			<input
+				type="checkbox"
+				bind:checked={customPronounsConfig.plural}
+				class="daisy-checkbox cursor-pointer"
+				name="pronounsPlural"
+				id="pronounsPlural"
+			/>
+			<label class="daisy-label daisy-label-text" for="pronounsPlural">
+				Pronouns are grammatically plural (like they/them)
+			</label>
+		</div>
+
+		<div class="daisy-form-control w-full max-w-sm m-1">
+			<label class="daisy-label" for="nominativePronoun">
+				<span class="daisy-label-text">Nominative Pronoun</span>
+			</label>
+			<input
+				type="text"
+				bind:value={customPronounsConfig.nominative}
+				placeholder="e.g. he, she, they, ey"
+				class="daisy-input daisy-input-bordered bg-white"
+				name="nominativePronoun"
+				id="nominativePronoun"
+				data-1p-ignore
+			/>
+		</div>
+
+		<div class="daisy-form-control w-full max-w-sm m-1">
+			<label class="daisy-label" for="objectivePronoun">
+				<span class="daisy-label-text">Objective Pronoun</span>
+			</label>
+			<input
+				type="text"
+				bind:value={customPronounsConfig.objective}
+				placeholder="e.g. him, her, them, em"
+				class="daisy-input daisy-input-bordered bg-white"
+				name="objectivePronoun"
+				id="objectivePronoun"
+				data-1p-ignore
+			/>
+		</div>
+
+		<div class="daisy-form-control w-full max-w-sm m-1">
+			<label class="daisy-label" for="possessiveAdjectivePronoun">
+				<span class="daisy-label-text">Possessive Adjective</span>
+			</label>
+			<input
+				type="text"
+				bind:value={customPronounsConfig.possessiveAdjective}
+				placeholder="e.g. his, her, their, eir"
+				class="daisy-input daisy-input-bordered bg-white"
+				name="possessiveAdjectivePronoun"
+				id="possessiveAdjectivePronoun"
+				data-1p-ignore
+			/>
+		</div>
+	{/if}
 </div>
