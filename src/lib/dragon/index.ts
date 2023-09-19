@@ -146,72 +146,73 @@ export const ABILITIES = [
 	['charisma', 'cha']
 ] as const;
 
+const standardDefaultSkillDescription = 'Varies with age and color';
 export const SKILLS = [
 	{
 		name: 'Acrobatics',
 		key: 'skillAcrobatics',
 		ability: 'dex',
-		defaultDescription: 'Varies based on age and color'
+		defaultDescription: standardDefaultSkillDescription
 	},
 	{
 		name: 'Animal Handling',
 		key: 'skillAnimalHandling',
 		ability: 'wis',
-		defaultDescription: 'Varies based on age and color'
+		defaultDescription: standardDefaultSkillDescription
 	},
 	{
 		name: 'Arcana',
 		key: 'skillArcana',
 		ability: 'int',
-		defaultDescription: 'Varies based on age and color'
+		defaultDescription: standardDefaultSkillDescription
 	},
 	{
 		name: 'Athletics',
 		key: 'skillAthletics',
 		ability: 'str',
-		defaultDescription: 'Varies based on age and color'
+		defaultDescription: standardDefaultSkillDescription
 	},
 	{
 		name: 'Deception',
 		key: 'skillDeception',
 		ability: 'cha',
-		defaultDescription: 'Varies based on age and color'
+		defaultDescription: standardDefaultSkillDescription
 	},
 	{
 		name: 'History',
 		key: 'skillHistory',
 		ability: 'int',
-		defaultDescription: 'Varies based on age and color'
+		defaultDescription: standardDefaultSkillDescription
 	},
 	{
 		name: 'Insight',
 		key: 'skillInsight',
 		ability: 'wis',
-		defaultDescription: 'Varies based on age and color'
+		defaultDescription: standardDefaultSkillDescription
 	},
 	{
 		name: 'Intimidation',
 		key: 'skillIntimidation',
 		ability: 'cha',
-		defaultDescription: 'Varies based on age and color'
+		defaultDescription: standardDefaultSkillDescription
 	},
 	{
 		name: 'Investigation',
 		key: 'skillInvestigation',
 		ability: 'int',
-		defaultDescription: 'Varies based on age and color'
+		defaultDescription: standardDefaultSkillDescription
 	},
 	{
 		name: 'Medicine',
 		key: 'skillMedicine',
 		ability: 'wis',
-		defaultDescription: 'Varies based on age and color'
+		defaultDescription: standardDefaultSkillDescription
 	},
 	{
 		name: 'Nature',
 		key: 'skillNature',
 		ability: 'int',
-		defaultDescription: 'Varies based on age and color'
+		defaultDescription: standardDefaultSkillDescription
 	},
 	{
 		name: 'Perception',
@@ -223,25 +224,25 @@ export const SKILLS = [
 		name: 'Performance',
 		key: 'skillPerformance',
 		ability: 'cha',
-		defaultDescription: 'Varies based on age and color'
+		defaultDescription: standardDefaultSkillDescription
 	},
 	{
 		name: 'Persuasion',
 		key: 'skillPersuasion',
 		ability: 'cha',
-		defaultDescription: 'Varies based on age and color'
+		defaultDescription: standardDefaultSkillDescription
 	},
 	{
 		name: 'Religion',
 		key: 'skillReligion',
 		ability: 'int',
-		defaultDescription: 'Varies based on age and color'
+		defaultDescription: standardDefaultSkillDescription
 	},
 	{
 		name: 'Sleight of Hand',
 		key: 'skillSleightOfHand',
 		ability: 'dex',
-		defaultDescription: 'Varies based on age and color'
+		defaultDescription: standardDefaultSkillDescription
 	},
 	{
 		name: 'Stealth',
@@ -253,7 +254,7 @@ export const SKILLS = [
 		name: 'Survival',
 		key: 'skillSurvival',
 		ability: 'wis',
-		defaultDescription: 'Varies based on age and color'
+		defaultDescription: standardDefaultSkillDescription
 	}
 ] as const;
 export type SkillKey = (typeof SKILLS)[number]['key'];
