@@ -4,6 +4,7 @@
 	import { currentDragonConfig, nextBuilderState } from '.';
 	import { DEFAULT_PRONOUNS, DragonConfig } from '..';
 	import FormSectionBasics from './edit-form/FormSectionBasics.svelte';
+	import FormSectionHpAbilities from './edit-form/FormSectionHPAbilities.svelte';
 	import FormSectionSkills from './edit-form/FormSectionSkills.svelte';
 	import FormSectionSpells from './edit-form/FormSectionSpells.svelte';
 	import { getToastStore, type ToastSettings } from '@skeletonlabs/skeleton';
@@ -51,10 +52,11 @@
 		toastStore.trigger(t);
 	}
 
-	const FORM_SECTION_NAMES = ['Basics', 'Skills', 'Spells'] as const;
+	const FORM_SECTION_NAMES = ['Basics', 'HP & Abilities', 'Skills', 'Spells'] as const;
 	type FormSectionName = (typeof FORM_SECTION_NAMES)[number];
 	const formSections = {
 		Basics: FormSectionBasics,
+		'HP & Abilities': FormSectionHpAbilities,
 		Skills: FormSectionSkills,
 		Spells: FormSectionSpells
 	} as const;
@@ -90,7 +92,9 @@
 		style="--outer-wrapper-height: {outerWrapperHeight}px; transition: height {heightTransitionDuration}ms ease;"
 	>
 		<div class="inner-wrapper w-full" bind:clientHeight={innerClientHeight}>
-			<svelte:component this={formSections[currentSectionName]} config={editedConfig} />
+			<div class="flex flex-col items-center w-full">
+				<svelte:component this={formSections[currentSectionName]} config={editedConfig} />
+			</div>
 		</div>
 	</div>
 
