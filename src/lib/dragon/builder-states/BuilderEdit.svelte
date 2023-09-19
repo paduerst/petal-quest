@@ -25,6 +25,12 @@
 		Spells: FormSectionSpells
 	} as const;
 	let currentSectionName: FormSectionName = 'Basics';
+
+	let innerClientHeight: number;
+	let outerWrapperHeight: number;
+	$: outerWrapperHeight = innerClientHeight;
+
+	let heightTransitionDuration = 100;
 </script>
 
 <div class="flex flex-col items-center">
@@ -45,7 +51,14 @@
 
 	<div class="daisy-divider my-2" />
 
-	<svelte:component this={formSections[currentSectionName]} config={editedConfig} />
+	<div
+		class="outer-wrapper w-full"
+		style="--outer-wrapper-height: {outerWrapperHeight}px; transition: height {heightTransitionDuration}ms ease;"
+	>
+		<div class="inner-wrapper w-full" bind:clientHeight={innerClientHeight}>
+			<svelte:component this={formSections[currentSectionName]} config={editedConfig} />
+		</div>
+	</div>
 
 	<div class="daisy-divider my-2" />
 
@@ -70,3 +83,20 @@
 		{$currentDragonConfig === undefined ? 'Build' : 'Update'} Dragon
 	</button>
 </div>
+
+<style>
+	.outer-wrapper {
+		@apply overflow-hidden;
+		height: var(--outer-wrapper-height);
+	}
+
+	@media print {
+		.outer-wrapper {
+			height: fit-content;
+		}
+	}
+
+	.inner-wrapper {
+		@apply h-fit inline-block;
+	}
+</style>
