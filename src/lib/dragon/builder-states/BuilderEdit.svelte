@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { page } from '$app/stores';
 
 	import { currentDragonConfig, nextBuilderState } from '.';
 	import { DEFAULT_PRONOUNS, DragonConfig } from '..';
@@ -104,10 +105,7 @@
 		class="daisy-btn daisy-btn-neutral m-2"
 		on:click={() => {
 			editedConfig.cleanup();
-			if (
-				$currentDragonConfig !== undefined &&
-				$currentDragonConfig.toString() === editedConfig.toString()
-			) {
+			if (`?${editedConfig.toString()}` === $page.url.search) {
 				// no change is being made, so let's just go to DISPLAY
 				$nextBuilderState = 'DISPLAY';
 			} else {
