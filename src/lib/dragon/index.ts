@@ -370,6 +370,9 @@ export const BASIC_PRONOUN_CONFIGS: {
 	}
 } as const;
 
+export const maxHPMin = 1;
+export const maxHPMax = 9999;
+
 export class DragonConfig {
 	age: Age = 'wyrmling';
 	color: Color = 'red';
@@ -381,7 +384,7 @@ export class DragonConfig {
 	pronouns?: Pronouns;
 	pronounsConfig?: PronounsConfig; // only needed if using custom pronouns
 
-	maxHP?: number;
+	maxHP?: number | null;
 
 	skillAcrobatics?: ProficiencyLevel;
 	skillAnimalHandling?: ProficiencyLevel;
@@ -469,8 +472,8 @@ export class DragonConfig {
 			delete this.pronounsConfig;
 		}
 
-		if (this.maxHP !== undefined) {
-			if (!Number.isSafeInteger(this.maxHP)) {
+		if (this.maxHP !== undefined && this.maxHP !== null) {
+			if (Number.isNaN(this.maxHP)) {
 				delete this.maxHP;
 			}
 		}
@@ -513,8 +516,8 @@ export class DragonConfig {
 			output.set('pronounPossessiveAdjective', this.pronounsConfig.possessiveAdjective);
 		}
 
-		if (this.maxHP !== undefined) {
-			output.set('maxHP', this.#boundMaxHP(this.maxHP).toString());
+		if (this.maxHP !== undefined && this.maxHP !== null && !Number.isNaN(this.maxHP)) {
+			output.set('maxHP', Math.max(maxHPMin, Math.min(maxHPMax, this.maxHP)).toString());
 		}
 
 		for (const skill of SKILLS) {
@@ -687,10 +690,6 @@ export class DragonConfig {
 		}
 	}
 
-	#boundMaxHP(maxHP: number): number {
-		return (maxHP = Math.max(1, Math.min(9999, maxHP)));
-	}
-
 	#setMaxHPFromURLSearchParams(params: URLSearchParams) {
 		const keys = ['maxHP', 'hp-override'] as const;
 		for (const key of keys) {
@@ -698,8 +697,7 @@ export class DragonConfig {
 			if (paramsKeyVal !== null) {
 				const paramsKeyInt = parseInt(paramsKeyVal);
 				if (!Number.isNaN(paramsKeyInt)) {
-					this.maxHP = paramsKeyInt;
-					this.maxHP = this.#boundMaxHP(this.maxHP);
+					this.maxHP = Math.max(maxHPMin, Math.min(maxHPMax, paramsKeyInt));
 					return;
 				}
 			}

@@ -6,6 +6,8 @@ import {
 	SKILLS,
 	DEFAULT_PRONOUNS,
 	BASIC_PRONOUN_CONFIGS,
+	maxHPMin,
+	maxHPMax,
 	scoreToMod,
 	numberWithSign,
 	expectedDiceResult,
@@ -79,9 +81,7 @@ export class DragonStats {
 		this.wis = scoreToMod(this.wisdom);
 		this.cha = scoreToMod(this.charisma);
 
-		this.expectedHitPoints =
-			this.#config.maxHP ??
-			expectedDiceResult(this.numberOfHitDice, this.hitDie, this.numberOfHitDice * this.con, 1);
+		this.expectedHitPoints = this.#getExpectedHitPoints();
 
 		this.immunity = this.#vals.immunity;
 		this.additionalImmunities = this.#vals.additionalImmunities;
@@ -251,6 +251,23 @@ export class DragonStats {
 			return customPronounsConfig;
 		} else {
 			return BASIC_PRONOUN_CONFIGS[this.#config.pronouns];
+		}
+	}
+
+	#getExpectedHitPoints(): number {
+		if (
+			this.#config.maxHP !== undefined &&
+			this.#config.maxHP !== null &&
+			!Number.isNaN(this.#config.maxHP)
+		) {
+			return Math.max(maxHPMin, Math.min(maxHPMax, this.#config.maxHP));
+		} else {
+			return expectedDiceResult(
+				this.numberOfHitDice,
+				this.hitDie,
+				this.numberOfHitDice * this.con,
+				1
+			);
 		}
 	}
 

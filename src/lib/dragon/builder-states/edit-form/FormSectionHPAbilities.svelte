@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { DragonConfig } from '$lib/dragon';
+	import { type DragonConfig, maxHPMin, maxHPMax } from '$lib/dragon';
 
 	export let config: DragonConfig;
 </script>
@@ -16,8 +16,8 @@
 		name="maxHP"
 		id="maxHP"
 		data-1p-ignore
-		min={1}
-		max={9999}
+		min={maxHPMin}
+		max={maxHPMax}
 		step={1}
 	/>
 </div>
