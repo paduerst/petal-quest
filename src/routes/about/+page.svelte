@@ -46,7 +46,7 @@
 </p>
 <p><a href="/">Return to Home.</a></p>
 
-<style lang="postcss">
+<style>
 	.filler {
 		@apply text-4xl p-4;
 	}
