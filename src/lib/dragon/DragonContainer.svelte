@@ -50,7 +50,7 @@
 	<div class="dragon-container-bot-edge" />
 </div>
 
-<style>
+<style lang="postcss">
 	.dragon-container {
 		@apply bg-neutral-200 text-black transition-all;
 		--y-edge-height: 4px;

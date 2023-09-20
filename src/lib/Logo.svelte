@@ -18,7 +18,7 @@
 	<span class="logo-txt">Petal Quest</span>
 </a>
 
-<style>
+<style lang="postcss">
 	.logo-anchor {
 		@apply flex items-center no-underline text-token p-2 m-1;
 		border-radius: var(--theme-rounded-base);

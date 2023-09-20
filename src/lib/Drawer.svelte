@@ -58,7 +58,7 @@
 	</nav>
 </Drawer>
 
-<style>
+<style lang="postcss">
 	.nav-anchor {
 		@apply no-underline text-token;
 		border-radius: var(--theme-rounded-base);

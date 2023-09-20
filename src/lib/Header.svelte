@@ -48,7 +48,7 @@
 	</AppBar>
 </div>
 
-<style>
+<style lang="postcss">
 	.nav-anchor {
 		@apply p-3 m-2 text-lg no-underline text-token;
 		border-radius: var(--theme-rounded-base);

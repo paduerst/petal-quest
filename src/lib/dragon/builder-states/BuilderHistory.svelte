@@ -170,7 +170,7 @@
 	{/if}
 </div>
 
-<style>
+<style lang="postcss">
 	.outer-wrapper {
 		@apply overflow-hidden;
 		height: var(--outer-wrapper-height);
