@@ -258,9 +258,11 @@ export class DragonStats {
 		if (
 			this.#config.maxHP !== undefined &&
 			this.#config.maxHP !== null &&
-			!Number.isNaN(this.#config.maxHP)
+			!Number.isNaN(this.#config.maxHP) &&
+			this.#config.maxHP >= maxHPMin &&
+			this.#config.maxHP <= maxHPMax
 		) {
-			return Math.max(maxHPMin, Math.min(maxHPMax, this.#config.maxHP));
+			return Math.floor(this.#config.maxHP);
 		} else {
 			return expectedDiceResult(
 				this.numberOfHitDice,

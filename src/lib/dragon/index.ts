@@ -472,10 +472,14 @@ export class DragonConfig {
 			delete this.pronounsConfig;
 		}
 
-		if (this.maxHP !== undefined && this.maxHP !== null) {
-			if (Number.isNaN(this.maxHP)) {
-				delete this.maxHP;
-			}
+		if (
+			this.maxHP !== undefined &&
+			(this.maxHP === null ||
+				Number.isNaN(this.maxHP) ||
+				this.maxHP < maxHPMin ||
+				this.maxHP > maxHPMax)
+		) {
+			delete this.maxHP;
 		}
 	}
 
@@ -516,8 +520,14 @@ export class DragonConfig {
 			output.set('pronounPossessiveAdjective', this.pronounsConfig.possessiveAdjective);
 		}
 
-		if (this.maxHP !== undefined && this.maxHP !== null && !Number.isNaN(this.maxHP)) {
-			output.set('maxHP', Math.max(maxHPMin, Math.min(maxHPMax, this.maxHP)).toString());
+		if (
+			this.maxHP !== undefined &&
+			this.maxHP !== null &&
+			!Number.isNaN(this.maxHP) &&
+			this.maxHP >= maxHPMin &&
+			this.maxHP <= maxHPMax
+		) {
+			output.set('maxHP', Math.floor(this.maxHP).toString());
 		}
 
 		for (const skill of SKILLS) {
@@ -696,8 +706,8 @@ export class DragonConfig {
 			const paramsKeyVal = params.get(key);
 			if (paramsKeyVal !== null) {
 				const paramsKeyInt = parseInt(paramsKeyVal);
-				if (!Number.isNaN(paramsKeyInt)) {
-					this.maxHP = Math.max(maxHPMin, Math.min(maxHPMax, paramsKeyInt));
+				if (!Number.isNaN(paramsKeyInt) && paramsKeyInt >= maxHPMin && paramsKeyInt <= maxHPMax) {
+					this.maxHP = paramsKeyInt;
 					return;
 				}
 			}
