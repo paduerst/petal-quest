@@ -14,7 +14,7 @@
 </script>
 
 <div class="print:hidden">
-	<AppBar padding="px-2 py-0" border="border-b border-surface-300-600-token">
+	<AppBar padding="px-2 py-0" border="border-b border-l border-r border-surface-300-600-token">
 		<svelte:fragment slot="lead">
 			<Logo />
 		</svelte:fragment>
