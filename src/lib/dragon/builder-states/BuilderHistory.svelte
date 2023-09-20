@@ -113,7 +113,7 @@
 <div class="flex flex-col items-center">
 	{#if historyPagesNeeded > 1}
 		<div class="daisy-join m-2">
-			{#each Array(historyPagesNeeded) as _, index (index)}
+			{#each [...Array(historyPagesNeeded).keys()] as index (index)}
 				<button
 					class="daisy-join-item daisy-btn daisy-btn-outline"
 					class:daisy-btn-active={index === currentHistoryPage}

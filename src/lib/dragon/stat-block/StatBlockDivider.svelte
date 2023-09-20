@@ -2,8 +2,8 @@
 	import type { RGB } from '$lib/dragon';
 
 	export let color: RGB;
-	export let height: string = '1px';
-	export let classes: string = '';
+	export let height = '1px';
+	export let classes = '';
 </script>
 
 <div class="my-1 {classes}" style="height: {height};">
