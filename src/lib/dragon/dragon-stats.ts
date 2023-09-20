@@ -3,11 +3,16 @@ import {
 	COLOR_TO_ALIGNMENT,
 	AGE_TO_SIZE,
 	SIZE_TO_HIT_DIE,
+	ABILITIES,
 	SKILLS,
 	DEFAULT_PRONOUNS,
 	BASIC_PRONOUN_CONFIGS,
 	maxHPMin,
 	maxHPMax,
+	numberOfHitDiceMin,
+	numberOfHitDiceMax,
+	abilityMin,
+	abilityMax,
 	scoreToMod,
 	numberWithSign,
 	expectedDiceResult,
@@ -57,7 +62,7 @@ export class DragonStats {
 
 		this.size = AGE_TO_SIZE[this.age];
 		this.ac = this.#vals.ac;
-		this.numberOfHitDice = this.#vals.numberOfHitDice;
+		this.numberOfHitDice = this.#getNumberOfHitDice();
 		this.hitDie = SIZE_TO_HIT_DIE[this.size];
 
 		this.speed = this.#vals.walkingSpeed;
@@ -67,12 +72,12 @@ export class DragonStats {
 		this.swimSpeed = this.#vals.swimSpeed;
 		this.speeds = this.#getSpeeds();
 
-		this.strength = this.#vals.strength;
-		this.dexterity = this.#vals.dexterity;
-		this.constitution = this.#vals.constitution;
-		this.intelligence = this.#vals.intelligence;
-		this.wisdom = this.#vals.wisdom;
-		this.charisma = this.#vals.charisma;
+		this.strength = this.#getAbilityScore('strength');
+		this.dexterity = this.#getAbilityScore('dexterity');
+		this.constitution = this.#getAbilityScore('constitution');
+		this.intelligence = this.#getAbilityScore('intelligence');
+		this.wisdom = this.#getAbilityScore('wisdom');
+		this.charisma = this.#getAbilityScore('charisma');
 
 		this.str = scoreToMod(this.strength);
 		this.dex = scoreToMod(this.dexterity);
@@ -251,6 +256,35 @@ export class DragonStats {
 			return customPronounsConfig;
 		} else {
 			return BASIC_PRONOUN_CONFIGS[this.#config.pronouns];
+		}
+	}
+
+	#getNumberOfHitDice(): number {
+		if (
+			this.#config.numberOfHitDice !== undefined &&
+			this.#config.numberOfHitDice !== null &&
+			!Number.isNaN(this.#config.numberOfHitDice) &&
+			this.#config.numberOfHitDice >= numberOfHitDiceMin &&
+			this.#config.numberOfHitDice <= numberOfHitDiceMax
+		) {
+			return Math.floor(this.#config.numberOfHitDice);
+		} else {
+			return this.#vals.numberOfHitDice;
+		}
+	}
+
+	#getAbilityScore(ability: (typeof ABILITIES)[number][0]): number {
+		const abilityScore = this.#config[ability];
+		if (
+			abilityScore !== undefined &&
+			abilityScore !== null &&
+			!Number.isNaN(abilityScore) &&
+			abilityScore >= abilityMin &&
+			abilityScore <= abilityMax
+		) {
+			return Math.floor(abilityScore);
+		} else {
+			return this.#vals[ability];
 		}
 	}
 

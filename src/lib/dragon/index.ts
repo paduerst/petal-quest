@@ -146,6 +146,9 @@ export const ABILITIES = [
 	['charisma', 'cha']
 ] as const;
 
+export const abilityMin = 1;
+export const abilityMax = 30;
+
 const standardDefaultSkillDescription = 'Varies with age and color';
 export const SKILLS = [
 	{
@@ -372,6 +375,8 @@ export const BASIC_PRONOUN_CONFIGS: {
 
 export const maxHPMin = 1;
 export const maxHPMax = 9999;
+export const numberOfHitDiceMin = 1;
+export const numberOfHitDiceMax = 99;
 
 export class DragonConfig {
 	age: Age = 'wyrmling';
@@ -385,6 +390,14 @@ export class DragonConfig {
 	pronounsConfig?: PronounsConfig; // only needed if using custom pronouns
 
 	maxHP?: number | null;
+	numberOfHitDice?: number | null;
+
+	strength?: number | null;
+	dexterity?: number | null;
+	constitution?: number | null;
+	intelligence?: number | null;
+	wisdom?: number | null;
+	charisma?: number | null;
 
 	skillAcrobatics?: ProficiencyLevel;
 	skillAnimalHandling?: ProficiencyLevel;
@@ -481,6 +494,28 @@ export class DragonConfig {
 		) {
 			delete this.maxHP;
 		}
+		if (
+			this.numberOfHitDice !== undefined &&
+			(this.numberOfHitDice === null ||
+				Number.isNaN(this.numberOfHitDice) ||
+				this.numberOfHitDice < numberOfHitDiceMin ||
+				this.numberOfHitDice > numberOfHitDiceMax)
+		) {
+			delete this.numberOfHitDice;
+		}
+
+		for (const abilityTuple of ABILITIES) {
+			const abilityScore = this[abilityTuple[0]];
+			if (
+				abilityScore !== undefined &&
+				(abilityScore === null ||
+					Number.isNaN(abilityScore) ||
+					abilityScore < abilityMin ||
+					abilityScore > abilityMax)
+			) {
+				delete this[abilityTuple[0]];
+			}
+		}
 	}
 
 	/**
@@ -528,6 +563,28 @@ export class DragonConfig {
 			this.maxHP <= maxHPMax
 		) {
 			output.set('maxHP', Math.floor(this.maxHP).toString());
+		}
+		if (
+			this.numberOfHitDice !== undefined &&
+			this.numberOfHitDice !== null &&
+			!Number.isNaN(this.numberOfHitDice) &&
+			this.numberOfHitDice >= numberOfHitDiceMin &&
+			this.numberOfHitDice <= numberOfHitDiceMax
+		) {
+			output.set('numberOfHitDice', Math.floor(this.numberOfHitDice).toString());
+		}
+
+		for (const abilityTuple of ABILITIES) {
+			const abilityScore = this[abilityTuple[0]];
+			if (
+				abilityScore !== undefined &&
+				abilityScore !== null &&
+				!Number.isNaN(abilityScore) &&
+				abilityScore >= abilityMin &&
+				abilityScore <= abilityMax
+			) {
+				output.set(abilityTuple[0], Math.floor(abilityScore).toString());
+			}
 		}
 
 		for (const skill of SKILLS) {
@@ -596,6 +653,10 @@ export class DragonConfig {
 		this.#setPronounsFromURLSearchParams(params);
 
 		this.#setMaxHPFromURLSearchParams(params);
+
+		this.#setNumberOfHitDiceFromURLSearchParams(params);
+
+		this.#setAbilitiesFromURLSearchParams(params);
 
 		this.#setSkillsFromURLSearchParams(params);
 
@@ -709,6 +770,41 @@ export class DragonConfig {
 				if (!Number.isNaN(paramsKeyInt) && paramsKeyInt >= maxHPMin && paramsKeyInt <= maxHPMax) {
 					this.maxHP = paramsKeyInt;
 					return;
+				}
+			}
+		}
+	}
+
+	#setNumberOfHitDiceFromURLSearchParams(params: URLSearchParams) {
+		const keys = ['numberOfHitDice'] as const;
+		for (const key of keys) {
+			const paramsKeyVal = params.get(key);
+			if (paramsKeyVal !== null) {
+				const paramsKeyInt = parseInt(paramsKeyVal);
+				if (
+					!Number.isNaN(paramsKeyInt) &&
+					paramsKeyInt >= numberOfHitDiceMin &&
+					paramsKeyInt <= numberOfHitDiceMax
+				) {
+					this.numberOfHitDice = paramsKeyInt;
+					return;
+				}
+			}
+		}
+	}
+
+	#setAbilitiesFromURLSearchParams(params: URLSearchParams) {
+		for (const abilityTuple of ABILITIES) {
+			const key = abilityTuple[0];
+			const paramsKeyVal = params.get(key);
+			if (paramsKeyVal !== null) {
+				const paramsKeyInt = parseInt(paramsKeyVal);
+				if (
+					!Number.isNaN(paramsKeyInt) &&
+					paramsKeyInt >= abilityMin &&
+					paramsKeyInt <= abilityMax
+				) {
+					this[key] = paramsKeyInt;
 				}
 			}
 		}
