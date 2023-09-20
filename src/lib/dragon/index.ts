@@ -378,6 +378,12 @@ export const maxHPMax = 9999;
 export const numberOfHitDiceMin = 1;
 export const numberOfHitDiceMax = 99;
 
+export const SPELLCASTING_CONFIG_OPTIONS = ['off', 'onlyAtWill', 'onlyDaily'] as const;
+export type SpellcastingConfig = (typeof SPELLCASTING_CONFIG_OPTIONS)[number];
+
+export const DISPLAY_SPELL_STATS_OPTIONS = ['both', 'attack', 'saveDC', 'neither'] as const;
+export type DisplaySpellStats = (typeof DISPLAY_SPELL_STATS_OPTIONS)[number];
+
 export class DragonConfig {
 	age: Age = 'wyrmling';
 	color: Color = 'red';
@@ -417,6 +423,11 @@ export class DragonConfig {
 	skillSleightOfHand?: ProficiencyLevel;
 	skillStealth?: ProficiencyLevel;
 	skillSurvival?: ProficiencyLevel;
+
+	spellcasting?: SpellcastingConfig;
+	atWillSpells?: string;
+	dailySpells?: string;
+	displaySpellStats?: DisplaySpellStats;
 
 	/**
 	 * Returns the title for this DragonConfig.
@@ -516,6 +527,13 @@ export class DragonConfig {
 				delete this[abilityTuple[0]];
 			}
 		}
+
+		if (this.atWillSpells === '') {
+			delete this.atWillSpells;
+		}
+		if (this.dailySpells === '') {
+			delete this.dailySpells;
+		}
 	}
 
 	/**
@@ -594,6 +612,19 @@ export class DragonConfig {
 			}
 		}
 
+		if (this.spellcasting !== undefined) {
+			output.set('spellcasting', this.spellcasting);
+		}
+		if (this.atWillSpells !== undefined) {
+			output.set('atWillSpells', this.atWillSpells);
+		}
+		if (this.dailySpells !== undefined) {
+			output.set('dailySpells', this.dailySpells);
+		}
+		if (this.displaySpellStats !== undefined) {
+			output.set('displaySpellStats', this.displaySpellStats);
+		}
+
 		return output;
 	}
 
@@ -660,6 +691,11 @@ export class DragonConfig {
 
 		this.#setSkillsFromURLSearchParams(params);
 
+		this.#setSpellcastingFromURLSearchParams(params);
+		this.#setAtWillSpellsFromURLSearchParams(params);
+		this.#setDailySpellsFromURLSearchParams(params);
+		this.#setDisplaySpellStatsFromURLSearchParams(params);
+
 		return true;
 	}
 
@@ -680,7 +716,7 @@ export class DragonConfig {
 		if (paramsPronounsVal !== null) {
 			// we have to check several options here to maintain backwards compatibility
 			if (paramsPronounsVal === DEFAULT_PRONOUNS || paramsPronounsVal === 'default') {
-				this.pronouns = undefined;
+				delete this.pronouns;
 			} else if (paramsPronounsVal === 'it-its' || paramsPronounsVal === 'neutral') {
 				this.pronouns = 'it-its';
 			} else if (paramsPronounsVal === 'she-her' || paramsPronounsVal === 'feminine') {
@@ -705,7 +741,7 @@ export class DragonConfig {
 				return; // don't check the URL for custom pronouns
 			} else {
 				console.log(`Unable to parse URL pronouns value of ${paramsPronounsVal}`);
-				this.pronouns = undefined;
+				delete this.pronouns;
 			}
 		}
 
@@ -823,6 +859,74 @@ export class DragonConfig {
 				) {
 					this[skill.key] = paramsSkillFloat;
 				}
+			}
+		}
+	}
+
+	#setSpellcastingFromURLSearchParams(params: URLSearchParams) {
+		const keys = ['spellcasting', 'spellstate'] as const;
+		for (const key of keys) {
+			const paramsKeyVal = params.get(key);
+			if (paramsKeyVal !== null) {
+				if (paramsKeyVal === 'default') {
+					delete this.spellcasting;
+				} else if (paramsKeyVal === 'off') {
+					this.spellcasting = 'off';
+				} else if (paramsKeyVal === 'onlyAtWill' || paramsKeyVal === 'onlyatwill') {
+					this.spellcasting = 'onlyAtWill';
+				} else if (paramsKeyVal === 'onlyDaily' || paramsKeyVal === 'noatwill') {
+					this.spellcasting = 'onlyDaily';
+				} else {
+					console.log(`Unable to parse URL spellcasting value of ${paramsKeyVal}`);
+					delete this.spellcasting;
+				}
+				return;
+			}
+		}
+	}
+
+	#setAtWillSpellsFromURLSearchParams(params: URLSearchParams) {
+		const keys = ['atWillSpells', 'cantripoverride'] as const;
+		for (const key of keys) {
+			const paramsKeyVal = params.get(key);
+			if (paramsKeyVal !== null) {
+				this.atWillSpells = paramsKeyVal;
+				return;
+			}
+		}
+	}
+
+	#setDailySpellsFromURLSearchParams(params: URLSearchParams) {
+		const keys = ['dailySpells', 'spellsoverride'] as const;
+		for (const key of keys) {
+			const paramsKeyVal = params.get(key);
+			if (paramsKeyVal !== null) {
+				this.dailySpells = paramsKeyVal;
+				return;
+			}
+		}
+	}
+
+	#setDisplaySpellStatsFromURLSearchParams(params: URLSearchParams) {
+		const keys = ['displaySpellStats', 'spelldescription'] as const;
+		for (const key of keys) {
+			const paramsKeyVal = params.get(key);
+			if (paramsKeyVal !== null) {
+				if (paramsKeyVal === 'default') {
+					delete this.displaySpellStats;
+				} else if (paramsKeyVal === 'neither') {
+					this.displaySpellStats = 'neither';
+				} else if (paramsKeyVal === 'both') {
+					this.displaySpellStats = 'both';
+				} else if (paramsKeyVal === 'attack') {
+					this.displaySpellStats = 'attack';
+				} else if (paramsKeyVal === 'saveDC' || paramsKeyVal === 'dc') {
+					this.displaySpellStats = 'saveDC';
+				} else {
+					console.log(`Unable to parse URL displaySpellStats value of ${paramsKeyVal}`);
+					delete this.displaySpellStats;
+				}
+				return;
 			}
 		}
 	}

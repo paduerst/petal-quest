@@ -347,7 +347,10 @@ export class DragonStats {
 
 	#getCantrips(): string[] {
 		let cantrips: string[] = [];
-		const rawCantrips = this.#vals.rawCantrip;
+		if (this.#config.spellcasting === 'off' || this.#config.spellcasting === 'onlyDaily') {
+			return cantrips; // return an empty array
+		}
+		const rawCantrips = this.#config.atWillSpells ?? this.#vals.rawCantrip;
 		if (rawCantrips.length > 0) {
 			cantrips = rawCantrips.split(spellcastingCommaRegex);
 		}
@@ -356,7 +359,10 @@ export class DragonStats {
 
 	#getSpells(): string[] {
 		let spells: string[] = [];
-		const rawSpells = this.#vals.rawSpells;
+		if (this.#config.spellcasting === 'off' || this.#config.spellcasting === 'onlyAtWill') {
+			return spells; // return an empty array
+		}
+		const rawSpells = this.#config.dailySpells ?? this.#vals.rawSpells;
 		if (rawSpells.length > 0) {
 			spells = rawSpells.split(spellcastingCommaRegex);
 		}
@@ -364,17 +370,29 @@ export class DragonStats {
 	}
 
 	#getSpellcastingDisplayAttack(): boolean {
-		return (
-			(this.cantrips.length > 0 && this.#vals.atWillSpellsHaveAttack > 0) ||
-			(this.spells.length > 0 && this.#vals.oncePerDaySpellsHaveAttack > 0)
-		);
+		if (this.#config.displaySpellStats !== undefined) {
+			return (
+				this.#config.displaySpellStats === 'attack' || this.#config.displaySpellStats === 'both'
+			);
+		} else {
+			return (
+				(this.cantrips.length > 0 && this.#vals.atWillSpellsHaveAttack > 0) ||
+				(this.spells.length > 0 && this.#vals.oncePerDaySpellsHaveAttack > 0)
+			);
+		}
 	}
 
 	#getSpellcastingDisplaySave(): boolean {
-		return (
-			(this.cantrips.length > 0 && this.#vals.atWillSpellsHaveSave > 0) ||
-			(this.spells.length > 0 && this.#vals.oncePerDaySpellsHaveSave > 0)
-		);
+		if (this.#config.displaySpellStats !== undefined) {
+			return (
+				this.#config.displaySpellStats === 'saveDC' || this.#config.displaySpellStats === 'both'
+			);
+		} else {
+			return (
+				(this.cantrips.length > 0 && this.#vals.atWillSpellsHaveSave > 0) ||
+				(this.spells.length > 0 && this.#vals.oncePerDaySpellsHaveSave > 0)
+			);
+		}
 	}
 
 	readonly #config: DragonConfig;
