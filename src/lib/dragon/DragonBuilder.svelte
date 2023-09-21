@@ -33,9 +33,17 @@
 	};
 
 	// Builder State Management
+	function scrollToTop() {
+		const elemPage = document.querySelector('#page');
+		if (elemPage !== null) {
+			elemPage.scrollTop = 0;
+		}
+	}
+
 	function transition(): void {
 		currentDragonConfig.transition();
 		if ($nextBuilderState !== undefined) {
+			scrollToTop();
 			$lastBuilderState = $currentBuilderState;
 			$currentBuilderState = $nextBuilderState;
 			$nextBuilderState = undefined;

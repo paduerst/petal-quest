@@ -1,6 +1,9 @@
 <script lang="ts">
 	import '../app.postcss';
 
+	import { afterNavigate } from '$app/navigation';
+	import type { AfterNavigate } from '@sveltejs/kit';
+
 	import { initializeStores, type ModalComponent } from '@skeletonlabs/skeleton';
 	import { AppShell, Modal, Toast } from '@skeletonlabs/skeleton';
 	import DragonShare from '$lib/modals/DragonShare.svelte';
@@ -15,6 +18,17 @@
 			ref: DragonShare
 		}
 	};
+
+	afterNavigate((navigation: AfterNavigate) => {
+		const isNewPage: boolean =
+			navigation.from === null || navigation.to === null
+				? false
+				: navigation.from.route.id !== navigation.to.route.id;
+		const elemPage = document.querySelector('#page');
+		if (isNewPage && elemPage !== null) {
+			elemPage.scrollTop = 0;
+		}
+	});
 </script>
 
 <Toast transitionOutParams={{ duration: 50 }} buttonDismiss="btn btn-icon-sm variant-filled" />

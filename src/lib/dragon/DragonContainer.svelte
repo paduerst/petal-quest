@@ -8,7 +8,7 @@
 	const iColorNext = () => {
 		iColor = (iColor + 1) % COLORS.length;
 	};
-	let colorInterval: NodeJS.Timeout;
+	let colorInterval: ReturnType<typeof setInterval>;
 	$: if (config === undefined) {
 		colorInterval = setInterval(iColorNext, 1000);
 	} else {
@@ -22,7 +22,7 @@
 	}
 
 	let innerClientHeight: number;
-	const minHeight: number = 300;
+	const minHeight = 300;
 	let outerWrapperHeight: number;
 	$: if (innerClientHeight < minHeight) {
 		outerWrapperHeight = minHeight;

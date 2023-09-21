@@ -146,6 +146,9 @@ export const ABILITIES = [
 	['charisma', 'cha']
 ] as const;
 
+export const abilityMin = 1;
+export const abilityMax = 30;
+
 const standardDefaultSkillDescription = 'Varies with age and color';
 export const SKILLS = [
 	{
@@ -328,7 +331,7 @@ export function RGBToRGBA(rgb: RGB, a: number): string {
 	return `rgba(${rgb.substring(4, rgb.length - 1)}, ${a})`;
 }
 
-export const BASIC_PRONOUN_OPTIONS = ['it-its', 'she-her', 'he-him', 'they-them'] as const;
+export const BASIC_PRONOUN_OPTIONS = ['it-its', 'she-her', 'he-him', 'they-them', 'ey-em'] as const;
 export type BasicPronouns = (typeof BASIC_PRONOUN_OPTIONS)[number];
 export const DEFAULT_PRONOUNS = 'she-her'; // assumed to be of type BasicPronouns
 
@@ -367,8 +370,25 @@ export const BASIC_PRONOUN_CONFIGS: {
 		nominative: 'they',
 		objective: 'them',
 		possessiveAdjective: 'their'
+	},
+	'ey-em': {
+		plural: false,
+		nominative: 'ey',
+		objective: 'em',
+		possessiveAdjective: 'eir'
 	}
 } as const;
+
+export const maxHPMin = 1;
+export const maxHPMax = 9999;
+export const numberOfHitDiceMin = 1;
+export const numberOfHitDiceMax = 99;
+
+export const SPELLCASTING_CONFIG_OPTIONS = ['off', 'onlyAtWill', 'onlyDaily'] as const;
+export type SpellcastingConfig = (typeof SPELLCASTING_CONFIG_OPTIONS)[number];
+
+export const DISPLAY_SPELL_STATS_OPTIONS = ['both', 'attack', 'saveDC', 'neither'] as const;
+export type DisplaySpellStats = (typeof DISPLAY_SPELL_STATS_OPTIONS)[number];
 
 export class DragonConfig {
 	age: Age = 'wyrmling';
@@ -380,6 +400,16 @@ export class DragonConfig {
 	languages?: string;
 	pronouns?: Pronouns;
 	pronounsConfig?: PronounsConfig; // only needed if using custom pronouns
+
+	maxHP?: number | null;
+	numberOfHitDice?: number | null;
+
+	strength?: number | null;
+	dexterity?: number | null;
+	constitution?: number | null;
+	intelligence?: number | null;
+	wisdom?: number | null;
+	charisma?: number | null;
 
 	skillAcrobatics?: ProficiencyLevel;
 	skillAnimalHandling?: ProficiencyLevel;
@@ -399,6 +429,11 @@ export class DragonConfig {
 	skillSleightOfHand?: ProficiencyLevel;
 	skillStealth?: ProficiencyLevel;
 	skillSurvival?: ProficiencyLevel;
+
+	spellcasting?: SpellcastingConfig;
+	atWillSpells?: string;
+	dailySpells?: string;
+	displaySpellStats?: DisplaySpellStats;
 
 	/**
 	 * Returns the title for this DragonConfig.
@@ -466,6 +501,45 @@ export class DragonConfig {
 			// we only use the pronounsConfig if using custom pronouns
 			delete this.pronounsConfig;
 		}
+
+		if (
+			this.maxHP !== undefined &&
+			(this.maxHP === null ||
+				Number.isNaN(this.maxHP) ||
+				this.maxHP < maxHPMin ||
+				this.maxHP > maxHPMax)
+		) {
+			delete this.maxHP;
+		}
+		if (
+			this.numberOfHitDice !== undefined &&
+			(this.numberOfHitDice === null ||
+				Number.isNaN(this.numberOfHitDice) ||
+				this.numberOfHitDice < numberOfHitDiceMin ||
+				this.numberOfHitDice > numberOfHitDiceMax)
+		) {
+			delete this.numberOfHitDice;
+		}
+
+		for (const abilityTuple of ABILITIES) {
+			const abilityScore = this[abilityTuple[0]];
+			if (
+				abilityScore !== undefined &&
+				(abilityScore === null ||
+					Number.isNaN(abilityScore) ||
+					abilityScore < abilityMin ||
+					abilityScore > abilityMax)
+			) {
+				delete this[abilityTuple[0]];
+			}
+		}
+
+		if (this.atWillSpells === '') {
+			delete this.atWillSpells;
+		}
+		if (this.dailySpells === '') {
+			delete this.dailySpells;
+		}
 	}
 
 	/**
@@ -505,11 +579,56 @@ export class DragonConfig {
 			output.set('pronounPossessiveAdjective', this.pronounsConfig.possessiveAdjective);
 		}
 
+		if (
+			this.maxHP !== undefined &&
+			this.maxHP !== null &&
+			!Number.isNaN(this.maxHP) &&
+			this.maxHP >= maxHPMin &&
+			this.maxHP <= maxHPMax
+		) {
+			output.set('maxHP', Math.floor(this.maxHP).toString());
+		}
+		if (
+			this.numberOfHitDice !== undefined &&
+			this.numberOfHitDice !== null &&
+			!Number.isNaN(this.numberOfHitDice) &&
+			this.numberOfHitDice >= numberOfHitDiceMin &&
+			this.numberOfHitDice <= numberOfHitDiceMax
+		) {
+			output.set('numberOfHitDice', Math.floor(this.numberOfHitDice).toString());
+		}
+
+		for (const abilityTuple of ABILITIES) {
+			const abilityScore = this[abilityTuple[0]];
+			if (
+				abilityScore !== undefined &&
+				abilityScore !== null &&
+				!Number.isNaN(abilityScore) &&
+				abilityScore >= abilityMin &&
+				abilityScore <= abilityMax
+			) {
+				output.set(abilityTuple[0], Math.floor(abilityScore).toString());
+			}
+		}
+
 		for (const skill of SKILLS) {
 			const thisSkillValue = this[skill.key];
 			if (thisSkillValue !== undefined) {
 				output.set(skill.key, thisSkillValue.toString());
 			}
+		}
+
+		if (this.spellcasting !== undefined) {
+			output.set('spellcasting', this.spellcasting);
+		}
+		if (this.atWillSpells !== undefined) {
+			output.set('atWillSpells', this.atWillSpells);
+		}
+		if (this.dailySpells !== undefined) {
+			output.set('dailySpells', this.dailySpells);
+		}
+		if (this.displaySpellStats !== undefined) {
+			output.set('displaySpellStats', this.displaySpellStats);
 		}
 
 		return output;
@@ -570,7 +689,18 @@ export class DragonConfig {
 
 		this.#setPronounsFromURLSearchParams(params);
 
+		this.#setMaxHPFromURLSearchParams(params);
+
+		this.#setNumberOfHitDiceFromURLSearchParams(params);
+
+		this.#setAbilitiesFromURLSearchParams(params);
+
 		this.#setSkillsFromURLSearchParams(params);
+
+		this.#setSpellcastingFromURLSearchParams(params);
+		this.#setAtWillSpellsFromURLSearchParams(params);
+		this.#setDailySpellsFromURLSearchParams(params);
+		this.#setDisplaySpellStatsFromURLSearchParams(params);
 
 		return true;
 	}
@@ -592,7 +722,7 @@ export class DragonConfig {
 		if (paramsPronounsVal !== null) {
 			// we have to check several options here to maintain backwards compatibility
 			if (paramsPronounsVal === DEFAULT_PRONOUNS || paramsPronounsVal === 'default') {
-				this.pronouns = undefined;
+				delete this.pronouns;
 			} else if (paramsPronounsVal === 'it-its' || paramsPronounsVal === 'neutral') {
 				this.pronouns = 'it-its';
 			} else if (paramsPronounsVal === 'she-her' || paramsPronounsVal === 'feminine') {
@@ -601,23 +731,15 @@ export class DragonConfig {
 				this.pronouns = 'he-him';
 			} else if (paramsPronounsVal === 'they-them' || paramsPronounsVal === 'singularthey') {
 				this.pronouns = 'they-them';
+			} else if (paramsPronounsVal === 'ey-em' || paramsPronounsVal === 'spivak') {
+				this.pronouns = 'ey-em';
 			} else if (paramsPronounsVal === 'none' || paramsPronounsVal === 'no-pronouns') {
 				this.pronouns = 'none';
 			} else if (paramsPronounsVal === 'custom' || paramsPronounsVal === 'custom-pronouns') {
 				this.pronouns = 'custom';
-			} else if (paramsPronounsVal === 'ey-em' || paramsPronounsVal === 'spivak') {
-				// we want to support these URL options, using them as custom pronouns
-				this.pronouns = 'custom';
-				this.pronounsConfig = {
-					plural: false,
-					nominative: 'ey',
-					objective: 'em',
-					possessiveAdjective: 'eir'
-				};
-				return; // don't check the URL for custom pronouns
 			} else {
 				console.log(`Unable to parse URL pronouns value of ${paramsPronounsVal}`);
-				this.pronouns = undefined;
+				delete this.pronouns;
 			}
 		}
 
@@ -673,6 +795,55 @@ export class DragonConfig {
 		}
 	}
 
+	#setMaxHPFromURLSearchParams(params: URLSearchParams) {
+		const keys = ['maxHP', 'hp-override'] as const;
+		for (const key of keys) {
+			const paramsKeyVal = params.get(key);
+			if (paramsKeyVal !== null) {
+				const paramsKeyInt = parseInt(paramsKeyVal);
+				if (!Number.isNaN(paramsKeyInt) && paramsKeyInt >= maxHPMin && paramsKeyInt <= maxHPMax) {
+					this.maxHP = paramsKeyInt;
+					return;
+				}
+			}
+		}
+	}
+
+	#setNumberOfHitDiceFromURLSearchParams(params: URLSearchParams) {
+		const keys = ['numberOfHitDice'] as const;
+		for (const key of keys) {
+			const paramsKeyVal = params.get(key);
+			if (paramsKeyVal !== null) {
+				const paramsKeyInt = parseInt(paramsKeyVal);
+				if (
+					!Number.isNaN(paramsKeyInt) &&
+					paramsKeyInt >= numberOfHitDiceMin &&
+					paramsKeyInt <= numberOfHitDiceMax
+				) {
+					this.numberOfHitDice = paramsKeyInt;
+					return;
+				}
+			}
+		}
+	}
+
+	#setAbilitiesFromURLSearchParams(params: URLSearchParams) {
+		for (const abilityTuple of ABILITIES) {
+			const key = abilityTuple[0];
+			const paramsKeyVal = params.get(key);
+			if (paramsKeyVal !== null) {
+				const paramsKeyInt = parseInt(paramsKeyVal);
+				if (
+					!Number.isNaN(paramsKeyInt) &&
+					paramsKeyInt >= abilityMin &&
+					paramsKeyInt <= abilityMax
+				) {
+					this[key] = paramsKeyInt;
+				}
+			}
+		}
+	}
+
 	#setSkillsFromURLSearchParams(params: URLSearchParams) {
 		for (const skill of SKILLS) {
 			const paramsSkillVal = params.get(skill.key);
@@ -686,6 +857,74 @@ export class DragonConfig {
 				) {
 					this[skill.key] = paramsSkillFloat;
 				}
+			}
+		}
+	}
+
+	#setSpellcastingFromURLSearchParams(params: URLSearchParams) {
+		const keys = ['spellcasting', 'spellstate'] as const;
+		for (const key of keys) {
+			const paramsKeyVal = params.get(key);
+			if (paramsKeyVal !== null) {
+				if (paramsKeyVal === 'default') {
+					delete this.spellcasting;
+				} else if (paramsKeyVal === 'off') {
+					this.spellcasting = 'off';
+				} else if (paramsKeyVal === 'onlyAtWill' || paramsKeyVal === 'onlyatwill') {
+					this.spellcasting = 'onlyAtWill';
+				} else if (paramsKeyVal === 'onlyDaily' || paramsKeyVal === 'noatwill') {
+					this.spellcasting = 'onlyDaily';
+				} else {
+					console.log(`Unable to parse URL spellcasting value of ${paramsKeyVal}`);
+					delete this.spellcasting;
+				}
+				return;
+			}
+		}
+	}
+
+	#setAtWillSpellsFromURLSearchParams(params: URLSearchParams) {
+		const keys = ['atWillSpells', 'cantripoverride'] as const;
+		for (const key of keys) {
+			const paramsKeyVal = params.get(key);
+			if (paramsKeyVal !== null) {
+				this.atWillSpells = paramsKeyVal;
+				return;
+			}
+		}
+	}
+
+	#setDailySpellsFromURLSearchParams(params: URLSearchParams) {
+		const keys = ['dailySpells', 'spellsoverride'] as const;
+		for (const key of keys) {
+			const paramsKeyVal = params.get(key);
+			if (paramsKeyVal !== null) {
+				this.dailySpells = paramsKeyVal;
+				return;
+			}
+		}
+	}
+
+	#setDisplaySpellStatsFromURLSearchParams(params: URLSearchParams) {
+		const keys = ['displaySpellStats', 'spelldescription'] as const;
+		for (const key of keys) {
+			const paramsKeyVal = params.get(key);
+			if (paramsKeyVal !== null) {
+				if (paramsKeyVal === 'default') {
+					delete this.displaySpellStats;
+				} else if (paramsKeyVal === 'neither') {
+					this.displaySpellStats = 'neither';
+				} else if (paramsKeyVal === 'both') {
+					this.displaySpellStats = 'both';
+				} else if (paramsKeyVal === 'attack') {
+					this.displaySpellStats = 'attack';
+				} else if (paramsKeyVal === 'saveDC' || paramsKeyVal === 'dc') {
+					this.displaySpellStats = 'saveDC';
+				} else {
+					console.log(`Unable to parse URL displaySpellStats value of ${paramsKeyVal}`);
+					delete this.displaySpellStats;
+				}
+				return;
 			}
 		}
 	}

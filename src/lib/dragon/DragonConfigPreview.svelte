@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
+	import { page } from '$app/stores';
 	import { type DragonConfig, RGBToRGBA } from '.';
-	import { currentDragonConfig } from './builder-states';
+	import { currentDragonConfig, nextBuilderState } from './builder-states';
 
 	const dispatch = createEventDispatcher<{ clickDelete: DragonConfig }>();
 
@@ -27,7 +28,12 @@
 			<button
 				class="daisy-btn daisy-btn-neutral text-white"
 				on:click={() => {
-					$currentDragonConfig = config;
+					if (`?${config.toString()}` === $page.url.search) {
+						// no change is being made, so let's just go to DISPLAY
+						$nextBuilderState = 'DISPLAY';
+					} else {
+						$currentDragonConfig = config;
+					}
 				}}
 			>
 				Rebuild Dragon

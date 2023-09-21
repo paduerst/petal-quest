@@ -123,3 +123,17 @@ body {
 		@apply font-normal;
 	}
 }
+
+#page {
+	/* Temporary workaround until Skeleton AppShell scrollbarGutter prop works */
+	scrollbar-gutter: stable both-edges;
+
+	/* This is a less-temporary workaround to animate scrolling */
+	scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion) {
+	#page {
+		scroll-behavior: auto;
+	}
+}

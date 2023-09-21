@@ -19,7 +19,11 @@
 
 <svelte:window bind:innerWidth />
 
-<Drawer position="right" width="w-[280px] md:w-[480px]">
+<Drawer
+	position="right"
+	width="w-[280px] md:w-[480px]"
+	border="border-l border-r border-surface-300-600-token"
+>
 	<div class="px-2 flex justify-between flex-row">
 		<div />
 		<button class="close-btn hover:bg-primary-hover-token" on:click={drawerClose}>

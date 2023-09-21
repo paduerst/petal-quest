@@ -1,9 +1,9 @@
 <script lang="ts">
 	export let title: string;
-	export let type: string = 'website';
+	export let type = 'website';
 	export let description: string;
 	export let url: string;
-	// export let image: string = 'preview.png';
+	// export let image = 'preview.png';
 </script>
 
 <svelte:head>
