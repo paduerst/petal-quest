@@ -331,7 +331,7 @@ export function RGBToRGBA(rgb: RGB, a: number): string {
 	return `rgba(${rgb.substring(4, rgb.length - 1)}, ${a})`;
 }
 
-export const BASIC_PRONOUN_OPTIONS = ['it-its', 'she-her', 'he-him', 'they-them'] as const;
+export const BASIC_PRONOUN_OPTIONS = ['it-its', 'she-her', 'he-him', 'they-them', 'ey-em'] as const;
 export type BasicPronouns = (typeof BASIC_PRONOUN_OPTIONS)[number];
 export const DEFAULT_PRONOUNS = 'she-her'; // assumed to be of type BasicPronouns
 
@@ -370,6 +370,12 @@ export const BASIC_PRONOUN_CONFIGS: {
 		nominative: 'they',
 		objective: 'them',
 		possessiveAdjective: 'their'
+	},
+	'ey-em': {
+		plural: false,
+		nominative: 'ey',
+		objective: 'em',
+		possessiveAdjective: 'eir'
 	}
 } as const;
 
@@ -725,20 +731,12 @@ export class DragonConfig {
 				this.pronouns = 'he-him';
 			} else if (paramsPronounsVal === 'they-them' || paramsPronounsVal === 'singularthey') {
 				this.pronouns = 'they-them';
+			} else if (paramsPronounsVal === 'ey-em' || paramsPronounsVal === 'spivak') {
+				this.pronouns = 'ey-em';
 			} else if (paramsPronounsVal === 'none' || paramsPronounsVal === 'no-pronouns') {
 				this.pronouns = 'none';
 			} else if (paramsPronounsVal === 'custom' || paramsPronounsVal === 'custom-pronouns') {
 				this.pronouns = 'custom';
-			} else if (paramsPronounsVal === 'ey-em' || paramsPronounsVal === 'spivak') {
-				// we want to support these URL options, using them as custom pronouns
-				this.pronouns = 'custom';
-				this.pronounsConfig = {
-					plural: false,
-					nominative: 'ey',
-					objective: 'em',
-					possessiveAdjective: 'eir'
-				};
-				return; // don't check the URL for custom pronouns
 			} else {
 				console.log(`Unable to parse URL pronouns value of ${paramsPronounsVal}`);
 				delete this.pronouns;
