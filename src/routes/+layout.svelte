@@ -37,7 +37,7 @@
 
 <Drawer />
 
-<AppShell>
+<AppShell scrollbarGutter="stable both-edges">
 	<svelte:fragment slot="header">
 		<Header />
 	</svelte:fragment>
