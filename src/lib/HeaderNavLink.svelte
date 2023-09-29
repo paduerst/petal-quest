@@ -11,13 +11,13 @@
 </script>
 
 <li
-	class="m-1 h-fit w-fit rounded-[--theme-rounded-base] daisy-dropdown daisy-dropdown-hover"
+	class="m-1 h-fit w-fit rounded-[--theme-rounded-base] daisy-dropdown daisy-dropdown-hover border border-surface-500-400-token"
 	class:bg-surface-active-token={path === link.href ||
 		link.children.some((child) => path === child.href)}
 >
 	<label for="blahg" bind:clientWidth={labelWidth} class="flex flex-nowrap">
 		<a
-			class="p-1 rounded-[--theme-rounded-base] text-lg leading-8 no-underline text-token box-border hover:bg-primary-hover-token flex flex-nowrap"
+			class="p-1 min-w-[2.75rem] rounded-[--theme-rounded-base] text-lg leading-8 no-underline text-token box-border hover:bg-primary-hover-token flex flex-nowrap"
 			href={link.href}
 			class:rounded-r-none={link.children.length > 0}
 		>
@@ -26,7 +26,7 @@
 
 		{#if link.children.length > 0}
 			<button
-				class="w-fit p-1 text-center flex items-center justify-center rounded-r-[--theme-rounded-base] hover:bg-primary-hover-token"
+				class="w-fit p-1 px-3 text-center flex items-center justify-center rounded-r-[--theme-rounded-base] hover:bg-primary-hover-token"
 			>
 				<ChevronDown class="mt-1" width="1.25rem" height="1.25rem" />
 			</button>

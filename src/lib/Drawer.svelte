@@ -26,7 +26,10 @@
 >
 	<div class="px-2 flex justify-between flex-row">
 		<div />
-		<button class="close-btn hover:bg-primary-hover-token" on:click={drawerClose}>
+		<button
+			class="close-btn hover:bg-primary-hover-token border border-transparent"
+			on:click={drawerClose}
+		>
 			<span>
 				<svg class="w-5 h-5" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path
