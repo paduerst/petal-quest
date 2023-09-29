@@ -125,10 +125,6 @@ body {
 }
 
 #page {
-	/* Temporary workaround until Skeleton AppShell scrollbarGutter prop works */
-	scrollbar-gutter: stable both-edges;
-
-	/* This is a less-temporary workaround to animate scrolling */
 	scroll-behavior: smooth;
 }
 
@@ -136,4 +132,9 @@ body {
 	#page {
 		scroll-behavior: auto;
 	}
+}
+
+.tree-item-content {
+	/* Workaround until Skeleton allows custom TreeViewItem width */
+	@apply w-full;
 }
