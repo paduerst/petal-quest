@@ -13,7 +13,8 @@
 
 <li
 	class="m-1 h-fit w-fit rounded-[--theme-rounded-base] daisy-dropdown daisy-dropdown-hover"
-	class:bg-surface-active-token={path === link.href}
+	class:bg-surface-active-token={path === link.href ||
+		link.children.some((child) => path === child.href)}
 >
 	<label for="blahg" bind:clientWidth={linkWidth}>
 		<a
