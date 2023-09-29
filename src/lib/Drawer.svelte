@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { Drawer, getDrawerStore } from '@skeletonlabs/skeleton';
+	import { Drawer, getDrawerStore, TreeView, TreeViewItem } from '@skeletonlabs/skeleton';
 	import { NAV_LINKS } from '$lib';
 
 	let path: string;
@@ -26,7 +26,10 @@
 >
 	<div class="px-2 flex justify-between flex-row">
 		<div />
-		<button class="close-btn hover:bg-primary-hover-token" on:click={drawerClose}>
+		<button
+			class="hover:bg-primary-hover-token border border-transparent p-3 rounded-[--theme-rounded-base] my-[6px]"
+			on:click={drawerClose}
+		>
 			<span>
 				<svg class="w-5 h-5" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path
@@ -41,36 +44,59 @@
 	</div>
 	<hr />
 	<nav class="list-nav p-4">
-		<ul>
-			{#each NAV_LINKS as link}
-				<li>
-					<a
-						class="nav-anchor hover:bg-primary-hover-token"
-						class:active={path === link.href}
-						href={link.href}
-						on:click={drawerClose}
+		<TreeView padding="py-1 pl-4 pr-1">
+			<ul>
+				{#each NAV_LINKS as link}
+					<TreeViewItem
+						hideChildren={link.children.length <= 0}
+						hyphenOpacity="opacity-0"
+						open={link.children.some((child) => path === child.href)}
 					>
-						{link.text}
-					</a>
-				</li>
-			{/each}
-		</ul>
+						<li
+							class="h-fit w-full rounded-[--theme-rounded-base] border border-transparent"
+							class:bg-surface-active-token={path === link.href}
+							class:border-surface-400-500-token={link.children.some(
+								(child) => path === child.href
+							)}
+						>
+							<a
+								class="p-1 w-full rounded-[--theme-rounded-base] text-lg leading-8 no-underline text-token box-border hover:bg-primary-hover-token flex flex-nowrap"
+								href={link.href}
+								on:click={drawerClose}
+							>
+								<span class="p-1">
+									{link.text}
+								</span>
+							</a>
+						</li>
+
+						<svelte:fragment slot="children">
+							{#if link.children.length > 0}
+								<ul>
+									{#each link.children as child}
+										<TreeViewItem hyphenOpacity="opacity-40">
+											<li
+												class="h-fit w-full rounded-[--theme-rounded-base] border border-transparent"
+												class:bg-surface-active-token={path === child.href}
+											>
+												<a
+													class="p-1 w-full rounded-[--theme-rounded-base] text-lg leading-8 no-underline text-token box-border hover:bg-primary-hover-token flex flex-nowrap"
+													href={child.href}
+													on:click={drawerClose}
+												>
+													<span class="p-1">
+														{child.text}
+													</span>
+												</a>
+											</li>
+										</TreeViewItem>
+									{/each}
+								</ul>
+							{/if}
+						</svelte:fragment>
+					</TreeViewItem>
+				{/each}
+			</ul>
+		</TreeView>
 	</nav>
 </Drawer>
-
-<style>
-	.nav-anchor {
-		@apply no-underline text-token;
-		border-radius: var(--theme-rounded-base);
-	}
-
-	.nav-anchor.active {
-		@apply bg-surface-active-token;
-	}
-
-	.close-btn {
-		@apply p-3;
-		margin: 6px 0;
-		border-radius: var(--theme-rounded-base);
-	}
-</style>

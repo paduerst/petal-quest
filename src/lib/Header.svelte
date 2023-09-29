@@ -1,11 +1,8 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import { AppBar, getDrawerStore } from '@skeletonlabs/skeleton';
 	import Logo from '$lib/Logo.svelte';
 	import { NAV_LINKS } from '$lib';
-
-	let path: string;
-	$: path = $page.url.pathname;
+	import HeaderNavLink from './HeaderNavLink.svelte';
 
 	const drawerStore = getDrawerStore();
 	function drawerOpen(): void {
@@ -23,19 +20,14 @@
 			<nav class="hidden lg:flex">
 				<ul class="list-none flex items-center flex-row">
 					{#each NAV_LINKS as link}
-						<li>
-							<a
-								class="nav-anchor hover:bg-primary-hover-token"
-								class:active={path === link.href}
-								href={link.href}
-							>
-								{link.text}
-							</a>
-						</li>
+						<HeaderNavLink {link} />
 					{/each}
 				</ul>
 			</nav>
-			<button class="lg:hidden menu-btn hover:bg-primary-hover-token" on:click={drawerOpen}>
+			<button
+				class="lg:hidden p-3 rounded-[--theme-rounded-base] hover:bg-primary-hover-token border border-transparent"
+				on:click={drawerOpen}
+			>
 				<span>
 					<svg viewBox="0 0 80 80" class="fill-token w-5 h-5">
 						<rect y="0" width="80" height="10" rx="2" />
@@ -47,19 +39,3 @@
 		</svelte:fragment>
 	</AppBar>
 </div>
-
-<style>
-	.nav-anchor {
-		@apply p-3 m-2 text-lg no-underline text-token;
-		border-radius: var(--theme-rounded-base);
-	}
-
-	.nav-anchor.active {
-		@apply bg-surface-active-token;
-	}
-
-	.menu-btn {
-		@apply p-3;
-		border-radius: var(--theme-rounded-base);
-	}
-</style>
