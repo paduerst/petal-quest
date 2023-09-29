@@ -25,7 +25,7 @@
 				</ul>
 			</nav>
 			<button
-				class="lg:hidden menu-btn hover:bg-primary-hover-token border border-transparent"
+				class="lg:hidden p-3 rounded-[--theme-rounded-base] hover:bg-primary-hover-token border border-transparent"
 				on:click={drawerOpen}
 			>
 				<span>
@@ -39,10 +39,3 @@
 		</svelte:fragment>
 	</AppBar>
 </div>
-
-<style>
-	.menu-btn {
-		@apply p-3;
-		border-radius: var(--theme-rounded-base);
-	}
-</style>

@@ -27,7 +27,7 @@
 	<div class="px-2 flex justify-between flex-row">
 		<div />
 		<button
-			class="close-btn hover:bg-primary-hover-token border border-transparent"
+			class="hover:bg-primary-hover-token border border-transparent p-3 rounded-[--theme-rounded-base] my-[6px]"
 			on:click={drawerClose}
 		>
 			<span>
@@ -48,8 +48,8 @@
 			{#each NAV_LINKS as link}
 				<li>
 					<a
-						class="nav-anchor hover:bg-primary-hover-token"
-						class:active={path === link.href}
+						class="no-underline text-token rounded-[--theme-rounded-base] hover:bg-primary-hover-token"
+						class:bg-surface-active-token={path === link.href}
 						href={link.href}
 						on:click={drawerClose}
 					>
@@ -60,20 +60,3 @@
 		</ul>
 	</nav>
 </Drawer>
-
-<style>
-	.nav-anchor {
-		@apply no-underline text-token;
-		border-radius: var(--theme-rounded-base);
-	}
-
-	.nav-anchor.active {
-		@apply bg-surface-active-token;
-	}
-
-	.close-btn {
-		@apply p-3;
-		margin: 6px 0;
-		border-radius: var(--theme-rounded-base);
-	}
-</style>
