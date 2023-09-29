@@ -2,13 +2,12 @@
 	import { page } from '$app/stores';
 	import type { NAV_LINKS } from '$lib';
 	import ChevronDown from '~icons/bi/chevron-down';
-	import ChevronUp from '~icons/bi/chevron-up';
 
 	let path: string;
 	$: path = $page.url.pathname;
 
 	export let link: (typeof NAV_LINKS)[number];
-	let linkWidth: number;
+	let labelWidth: number;
 </script>
 
 <li
@@ -16,26 +15,29 @@
 	class:bg-surface-active-token={path === link.href ||
 		link.children.some((child) => path === child.href)}
 >
-	<label for="blahg" bind:clientWidth={linkWidth}>
+	<label for="blahg" bind:clientWidth={labelWidth} class="flex flex-nowrap">
 		<a
 			class="p-1 rounded-[--theme-rounded-base] text-lg leading-8 no-underline text-token box-border hover:bg-primary-hover-token flex flex-nowrap"
 			href={link.href}
+			class:rounded-r-none={link.children.length > 0}
 		>
 			<span class="p-1">{link.text}</span>
-
-			{#if link.children.length > 0}
-				<div class="w-fit p-1 text-center flex items-center justify-center">
-					<ChevronDown class="mt-1" width="1.25rem" height="1.25rem" />
-				</div>
-			{/if}
 		</a>
+
+		{#if link.children.length > 0}
+			<button
+				class="w-fit p-1 text-center flex items-center justify-center rounded-r-[--theme-rounded-base] hover:bg-primary-hover-token"
+			>
+				<ChevronDown class="mt-1" width="1.25rem" height="1.25rem" />
+			</button>
+		{/if}
 	</label>
 
 	{#if link.children.length > 0}
 		<ul
 			id="blahg"
 			class="daisy-dropdown-content z-[1] p-1 shadow bg-surface-200-700-token w-fit border-surface-300-600-token border rounded-[--theme-rounded-base] flex flex-col gap-1"
-			style="min-width: {linkWidth}px;"
+			style="min-width: {labelWidth}px;"
 		>
 			{#each link.children as child}
 				<li
