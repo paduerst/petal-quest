@@ -8,6 +8,9 @@
 
 	export let link: (typeof NAV_LINKS)[number];
 	let labelWidth: number;
+
+	let childrenList: HTMLUListElement;
+	let childrenVisible: boolean = false;
 </script>
 
 <li
@@ -26,9 +29,18 @@
 
 		{#if link.children.length > 0}
 			<button
-				class="w-fit p-1 px-3 text-center flex items-center justify-center rounded-r-[--theme-rounded-base] hover:bg-primary-hover-token"
+				class="custom-daisy-dropdown-btn w-fit p-1 px-3 text-center flex items-center justify-center rounded-r-[--theme-rounded-base] hover:bg-primary-hover-token"
+				on:click={() => {
+					if (childrenVisible) {
+						console.log(
+							'TODO: this click should have closed the childrenList, maybe by breaking focus on this button?'
+						);
+					}
+				}}
 			>
-				<ChevronDown class="mt-1" width="1.25rem" height="1.25rem" />
+				<div class="custom-daisy-dropdown-arrow mt-1">
+					<ChevronDown width="1.25rem" height="1.25rem" />
+				</div>
 			</button>
 		{/if}
 	</label>
@@ -36,12 +48,16 @@
 	{#if link.children.length > 0}
 		<ul
 			id="blahg"
+			bind:this={childrenList}
 			class="daisy-dropdown-content z-[1] p-1 shadow bg-surface-200-700-token w-fit border-surface-300-600-token border rounded-[--theme-rounded-base] flex flex-col gap-1"
 			style="min-width: {labelWidth}px;"
+			on:transitionend={() => {
+				childrenVisible = getComputedStyle(childrenList).visibility === 'visible';
+			}}
 		>
 			{#each link.children as child}
 				<li
-					class="h-fit w-full rounded-[--theme-rounded-base]"
+					class="h-fit w-full rounded-[--theme-rounded-base] border border-surface-500-400-token"
 					class:bg-surface-active-token={path === child.href}
 				>
 					<a
@@ -57,3 +73,29 @@
 		</ul>
 	{/if}
 </li>
+
+<style>
+	.custom-daisy-dropdown-btn {
+		--dropdown-arrow-rotation: 0deg;
+	}
+
+	/* .daisy-dropdown.daisy-dropdown-open .custom-daisy-dropdown-btn, */
+	.daisy-dropdown:not(.daisy-dropdown-hover):focus .custom-daisy-dropdown-btn,
+	.daisy-dropdown:focus-within .custom-daisy-dropdown-btn {
+		--dropdown-arrow-rotation: 180deg;
+	}
+
+	@media (hover: hover) {
+		.daisy-dropdown.daisy-dropdown-hover:hover .custom-daisy-dropdown-btn {
+			--dropdown-arrow-rotation: 180deg;
+		}
+	}
+
+	.custom-daisy-dropdown-arrow {
+		transition-property: transform;
+		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+		transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+		transition-duration: 200ms;
+		transform: rotate(var(--dropdown-arrow-rotation));
+	}
+</style>
