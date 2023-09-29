@@ -14,7 +14,7 @@
 </script>
 
 <li
-	class="m-1 h-fit w-fit rounded-[--theme-rounded-base] daisy-dropdown daisy-dropdown-hover border border-surface-500-400-token"
+	class="m-1 h-fit w-fit rounded-[--theme-rounded-base] daisy-dropdown daisy-dropdown-hover border border-surface-400-500-token"
 	class:bg-surface-active-token={path === link.href ||
 		link.children.some((child) => path === child.href)}
 >
@@ -39,7 +39,7 @@
 				}}
 			>
 				<div class="custom-daisy-dropdown-arrow mt-1">
-					<ChevronDown width="1.25rem" height="1.25rem" />
+					<ChevronDown width="20px" height="20px" />
 				</div>
 			</button>
 		{/if}
@@ -57,7 +57,7 @@
 		>
 			{#each link.children as child}
 				<li
-					class="h-fit w-full rounded-[--theme-rounded-base] border border-surface-500-400-token"
+					class="h-fit w-full rounded-[--theme-rounded-base] border border-surface-400-500-token"
 					class:bg-surface-active-token={path === child.href}
 				>
 					<a
