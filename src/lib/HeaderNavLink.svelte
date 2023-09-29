@@ -33,19 +33,21 @@
 	{#if link.children.length > 0}
 		<ul
 			id="blahg"
-			class="daisy-dropdown-content z-[1] p-2 shadow bg-surface-200-700-token w-fit border-surface-300-600-token border rounded-[--theme-rounded-base]"
+			class="daisy-dropdown-content z-[1] p-1 shadow bg-surface-200-700-token w-fit border-surface-300-600-token border rounded-[--theme-rounded-base] flex flex-col gap-1"
 			style="min-width: {linkWidth}px;"
 		>
 			{#each link.children as child}
 				<li
-					class="m-1 h-fit w-full rounded-[--theme-rounded-base]"
+					class="h-fit w-full rounded-[--theme-rounded-base]"
 					class:bg-surface-active-token={path === child.href}
 				>
 					<a
 						class="p-1 w-full rounded-[--theme-rounded-base] text-lg leading-8 no-underline text-token box-border hover:bg-primary-hover-token flex flex-nowrap"
 						href={child.href}
 					>
-						{child.text}
+						<span class="p-1">
+							{child.text}
+						</span>
 					</a>
 				</li>
 			{/each}
