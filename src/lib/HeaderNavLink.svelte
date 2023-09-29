@@ -13,8 +13,9 @@
 </script>
 
 <li
-	class="m-1 h-fit w-fit rounded-[--theme-rounded-base] daisy-dropdown daisy-dropdown-hover border border-surface-400-500-token"
+	class="m-1 h-fit w-fit rounded-[--theme-rounded-base] daisy-dropdown daisy-dropdown-hover border border-transparent"
 	class:bg-surface-active-token={path === link.href}
+	class:border-surface-400-500-token={link.children.some((child) => path === child.href)}
 >
 	<label for={navLinkChildrenId} bind:clientWidth={labelWidth} class="flex flex-nowrap">
 		<a
@@ -45,7 +46,7 @@
 		>
 			{#each link.children as child}
 				<li
-					class="h-fit w-full rounded-[--theme-rounded-base] border border-surface-400-500-token"
+					class="h-fit w-full rounded-[--theme-rounded-base] border border-transparent"
 					class:bg-surface-active-token={path === child.href}
 				>
 					<a
