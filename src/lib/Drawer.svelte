@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { Drawer, getDrawerStore } from '@skeletonlabs/skeleton';
+	import { Drawer, getDrawerStore, TreeView, TreeViewItem } from '@skeletonlabs/skeleton';
 	import { NAV_LINKS } from '$lib';
 
 	let path: string;
@@ -44,9 +44,13 @@
 	</div>
 	<hr />
 	<nav class="list-nav p-4">
-		<ul>
+		<TreeView>
 			{#each NAV_LINKS as link}
-				<li>
+				<TreeViewItem
+					hideChildren={link.children.length <= 0}
+					hyphenOpacity="opacity-0"
+					open={link.children.some((child) => path === child.href)}
+				>
 					<a
 						class="no-underline text-token rounded-[--theme-rounded-base] hover:bg-primary-hover-token"
 						class:bg-surface-active-token={path === link.href}
@@ -55,8 +59,22 @@
 					>
 						{link.text}
 					</a>
-				</li>
+					<svelte:fragment slot="children">
+						{#each link.children as child}
+							<TreeViewItem hyphenOpacity="opacity-40">
+								<a
+									class="no-underline text-token rounded-[--theme-rounded-base] hover:bg-primary-hover-token"
+									class:bg-surface-active-token={path === child.href}
+									href={child.href}
+									on:click={drawerClose}
+								>
+									{child.text}
+								</a>
+							</TreeViewItem>
+						{/each}
+					</svelte:fragment>
+				</TreeViewItem>
 			{/each}
-		</ul>
+		</TreeView>
 	</nav>
 </Drawer>
