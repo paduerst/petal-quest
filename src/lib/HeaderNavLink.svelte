@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import type { NAV_LINKS } from '$lib';
+	import { type NAV_LINKS, getNavLinkId } from '$lib';
 	import ChevronDown from '~icons/bi/chevron-down';
 
 	let path: string;
@@ -9,16 +9,14 @@
 	export let link: (typeof NAV_LINKS)[number];
 	let labelWidth: number;
 
-	let childrenList: HTMLUListElement;
-	let childrenVisible: boolean = false;
+	let navLinkChildrenId = `${getNavLinkId(link)}__children`;
 </script>
 
 <li
 	class="m-1 h-fit w-fit rounded-[--theme-rounded-base] daisy-dropdown daisy-dropdown-hover border border-surface-400-500-token"
-	class:bg-surface-active-token={path === link.href ||
-		link.children.some((child) => path === child.href)}
+	class:bg-surface-active-token={path === link.href}
 >
-	<label for="blahg" bind:clientWidth={labelWidth} class="flex flex-nowrap">
+	<label for={navLinkChildrenId} bind:clientWidth={labelWidth} class="flex flex-nowrap">
 		<a
 			class="p-1 min-w-[2.75rem] rounded-[--theme-rounded-base] text-lg leading-8 no-underline text-token box-border hover:bg-primary-hover-token flex flex-nowrap"
 			href={link.href}
@@ -29,14 +27,8 @@
 
 		{#if link.children.length > 0}
 			<button
+				tabindex="-1"
 				class="custom-daisy-dropdown-btn w-fit p-1 px-3 text-center flex items-center justify-center rounded-r-[--theme-rounded-base] hover:bg-primary-hover-token"
-				on:click={() => {
-					if (childrenVisible) {
-						console.log(
-							'TODO: this click should have closed the childrenList, maybe by breaking focus on this button?'
-						);
-					}
-				}}
 			>
 				<div class="custom-daisy-dropdown-arrow mt-1">
 					<ChevronDown width="20px" height="20px" />
@@ -47,13 +39,9 @@
 
 	{#if link.children.length > 0}
 		<ul
-			id="blahg"
-			bind:this={childrenList}
-			class="daisy-dropdown-content z-[1] p-1 shadow bg-surface-200-700-token w-fit border-surface-300-600-token border rounded-[--theme-rounded-base] flex flex-col gap-1"
-			style="min-width: {labelWidth}px;"
-			on:transitionend={() => {
-				childrenVisible = getComputedStyle(childrenList).visibility === 'visible';
-			}}
+			id={navLinkChildrenId}
+			class="daisy-dropdown-content z-[1] p-1 shadow bg-surface-200-700-token border-surface-300-600-token border rounded-[--theme-rounded-base] flex flex-col gap-1"
+			style="width: {labelWidth}px;"
 		>
 			{#each link.children as child}
 				<li
