@@ -1,6 +1,10 @@
 import SpellWallOfShadow__SvelteComponent_ from './SpellWallOfShadow.svelte';
 import SpellWallOfForce__SvelteComponent_ from './SpellWallOfForce.svelte';
 
+import { SRD_SPELLS } from './srd';
+
+export type SpellLevel = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+
 export const SPELL_SCHOOLS = [
 	'Abjuration',
 	'Conjuration',
@@ -13,11 +17,19 @@ export const SPELL_SCHOOLS = [
 ] as const;
 export type SpellSchool = (typeof SPELL_SCHOOLS)[number];
 
+export type SpellVals = {
+	name: string;
+	level: SpellLevel;
+	school: SpellSchool;
+	castingTime: string;
+	ritual: boolean;
+	range: string;
+	components: string;
+	duration: string;
+};
+
 // Homebrew spells written by us.
 export const PETAL_SPELLS = ['wall-of-shadow'] as const;
-
-// Spells from the SRD 5.1: https://dnd.wizards.com/resources/systems-reference-document
-export const SRD_SPELLS = ['wall-of-force'] as const;
 
 // Spells that can be displayed in this app.
 export const APP_SPELLS = [...PETAL_SPELLS, ...SRD_SPELLS] as const;
