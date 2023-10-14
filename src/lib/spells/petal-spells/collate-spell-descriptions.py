@@ -16,7 +16,7 @@ path_to_output_file = os.path.join(
 output_preamble = "\n".join([
     "import type { PetalSpell } from '.';",
     "",
-    "export const SRD_SPELL_DESCRIPTIONS: {",
+    "export const PETAL_SPELL_DESCRIPTIONS: {",
     "	[key in PetalSpell]: string;",
     "} = "
 ])
