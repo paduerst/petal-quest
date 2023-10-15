@@ -29,6 +29,7 @@ output_postamble = "\n".join([
 
 def cleanSpellDescription(description: str):
     output = description.strip()
+    output = output.replace("\t", "  ")
     output = newlineRegex.sub('', output)
     output = multispaceRegex.sub(' ', output)
     output = output.replace("<p> ", "<p>")
