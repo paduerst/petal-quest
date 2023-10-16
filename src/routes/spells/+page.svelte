@@ -1,4 +1,5 @@
 <script lang="ts">
+	import PageMeta from '$lib/PageMeta.svelte';
 	import { PETAL_SPELLS } from '$lib/spells/petal-spells';
 	import { PETAL_SPELL_VALS } from '$lib/spells/petal-spells/petal-spell-vals';
 	import { SRD_SPELLS } from '$lib/spells/srd-spells';
@@ -8,6 +9,12 @@
 		return `${spellID}/`;
 	}
 </script>
+
+<PageMeta
+	title="Spells - Petal Quest"
+	description="Spells for 5th edition, both homebrew and from the SRD."
+	url="https://www.petalquest.com/spells/"
+/>
 
 <h2 class="mt-4">Homebrew Spells</h2>
 
