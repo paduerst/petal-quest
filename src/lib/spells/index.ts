@@ -31,6 +31,7 @@ export type SpellVals = {
 	range: string;
 	components: string;
 	duration: string;
+	classes?: readonly string[];
 };
 
 // Spells that can be displayed in this app.

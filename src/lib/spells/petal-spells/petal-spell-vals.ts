@@ -12,6 +12,7 @@ export const PETAL_SPELL_VALS: {
 		ritual: false,
 		range: '60 feet',
 		components: 'V, S',
-		duration: '10 minutes'
+		duration: '10 minutes',
+		classes: ['Wizard']
 	}
 } as const;

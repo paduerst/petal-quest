@@ -9,10 +9,6 @@
 	}
 </script>
 
-<h1>Spells</h1>
-
-<p>This app has the following spells on it.</p>
-
 <h2 class="mt-4">Homebrew Spells</h2>
 
 <ul>
