@@ -323,3 +323,7 @@ export const SRD_SPELLS = [
 ] as const;
 
 export type SRDSpell = (typeof SRD_SPELLS)[number];
+
+export function stringToSRDSpell(spellString: string): SRDSpell | undefined {
+	return SRD_SPELLS.find((spell) => spell === spellString);
+}

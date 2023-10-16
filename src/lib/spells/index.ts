@@ -1,3 +1,5 @@
+import { numberWithOrdinalSuffix } from '$lib';
+
 import { PETAL_SPELLS } from './petal-spells';
 import { PETAL_SPELL_VALS } from './petal-spells/petal-spell-vals';
 import { PETAL_SPELL_DESCRIPTIONS } from './petal-spells/petal-spell-descriptions';
@@ -33,6 +35,19 @@ export type SpellVals = {
 	duration: string;
 	classes?: readonly string[];
 };
+
+export function getSpellSubtitle(spell: SpellVals): string {
+	let output: string;
+	if (spell.level === 0) {
+		output = `${spell.school} cantrip`;
+	} else {
+		output = `${numberWithOrdinalSuffix(spell.level)}-level ${spell.school.toLowerCase()}`;
+	}
+	if (spell.ritual) {
+		output = `${output} (ritual)`;
+	}
+	return output;
+}
 
 // Spells that can be displayed in this app.
 export const APP_SPELLS = [...PETAL_SPELLS, ...SRD_SPELLS] as const;
