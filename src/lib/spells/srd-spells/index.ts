@@ -327,3 +327,43 @@ export type SRDSpell = (typeof SRD_SPELLS)[number];
 export function stringToSRDSpell(spellString: string): SRDSpell | undefined {
 	return SRD_SPELLS.find((spell) => spell === spellString);
 }
+
+export const SRD_SPELLS_WITH_ERRATA: readonly SRDSpell[] = [
+	'acid-splash',
+	'call-lightning',
+	'clone',
+	'color-spray',
+	'contagion',
+	'disintegrate',
+	'find-familiar',
+	'find-steed',
+	'glyph-of-warding',
+	'heroes-feast',
+	'levitate',
+	'mass-cure-wounds',
+	'mass-heal',
+	'moonbeam',
+	'magnificent-mansion',
+	'phantasmal-killer',
+	'polymorph',
+	'prismatic-wall',
+	'revivify',
+	'sanctuary',
+	'simulacrum',
+	'sleet-storm',
+	'slow',
+	'storm-of-vengeance',
+	'true-polymorph',
+	'true-resurrection',
+	'unseen-servant',
+	'weird'
+] as const;
+
+export function spellHasErrata(spellString: string): boolean {
+	const spellInSRD = stringToSRDSpell(spellString);
+	if (spellInSRD === undefined) {
+		return false;
+	} else {
+		return SRD_SPELLS_WITH_ERRATA.includes(spellInSRD);
+	}
+}

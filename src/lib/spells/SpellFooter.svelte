@@ -1,27 +1,28 @@
 <script lang="ts">
 	import type { AppSpell } from '.';
 	import { stringToPetalSpell } from './petal-spells';
-	import { stringToSRDSpell } from './srd-spells';
+	import { stringToSRDSpell, spellHasErrata } from './srd-spells';
 
 	export let spell: AppSpell;
 
-	let spellAsPetalSpell = stringToPetalSpell(spell);
-	let spellAsSRDSpell = stringToSRDSpell(spell);
+	let isPetalSpell = stringToPetalSpell(spell) !== undefined;
+	let isSRDSpell = stringToSRDSpell(spell) !== undefined;
+	let hasErrata = spellHasErrata(spell);
 </script>
 
-{#if spellAsPetalSpell !== undefined || spellAsSRDSpell !== undefined}
+{#if isPetalSpell || (isSRDSpell && hasErrata)}
 	<div class="spell-footer p-2 pt-0">
 		<div
 			class="card p-4"
-			class:variant-ghost-tertiary={spellAsPetalSpell !== undefined}
-			class:variant-ghost-warning={spellAsSRDSpell !== undefined}
+			class:variant-ghost-tertiary={isPetalSpell}
+			class:variant-ghost-warning={isSRDSpell}
 		>
-			{#if spellAsPetalSpell !== undefined}
+			{#if isPetalSpell}
 				<p>
 					This is a homebrew spell written by Petal Quest. It isn't available as a player option
 					without your GM's permission.
 				</p>
-			{:else if spellAsSRDSpell !== undefined}
+			{:else if isSRDSpell && hasErrata}
 				<p>
 					This is a spell copied from the
 					<a href="https://dnd.wizards.com/resources/systems-reference-document">SRD 5.1</a>, which
