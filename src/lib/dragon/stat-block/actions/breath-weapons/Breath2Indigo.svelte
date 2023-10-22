@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { capitalizeFirstLetter } from '$lib/dragon';
 	import type { DragonStats } from '$lib/dragon/dragon-stats';
+	import SpellLink from '$lib/spells/SpellLink.svelte';
 
 	export let dragon: DragonStats;
 </script>
@@ -13,6 +14,6 @@
 		Constitution saving throw. On a failed save, the creature is restrained until the end of its next
 		turn, at which time it must repeat the saving throw. If it fails this second save as well, the creature
 		turns to stone and is petrified {dragon.breath2SpecialValue}until freed by the
-		<i>greater restoration</i> spell or other magic.
+		<SpellLink spellName="greater restoration" /> spell or other magic.
 	</p>
 </div>
