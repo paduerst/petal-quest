@@ -8,7 +8,7 @@ import { SRD_SPELLS } from './srd-spells';
 import { SRD_SPELL_VALS } from './srd-spells/srd-spell-vals';
 import { SRD_SPELL_DESCRIPTIONS } from './srd-spells/srd-spell-descriptions';
 
-import { DDB_SPELLS } from './ddb-spells';
+import { DDB_SPELLS, stringToDDBSpell } from './ddb-spells';
 
 export type SpellLevel = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 
@@ -70,3 +70,23 @@ export function stringToAppSpell(spellString: string): AppSpell | undefined {
 
 // All spells that this app knows of.
 export const COMPLETE_SPELLS = [...APP_SPELLS, ...DDB_SPELLS] as const;
+
+export function spellNameToID(spellName: string): string {
+	return spellName.toLowerCase().replace(/[ /]/g, '-').replace(/[’']/, '');
+}
+
+export function spellNameToURL(spellName: string): string {
+	const spell = spellNameToID(spellName);
+
+	const spellAsAppSpell = stringToAppSpell(spell);
+	if (spellAsAppSpell !== undefined) {
+		return `/spells/${spellAsAppSpell}/`;
+	}
+
+	const spellAsDDBSpell = stringToDDBSpell(spell);
+	if (spellAsDDBSpell !== undefined) {
+		return `https://www.dndbeyond.com/spells/${spellAsDDBSpell}`;
+	}
+
+	return '';
+}
