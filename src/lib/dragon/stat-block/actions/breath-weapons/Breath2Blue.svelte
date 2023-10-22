@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { capitalizeFirstLetter } from '$lib/dragon';
 	import type { DragonStats } from '$lib/dragon/dragon-stats';
+	import SpellLink from '$lib/spells/SpellLink.svelte';
 
 	export let dragon: DragonStats;
 </script>
@@ -15,7 +16,7 @@
 
 	<p class="blue-breath-option">
 		<i>1. Floating Feeling.</i> The creature levitates (as if affected by the
-		<i>levitate</i> spell), and its flying speed (if any) becomes 0.
+		<SpellLink spellName="levitate" /> spell), and its flying speed (if any) becomes 0.
 	</p>
 
 	<p class="blue-breath-option">
@@ -31,7 +32,7 @@
 
 	<p class="blue-breath-option">
 		<i>4. Froggy Jinx.</i> The creature is transformed into a frog, as if by the
-		<i>polymorph</i> spell.
+		<SpellLink spellName="polymorph" /> spell.
 	</p>
 </div>
 
