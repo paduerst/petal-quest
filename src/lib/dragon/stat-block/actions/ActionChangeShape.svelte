@@ -35,11 +35,11 @@
 			<abbr title="hit points and Hit Dice">hit points</abbr>,
 			<abbr title="Intelligence, Wisdom, and Charisma scores">mental ability scores</abbr>,
 			{#if dragon.changeShapeRetainedFeatures.length < 1}
-				and proficiencies
+				and proficiencies,
 			{:else}
-				proficiencies, {retainedFeatures}
+				proficiencies, {retainedFeatures},
 			{/if}
-			, as well as this feature.
+			as well as this feature.
 			{capitalizeFirstLetter(dragon.pronounPossessiveAdjective)} statistics and capabilities are otherwise
 			replaced by those of the new form, except any class features or legendary actions of that form.
 		</p>
