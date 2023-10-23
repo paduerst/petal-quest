@@ -7,7 +7,9 @@
 {#if dragon.age !== 'wyrmling' && dragon.age !== 'young'}
 	<div class="dragon-action">
 		<p>
-			<i><b>Frightful Flare (1/Day).</b></i>
+			<i>
+				<b>Frightful Flare (<abbr title="Recharges after a Short or Long Rest">1/SR</abbr>). </b>
+			</i>
 			{dragon.nameUpper} unleashes {dragon.pronounPossessiveAdjective} inner light, maxing out {dragon.pronounPossessiveAdjective}
 			Variable Radiance to a radius of {dragon.prismaticRadianceRadius} feet. Each creature of {dragon.name}'s
 			choice within {2 * dragon.prismaticRadianceRadius} feet of {dragon.pronounObjective} must make
