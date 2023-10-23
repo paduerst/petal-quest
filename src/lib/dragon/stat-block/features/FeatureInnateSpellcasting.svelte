@@ -51,7 +51,7 @@
 		{#if dragon.spells.length > 0}
 			<div class="dragon-spells dragon-list">
 				<p class="-indent-4 pl-4">
-					1/day{dragon.spells.length > 0 ? ' each' : ''}:
+					1/day{dragon.spells.length > 1 ? ' each' : ''}:
 					{#each dragon.spells as spell, index}
 						<FeatureInnateSpellcastingSpell
 							{spell}
