@@ -3,6 +3,7 @@
 	import { numberWithSign } from '$lib/dragon';
 	import FeatureInnateSpellcastingSpell from './FeatureInnateSpellcastingSpell.svelte';
 	import { numberWithOrdinalSuffix } from '$lib';
+	import UpcastAbbr from '../UpcastAbbr.svelte';
 
 	export let dragon: DragonStats;
 
@@ -22,13 +23,6 @@
 		}
 		spellsDCString = spellsDCString + ')';
 	}
-
-	let maxLevelWithOrdinal = numberWithOrdinalSuffix(dragon.spellcastingMaxLevel);
-	let affectedLevels =
-		dragon.spellcastingMaxLevel > 2
-			? `1st through ${numberWithOrdinalSuffix(dragon.spellcastingMaxLevel - 1)} level`
-			: '1st level';
-	let abbrTitle = `Spells of ${affectedLevels} are cast at ${maxLevelWithOrdinal} level.`;
 </script>
 
 {#if dragon.cantrips.length > 0 || dragon.spells.length > 0}
@@ -38,9 +32,7 @@
 				<i>
 					<b>
 						{#if dragon.spellcastingMaxLevel > 1}
-							Innate Spellcasting (<abbr title={abbrTitle}
-								>Upcast to {maxLevelWithOrdinal} Level</abbr
-							>).
+							Innate Spellcasting (<UpcastAbbr level={dragon.spellcastingMaxLevel} />).
 						{:else}
 							Innate Spellcasting.
 						{/if}
