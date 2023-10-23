@@ -399,7 +399,7 @@ export const DRAGON_VALS: {
 			atWillSpellsHaveAttack: 0,
 			atWillSpellsHaveSave: 1,
 			rawSpells:
-				'disguise self, illusory script, enthrall, silent image, magic mouth, major image (6th level, lasts until dispelled), teleport (self only)',
+				'disguise self, illusory script, enthrall, silent image, magic mouth, major image (lasts until dispelled), teleport (self only)',
 			oncePerDaySpellsHaveAttack: 0,
 			oncePerDaySpellsHaveSave: 1,
 			biteReach: 15,
@@ -2309,7 +2309,7 @@ export const DRAGON_VALS: {
 			atWillSpellsHaveAttack: 0,
 			atWillSpellsHaveSave: 0,
 			rawSpells:
-				'magic circle (6th level, 4-hour duration), zone of truth, sending, unseen servant, teleportation circle',
+				'magic circle (4-hour duration), zone of truth, sending, unseen servant, teleportation circle',
 			oncePerDaySpellsHaveAttack: 0,
 			oncePerDaySpellsHaveSave: 1,
 			biteReach: 10,
@@ -2392,7 +2392,7 @@ export const DRAGON_VALS: {
 			atWillSpellsHaveAttack: 0,
 			atWillSpellsHaveSave: 0,
 			rawSpells:
-				'zone of truth, teleport, magic circle (8th level, 6-hour duration), sending, unseen servant, teleportation circle',
+				'zone of truth, teleport, magic circle (6-hour duration), sending, unseen servant, teleportation circle',
 			oncePerDaySpellsHaveAttack: 0,
 			oncePerDaySpellsHaveSave: 1,
 			biteReach: 15,

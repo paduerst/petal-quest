@@ -2,11 +2,12 @@
 	import type { DragonStats } from '$lib/dragon/dragon-stats';
 	import { numberWithSign } from '$lib/dragon';
 	import FeatureInnateSpellcastingSpell from './FeatureInnateSpellcastingSpell.svelte';
+	import { numberWithOrdinalSuffix } from '$lib';
 
 	export let dragon: DragonStats;
 
 	let spellsDCString = '';
-	if (dragon.spellcastingDisplayAttack || dragon.spellcastingDisplaySave) {
+	$: if (dragon.spellcastingDisplayAttack || dragon.spellcastingDisplaySave) {
 		spellsDCString = spellsDCString + ' (';
 		if (dragon.spellcastingDisplaySave) {
 			spellsDCString = spellsDCString + `spell save DC ${dragon.saveDCCha}`;
@@ -21,13 +22,30 @@
 		}
 		spellsDCString = spellsDCString + ')';
 	}
+
+	let maxLevelWithOrdinal = numberWithOrdinalSuffix(dragon.spellcastingMaxLevel);
+	let affectedLevels =
+		dragon.spellcastingMaxLevel > 2
+			? `1st through ${numberWithOrdinalSuffix(dragon.spellcastingMaxLevel - 1)} level`
+			: '1st level';
+	let abbrTitle = `Spells of ${affectedLevels} are cast at ${maxLevelWithOrdinal} level.`;
 </script>
 
 {#if dragon.cantrips.length > 0 || dragon.spells.length > 0}
 	<div class="break-inside-avoid">
 		<div class="dragon-trait">
 			<p>
-				<i><b>Innate Spellcasting.</b></i>
+				<i>
+					<b>
+						{#if dragon.spellcastingMaxLevel > 1}
+							Innate Spellcasting (<abbr title={abbrTitle}
+								>Upcast to {maxLevelWithOrdinal} Level</abbr
+							>).
+						{:else}
+							Innate Spellcasting.
+						{/if}
+					</b>
+				</i>
 				{dragon.nameUpper}'s innate spellcasting ability is Charisma{spellsDCString}. {dragon.nameUpper}
 				can innately cast the following {dragon.cantrips.length + dragon.spells.length > 1
 					? 'spells'

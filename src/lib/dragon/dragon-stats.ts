@@ -21,6 +21,7 @@ import {
 import type { Age, Color, RGB, Size, Die, ProficiencyLevel, PronounsConfig } from '.';
 import { DRAGON_VALS, type DragonVals } from './dragon-vals';
 import { type CR, CRNumberToString, CR_TABLE } from './challenge-rating';
+import { type SpellLevel, SPELL_LEVELS } from '$lib/spells';
 
 // copied from https://stackoverflow.com/a/9030062
 const spellcastingCommaRegex = /,(?![^(]*\))/g;
@@ -145,6 +146,7 @@ export class DragonStats {
 		this.spells = this.#getSpells();
 		this.spellcastingDisplayAttack = this.#getSpellcastingDisplayAttack();
 		this.spellcastingDisplaySave = this.#getSpellcastingDisplaySave();
+		this.spellcastingMaxLevel = this.#getSpellcastingMaxLevel();
 
 		this.legendaryResistances = this.#vals.legendaryResistances;
 
@@ -398,6 +400,17 @@ export class DragonStats {
 		}
 	}
 
+	#getSpellcastingMaxLevel(): SpellLevel {
+		const crAsNumber = CR_TABLE[this.cr].asNumber;
+		const maxSpellLevel = Math.floor(crAsNumber / 3);
+		for (let i = SPELL_LEVELS.length - 1; i >= 1; i--) {
+			if (maxSpellLevel >= SPELL_LEVELS[i]) {
+				return SPELL_LEVELS[i];
+			}
+		}
+		return 1;
+	}
+
 	#getChangeShapeRetainedFeatures(): string[] {
 		const output: string[] = [];
 		if (this.legendaryResistances > 0) {
@@ -511,6 +524,7 @@ export class DragonStats {
 	spells: string[];
 	spellcastingDisplayAttack: boolean;
 	spellcastingDisplaySave: boolean;
+	spellcastingMaxLevel: SpellLevel;
 
 	legendaryResistances: number;
 
