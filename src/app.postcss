@@ -106,13 +106,16 @@ body {
 	}
 
 	.dragon-trait,
-	.dragon-action,
-	.dragon-legendary-action {
-		@apply my-1;
+	.dragon-action {
+		@apply my-2;
+
+		p + p {
+			@apply mt-2;
+		}
 	}
 
 	.dragon-legendary-action {
-		@apply -indent-4 pl-4;
+		@apply -indent-4 pl-4 my-1;
 	}
 
 	.breath-option p {

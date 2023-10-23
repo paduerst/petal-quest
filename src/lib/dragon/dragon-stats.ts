@@ -201,6 +201,9 @@ export class DragonStats {
 		this.breath2DiceCount = this.#vals.breath2DiceCount;
 		this.breath2SpecialValue = this.#vals.breath2SpecialValue;
 
+		this.hasChangeShape = this.age !== 'wyrmling' && this.age !== 'young';
+		this.changeShapeRetainedFeatures = this.#getChangeShapeRetainedFeatures();
+
 		this.hasWallOfLight = this.age !== 'wyrmling' && this.age !== 'young';
 		this.wallLayers = this.#vals.wallLayers;
 
@@ -395,6 +398,17 @@ export class DragonStats {
 		}
 	}
 
+	#getChangeShapeRetainedFeatures(): string[] {
+		const output: string[] = [];
+		if (this.legendaryResistances > 0) {
+			output.push('Legendary Resistance');
+		}
+		if (this.cantrips.length > 0 || this.spells.length > 0) {
+			output.push('Innate Spellcasting');
+		}
+		return output;
+	}
+
 	readonly #config: DragonConfig;
 	readonly #vals: DragonVals;
 
@@ -532,6 +546,9 @@ export class DragonStats {
 	breath2Shape: string;
 	breath2DiceCount: number;
 	breath2SpecialValue: string;
+
+	hasChangeShape: boolean;
+	changeShapeRetainedFeatures: string[];
 
 	hasWallOfLight: boolean;
 	wallLayers: string;
