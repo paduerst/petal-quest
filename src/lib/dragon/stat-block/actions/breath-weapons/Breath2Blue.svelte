@@ -6,7 +6,7 @@
 
 	export let dragon: DragonStats;
 
-	const OLD_VERSION = true;
+	const OLD_VERSION = false;
 </script>
 
 <div class="dragon-action breath-option">
@@ -40,21 +40,28 @@
 		</p>
 	{:else}
 		<p>
-			<b>{dragon.breath2Name} Breath (<UpcastAbbr level={dragon.spellcastingMaxLevel} />).</b>
+			<b>{dragon.breath2Name} Breath<UpcastAbbr level={dragon.spellcastingMaxLevel} />.</b>
 			{capitalizeFirstLetter(dragon.color)} rays of magical light flash from {dragon.name}'s mouth
-			in a {dragon.breathConeSize}-foot cone. Each creature in that area is targeted by one of the
-			following spells at random.
+			in a {dragon.breathConeSize}-foot cone. Randomly select one of the following spells; each
+			creature in that area is targeted by that spell as if {dragon.name} cast it using Constitution
+			as the spellcasting ability (spell save DC {dragon.saveDCCon}). <SpellLink
+				spellName="Counterspell"
+			/> can only prevent 1 target from being effected. The spell's duration becomes 1 minute (no concentration),
+			and it may have additional effects on a failed save which last for the duration.
 		</p>
 
 		<ol class="list-decimal ml-8 mt-1">
 			<li>
-				<SpellLink spellName="Hideous laughter" />.
+				<SpellLink spellName="Hideous Laughter" /> (target cannot speak).
 			</li>
 			<li>
-				<SpellLink spellName="Faerie fire" /> (always blue light).
+				<SpellLink spellName="Faerie Fire" /> (always blue light).
 			</li>
 			<li>
 				<SpellLink spellName="Levitate" /> (target's flying speed becomes 0).
+			</li>
+			<li>
+				<SpellLink spellName="Polymorph" /> (target becomes a frog).
 			</li>
 		</ol>
 	{/if}

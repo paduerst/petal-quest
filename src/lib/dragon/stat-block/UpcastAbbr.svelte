@@ -10,4 +10,6 @@
 	let abbrTitle = `Spells of ${affectedLevels} are cast at ${maxLevelWithOrdinal} level.`;
 </script>
 
-<abbr title={abbrTitle}>Upcast to {maxLevelWithOrdinal} Level</abbr>
+{#if level > 1}
+	{' ('}<abbr title={abbrTitle}>Upcast to {maxLevelWithOrdinal} Level</abbr>{')'}
+{/if}

@@ -31,11 +31,7 @@
 			<p>
 				<i>
 					<b>
-						{#if dragon.spellcastingMaxLevel > 1}
-							Innate Spellcasting (<UpcastAbbr level={dragon.spellcastingMaxLevel} />).
-						{:else}
-							Innate Spellcasting.
-						{/if}
+						Innate Spellcasting<UpcastAbbr level={dragon.spellcastingMaxLevel} />.
 					</b>
 				</i>
 				{dragon.nameUpper}'s innate spellcasting ability is Charisma{spellsDCString}. {dragon.nameUpper}
