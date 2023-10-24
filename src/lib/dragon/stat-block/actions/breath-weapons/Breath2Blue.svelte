@@ -2,11 +2,14 @@
 	import { capitalizeFirstLetter } from '$lib/dragon';
 	import type { DragonStats } from '$lib/dragon/dragon-stats';
 	import SpellLink from '$lib/spells/SpellLink.svelte';
-	import UpcastAbbr from '../../UpcastAbbr.svelte';
 
 	export let dragon: DragonStats;
 
 	const OLD_VERSION = false;
+
+	let diceCount: number;
+	$: diceCount = Math.max(1, dragon.breath2DiceCount);
+	const diceType = 6;
 </script>
 
 <div class="dragon-action breath-option">
@@ -40,28 +43,27 @@
 		</p>
 	{:else}
 		<p>
-			<b>{dragon.breath2Name} Breath<UpcastAbbr level={dragon.spellcastingMaxLevel} />.</b>
+			<b>{dragon.breath2Name} Breath.</b>
 			{capitalizeFirstLetter(dragon.color)} rays of magical light flash from {dragon.name}'s mouth
 			in a {dragon.breathConeSize}-foot cone. Randomly select one of the following spells; each
-			creature in that area is targeted by that spell as if {dragon.name} cast it using Constitution
-			as the spellcasting ability (spell save DC {dragon.saveDCCon}). <SpellLink
-				spellName="Counterspell"
-			/> can only prevent 1 target from being effected. The spell's duration becomes 1 minute (no concentration),
-			and it may have additional effects on a failed save which last for the duration.
+			creature in that area is targeted by that spell (spell save DC {dragon.saveDCCon}). The
+			spell's duration becomes 1 minute (no concentration), and if additional effects are specified,
+			they end with the spell.
 		</p>
 
 		<ol class="list-decimal ml-8 mt-1">
 			<li>
-				<SpellLink spellName="Hideous Laughter" /> (target cannot speak).
+				<SpellLink spellName="Hideous Laughter" />, and the creature can choose to take {diceCount}d{diceType}
+				psychic damage at the start of any of its turns.
 			</li>
 			<li>
-				<SpellLink spellName="Faerie Fire" /> (always blue light).
+				<SpellLink spellName="Faerie Fire" />, but the light is always blue.
 			</li>
 			<li>
-				<SpellLink spellName="Levitate" /> (target's flying speed becomes 0).
+				<SpellLink spellName="Levitate" />, and the creature's flying speed becomes 0.
 			</li>
 			<li>
-				<SpellLink spellName="Polymorph" /> (target becomes a frog).
+				<SpellLink spellName="Polymorph" />; the creature becomes a frog.
 			</li>
 		</ol>
 	{/if}

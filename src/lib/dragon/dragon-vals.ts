@@ -1499,7 +1499,7 @@ export const DRAGON_VALS: {
 			breath1DiceType: 6,
 			breath2Name: 'Wild Magic',
 			breath2Shape: 'Cone',
-			breath2DiceCount: 0,
+			breath2DiceCount: 1,
 			breath2SpecialValue:
 				'one of the following effects at random. At the end of each of its turns, the creature can repeat the saving throw. On a successful save or after 1 minute has passed, the effect ends',
 			prismaticRadianceRadius: 20,
@@ -1582,7 +1582,7 @@ export const DRAGON_VALS: {
 			breath1DiceType: 6,
 			breath2Name: 'Wild Magic',
 			breath2Shape: 'Cone',
-			breath2DiceCount: 0,
+			breath2DiceCount: 2,
 			breath2SpecialValue:
 				'one of the following effects at random. At the end of each of its turns, the creature can repeat the saving throw. On a successful save or after 1 minute has passed, the effect ends',
 			prismaticRadianceRadius: 20,
@@ -1665,7 +1665,7 @@ export const DRAGON_VALS: {
 			breath1DiceType: 6,
 			breath2Name: 'Wild Magic',
 			breath2Shape: 'Cone',
-			breath2DiceCount: 0,
+			breath2DiceCount: 2,
 			breath2SpecialValue:
 				'one of the following effects at random. At the end of each of its turns, the creature can repeat the saving throw. On a successful save or after 1 minute has passed, the effect ends',
 			prismaticRadianceRadius: 30,
@@ -1749,7 +1749,7 @@ export const DRAGON_VALS: {
 			breath1DiceType: 6,
 			breath2Name: 'Wild Magic',
 			breath2Shape: 'Cone',
-			breath2DiceCount: 0,
+			breath2DiceCount: 3,
 			breath2SpecialValue:
 				'one of the following effects at random. At the end of each of its turns, the creature can repeat the saving throw. On a successful save or after 1 minute has passed, the effect ends',
 			prismaticRadianceRadius: 60,
