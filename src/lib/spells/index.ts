@@ -1,4 +1,4 @@
-import { numberWithOrdinalSuffix } from '$lib';
+import { numberWithOrdinalSuffix } from '$lib/text-utils';
 
 import { PETAL_SPELLS } from './petal-spells';
 import { PETAL_SPELL_VALS } from './petal-spells/petal-spell-vals';

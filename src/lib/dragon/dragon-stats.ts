@@ -13,10 +13,9 @@ import {
 	abilityMin,
 	abilityMax,
 	scoreToMod,
-	numberWithSign,
-	expectedDiceResult,
-	capitalizeFirstLetter
+	expectedDiceResult
 } from '.';
+import { capitalizeFirstLetter, numberWithSign } from '$lib/text-utils';
 import type { Age, Color, RGB, Size, Die, ProficiencyLevel, PronounsConfig } from '.';
 import { DragonConfig } from './dragon-config';
 import { DRAGON_VALS, type DragonVals } from './dragon-vals';

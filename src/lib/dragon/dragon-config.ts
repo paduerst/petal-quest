@@ -10,7 +10,6 @@ import type {
 } from '.';
 
 import {
-	capitalizeFirstLetter,
 	stringToAge,
 	stringToColor,
 	COLOR_TO_THEME,
@@ -24,6 +23,8 @@ import {
 	numberOfHitDiceMin,
 	numberOfHitDiceMax
 } from '.';
+
+import { capitalizeFirstLetter } from '$lib/text-utils';
 
 export class DragonConfig {
 	age: Age = 'wyrmling';
