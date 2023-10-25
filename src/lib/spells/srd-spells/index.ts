@@ -324,6 +324,12 @@ export const SRD_SPELLS = [
 
 export type SRDSpell = (typeof SRD_SPELLS)[number];
 
+/**
+ * Converts input string to SRDSpell if possible, returning undefined if not.
+ * @export
+ * @param {string} spellString
+ * @return {*}  {(SRDSpell | undefined)}
+ */
 export function stringToSRDSpell(spellString: string): SRDSpell | undefined {
 	return SRD_SPELLS.find((spell) => spell === spellString);
 }
@@ -359,6 +365,12 @@ export const SRD_SPELLS_WITH_ERRATA: readonly SRDSpell[] = [
 	'weird'
 ] as const;
 
+/**
+ * Returns true if the given spell ID is in the SRD and has errata.
+ * @export
+ * @param {string} spellString
+ * @return {*}  {boolean}
+ */
 export function spellHasErrata(spellString: string): boolean {
 	const spellInSRD = stringToSRDSpell(spellString);
 	if (spellInSRD === undefined) {

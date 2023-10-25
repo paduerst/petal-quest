@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { type RGB, COLOR_TO_THEME, COLORS, DragonConfig } from '.';
+	import { type RGB, COLOR_TO_THEME, COLORS } from '.';
+	import type { DragonConfig } from './dragon-config';
 	import { builderFadeParams } from './builder-states';
 	export let config: DragonConfig | undefined = undefined;
 	let dragonTheme: RGB;

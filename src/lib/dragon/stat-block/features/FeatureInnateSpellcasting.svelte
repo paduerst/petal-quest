@@ -1,8 +1,7 @@
 <script lang="ts">
 	import type { DragonStats } from '$lib/dragon/dragon-stats';
-	import { numberWithSign } from '$lib/dragon';
+	import { numberWithSign } from '$lib/text-utils';
 	import FeatureInnateSpellcastingSpell from './FeatureInnateSpellcastingSpell.svelte';
-	import { numberWithOrdinalSuffix } from '$lib';
 	import UpcastAbbr from '../UpcastAbbr.svelte';
 
 	export let dragon: DragonStats;

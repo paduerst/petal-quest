@@ -44,7 +44,6 @@
 	voluptas provident molestiae! Inventore minima, laborum illo enim hic ratione maxime possimus.
 	Asperiores rem beatae illo?
 </p>
-<p><a href="/">Return to Home.</a></p>
 
 <style>
 	.filler {

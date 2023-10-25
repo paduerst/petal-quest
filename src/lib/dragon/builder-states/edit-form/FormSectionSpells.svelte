@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { DragonConfig } from '$lib/dragon';
+	import type { DragonConfig } from '$lib/dragon/dragon-config';
 
 	export let config: DragonConfig;
 </script>
