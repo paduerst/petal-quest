@@ -8,7 +8,8 @@
 		nextBuilderState,
 		dragonBuilderHistoryMaxLength
 	} from '.';
-	import { type DragonConfig, capitalizeFirstLetter } from '..';
+	import { capitalizeFirstLetter } from '$lib/text-utils';
+	import type { DragonConfig } from '../dragon-config';
 	import DragonConfigPreview from '../DragonConfigPreview.svelte';
 	import { getToastStore, type ToastSettings } from '@skeletonlabs/skeleton';
 

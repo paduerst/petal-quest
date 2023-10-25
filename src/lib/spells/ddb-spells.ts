@@ -208,6 +208,12 @@ export const DDB_SPELLS = [
 
 export type DDBSpell = (typeof DDB_SPELLS)[number];
 
+/**
+ * Converts input string to DDBSpell if possible, returning undefined if not.
+ * @export
+ * @param {string} spellString
+ * @return {*}  {(DDBSpell | undefined)}
+ */
 export function stringToDDBSpell(spellString: string): DDBSpell | undefined {
 	return DDB_SPELLS.find((spell) => spell === spellString);
 }

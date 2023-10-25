@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { numberWithOrdinalSuffix } from '$lib';
+	import { numberWithOrdinalSuffix } from '$lib/text-utils';
 	import type { SpellLevel } from '$lib/spells';
 
 	export let level: SpellLevel;

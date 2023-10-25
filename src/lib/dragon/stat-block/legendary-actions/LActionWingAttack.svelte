@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { numberWithSign } from '$lib/dragon';
+	import { numberWithSign } from '$lib/text-utils';
 	import type { DragonStats } from '$lib/dragon/dragon-stats';
 
 	export let dragon: DragonStats;

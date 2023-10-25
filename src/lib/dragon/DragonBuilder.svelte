@@ -7,7 +7,7 @@
 
 	import { getModalStore, type ModalSettings } from '@skeletonlabs/skeleton';
 
-	import { DragonConfig } from '.';
+	import { DragonConfig } from './dragon-config';
 	import {
 		lastBuilderState,
 		currentBuilderState,

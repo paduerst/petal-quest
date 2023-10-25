@@ -1,5 +1,6 @@
 <script lang="ts">
-	import type { DragonConfig, PronounsConfig } from '$lib/dragon';
+	import type { PronounsConfig } from '$lib/dragon';
+	import type { DragonConfig } from '$lib/dragon/dragon-config';
 	import FormSubsectionWelcome from './FormSubsectionWelcome.svelte';
 
 	export let config: DragonConfig;
