@@ -21,6 +21,7 @@ import {
 import type { Age, Color, RGB, Size, Die, ProficiencyLevel, PronounsConfig } from '.';
 import { DRAGON_VALS, type DragonVals } from './dragon-vals';
 import { type CR, CRNumberToString, CR_TABLE } from './challenge-rating';
+import { type SpellLevel, SPELL_LEVELS } from '$lib/spells';
 
 // copied from https://stackoverflow.com/a/9030062
 const spellcastingCommaRegex = /,(?![^(]*\))/g;
@@ -145,6 +146,7 @@ export class DragonStats {
 		this.spells = this.#getSpells();
 		this.spellcastingDisplayAttack = this.#getSpellcastingDisplayAttack();
 		this.spellcastingDisplaySave = this.#getSpellcastingDisplaySave();
+		this.spellcastingMaxLevel = this.#getSpellcastingMaxLevel();
 
 		this.legendaryResistances = this.#vals.legendaryResistances;
 
@@ -200,6 +202,9 @@ export class DragonStats {
 		this.breath2Shape = this.#vals.breath2Shape;
 		this.breath2DiceCount = this.#vals.breath2DiceCount;
 		this.breath2SpecialValue = this.#vals.breath2SpecialValue;
+
+		this.hasChangeShape = this.age !== 'wyrmling' && this.age !== 'young';
+		this.changeShapeRetainedFeatures = this.#getChangeShapeRetainedFeatures();
 
 		this.hasWallOfLight = this.age !== 'wyrmling' && this.age !== 'young';
 		this.wallLayers = this.#vals.wallLayers;
@@ -395,6 +400,28 @@ export class DragonStats {
 		}
 	}
 
+	#getSpellcastingMaxLevel(): SpellLevel {
+		const crAsNumber = CR_TABLE[this.cr].asNumber;
+		const maxSpellLevel = Math.floor(crAsNumber / 3);
+		for (let i = SPELL_LEVELS.length - 1; i >= 1; i--) {
+			if (maxSpellLevel >= SPELL_LEVELS[i]) {
+				return SPELL_LEVELS[i];
+			}
+		}
+		return 1;
+	}
+
+	#getChangeShapeRetainedFeatures(): string[] {
+		const output: string[] = [];
+		if (this.legendaryResistances > 0) {
+			output.push('Legendary Resistance');
+		}
+		if (this.cantrips.length > 0 || this.spells.length > 0) {
+			output.push('Innate Spellcasting');
+		}
+		return output;
+	}
+
 	readonly #config: DragonConfig;
 	readonly #vals: DragonVals;
 
@@ -497,6 +524,7 @@ export class DragonStats {
 	spells: string[];
 	spellcastingDisplayAttack: boolean;
 	spellcastingDisplaySave: boolean;
+	spellcastingMaxLevel: SpellLevel;
 
 	legendaryResistances: number;
 
@@ -532,6 +560,9 @@ export class DragonStats {
 	breath2Shape: string;
 	breath2DiceCount: number;
 	breath2SpecialValue: string;
+
+	hasChangeShape: boolean;
+	changeShapeRetainedFeatures: string[];
 
 	hasWallOfLight: boolean;
 	wallLayers: string;

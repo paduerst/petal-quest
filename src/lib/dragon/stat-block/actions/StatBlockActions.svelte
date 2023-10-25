@@ -2,6 +2,7 @@
 	import type { DragonStats } from '$lib/dragon/dragon-stats';
 	import ActionAttacks from './ActionAttacks.svelte';
 	import ActionBreathWeapons from './breath-weapons/ActionBreathWeapons.svelte';
+	import ActionChangeShape from './ActionChangeShape.svelte';
 	import ActionWallOfLight from './ActionWallOfLight.svelte';
 	import StatBlockDivider from '../StatBlockDivider.svelte';
 	import { dividerHeightThin } from '..';
@@ -17,5 +18,7 @@
 <ActionAttacks {dragon} />
 
 <ActionBreathWeapons {dragon} />
+
+<ActionChangeShape {dragon} />
 
 <ActionWallOfLight {dragon} />

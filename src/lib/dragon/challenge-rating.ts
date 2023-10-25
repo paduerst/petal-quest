@@ -36,6 +36,7 @@ export function CRNumberToString(number: CRNumber): CR {
 
 export const CR_TABLE: {
 	[key in CR]: {
+		asNumber: number;
 		proficiencyBonus: number;
 		xp: number;
 		expectedAC: number;
@@ -48,6 +49,7 @@ export const CR_TABLE: {
 	};
 } = {
 	'0': {
+		asNumber: 0,
 		proficiencyBonus: 2,
 		xp: 10,
 		expectedAC: 13,
@@ -59,6 +61,7 @@ export const CR_TABLE: {
 		expectedDC: 13
 	},
 	'1/8': {
+		asNumber: 0.125,
 		proficiencyBonus: 2,
 		xp: 25,
 		expectedAC: 13,
@@ -70,6 +73,7 @@ export const CR_TABLE: {
 		expectedDC: 13
 	},
 	'1/4': {
+		asNumber: 0.25,
 		proficiencyBonus: 2,
 		xp: 50,
 		expectedAC: 13,
@@ -81,6 +85,7 @@ export const CR_TABLE: {
 		expectedDC: 13
 	},
 	'1/2': {
+		asNumber: 0.5,
 		proficiencyBonus: 2,
 		xp: 100,
 		expectedAC: 13,
@@ -92,6 +97,7 @@ export const CR_TABLE: {
 		expectedDC: 13
 	},
 	'1': {
+		asNumber: 1,
 		proficiencyBonus: 2,
 		xp: 200,
 		expectedAC: 13,
@@ -103,6 +109,7 @@ export const CR_TABLE: {
 		expectedDC: 13
 	},
 	'2': {
+		asNumber: 2,
 		proficiencyBonus: 2,
 		xp: 450,
 		expectedAC: 13,
@@ -114,6 +121,7 @@ export const CR_TABLE: {
 		expectedDC: 13
 	},
 	'3': {
+		asNumber: 3,
 		proficiencyBonus: 2,
 		xp: 700,
 		expectedAC: 13,
@@ -125,6 +133,7 @@ export const CR_TABLE: {
 		expectedDC: 13
 	},
 	'4': {
+		asNumber: 4,
 		proficiencyBonus: 2,
 		xp: 1100,
 		expectedAC: 14,
@@ -136,6 +145,7 @@ export const CR_TABLE: {
 		expectedDC: 14
 	},
 	'5': {
+		asNumber: 5,
 		proficiencyBonus: 3,
 		xp: 1800,
 		expectedAC: 15,
@@ -147,6 +157,7 @@ export const CR_TABLE: {
 		expectedDC: 15
 	},
 	'6': {
+		asNumber: 6,
 		proficiencyBonus: 3,
 		xp: 2300,
 		expectedAC: 15,
@@ -158,6 +169,7 @@ export const CR_TABLE: {
 		expectedDC: 15
 	},
 	'7': {
+		asNumber: 7,
 		proficiencyBonus: 3,
 		xp: 2900,
 		expectedAC: 15,
@@ -169,6 +181,7 @@ export const CR_TABLE: {
 		expectedDC: 15
 	},
 	'8': {
+		asNumber: 8,
 		proficiencyBonus: 3,
 		xp: 3900,
 		expectedAC: 16,
@@ -180,6 +193,7 @@ export const CR_TABLE: {
 		expectedDC: 16
 	},
 	'9': {
+		asNumber: 9,
 		proficiencyBonus: 4,
 		xp: 5000,
 		expectedAC: 16,
@@ -191,6 +205,7 @@ export const CR_TABLE: {
 		expectedDC: 16
 	},
 	'10': {
+		asNumber: 10,
 		proficiencyBonus: 4,
 		xp: 5900,
 		expectedAC: 17,
@@ -202,6 +217,7 @@ export const CR_TABLE: {
 		expectedDC: 16
 	},
 	'11': {
+		asNumber: 11,
 		proficiencyBonus: 4,
 		xp: 7200,
 		expectedAC: 17,
@@ -213,6 +229,7 @@ export const CR_TABLE: {
 		expectedDC: 17
 	},
 	'12': {
+		asNumber: 12,
 		proficiencyBonus: 4,
 		xp: 8400,
 		expectedAC: 17,
@@ -224,6 +241,7 @@ export const CR_TABLE: {
 		expectedDC: 17
 	},
 	'13': {
+		asNumber: 13,
 		proficiencyBonus: 5,
 		xp: 10000,
 		expectedAC: 18,
@@ -235,6 +253,7 @@ export const CR_TABLE: {
 		expectedDC: 18
 	},
 	'14': {
+		asNumber: 14,
 		proficiencyBonus: 5,
 		xp: 11500,
 		expectedAC: 18,
@@ -246,6 +265,7 @@ export const CR_TABLE: {
 		expectedDC: 18
 	},
 	'15': {
+		asNumber: 15,
 		proficiencyBonus: 5,
 		xp: 13000,
 		expectedAC: 18,
@@ -257,6 +277,7 @@ export const CR_TABLE: {
 		expectedDC: 18
 	},
 	'16': {
+		asNumber: 16,
 		proficiencyBonus: 5,
 		xp: 15000,
 		expectedAC: 18,
@@ -268,6 +289,7 @@ export const CR_TABLE: {
 		expectedDC: 18
 	},
 	'17': {
+		asNumber: 17,
 		proficiencyBonus: 6,
 		xp: 18000,
 		expectedAC: 19,
@@ -279,6 +301,7 @@ export const CR_TABLE: {
 		expectedDC: 19
 	},
 	'18': {
+		asNumber: 18,
 		proficiencyBonus: 6,
 		xp: 20000,
 		expectedAC: 19,
@@ -290,6 +313,7 @@ export const CR_TABLE: {
 		expectedDC: 19
 	},
 	'19': {
+		asNumber: 19,
 		proficiencyBonus: 6,
 		xp: 22000,
 		expectedAC: 19,
@@ -301,6 +325,7 @@ export const CR_TABLE: {
 		expectedDC: 19
 	},
 	'20': {
+		asNumber: 20,
 		proficiencyBonus: 6,
 		xp: 25000,
 		expectedAC: 19,
@@ -312,6 +337,7 @@ export const CR_TABLE: {
 		expectedDC: 19
 	},
 	'21': {
+		asNumber: 21,
 		proficiencyBonus: 7,
 		xp: 33000,
 		expectedAC: 19,
@@ -323,6 +349,7 @@ export const CR_TABLE: {
 		expectedDC: 20
 	},
 	'22': {
+		asNumber: 22,
 		proficiencyBonus: 7,
 		xp: 41000,
 		expectedAC: 19,
@@ -334,6 +361,7 @@ export const CR_TABLE: {
 		expectedDC: 20
 	},
 	'23': {
+		asNumber: 23,
 		proficiencyBonus: 7,
 		xp: 50000,
 		expectedAC: 19,
@@ -345,6 +373,7 @@ export const CR_TABLE: {
 		expectedDC: 20
 	},
 	'24': {
+		asNumber: 24,
 		proficiencyBonus: 7,
 		xp: 62000,
 		expectedAC: 19,
@@ -356,6 +385,7 @@ export const CR_TABLE: {
 		expectedDC: 21
 	},
 	'25': {
+		asNumber: 25,
 		proficiencyBonus: 8,
 		xp: 75000,
 		expectedAC: 19,
@@ -367,6 +397,7 @@ export const CR_TABLE: {
 		expectedDC: 21
 	},
 	'26': {
+		asNumber: 26,
 		proficiencyBonus: 8,
 		xp: 90000,
 		expectedAC: 19,
@@ -378,6 +409,7 @@ export const CR_TABLE: {
 		expectedDC: 21
 	},
 	'27': {
+		asNumber: 27,
 		proficiencyBonus: 8,
 		xp: 105000,
 		expectedAC: 19,
@@ -389,6 +421,7 @@ export const CR_TABLE: {
 		expectedDC: 22
 	},
 	'28': {
+		asNumber: 28,
 		proficiencyBonus: 8,
 		xp: 120000,
 		expectedAC: 19,
@@ -400,6 +433,7 @@ export const CR_TABLE: {
 		expectedDC: 22
 	},
 	'29': {
+		asNumber: 29,
 		proficiencyBonus: 9,
 		xp: 135000,
 		expectedAC: 19,
@@ -411,6 +445,7 @@ export const CR_TABLE: {
 		expectedDC: 22
 	},
 	'30': {
+		asNumber: 30,
 		proficiencyBonus: 9,
 		xp: 155000,
 		expectedAC: 19,

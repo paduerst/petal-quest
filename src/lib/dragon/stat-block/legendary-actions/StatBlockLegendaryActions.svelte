@@ -15,7 +15,7 @@
 		<StatBlockDivider color={dragon.theme} height={dividerHeightThin} classes={'mt-0'} />
 	</div>
 
-	<p>
+	<p class="mb-2">
 		{dragon.nameUpper} can take 3 legendary actions, choosing from the options below. Only one legendary
 		action option can be used at a time and only at the end of another creature's turn. {dragon.nameUpper}
 		regains spent legendary actions at the start of {dragon.pronounPossessiveAdjective} turn.
