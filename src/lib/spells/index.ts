@@ -10,7 +10,8 @@ import { SRD_SPELL_DESCRIPTIONS } from './srd-spells/srd-spell-descriptions';
 
 import { DDB_SPELLS, stringToDDBSpell } from './ddb-spells';
 
-export type SpellLevel = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+export const SPELL_LEVELS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] as const;
+export type SpellLevel = (typeof SPELL_LEVELS)[number];
 
 export const SPELL_SCHOOLS = [
 	'Abjuration',
