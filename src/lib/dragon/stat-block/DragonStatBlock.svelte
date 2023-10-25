@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { DragonConfig } from '..';
+	import type { DragonConfig } from '../dragon-config';
 	import { DragonStats } from '../dragon-stats';
 	import StatBlockPreamble from './preamble/StatBlockPreamble.svelte';
 	import StatBlockFeatures from './features/StatBlockFeatures.svelte';

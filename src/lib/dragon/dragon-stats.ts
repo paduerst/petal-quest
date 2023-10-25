@@ -1,5 +1,4 @@
 import {
-	DragonConfig,
 	COLOR_TO_ALIGNMENT,
 	AGE_TO_SIZE,
 	SIZE_TO_HIT_DIE,
@@ -19,6 +18,7 @@ import {
 	capitalizeFirstLetter
 } from '.';
 import type { Age, Color, RGB, Size, Die, ProficiencyLevel, PronounsConfig } from '.';
+import { DragonConfig } from './dragon-config';
 import { DRAGON_VALS, type DragonVals } from './dragon-vals';
 import { type CR, CRNumberToString, CR_TABLE } from './challenge-rating';
 import { type SpellLevel, SPELL_LEVELS } from '$lib/spells';

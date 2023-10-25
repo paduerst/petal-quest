@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { nextBuilderState, currentDragonConfig, dragonBuilderHistory } from '.';
-	import { DragonConfig } from '..';
+	import { DragonConfig } from '../dragon-config';
 	import FormSubsectionWelcome from './edit-form/FormSubsectionWelcome.svelte';
 
 	let newConfig: DragonConfig = new DragonConfig();

@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 	import { page } from '$app/stores';
-	import { type DragonConfig, RGBToRGBA } from '.';
+	import { RGBToRGBA } from '.';
+	import type { DragonConfig } from './dragon-config';
 	import { currentDragonConfig, nextBuilderState } from './builder-states';
 
 	const dispatch = createEventDispatcher<{ clickDelete: DragonConfig }>();

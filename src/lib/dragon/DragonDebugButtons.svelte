@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import { createEventDispatcher } from 'svelte';
-	import { DragonConfig } from '.';
+	import { DragonConfig } from './dragon-config';
 	import {
 		BUILDER_STATES,
 		nextBuilderState,

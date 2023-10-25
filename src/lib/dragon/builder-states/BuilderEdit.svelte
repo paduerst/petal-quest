@@ -3,7 +3,8 @@
 	import { page } from '$app/stores';
 
 	import { currentDragonConfig, nextBuilderState } from '.';
-	import { DEFAULT_PRONOUNS, DragonConfig } from '..';
+	import { DEFAULT_PRONOUNS } from '..';
+	import { DragonConfig } from '../dragon-config';
 	import FormSectionBasics from './edit-form/FormSectionBasics.svelte';
 	import FormSectionHpAbilities from './edit-form/FormSectionHPAbilities.svelte';
 	import FormSectionSkills from './edit-form/FormSectionSkills.svelte';
