@@ -9,5 +9,5 @@
 />
 
 <h1>Colors of Prismatic Dragons</h1>
-<p>This page will contain info about the colors of the Prismatic Dragons.</p>
+<p>This page is just here so we can test having child pages.</p>
 <p><a href="/">Return to Home.</a></p>

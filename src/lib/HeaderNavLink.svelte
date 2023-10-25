@@ -15,7 +15,8 @@
 <li
 	class="m-1 h-fit w-fit rounded-[--theme-rounded-base] daisy-dropdown daisy-dropdown-hover border border-transparent"
 	class:bg-surface-active-token={path === link.href}
-	class:border-surface-400-500-token={link.children.some((child) => path === child.href)}
+	class:border-surface-400-500-token={link.children.some((child) => path === child.href) ||
+		path.startsWith(link.href)}
 >
 	<label for={navLinkChildrenId} bind:clientWidth={labelWidth} class="flex flex-nowrap">
 		<a

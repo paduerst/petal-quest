@@ -12,11 +12,6 @@ export const NAV_LINKS = [
 		children: []
 	},
 	{
-		href: '/spells/',
-		text: 'Spells',
-		children: []
-	},
-	{
 		href: '/about/',
 		text: 'About',
 		children: []
