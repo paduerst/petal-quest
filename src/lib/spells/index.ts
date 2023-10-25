@@ -37,6 +37,12 @@ export type SpellVals = {
 	classes?: readonly string[];
 };
 
+/**
+ * Returns the subtitle for the given spell ID.
+ * @export
+ * @param {SpellVals} spell
+ * @return {*}  {string}
+ */
 export function getSpellSubtitle(spell: SpellVals): string {
 	let output: string;
 	if (spell.level === 0) {
@@ -65,6 +71,12 @@ export const APP_SPELL_DESCRIPTIONS: {
 	...SRD_SPELL_DESCRIPTIONS
 } as const;
 
+/**
+ * Converts input string to AppSpell if possible, returning undefined if not.
+ * @export
+ * @param {string} spellString
+ * @return {*}  {(AppSpell | undefined)}
+ */
 export function stringToAppSpell(spellString: string): AppSpell | undefined {
 	return APP_SPELLS.find((spell) => spell === spellString);
 }
@@ -72,10 +84,22 @@ export function stringToAppSpell(spellString: string): AppSpell | undefined {
 // All spells that this app knows of.
 export const COMPLETE_SPELLS = [...APP_SPELLS, ...DDB_SPELLS] as const;
 
+/**
+ * Converts given spell name to the normalized spell ID format.
+ * @export
+ * @param {string} spellName
+ * @return {*}  {string}
+ */
 export function spellNameToID(spellName: string): string {
 	return spellName.toLowerCase().replace(/[ /]/g, '-').replace(/[’']/, '');
 }
 
+/**
+ * Returns the known URL for the given spell name or an empty string if unknown.
+ * @export
+ * @param {string} spellName
+ * @return {*}  {string}
+ */
 export function spellNameToURL(spellName: string): string {
 	const spell = spellNameToID(spellName);
 

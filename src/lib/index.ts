@@ -23,6 +23,12 @@ export const NAV_LINKS = [
 	}
 ] as const;
 
+/**
+ * Returns a unique ID string for the given Nav Link. Uniqueness is guaranteed by testing.
+ * @export
+ * @param {(typeof NAV_LINKS)[number]} link
+ * @return {*}  {string}
+ */
 export function getNavLinkId(link: (typeof NAV_LINKS)[number]): string {
 	return `navLink__${normalizeString(link.text)}`;
 }
