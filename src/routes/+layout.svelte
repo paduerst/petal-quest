@@ -33,11 +33,22 @@
 			elemPage.scrollTop = 0;
 		}
 	});
+
+	const modalTransitionParams = {
+		duration: 150,
+		opacity: 0,
+		x: 0,
+		y: 0
+	};
 </script>
 
 <Toast transitionOutParams={{ duration: 50 }} buttonDismiss="btn btn-icon-sm variant-filled" />
 
-<Modal components={modalComponentRegistry} />
+<Modal
+	components={modalComponentRegistry}
+	transitionInParams={modalTransitionParams}
+	transitionOutParams={modalTransitionParams}
+/>
 
 <Drawer />
 

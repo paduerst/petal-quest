@@ -19,4 +19,4 @@
 	}
 </script>
 
-<button on:click={handleClick}><i>{spellName}</i></button>
+<button on:click={handleClick} class="italic underline decoration-dotted">{spellName}</button>
