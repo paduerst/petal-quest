@@ -1,6 +1,6 @@
 import { capitalizeFirstLetter } from '$lib/text-utils';
 
-export const AGES = ['wyrmling', 'young', 'adult', 'ancient'] as const;
+export const AGES = ['wyrmling', 'young', 'adult', 'ancient', 'cosmic'] as const;
 export const AGES_UPPER = AGES.map(capitalizeFirstLetter) as ReadonlyArray<string>;
 export const AGES_CAPS = AGES.map((age) => age.toUpperCase()) as ReadonlyArray<string>;
 export type Age = (typeof AGES)[number];
@@ -64,7 +64,8 @@ export const AGE_TO_SIZE: {
 	wyrmling: 'Medium',
 	young: 'Large',
 	adult: 'Huge',
-	ancient: 'Gargantuan'
+	ancient: 'Gargantuan',
+	cosmic: 'Gargantuan'
 } as const;
 
 export const DICE = [4, 6, 8, 10, 12, 20] as const;

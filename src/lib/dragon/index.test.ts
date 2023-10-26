@@ -12,8 +12,8 @@ import {
 	RGBToRGBA
 } from '.';
 
-test('AGES_UPPER are Wyrmling, Young, Adult, and Ancient', () => {
-	expect(AGES_UPPER).toStrictEqual(['Wyrmling', 'Young', 'Adult', 'Ancient']);
+test('AGES_UPPER are Wyrmling, Young, Adult, Ancient, and Cosmic', () => {
+	expect(AGES_UPPER).toStrictEqual(['Wyrmling', 'Young', 'Adult', 'Ancient', 'Cosmic']);
 });
 
 test('stringToAge() behavior', () => {
