@@ -68,17 +68,24 @@
 	<li class="dragon-senses my-1">
 		<p class="-indent-4 pl-4">
 			<span class="dragon-label">Senses</span>
-			<span
-				><span class="whitespace-nowrap">
-					blindsight
-					{dragon.blindsight} ft.,
-				</span>
-				<span class="whitespace-nowrap">
-					darkvision
-					{dragon.darkvision} ft.,
-				</span>
-				<span class="whitespace-nowrap">passive Perception {dragon.passivePerception}</span></span
-			>
+			<span>
+				{#if dragon.age === 'cosmic'}
+					<span class="whitespace-nowrap">
+						truesight
+						{dragon.blindsight} ft.,
+					</span>
+				{:else}
+					<span class="whitespace-nowrap">
+						blindsight
+						{dragon.blindsight} ft.,
+					</span>
+					<span class="whitespace-nowrap">
+						darkvision
+						{dragon.darkvision} ft.,
+					</span>
+				{/if}
+				<span class="whitespace-nowrap">passive Perception {dragon.passivePerception}</span>
+			</span>
 		</p>
 	</li>
 
