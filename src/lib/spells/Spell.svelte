@@ -5,9 +5,15 @@
 	import SpellFooter from './SpellFooter.svelte';
 
 	export let spell: AppSpell;
+
+	export let showButton: boolean = false;
 </script>
 
-<div class="card text-left">
+<div class="card text-token text-left relative">
+	{#if showButton}
+		<button on:click class="btn btn-icon-base variant-ghost-error m-2 float-right">✕</button>
+	{/if}
+
 	<div class="card-header rounded-t-[--theme-rounded-container]">
 		<SpellHeader {spell} />
 	</div>
