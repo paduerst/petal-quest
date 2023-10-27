@@ -78,21 +78,21 @@
 			<SpellCornerButtons on:click={parent.onClose} />
 
 			<div class="p-4">
-				<h1 class="spell-name mb-2">Local Spell URLs</h1>
+				<h1 class="spell-name mb-6">Local Spell URLs</h1>
 				{#if Object.keys($localSpellURLs).length === 0}
 					<p>No spell URLs in local storage!</p>
 				{:else}
-					<ul>
+					<ul class="flex flex-col">
 						{#each Object.keys($localSpellURLs) as spell}
-							<li class="card variant-filled p-2 flex">
-								<button class="btn variant-filled-error m-1" on:click={() => onDelete(spell)}
+							<li class="card variant-filled p-2 mx-2 my-1 flex flex-nowrap gap-2 w-full min-w-fit">
+								<button class="btn variant-filled-error" on:click={() => onDelete(spell)}
 									>Delete</button
 								>
-								<button class="btn variant-filled-primary m-1" on:click={() => onEdit(spell)}
+								<button class="btn variant-filled-primary" on:click={() => onEdit(spell)}
 									>Edit</button
 								>
-								<div class="card variant-filled-surface p-2 m-1">
-									{spell}
+								<div class="card variant-filled-surface p-2 w-full">
+									<p>{spell}</p>
 									<a href={$localSpellURLs[spell]} target="_blank">
 										{$localSpellURLs[spell]}
 									</a>
