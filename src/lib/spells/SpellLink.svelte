@@ -14,7 +14,7 @@
 	let spellID = spellNameToID(spellName);
 
 	function handleClick() {
-		spellModal.value = spellID;
+		spellModal.value = { name: spellName, id: spellID };
 		modalStore.trigger(spellModal);
 	}
 </script>
