@@ -39,7 +39,7 @@
 </script>
 
 {#if $modalStore[0]}
-	<div class="card p-4 w-modal shadow-xl space-y-4">
+	<div class="card p-4 w-modal shadow-xl space-y-4 overflow-x-clip">
 		<header class="text-2xl font-bold">{$modalStore[0].title ?? 'Share Dragon'}</header>
 		<div>
 			{shareURL}

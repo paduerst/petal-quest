@@ -6,7 +6,10 @@
 
 	import { initializeStores, type ModalComponent } from '@skeletonlabs/skeleton';
 	import { AppShell, Modal, Toast } from '@skeletonlabs/skeleton';
+	import AddLocalSpell from '$lib/modals/AddLocalSpell.svelte';
+	import ManageLocalSpells from '$lib/modals/ManageLocalSpells.svelte';
 	import DragonShare from '$lib/modals/DragonShare.svelte';
+	import SpellModal from '$lib/modals/SpellModal.svelte';
 	import Drawer from '$lib/Drawer.svelte';
 	import Header from '$lib/Header.svelte';
 	import Footer from '$lib/Footer.svelte';
@@ -14,8 +17,17 @@
 	initializeStores();
 
 	const modalComponentRegistry: Record<string, ModalComponent> = {
+		addLocalSpell: {
+			ref: AddLocalSpell
+		},
+		manageLocalSpells: {
+			ref: ManageLocalSpells
+		},
 		dragonShare: {
 			ref: DragonShare
+		},
+		spellModal: {
+			ref: SpellModal
 		}
 	};
 
@@ -29,11 +41,22 @@
 			elemPage.scrollTop = 0;
 		}
 	});
+
+	const modalTransitionParams = {
+		duration: 150,
+		opacity: 0,
+		x: 0,
+		y: 0
+	};
 </script>
 
 <Toast transitionOutParams={{ duration: 50 }} buttonDismiss="btn btn-icon-sm variant-filled" />
 
-<Modal components={modalComponentRegistry} />
+<Modal
+	components={modalComponentRegistry}
+	transitionInParams={modalTransitionParams}
+	transitionOutParams={modalTransitionParams}
+/>
 
 <Drawer />
 

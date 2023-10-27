@@ -25,12 +25,13 @@
 			{:else if isSRDSpell && hasErrata}
 				<p>
 					This is a spell copied from the
-					<a href="https://dnd.wizards.com/resources/systems-reference-document">SRD 5.1</a>, which
-					does not include changes from the
-					<a href="https://media.wizards.com/2021/dnd/downloads/PH-Errata.pdf"
+					<a href="https://dnd.wizards.com/resources/systems-reference-document" target="_blank"
+						>SRD 5.1</a
+					>, which does not include changes from the
+					<a href="https://media.wizards.com/2021/dnd/downloads/PH-Errata.pdf" target="_blank"
 						><i>Player's Handbook</i> errata</a
 					>. You can find the up-to-date version of this spell on
-					<a href="https://www.dndbeyond.com/spells/{spell}">D&D Beyond</a>.
+					<a href="https://www.dndbeyond.com/spells/{spell}" target="_blank">D&D Beyond</a>.
 				</p>
 			{/if}
 		</div>

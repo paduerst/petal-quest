@@ -32,16 +32,3 @@
 		<p class="spell-source"><b>Source:</b> {source}</p>
 	{/if}
 </div>
-
-<style>
-	.spell-name {
-		font-size: 1.5rem;
-		margin: 0;
-		padding: 0;
-	}
-
-	.spell-subtitle {
-		font-style: italic;
-		margin-bottom: 0.5rem;
-	}
-</style>

@@ -1,9 +1,11 @@
 import { capitalizeFirstLetter } from '$lib/text-utils';
 
-export const AGES = ['wyrmling', 'young', 'adult', 'ancient'] as const;
+export const AGES = ['wyrmling', 'young', 'adult', 'ancient', 'cosmic'] as const;
 export const AGES_UPPER = AGES.map(capitalizeFirstLetter) as ReadonlyArray<string>;
 export const AGES_CAPS = AGES.map((age) => age.toUpperCase()) as ReadonlyArray<string>;
 export type Age = (typeof AGES)[number];
+
+export const HIDDEN_AGES: readonly Age[] = ['cosmic'] as const;
 
 /**
  * Converts input string to Age if possible, returning undefined if not.
@@ -19,6 +21,8 @@ export const COLORS = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'vi
 export const COLORS_UPPER = COLORS.map(capitalizeFirstLetter) as ReadonlyArray<string>;
 export const COLORS_CAPS = COLORS.map((color) => color.toUpperCase()) as ReadonlyArray<string>;
 export type Color = (typeof COLORS)[number];
+
+export const HIDDEN_COLORS: readonly Color[] = [] as const;
 
 /**
  * Converts input string to Color if possible, returning undefined if not.
@@ -64,7 +68,8 @@ export const AGE_TO_SIZE: {
 	wyrmling: 'Medium',
 	young: 'Large',
 	adult: 'Huge',
-	ancient: 'Gargantuan'
+	ancient: 'Gargantuan',
+	cosmic: 'Gargantuan'
 } as const;
 
 export const DICE = [4, 6, 8, 10, 12, 20] as const;
