@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { DragonStats } from '$lib/dragon/dragon-stats';
 	import { FLARE_DISADVANTAGE_FOR_CLOSE_CREATURES } from '.';
+	import AbbrButton from '../AbbrButton.svelte';
 
 	export let dragon: DragonStats;
 </script>
@@ -9,7 +10,11 @@
 	<div class="dragon-action">
 		<p>
 			<i>
-				<b>Frightful Flare (<abbr title="Recharges after a Short or Long Rest">1/SR</abbr>). </b>
+				<b
+					>Frightful Flare (<AbbrButton title="Recharges after a Short or Long Rest"
+						><span class="italic">1/SR</span></AbbrButton
+					>).
+				</b>
 			</i>
 			{dragon.nameUpper} unleashes {dragon.pronounPossessiveAdjective} inner light, maxing out {dragon.pronounPossessiveAdjective}
 			Variable Radiance to a radius of {dragon.prismaticRadianceRadius} feet. Each creature of {dragon.name}'s

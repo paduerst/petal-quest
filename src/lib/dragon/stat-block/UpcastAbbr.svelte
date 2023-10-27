@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { numberWithOrdinalSuffix } from '$lib/text-utils';
 	import type { SpellLevel } from '$lib/spells';
+	import AbbrButton from './AbbrButton.svelte';
 
 	export let level: SpellLevel;
 
@@ -11,5 +12,7 @@
 </script>
 
 {#if level > 1}
-	{' ('}<abbr title={abbrTitle}>Upcast to {maxLevelWithOrdinal} Level</abbr>{')'}
+	{' ('}<AbbrButton title={abbrTitle}>
+		<span class="italic">Upcast to {maxLevelWithOrdinal} Level</span>
+	</AbbrButton>{')'}
 {/if}

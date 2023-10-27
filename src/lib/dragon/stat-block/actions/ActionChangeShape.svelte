@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { capitalizeFirstLetter } from '$lib/text-utils';
 	import type { DragonStats } from '$lib/dragon/dragon-stats';
+	import AbbrButton from '../AbbrButton.svelte';
 
 	export let dragon: DragonStats;
 
@@ -31,9 +32,11 @@
 		</p>
 		<p>
 			In the new form, {dragon.name} retains {dragon.pronounPossessiveAdjective}
-			<abbr title="personality, alignment, and known languages">personality</abbr>,
-			<abbr title="hit points and Hit Dice">hit points</abbr>,
-			<abbr title="Intelligence, Wisdom, and Charisma scores">mental ability scores</abbr>,
+			<AbbrButton title="personality, alignment, and known languages">personality</AbbrButton>,
+			<AbbrButton title="hit points and Hit Dice">hit points</AbbrButton>,
+			<AbbrButton title="Intelligence, Wisdom, and Charisma scores"
+				>mental ability scores</AbbrButton
+			>,
 			{#if dragon.changeShapeRetainedFeatures.length < 1}
 				and proficiencies,
 			{:else}
