@@ -2,6 +2,11 @@ export interface StringMap {
 	[key: string]: string;
 }
 
+export function isValidURL(url: string): boolean {
+	// TODO: More validation.
+	return url.length > 0;
+}
+
 /**
  * Returns the given number with its ordinal suffix (e.g. '1st' for 1).
  * Copied from StackOverflow: https://stackoverflow.com/a/13627586/17934762

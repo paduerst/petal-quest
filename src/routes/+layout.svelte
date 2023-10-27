@@ -6,6 +6,8 @@
 
 	import { initializeStores, type ModalComponent } from '@skeletonlabs/skeleton';
 	import { AppShell, Modal, Toast } from '@skeletonlabs/skeleton';
+	import AddLocalSpell from '$lib/modals/AddLocalSpell.svelte';
+	import ManageLocalSpells from '$lib/modals/ManageLocalSpells.svelte';
 	import DragonShare from '$lib/modals/DragonShare.svelte';
 	import SpellModal from '$lib/modals/SpellModal.svelte';
 	import Drawer from '$lib/Drawer.svelte';
@@ -15,6 +17,12 @@
 	initializeStores();
 
 	const modalComponentRegistry: Record<string, ModalComponent> = {
+		addLocalSpell: {
+			ref: AddLocalSpell
+		},
+		manageLocalSpells: {
+			ref: ManageLocalSpells
+		},
 		dragonShare: {
 			ref: DragonShare
 		},

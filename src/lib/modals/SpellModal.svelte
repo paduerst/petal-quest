@@ -28,8 +28,18 @@
 
 	import { onMount } from 'svelte';
 
-	import { getModalStore } from '@skeletonlabs/skeleton';
+	import { getModalStore, type ModalSettings } from '@skeletonlabs/skeleton';
 	const modalStore = getModalStore();
+
+	const manageLocalSpells: ModalSettings = {
+		type: 'component',
+		component: 'manageLocalSpells'
+	};
+
+	const addLocalSpell: ModalSettings = {
+		type: 'component',
+		component: 'addLocalSpell'
+	};
 
 	import { stringToAppSpell, spellNameToURL } from '$lib/spells';
 	import { stringToDDBSpell } from '$lib/spells/ddb-spells';
@@ -48,6 +58,17 @@
 
 	const baseClasses = 'card max-w-4xl shadow-xl space-y-4 max-h-[80vh] overflow-y-auto';
 	let modalClasses = `${baseClasses} ${asAppSpell !== undefined ? 'w-11/12' : ''}`;
+
+	function manageLocalURLs() {
+		parent.onClose();
+		modalStore.trigger(manageLocalSpells);
+	}
+
+	function addLocalURL() {
+		parent.onClose();
+		addLocalSpell.value = spellInfo;
+		modalStore.trigger(addLocalSpell);
+	}
 </script>
 
 {#if $modalStore[0]}
@@ -57,6 +78,7 @@
 		{:else if spellURL.length > 0}
 			<div class="card text-token text-left relative">
 				<SpellCornerButtons {spellURL} on:click={parent.onClose} />
+
 				<div class="p-4">
 					<h1 class="spell-name mb-2">{spellInfo.name}</h1>
 					{#if asDDBSpell !== undefined}
@@ -69,14 +91,33 @@
 					{/if}
 					<p><a href={spellURL} target="_blank">{spellURL}</a></p>
 				</div>
+
+				{#if asDDBSpell === undefined}
+					<footer class="p-4 {parent.regionFooter}">
+						<button class="btn {parent.buttonPositive}" on:click={manageLocalURLs}>
+							Manage URLs in local storage
+						</button>
+					</footer>
+				{/if}
 			</div>
 		{:else}
 			<div class="card text-token text-left relative">
 				<SpellCornerButtons on:click={parent.onClose} />
+
 				<div class="p-4">
 					<h1 class="spell-name mb-2">{spellInfo.name}</h1>
-					<p>This spell ({spellInfo.id}) is not recognized.</p>
+					<p>This spell is not recognized.</p>
+					<p>
+						You can specify a URL for it which will be stored in this browser's local storage for
+						future reference.
+					</p>
 				</div>
+
+				<footer class="p-4 {parent.regionFooter}">
+					<button class="btn {parent.buttonPositive}" on:click={addLocalURL}>
+						Add URL for {spellInfo.name}
+					</button>
+				</footer>
 			</div>
 		{/if}
 	</div>
