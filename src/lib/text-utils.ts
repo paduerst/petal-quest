@@ -1,3 +1,7 @@
+export interface StringMap {
+	[key: string]: string;
+}
+
 /**
  * Returns the given number with its ordinal suffix (e.g. '1st' for 1).
  * Copied from StackOverflow: https://stackoverflow.com/a/13627586/17934762

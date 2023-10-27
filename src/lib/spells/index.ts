@@ -10,6 +10,9 @@ import { SRD_SPELL_DESCRIPTIONS } from './srd-spells/srd-spell-descriptions';
 
 import { DDB_SPELLS, stringToDDBSpell } from './ddb-spells';
 
+import { get } from 'svelte/store';
+import { localSpellURLs } from './local-spells';
+
 export const SPELL_LEVELS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] as const;
 export type SpellLevel = (typeof SPELL_LEVELS)[number];
 
@@ -111,6 +114,11 @@ export function spellNameToURL(spellName: string): string {
 	const spellAsDDBSpell = stringToDDBSpell(spell);
 	if (spellAsDDBSpell !== undefined) {
 		return `https://www.dndbeyond.com/spells/${spellAsDDBSpell}`;
+	}
+
+	const spellAsLocalSpellURL = get(localSpellURLs)[spell];
+	if (spellAsLocalSpellURL !== undefined) {
+		return spellAsLocalSpellURL;
 	}
 
 	return '';

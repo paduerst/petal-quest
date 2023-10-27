@@ -75,7 +75,7 @@
 				<SpellCornerButtons on:click={parent.onClose} />
 				<div class="p-4">
 					<h1 class="spell-name mb-2">{spellInfo.name}</h1>
-					<p>This spell is not recognized.</p>
+					<p>This spell ({spellInfo.id}) is not recognized.</p>
 				</div>
 			</div>
 		{/if}
