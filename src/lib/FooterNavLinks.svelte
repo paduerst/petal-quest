@@ -6,17 +6,12 @@
 	$: path = $page.url.pathname;
 </script>
 
-<nav class="list-nav">
+<nav>
 	<ul>
 		{#each NAV_LINKS as link}
-			<li
-				class="h-fit w-full rounded-[--theme-rounded-base] border border-transparent"
-				class:bg-surface-active-token={path === link.href}
-				class:border-surface-400-500-token={link.children.some((child) => path === child.href) ||
-					path.startsWith(link.href)}
-			>
+			<li class="h-fit w-full rounded-[--theme-rounded-base] border border-transparent">
 				<a
-					class="w-full rounded-[--theme-rounded-base] no-underline text-token box-border hover:bg-primary-hover-token flex flex-nowrap"
+					class="w-full rounded-[--theme-rounded-base] no-underline text-token box-border hover:bg-primary-hover-token flex flex-nowrap p-1"
 					href={link.href}
 				>
 					<span>
