@@ -9,3 +9,5 @@ export const RADIANCE_PENALIZES_FRIGHTFUL_FLARE_SAVES = true;
 
 // Creatures within bright light radius have disadvantage on Frightful Flare save
 export const FLARE_DISADVANTAGE_FOR_CLOSE_CREATURES = false;
+
+export const SUPERNOVA_ENABLED = false;
