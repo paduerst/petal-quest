@@ -48,7 +48,7 @@
 		bind:this={divElement}
 	>
 		{#if spell !== undefined}
-			<Spell {spell} showButton on:click={parent.onClose} />
+			<Spell {spell} showButtons on:click={parent.onClose} />
 		{:else}
 			<p>This ({$modalStore[0].value}) is not an app spell.</p>
 		{/if}
