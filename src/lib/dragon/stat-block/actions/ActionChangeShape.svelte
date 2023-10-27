@@ -32,11 +32,8 @@
 		</p>
 		<p>
 			In the new form, {dragon.name} retains {dragon.pronounPossessiveAdjective}
-			<AbbrButton title="personality, alignment, and known languages">personality</AbbrButton>,
-			<AbbrButton title="hit points and Hit Dice">hit points</AbbrButton>,
-			<AbbrButton title="Intelligence, Wisdom, and Charisma scores"
-				>mental ability scores</AbbrButton
-			>,
+			<AbbrButton title="personality, alignment, and known languages">personality</AbbrButton>, hit
+			points, mental ability scores,
 			{#if dragon.changeShapeRetainedFeatures.length < 1}
 				and proficiencies,
 			{:else}
