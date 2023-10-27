@@ -6,7 +6,6 @@
 
 	import { initializeStores, type ModalComponent } from '@skeletonlabs/skeleton';
 	import { AppShell, Modal, Toast } from '@skeletonlabs/skeleton';
-	import AbbrModal from '$lib/modals/AbbrModal.svelte';
 	import DragonShare from '$lib/modals/DragonShare.svelte';
 	import SpellModal from '$lib/modals/SpellModal.svelte';
 	import Drawer from '$lib/Drawer.svelte';
@@ -16,9 +15,6 @@
 	initializeStores();
 
 	const modalComponentRegistry: Record<string, ModalComponent> = {
-		abbrModal: {
-			ref: AbbrModal
-		},
 		dragonShare: {
 			ref: DragonShare
 		},

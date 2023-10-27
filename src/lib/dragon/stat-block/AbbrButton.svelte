@@ -1,18 +1,16 @@
 <script lang="ts">
-	import { getModalStore, type ModalSettings } from '@skeletonlabs/skeleton';
-
-	const modalStore = getModalStore();
-	const abbrModal: ModalSettings = {
-		type: 'component',
-		component: 'abbrModal'
-	};
-
 	export let title: string;
-
-	function handleClick() {
-		abbrModal.value = title;
-		modalStore.trigger(abbrModal);
-	}
 </script>
 
-<button on:click={handleClick} class="underline decoration-dotted"><slot /></button>
+<div class="daisy-dropdown daisy-dropdown-hover">
+	<label for="testfsdf">
+		<button class="underline decoration-dotted"><slot /></button>
+	</label>
+	<div
+		class="daisy-card daisy-compact daisy-dropdown-content z-[1] shadow bg-base-100 rounded-box border border-black min-w-[8rem]"
+	>
+		<div class="daisy-card-body">
+			<p class="font-normal not-italic">{title}</p>
+		</div>
+	</div>
+</div>
