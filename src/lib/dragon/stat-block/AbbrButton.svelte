@@ -4,11 +4,34 @@
 	export let title: string;
 
 	let abbrID = `abbrevationDropdown__${normalizeString(title)}`;
+
+	function handleClick() {
+		// no action required
+	}
+
+	function handleKeydown(e: KeyboardEvent) {
+		if (e.key === ' ') {
+			handleClick();
+		}
+	}
+
+	function handleKeyup(e: KeyboardEvent) {
+		if (e.key === 'Enter') {
+			handleClick();
+		}
+	}
 </script>
 
 <div class="daisy-dropdown daisy-dropdown-hover">
 	<label for={abbrID}>
-		<button class="underline decoration-dotted"><slot /></button>
+		<span
+			role="button"
+			tabindex="0"
+			on:keydown={handleKeydown}
+			on:keyup={handleKeyup}
+			on:click={handleClick}
+			class="underline decoration-dotted"><slot /></span
+		>
 	</label>
 	<div
 		id={abbrID}
