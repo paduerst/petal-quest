@@ -309,3 +309,6 @@ export type SpellcastingConfig = (typeof SPELLCASTING_CONFIG_OPTIONS)[number];
 
 export const DISPLAY_SPELL_STATS_OPTIONS = ['both', 'attack', 'saveDC', 'neither'] as const;
 export type DisplaySpellStats = (typeof DISPLAY_SPELL_STATS_OPTIONS)[number];
+
+export const SHAPE_CHANGE_RETAINS_LEGENDARY_RESISTANCE = true;
+export const SHAPE_CHANGE_RETAINS_INNATE_SPELLCASTING = true;

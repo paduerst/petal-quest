@@ -13,7 +13,9 @@ import {
 	abilityMin,
 	abilityMax,
 	scoreToMod,
-	expectedDiceResult
+	expectedDiceResult,
+	SHAPE_CHANGE_RETAINS_LEGENDARY_RESISTANCE,
+	SHAPE_CHANGE_RETAINS_INNATE_SPELLCASTING
 } from '.';
 import { capitalizeFirstLetter, numberWithSign } from '$lib/text-utils';
 import type { Age, Color, RGB, Size, Die, ProficiencyLevel, PronounsConfig } from '.';
@@ -414,10 +416,13 @@ export class DragonStats {
 
 	#getChangeShapeRetainedFeatures(): string[] {
 		const output: string[] = [];
-		if (this.legendaryResistances > 0) {
+		if (this.legendaryResistances > 0 && SHAPE_CHANGE_RETAINS_LEGENDARY_RESISTANCE) {
 			output.push('Legendary Resistance');
 		}
-		if (this.cantrips.length > 0 || this.spells.length > 0) {
+		if (
+			(this.cantrips.length > 0 || this.spells.length > 0) &&
+			SHAPE_CHANGE_RETAINS_INNATE_SPELLCASTING
+		) {
 			output.push('Innate Spellcasting');
 		}
 		return output;

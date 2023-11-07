@@ -8,6 +8,8 @@
 	let retainedFeatures: string;
 	$: if (dragon.changeShapeRetainedFeatures.length < 1) {
 		retainedFeatures = '';
+	} else if (dragon.changeShapeRetainedFeatures.length === 1) {
+		retainedFeatures = `and ${dragon.changeShapeRetainedFeatures[0]}`;
 	} else {
 		retainedFeatures = '';
 		const retainedFeaturesArray: string[] = JSON.parse(
