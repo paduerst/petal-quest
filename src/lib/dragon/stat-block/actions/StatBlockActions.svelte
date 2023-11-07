@@ -15,10 +15,14 @@
 	<StatBlockDivider color={dragon.theme} height={dividerHeightThin} classes={'mt-0'} />
 </div>
 
-<ActionAttacks {dragon} />
+{#if dragon.isShapechanged}
+	<ActionChangeShape {dragon} />
+{:else}
+	<ActionAttacks {dragon} />
 
-<ActionBreathWeapons {dragon} />
+	<ActionBreathWeapons {dragon} />
 
-<ActionChangeShape {dragon} />
+	<ActionChangeShape {dragon} />
 
-<ActionWallOfLight {dragon} />
+	<ActionWallOfLight {dragon} />
+{/if}

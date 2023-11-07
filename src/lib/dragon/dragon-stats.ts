@@ -204,8 +204,9 @@ export class DragonStats {
 		this.breath2DiceCount = this.#vals.breath2DiceCount;
 		this.breath2SpecialValue = this.#vals.breath2SpecialValue;
 
-		this.hasChangeShape = this.age !== 'wyrmling' && this.age !== 'young';
+		this.hasChangeShape = this.age === 'adult' || this.age === 'ancient';
 		this.changeShapeRetainedFeatures = this.#getChangeShapeRetainedFeatures();
+		this.isShapechanged = this.#config.shapechanged === true && this.hasChangeShape;
 
 		this.hasWallOfLight = this.age !== 'wyrmling' && this.age !== 'young';
 		this.wallLayers = this.#vals.wallLayers;
@@ -569,6 +570,7 @@ export class DragonStats {
 
 	hasChangeShape: boolean;
 	changeShapeRetainedFeatures: string[];
+	isShapechanged: boolean;
 
 	hasWallOfLight: boolean;
 	wallLayers: string;

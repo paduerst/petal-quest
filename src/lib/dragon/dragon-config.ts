@@ -71,6 +71,8 @@ export class DragonConfig {
 	dailySpells?: string;
 	displaySpellStats?: DisplaySpellStats;
 
+	shapechanged?: boolean;
+
 	/**
 	 * Returns the title for this DragonConfig.
 	 * @return {*}  {string}
@@ -176,6 +178,10 @@ export class DragonConfig {
 		if (this.dailySpells === '') {
 			delete this.dailySpells;
 		}
+
+		if (this.shapechanged === false) {
+			delete this.shapechanged;
+		}
 	}
 
 	/**
@@ -267,6 +273,10 @@ export class DragonConfig {
 			output.set('displaySpellStats', this.displaySpellStats);
 		}
 
+		if (this.shapechanged === true) {
+			output.set('shapechanged', '1');
+		}
+
 		return output;
 	}
 
@@ -337,6 +347,10 @@ export class DragonConfig {
 		this.#setAtWillSpellsFromURLSearchParams(params);
 		this.#setDailySpellsFromURLSearchParams(params);
 		this.#setDisplaySpellStatsFromURLSearchParams(params);
+
+		if (params.has('shapechanged')) {
+			this.shapechanged = true;
+		}
 
 		return true;
 	}
