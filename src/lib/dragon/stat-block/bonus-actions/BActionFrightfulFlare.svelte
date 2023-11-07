@@ -6,7 +6,7 @@
 	export let dragon: DragonStats;
 </script>
 
-{#if dragon.age !== 'wyrmling' && dragon.age !== 'young'}
+{#if dragon.hasFrightfulFlare}
 	<div class="dragon-action">
 		<p>
 			<i>

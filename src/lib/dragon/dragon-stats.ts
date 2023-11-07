@@ -208,6 +208,8 @@ export class DragonStats {
 		this.hasWallOfLight = this.age !== 'wyrmling' && this.age !== 'young';
 		this.wallLayers = this.#vals.wallLayers;
 
+		this.hasFrightfulFlare = this.age !== 'wyrmling' && this.age !== 'young';
+
 		this.prismaticRadianceRadius = this.#vals.prismaticRadianceRadius;
 
 		this.wingAttackRadius = this.#vals.wingAttackRadius;
@@ -565,6 +567,8 @@ export class DragonStats {
 
 	hasWallOfLight: boolean;
 	wallLayers: string;
+
+	hasFrightfulFlare: boolean;
 
 	prismaticRadianceRadius: number;
 
