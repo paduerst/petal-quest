@@ -6,6 +6,9 @@ import {
 	COLORS,
 	COLORS_UPPER,
 	stringToColor,
+	AGE_TO_SIZE,
+	SIZE_TO_HIT_DIE,
+	AGE_TO_HIT_DIE,
 	scoreToMod,
 	expectedDiceResult,
 	type RGB,
@@ -34,6 +37,12 @@ test('COLORS_UPPER are Red, Orange, Yellow, Green, Blue, Indigo, and Violet', ()
 		'Indigo',
 		'Violet'
 	]);
+});
+
+test('AGE_TO_HIT_DIE[age] === SIZE_TO_HIT_DIE[AGE_TO_SIZE[age]] for all ages', () => {
+	for (const age of AGES) {
+		expect(AGE_TO_HIT_DIE[age]).toBe(SIZE_TO_HIT_DIE[AGE_TO_SIZE[age]]);
+	}
 });
 
 test('scoreToMod() behavior', () => {

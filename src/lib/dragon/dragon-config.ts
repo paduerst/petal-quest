@@ -6,7 +6,8 @@ import type {
 	PronounsConfig,
 	ProficiencyLevel,
 	SpellcastingConfig,
-	DisplaySpellStats
+	DisplaySpellStats,
+	Size
 } from '.';
 
 import {
@@ -32,6 +33,8 @@ export class DragonConfig {
 	name?: string;
 	disableNameCapitalization?: boolean;
 	statBlockTitle?: string;
+	size?: Size; // not a visible "Edit Dragon" option
+	type?: string; // not a visible "Edit Dragon" option
 	alignment?: string;
 	languages?: string;
 	pronouns?: Pronouns;
@@ -66,12 +69,19 @@ export class DragonConfig {
 	skillStealth?: ProficiencyLevel;
 	skillSurvival?: ProficiencyLevel;
 
+	vulnerabilities?: string; // not a visible "Edit Dragon" option
+	resistances?: string; // not a visible "Edit Dragon" option
+	immunities?: string; // not a visible "Edit Dragon" option
+
+	blindsight?: number | null; // not a visible "Edit Dragon" option
+	darkvision?: number | null; // not a visible "Edit Dragon" option
+
 	spellcasting?: SpellcastingConfig;
 	atWillSpells?: string;
 	dailySpells?: string;
 	displaySpellStats?: DisplaySpellStats;
 
-	shapechanged?: boolean;
+	shapechanged?: boolean; // not a visible "Edit Dragon" option
 
 	/**
 	 * Returns the title for this DragonConfig.

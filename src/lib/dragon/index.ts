@@ -86,6 +86,16 @@ export const SIZE_TO_HIT_DIE: {
 	Gargantuan: 20
 } as const;
 
+export const AGE_TO_HIT_DIE: {
+	[key in Age]: Die;
+} = {
+	wyrmling: SIZE_TO_HIT_DIE[AGE_TO_SIZE['wyrmling']],
+	young: SIZE_TO_HIT_DIE[AGE_TO_SIZE['young']],
+	adult: SIZE_TO_HIT_DIE[AGE_TO_SIZE['adult']],
+	ancient: SIZE_TO_HIT_DIE[AGE_TO_SIZE['ancient']],
+	cosmic: SIZE_TO_HIT_DIE[AGE_TO_SIZE['cosmic']]
+} as const;
+
 export const ABILITIES = [
 	['strength', 'str'],
 	['dexterity', 'dex'],
