@@ -96,15 +96,15 @@ export const SIZE_TO_HIT_DIE: {
 	Gargantuan: 20
 } as const;
 
-export const AGE_TO_HIT_DIE: {
-	[key in Age]: Die;
-} = {
-	wyrmling: SIZE_TO_HIT_DIE[AGE_TO_SIZE['wyrmling']],
-	young: SIZE_TO_HIT_DIE[AGE_TO_SIZE['young']],
-	adult: SIZE_TO_HIT_DIE[AGE_TO_SIZE['adult']],
-	ancient: SIZE_TO_HIT_DIE[AGE_TO_SIZE['ancient']],
-	cosmic: SIZE_TO_HIT_DIE[AGE_TO_SIZE['cosmic']]
-} as const;
+/**
+ * Returns the typical Hit Die for this age of dragon.
+ * @export
+ * @param {Age} age
+ * @return {*}  {Die}
+ */
+export function ageToHitDie(age: Age): Die {
+	return SIZE_TO_HIT_DIE[AGE_TO_SIZE[age]];
+}
 
 export const ABILITIES = [
 	['strength', 'str'],

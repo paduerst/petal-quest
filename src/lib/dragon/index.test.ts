@@ -8,9 +8,6 @@ import {
 	stringToColor,
 	SIZES,
 	stringToSize,
-	AGE_TO_SIZE,
-	SIZE_TO_HIT_DIE,
-	AGE_TO_HIT_DIE,
 	scoreToMod,
 	expectedDiceResult,
 	type RGB,
@@ -46,12 +43,6 @@ test('stringToSize() behavior', () => {
 
 	for (const size of SIZES) {
 		expect(stringToSize(size)).toBe(size);
-	}
-});
-
-test('AGE_TO_HIT_DIE[age] === SIZE_TO_HIT_DIE[AGE_TO_SIZE[age]] for all ages', () => {
-	for (const age of AGES) {
-		expect(AGE_TO_HIT_DIE[age]).toBe(SIZE_TO_HIT_DIE[AGE_TO_SIZE[age]]);
 	}
 });
 

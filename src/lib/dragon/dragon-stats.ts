@@ -1,7 +1,7 @@
 import {
 	COLOR_TO_ALIGNMENT,
 	AGE_TO_SIZE,
-	AGE_TO_HIT_DIE,
+	ageToHitDie,
 	ABILITIES,
 	SKILLS,
 	DEFAULT_PRONOUNS,
@@ -66,7 +66,7 @@ export class DragonStats {
 		this.type = this.#getType();
 		this.ac = this.#vals.ac;
 		this.numberOfHitDice = this.#getNumberOfHitDice();
-		this.hitDie = AGE_TO_HIT_DIE[this.age];
+		this.hitDie = ageToHitDie(this.age);
 
 		this.speed = this.#vals.walkingSpeed;
 		this.burrowSpeed = this.#vals.burrowSpeed;
