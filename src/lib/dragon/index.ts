@@ -62,6 +62,16 @@ export const COLOR_TO_THEME: {
 export const SIZES = ['Tiny', 'Small', 'Medium', 'Large', 'Huge', 'Gargantuan'] as const;
 export type Size = (typeof SIZES)[number];
 
+/**
+ * Converts input string to Size if possible, returning undefined if not.
+ * @export
+ * @param {string} sizeString
+ * @return {*}  {(Size | undefined)}
+ */
+export function stringToSize(sizeString: string): Size | undefined {
+	return SIZES.find((size) => size === sizeString);
+}
+
 export const AGE_TO_SIZE: {
 	[key in Age]: Size;
 } = {

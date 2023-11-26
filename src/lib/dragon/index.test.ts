@@ -6,6 +6,8 @@ import {
 	COLORS,
 	COLORS_UPPER,
 	stringToColor,
+	SIZES,
+	stringToSize,
 	AGE_TO_SIZE,
 	SIZE_TO_HIT_DIE,
 	AGE_TO_HIT_DIE,
@@ -37,6 +39,14 @@ test('COLORS_UPPER are Red, Orange, Yellow, Green, Blue, Indigo, and Violet', ()
 		'Indigo',
 		'Violet'
 	]);
+});
+
+test('stringToSize() behavior', () => {
+	expect(stringToSize('This is not a valid size.')).toBe(undefined);
+
+	for (const size of SIZES) {
+		expect(stringToSize(size)).toBe(size);
+	}
 });
 
 test('AGE_TO_HIT_DIE[age] === SIZE_TO_HIT_DIE[AGE_TO_SIZE[age]] for all ages', () => {

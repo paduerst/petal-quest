@@ -62,7 +62,8 @@ export class DragonStats {
 		this.pronounObjective = pronouns.objective;
 		this.pronounPossessiveAdjective = pronouns.possessiveAdjective;
 
-		this.size = AGE_TO_SIZE[this.age];
+		this.size = this.#getSize();
+		this.type = this.#getType();
 		this.ac = this.#vals.ac;
 		this.numberOfHitDice = this.#getNumberOfHitDice();
 		this.hitDie = AGE_TO_HIT_DIE[this.age];
@@ -91,15 +92,14 @@ export class DragonStats {
 		this.expectedHitPoints = this.#getExpectedHitPoints();
 
 		this.immunity = this.#vals.immunity;
-		this.additionalImmunities = this.#vals.additionalImmunities;
-		this.immunities = this.immunity + this.additionalImmunities;
-		this.resistances = this.#vals.resistances;
+		this.immunities = this.#getImmunities();
+		this.resistances = this.#getResistances();
 		this.vulnerability = this.#vals.vulnerability;
-		this.vulnerabilities = this.vulnerability;
+		this.vulnerabilities = this.#getVulnerabilities();
 		this.conditionImmunities = this.#vals.conditionImmunities;
 
-		this.blindsight = this.#vals.blindsight;
-		this.darkvision = this.#vals.darkvision;
+		this.blindsight = this.#getBlindsight();
+		this.darkvision = this.#getDarkvision();
 
 		this.languages = this.#config.languages ?? this.#vals.languages;
 
@@ -268,6 +268,22 @@ export class DragonStats {
 		}
 	}
 
+	#getSize(): Size {
+		if (this.#config.size !== undefined) {
+			return this.#config.size;
+		} else {
+			return AGE_TO_SIZE[this.age];
+		}
+	}
+
+	#getType(): string {
+		if (this.#config.type !== undefined) {
+			return this.#config.type;
+		} else {
+			return 'Dragon (Prismatic)';
+		}
+	}
+
 	#getNumberOfHitDice(): number {
 		if (
 			this.#config.numberOfHitDice !== undefined &&
@@ -352,6 +368,46 @@ export class DragonStats {
 			}
 		}
 		return skillsOutput;
+	}
+
+	#getImmunities(): string {
+		if (this.#config.immunities !== undefined) {
+			return this.#config.immunities;
+		} else {
+			return this.immunity + this.#vals.additionalImmunities;
+		}
+	}
+
+	#getResistances(): string {
+		return this.#config.resistances ?? this.#vals.resistances;
+	}
+
+	#getVulnerabilities(): string {
+		return this.#config.vulnerabilities ?? this.vulnerability;
+	}
+
+	#getBlindsight(): number {
+		if (
+			this.#config.blindsight !== undefined &&
+			this.#config.blindsight !== null &&
+			!Number.isNaN(this.#config.blindsight)
+		) {
+			return this.#config.blindsight;
+		} else {
+			return this.#vals.blindsight;
+		}
+	}
+
+	#getDarkvision(): number {
+		if (
+			this.#config.darkvision !== undefined &&
+			this.#config.darkvision !== null &&
+			!Number.isNaN(this.#config.darkvision)
+		) {
+			return this.#config.darkvision;
+		} else {
+			return this.#vals.darkvision;
+		}
 	}
 
 	#getCantrips(): string[] {
@@ -447,6 +503,7 @@ export class DragonStats {
 	pronounPossessiveAdjective: string;
 
 	size: Size;
+	type: string;
 	ac: number;
 	numberOfHitDice: number;
 	hitDie: Die;
@@ -475,7 +532,6 @@ export class DragonStats {
 	expectedHitPoints: number;
 
 	immunity: string;
-	additionalImmunities: string;
 	immunities: string;
 	resistances: string;
 	vulnerability: string;
