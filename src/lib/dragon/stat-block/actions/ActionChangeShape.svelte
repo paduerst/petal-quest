@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { capitalizeFirstLetter } from '$lib/text-utils';
 	import type { DragonStats } from '$lib/dragon/dragon-stats';
-	import AbbrButton from '../AbbrButton.svelte';
 
 	export let dragon: DragonStats;
 

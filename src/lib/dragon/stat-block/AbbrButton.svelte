@@ -1,12 +1,18 @@
 <script lang="ts">
-	import { normalizeString } from '$lib/text-utils';
+	import { getModalStore, type ModalSettings } from '@skeletonlabs/skeleton';
 
-	export let title: string;
+	const modalStore = getModalStore();
+	const modalConfig: ModalSettings = {
+		type: 'component',
+		component: 'abbrModal'
+	};
 
-	let abbrID = `abbrevationDropdown__${normalizeString(title)}`;
+	export let abbreviation: string;
+	export let definition: string;
 
 	function handleClick() {
-		// no action required
+		modalConfig.value = { abbreviation, definition };
+		modalStore.trigger(modalConfig);
 	}
 
 	function handleKeydown(e: KeyboardEvent) {
@@ -22,23 +28,11 @@
 	}
 </script>
 
-<div class="daisy-dropdown daisy-dropdown-hover">
-	<label for={abbrID}>
-		<span
-			role="button"
-			tabindex="0"
-			on:keydown={handleKeydown}
-			on:keyup={handleKeyup}
-			on:click={handleClick}
-			class="underline decoration-dotted"><slot /></span
-		>
-	</label>
-	<div
-		id={abbrID}
-		class="daisy-card daisy-compact daisy-dropdown-content z-[1] shadow bg-base-100 rounded-box border border-black min-w-[8rem]"
-	>
-		<div class="daisy-card-body">
-			<p class="font-normal not-italic">{title}</p>
-		</div>
-	</div>
-</div>
+<span
+	role="button"
+	tabindex="0"
+	on:keydown={handleKeydown}
+	on:keyup={handleKeyup}
+	on:click={handleClick}
+	class="underline print:no-underline">{abbreviation}</span
+>

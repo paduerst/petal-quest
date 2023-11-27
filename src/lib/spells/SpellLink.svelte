@@ -37,5 +37,5 @@
 	on:click={handleClick}
 	on:keydown={handleKeydown}
 	on:keyup={handleKeyup}
-	class="italic underline">{spellName}</span
+	class="italic underline print:no-underline">{spellName}</span
 >
