@@ -62,6 +62,16 @@ export const COLOR_TO_THEME: {
 export const SIZES = ['Tiny', 'Small', 'Medium', 'Large', 'Huge', 'Gargantuan'] as const;
 export type Size = (typeof SIZES)[number];
 
+/**
+ * Converts input string to Size if possible, returning undefined if not.
+ * @export
+ * @param {string} sizeString
+ * @return {*}  {(Size | undefined)}
+ */
+export function stringToSize(sizeString: string): Size | undefined {
+	return SIZES.find((size) => size === sizeString);
+}
+
 export const AGE_TO_SIZE: {
 	[key in Age]: Size;
 } = {
@@ -85,6 +95,16 @@ export const SIZE_TO_HIT_DIE: {
 	Huge: 12,
 	Gargantuan: 20
 } as const;
+
+/**
+ * Returns the typical Hit Die for this age of dragon.
+ * @export
+ * @param {Age} age
+ * @return {*}  {Die}
+ */
+export function ageToHitDie(age: Age): Die {
+	return SIZE_TO_HIT_DIE[AGE_TO_SIZE[age]];
+}
 
 export const ABILITIES = [
 	['strength', 'str'],
@@ -309,3 +329,6 @@ export type SpellcastingConfig = (typeof SPELLCASTING_CONFIG_OPTIONS)[number];
 
 export const DISPLAY_SPELL_STATS_OPTIONS = ['both', 'attack', 'saveDC', 'neither'] as const;
 export type DisplaySpellStats = (typeof DISPLAY_SPELL_STATS_OPTIONS)[number];
+
+export const SHAPE_CHANGE_RETAINS_LEGENDARY_RESISTANCE = true;
+export const SHAPE_CHANGE_RETAINS_INNATE_SPELLCASTING = true;

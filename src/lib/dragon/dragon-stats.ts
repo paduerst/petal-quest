@@ -1,7 +1,7 @@
 import {
 	COLOR_TO_ALIGNMENT,
 	AGE_TO_SIZE,
-	SIZE_TO_HIT_DIE,
+	ageToHitDie,
 	ABILITIES,
 	SKILLS,
 	DEFAULT_PRONOUNS,
@@ -13,7 +13,9 @@ import {
 	abilityMin,
 	abilityMax,
 	scoreToMod,
-	expectedDiceResult
+	expectedDiceResult,
+	SHAPE_CHANGE_RETAINS_LEGENDARY_RESISTANCE,
+	SHAPE_CHANGE_RETAINS_INNATE_SPELLCASTING
 } from '.';
 import { capitalizeFirstLetter, numberWithSign } from '$lib/text-utils';
 import type { Age, Color, RGB, Size, Die, ProficiencyLevel, PronounsConfig } from '.';
@@ -60,10 +62,11 @@ export class DragonStats {
 		this.pronounObjective = pronouns.objective;
 		this.pronounPossessiveAdjective = pronouns.possessiveAdjective;
 
-		this.size = AGE_TO_SIZE[this.age];
+		this.size = this.#getSize();
+		this.type = this.#getType();
 		this.ac = this.#vals.ac;
 		this.numberOfHitDice = this.#getNumberOfHitDice();
-		this.hitDie = SIZE_TO_HIT_DIE[this.size];
+		this.hitDie = ageToHitDie(this.age);
 
 		this.speed = this.#vals.walkingSpeed;
 		this.burrowSpeed = this.#vals.burrowSpeed;
@@ -89,15 +92,14 @@ export class DragonStats {
 		this.expectedHitPoints = this.#getExpectedHitPoints();
 
 		this.immunity = this.#vals.immunity;
-		this.additionalImmunities = this.#vals.additionalImmunities;
-		this.immunities = this.immunity + this.additionalImmunities;
-		this.resistances = this.#vals.resistances;
+		this.immunities = this.#getImmunities();
+		this.resistances = this.#getResistances();
 		this.vulnerability = this.#vals.vulnerability;
-		this.vulnerabilities = this.vulnerability;
+		this.vulnerabilities = this.#getVulnerabilities();
 		this.conditionImmunities = this.#vals.conditionImmunities;
 
-		this.blindsight = this.#vals.blindsight;
-		this.darkvision = this.#vals.darkvision;
+		this.blindsight = this.#getBlindsight();
+		this.darkvision = this.#getDarkvision();
 
 		this.languages = this.#config.languages ?? this.#vals.languages;
 
@@ -202,11 +204,14 @@ export class DragonStats {
 		this.breath2DiceCount = this.#vals.breath2DiceCount;
 		this.breath2SpecialValue = this.#vals.breath2SpecialValue;
 
-		this.hasChangeShape = this.age !== 'wyrmling' && this.age !== 'young';
+		this.hasChangeShape = this.age === 'adult' || this.age === 'ancient';
 		this.changeShapeRetainedFeatures = this.#getChangeShapeRetainedFeatures();
+		this.isShapechanged = this.#config.shapechanged === true && this.hasChangeShape;
 
 		this.hasWallOfLight = this.age !== 'wyrmling' && this.age !== 'young';
 		this.wallLayers = this.#vals.wallLayers;
+
+		this.hasFrightfulFlare = this.age !== 'wyrmling' && this.age !== 'young';
 
 		this.prismaticRadianceRadius = this.#vals.prismaticRadianceRadius;
 
@@ -260,6 +265,22 @@ export class DragonStats {
 			return customPronounsConfig;
 		} else {
 			return BASIC_PRONOUN_CONFIGS[this.#config.pronouns];
+		}
+	}
+
+	#getSize(): Size {
+		if (this.#config.size !== undefined) {
+			return this.#config.size;
+		} else {
+			return AGE_TO_SIZE[this.age];
+		}
+	}
+
+	#getType(): string {
+		if (this.#config.type !== undefined) {
+			return this.#config.type;
+		} else {
+			return 'Dragon (Prismatic)';
 		}
 	}
 
@@ -349,6 +370,46 @@ export class DragonStats {
 		return skillsOutput;
 	}
 
+	#getImmunities(): string {
+		if (this.#config.immunities !== undefined) {
+			return this.#config.immunities;
+		} else {
+			return this.immunity + this.#vals.additionalImmunities;
+		}
+	}
+
+	#getResistances(): string {
+		return this.#config.resistances ?? this.#vals.resistances;
+	}
+
+	#getVulnerabilities(): string {
+		return this.#config.vulnerabilities ?? this.vulnerability;
+	}
+
+	#getBlindsight(): number {
+		if (
+			this.#config.blindsight !== undefined &&
+			this.#config.blindsight !== null &&
+			!Number.isNaN(this.#config.blindsight)
+		) {
+			return this.#config.blindsight;
+		} else {
+			return this.#vals.blindsight;
+		}
+	}
+
+	#getDarkvision(): number {
+		if (
+			this.#config.darkvision !== undefined &&
+			this.#config.darkvision !== null &&
+			!Number.isNaN(this.#config.darkvision)
+		) {
+			return this.#config.darkvision;
+		} else {
+			return this.#vals.darkvision;
+		}
+	}
+
 	#getCantrips(): string[] {
 		let cantrips: string[] = [];
 		if (this.#config.spellcasting === 'off' || this.#config.spellcasting === 'onlyDaily') {
@@ -412,10 +473,13 @@ export class DragonStats {
 
 	#getChangeShapeRetainedFeatures(): string[] {
 		const output: string[] = [];
-		if (this.legendaryResistances > 0) {
+		if (this.legendaryResistances > 0 && SHAPE_CHANGE_RETAINS_LEGENDARY_RESISTANCE) {
 			output.push('Legendary Resistance');
 		}
-		if (this.cantrips.length > 0 || this.spells.length > 0) {
+		if (
+			(this.cantrips.length > 0 || this.spells.length > 0) &&
+			SHAPE_CHANGE_RETAINS_INNATE_SPELLCASTING
+		) {
 			output.push('Innate Spellcasting');
 		}
 		return output;
@@ -439,6 +503,7 @@ export class DragonStats {
 	pronounPossessiveAdjective: string;
 
 	size: Size;
+	type: string;
 	ac: number;
 	numberOfHitDice: number;
 	hitDie: Die;
@@ -467,7 +532,6 @@ export class DragonStats {
 	expectedHitPoints: number;
 
 	immunity: string;
-	additionalImmunities: string;
 	immunities: string;
 	resistances: string;
 	vulnerability: string;
@@ -562,9 +626,12 @@ export class DragonStats {
 
 	hasChangeShape: boolean;
 	changeShapeRetainedFeatures: string[];
+	isShapechanged: boolean;
 
 	hasWallOfLight: boolean;
 	wallLayers: string;
+
+	hasFrightfulFlare: boolean;
 
 	prismaticRadianceRadius: number;
 

@@ -1,13 +1,14 @@
 <script lang="ts">
 	import { capitalizeFirstLetter } from '$lib/text-utils';
 	import type { DragonStats } from '$lib/dragon/dragon-stats';
-	import AbbrButton from '../AbbrButton.svelte';
 
 	export let dragon: DragonStats;
 
 	let retainedFeatures: string;
 	$: if (dragon.changeShapeRetainedFeatures.length < 1) {
 		retainedFeatures = '';
+	} else if (dragon.changeShapeRetainedFeatures.length === 1) {
+		retainedFeatures = `and ${dragon.changeShapeRetainedFeatures[0]}`;
 	} else {
 		retainedFeatures = '';
 		const retainedFeaturesArray: string[] = JSON.parse(
@@ -32,8 +33,7 @@
 		</p>
 		<p>
 			In the new form, {dragon.name} retains {dragon.pronounPossessiveAdjective}
-			<AbbrButton title="personality, alignment, and known languages">personality</AbbrButton>, hit
-			points, mental ability scores,
+			personality, known languages, hit points, mental ability scores,
 			{#if dragon.changeShapeRetainedFeatures.length < 1}
 				and proficiencies,
 			{:else}

@@ -6,13 +6,12 @@
 	export let level: SpellLevel;
 
 	let maxLevelWithOrdinal = numberWithOrdinalSuffix(level);
+	let abbreviation = `Upcast to ${maxLevelWithOrdinal} Level`;
 	let affectedLevels =
 		level > 2 ? `1st through ${numberWithOrdinalSuffix(level - 1)} level` : '1st level';
-	let abbrTitle = `Spells of ${affectedLevels} are cast at ${maxLevelWithOrdinal} level.`;
+	let definition = `Spells of ${affectedLevels} are cast at ${maxLevelWithOrdinal} level.`;
 </script>
 
 {#if level > 1}
-	{' ('}<AbbrButton title={abbrTitle}>
-		<span class="italic">Upcast to {maxLevelWithOrdinal} Level</span>
-	</AbbrButton>{')'}
+	{' ('}<AbbrButton {abbreviation} {definition} />{')'}
 {/if}

@@ -7,6 +7,6 @@
 <div class="dragon-header">
 	<div>
 		<h4 class="dragon-title">{dragon.title}</h4>
-		<p class="dragon-subheading">{dragon.size} Dragon (Prismatic), {dragon.alignment}</p>
+		<p class="dragon-subheading">{dragon.size} {dragon.type}, {dragon.alignment}</p>
 	</div>
 </div>

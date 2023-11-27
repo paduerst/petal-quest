@@ -6,12 +6,14 @@ import type {
 	PronounsConfig,
 	ProficiencyLevel,
 	SpellcastingConfig,
-	DisplaySpellStats
+	DisplaySpellStats,
+	Size
 } from '.';
 
 import {
 	stringToAge,
 	stringToColor,
+	stringToSize,
 	COLOR_TO_THEME,
 	DEFAULT_PRONOUNS,
 	ABILITIES,
@@ -32,6 +34,8 @@ export class DragonConfig {
 	name?: string;
 	disableNameCapitalization?: boolean;
 	statBlockTitle?: string;
+	size?: Size; // not a visible "Edit Dragon" option
+	type?: string; // not a visible "Edit Dragon" option
 	alignment?: string;
 	languages?: string;
 	pronouns?: Pronouns;
@@ -66,10 +70,19 @@ export class DragonConfig {
 	skillStealth?: ProficiencyLevel;
 	skillSurvival?: ProficiencyLevel;
 
+	vulnerabilities?: string; // not a visible "Edit Dragon" option
+	resistances?: string; // not a visible "Edit Dragon" option
+	immunities?: string; // not a visible "Edit Dragon" option
+
+	blindsight?: number | null; // not a visible "Edit Dragon" option
+	darkvision?: number | null; // not a visible "Edit Dragon" option
+
 	spellcasting?: SpellcastingConfig;
 	atWillSpells?: string;
 	dailySpells?: string;
 	displaySpellStats?: DisplaySpellStats;
+
+	shapechanged?: boolean; // not a visible "Edit Dragon" option
 
 	/**
 	 * Returns the title for this DragonConfig.
@@ -124,6 +137,9 @@ export class DragonConfig {
 		if (this.statBlockTitle === '') {
 			delete this.statBlockTitle;
 		}
+		if (this.type === '') {
+			delete this.type;
+		}
 		if (this.alignment === '') {
 			delete this.alignment;
 		}
@@ -170,11 +186,22 @@ export class DragonConfig {
 			}
 		}
 
+		if (this.blindsight === null) {
+			delete this.blindsight;
+		}
+		if (this.darkvision === null) {
+			delete this.darkvision;
+		}
+
 		if (this.atWillSpells === '') {
 			delete this.atWillSpells;
 		}
 		if (this.dailySpells === '') {
 			delete this.dailySpells;
+		}
+
+		if (this.shapechanged === false) {
+			delete this.shapechanged;
 		}
 	}
 
@@ -196,6 +223,12 @@ export class DragonConfig {
 		}
 		if (this.statBlockTitle !== undefined) {
 			output.set('statBlockTitle', this.statBlockTitle);
+		}
+		if (this.size !== undefined) {
+			output.set('size', this.size);
+		}
+		if (this.type !== undefined) {
+			output.set('type', this.type);
 		}
 		if (this.alignment !== undefined) {
 			output.set('alignment', this.alignment);
@@ -254,6 +287,31 @@ export class DragonConfig {
 			}
 		}
 
+		if (this.vulnerabilities !== undefined) {
+			output.set('vulnerabilities', this.vulnerabilities);
+		}
+		if (this.resistances !== undefined) {
+			output.set('resistances', this.resistances);
+		}
+		if (this.immunities !== undefined) {
+			output.set('immunities', this.immunities);
+		}
+
+		if (
+			this.blindsight !== undefined &&
+			this.blindsight !== null &&
+			!Number.isNaN(this.blindsight)
+		) {
+			output.set('blindsight', Math.floor(this.blindsight).toString());
+		}
+		if (
+			this.darkvision !== undefined &&
+			this.darkvision !== null &&
+			!Number.isNaN(this.darkvision)
+		) {
+			output.set('darkvision', Math.floor(this.darkvision).toString());
+		}
+
 		if (this.spellcasting !== undefined) {
 			output.set('spellcasting', this.spellcasting);
 		}
@@ -265,6 +323,10 @@ export class DragonConfig {
 		}
 		if (this.displaySpellStats !== undefined) {
 			output.set('displaySpellStats', this.displaySpellStats);
+		}
+
+		if (this.shapechanged === true) {
+			output.set('shapechanged', '1');
 		}
 
 		return output;
@@ -313,6 +375,19 @@ export class DragonConfig {
 
 		this.#setStatBlockTitleFromURLSearchParams(params);
 
+		const paramsSizeVal = params.get('size');
+		if (paramsSizeVal !== null) {
+			const paramsSize = stringToSize(paramsSizeVal);
+			if (paramsSize !== undefined) {
+				this.size = paramsSize;
+			}
+		}
+
+		const paramsTypeVal = params.get('type');
+		if (paramsTypeVal !== null) {
+			this.type = paramsTypeVal;
+		}
+
 		const paramsAlignmentVal = params.get('alignment');
 		if (paramsAlignmentVal !== null) {
 			this.alignment = paramsAlignmentVal;
@@ -333,10 +408,18 @@ export class DragonConfig {
 
 		this.#setSkillsFromURLSearchParams(params);
 
+		this.#setDamageModifiersFromURLSearchParams(params);
+
+		this.#setSensesFromURLSearchParams(params);
+
 		this.#setSpellcastingFromURLSearchParams(params);
 		this.#setAtWillSpellsFromURLSearchParams(params);
 		this.#setDailySpellsFromURLSearchParams(params);
 		this.#setDisplaySpellStatsFromURLSearchParams(params);
+
+		if (params.has('shapechanged')) {
+			this.shapechanged = true;
+		}
 
 		return true;
 	}
@@ -493,6 +576,41 @@ export class DragonConfig {
 				) {
 					this[skill.key] = paramsSkillFloat;
 				}
+			}
+		}
+	}
+
+	#setDamageModifiersFromURLSearchParams(params: URLSearchParams) {
+		const paramsVulnerabilitiesVal = params.get('vulnerabilities');
+		if (paramsVulnerabilitiesVal !== null) {
+			this.vulnerabilities = paramsVulnerabilitiesVal;
+		}
+
+		const paramsResistancesVal = params.get('resistances');
+		if (paramsResistancesVal !== null) {
+			this.resistances = paramsResistancesVal;
+		}
+
+		const paramsImmunitiesVal = params.get('immunities');
+		if (paramsImmunitiesVal !== null) {
+			this.immunities = paramsImmunitiesVal;
+		}
+	}
+
+	#setSensesFromURLSearchParams(params: URLSearchParams) {
+		const paramsBlindsightVal = params.get('blindsight');
+		if (paramsBlindsightVal !== null) {
+			const paramsBlindsightInt = parseInt(paramsBlindsightVal);
+			if (!Number.isNaN(paramsBlindsightInt)) {
+				this.blindsight = paramsBlindsightInt;
+			}
+		}
+
+		const paramsDarkvisionVal = params.get('darkvision');
+		if (paramsDarkvisionVal !== null) {
+			const paramsDarkvisionInt = parseInt(paramsDarkvisionVal);
+			if (!Number.isNaN(paramsDarkvisionInt)) {
+				this.darkvision = paramsDarkvisionInt;
 			}
 		}
 	}
