@@ -6,6 +6,8 @@ import {
 	COLORS,
 	COLORS_UPPER,
 	stringToColor,
+	SIZES,
+	stringToSize,
 	scoreToMod,
 	expectedDiceResult,
 	type RGB,
@@ -34,6 +36,14 @@ test('COLORS_UPPER are Red, Orange, Yellow, Green, Blue, Indigo, and Violet', ()
 		'Indigo',
 		'Violet'
 	]);
+});
+
+test('stringToSize() behavior', () => {
+	expect(stringToSize('This is not a valid size.')).toBe(undefined);
+
+	for (const size of SIZES) {
+		expect(stringToSize(size)).toBe(size);
+	}
 });
 
 test('scoreToMod() behavior', () => {

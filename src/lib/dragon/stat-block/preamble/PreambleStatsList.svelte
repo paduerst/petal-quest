@@ -49,12 +49,14 @@
 		</li>
 	{/if}
 
-	<li class="dragon-immunities my-1">
-		<p class="-indent-4 pl-4">
-			<span class="dragon-label">Damage Immunities</span>
-			<span class="lowercase">{dragon.immunities}</span>
-		</p>
-	</li>
+	{#if dragon.immunities.length > 0}
+		<li class="dragon-immunities my-1">
+			<p class="-indent-4 pl-4">
+				<span class="dragon-label">Damage Immunities</span>
+				<span class="lowercase">{dragon.immunities}</span>
+			</p>
+		</li>
+	{/if}
 
 	{#if dragon.conditionImmunities.length > 0}
 		<li class="dragon-conditions my-1">
@@ -70,19 +72,25 @@
 			<span class="dragon-label">Senses</span>
 			<span>
 				{#if dragon.age === 'cosmic'}
-					<span class="whitespace-nowrap">
-						truesight
-						{dragon.blindsight} ft.,
-					</span>
+					{#if dragon.blindsight > 0}
+						<span class="whitespace-nowrap">
+							truesight
+							{dragon.blindsight} ft.,
+						</span>
+					{/if}
 				{:else}
-					<span class="whitespace-nowrap">
-						blindsight
-						{dragon.blindsight} ft.,
-					</span>
-					<span class="whitespace-nowrap">
-						darkvision
-						{dragon.darkvision} ft.,
-					</span>
+					{#if dragon.blindsight > 0}
+						<span class="whitespace-nowrap">
+							blindsight
+							{dragon.blindsight} ft.,
+						</span>
+					{/if}
+					{#if dragon.darkvision > 0}
+						<span class="whitespace-nowrap">
+							darkvision
+							{dragon.darkvision} ft.,
+						</span>
+					{/if}
 				{/if}
 				<span class="whitespace-nowrap">passive Perception {dragon.passivePerception}</span>
 			</span>

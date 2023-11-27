@@ -9,7 +9,7 @@
 	export let dragon: DragonStats;
 </script>
 
-{#if dragon.age !== 'wyrmling' && dragon.age !== 'young'}
+{#if dragon.age !== 'wyrmling' && dragon.age !== 'young' && !dragon.isShapechanged}
 	<div class="break-inside-avoid break-after-avoid">
 		<h5 class="dragon-heading-font text-xl">Legendary Actions</h5>
 		<StatBlockDivider color={dragon.theme} height={dividerHeightThin} classes={'mt-0'} />
