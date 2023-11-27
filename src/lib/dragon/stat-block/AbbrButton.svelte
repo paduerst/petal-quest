@@ -34,5 +34,5 @@
 	on:keydown={handleKeydown}
 	on:keyup={handleKeyup}
 	on:click={handleClick}
-	class="underline">{abbreviation}</span
+	class="underline print:no-underline">{abbreviation}</span
 >
