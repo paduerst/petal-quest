@@ -4,17 +4,16 @@
 	import AbbrButton from '../AbbrButton.svelte';
 
 	export let dragon: DragonStats;
+
+	let abbreviation = '1/SR';
+	let definition = 'Recharges after a Short or Long Rest';
 </script>
 
 {#if dragon.hasFrightfulFlare}
 	<div class="dragon-action">
 		<p>
 			<i>
-				<b
-					>Frightful Flare (<AbbrButton title="Recharges after a Short or Long Rest"
-						><span class="italic">1/SR</span></AbbrButton
-					>).
-				</b>
+				<b>Frightful Flare (<AbbrButton {abbreviation} {definition} />). </b>
 			</i>
 			{dragon.nameUpper} unleashes {dragon.pronounPossessiveAdjective} inner light, maxing out {dragon.pronounPossessiveAdjective}
 			Variable Radiance to a radius of {dragon.prismaticRadianceRadius} feet. Each creature of {dragon.name}'s
