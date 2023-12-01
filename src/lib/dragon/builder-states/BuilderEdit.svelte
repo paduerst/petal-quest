@@ -2,7 +2,12 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 
-	import { currentDragonConfig, nextBuilderState } from '.';
+	import {
+		currentDragonConfig,
+		discardedDragonEditsToRestore,
+		currentBuilderState,
+		nextBuilderState
+	} from '.';
 	import { DEFAULT_PRONOUNS } from '..';
 	import { DragonConfig } from '../dragon-config';
 	import FormSectionBasics from './edit-form/FormSectionBasics.svelte';
@@ -27,27 +32,34 @@
 		}
 	}
 
-	function onDiscardEdits() {
+	function onCancelEditing() {
 		editedConfig.cleanup();
 		const discardedConfig = DragonConfig.newFromDragonConfig(editedConfig);
 		setEditedConfig($currentDragonConfig);
 
-		// let the user know what we did
-		const t: ToastSettings = {
-			message: 'No edits to discard.',
-			timeout: 10000,
-			hoverable: true
-		};
 		if (discardedConfig.toString() !== editedConfig.toString()) {
-			// we discarded actual changes, so let's offer to undo that
-			t.message = 'Edits discarded.';
-			t.action = {
-				label: 'Undo',
-				response: () => setEditedConfig(discardedConfig)
+			// we're discarding actual changes, so let's offter to undo that
+			const t: ToastSettings = {
+				message: 'Edits discarded.',
+				timeout: 10000,
+				hoverable: true,
+				action: {
+					label: 'Undo',
+					response: () => {
+						if ($currentBuilderState === 'EDIT') {
+							setEditedConfig(discardedConfig);
+						} else {
+							$discardedDragonEditsToRestore = discardedConfig;
+							$nextBuilderState = 'EDIT';
+						}
+					}
+				}
 			};
+			toastStore.clear();
+			toastStore.trigger(t);
 		}
-		toastStore.clear();
-		toastStore.trigger(t);
+
+		$nextBuilderState = 'DISPLAY';
 	}
 
 	const FORM_SECTION_NAMES = ['Basics', 'HP & Abilities', 'Skills', 'Spells'] as const;
@@ -69,8 +81,15 @@
 	let sectionControlElements: (HTMLElement | undefined)[] = Array(FORM_SECTION_NAMES.length).fill(
 		undefined
 	);
+
 	onMount(() => {
-		setEditedConfig($currentDragonConfig);
+		if ($discardedDragonEditsToRestore !== undefined) {
+			setEditedConfig($discardedDragonEditsToRestore);
+			$discardedDragonEditsToRestore = undefined;
+		} else {
+			setEditedConfig($currentDragonConfig);
+		}
+
 		if (sectionControlElements[0] !== undefined) {
 			sectionControlElements[0].focus();
 		}
@@ -125,8 +144,11 @@
 	</button>
 
 	{#if $currentDragonConfig !== undefined}
-		<button class="daisy-btn daisy-btn-outline hover:daisy-btn-error m-2" on:click={onDiscardEdits}>
-			Discard Edits
+		<button
+			class="daisy-btn daisy-btn-outline hover:daisy-btn-error m-2"
+			on:click={onCancelEditing}
+		>
+			Cancel
 		</button>
 	{:else}
 		<button

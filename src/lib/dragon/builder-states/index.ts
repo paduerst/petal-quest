@@ -162,3 +162,5 @@ export const currentDragonConfig = (() => {
 		}
 	};
 })();
+
+export const discardedDragonEditsToRestore = writable<DragonConfig | undefined>(undefined);

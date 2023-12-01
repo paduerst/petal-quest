@@ -1,11 +1,15 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 
+	import { getToastStore } from '@skeletonlabs/skeleton';
+
 	import { currentDragonConfig, nextBuilderState } from './builder-states';
 
 	const dispatch = createEventDispatcher<{
 		click: { buttonText: string; clickedButton?: HTMLElement };
 	}>();
+
+	const toastStore = getToastStore();
 
 	function dispatchClick(buttonText: string, clickedButton?: HTMLElement) {
 		dispatch('click', {
@@ -21,6 +25,7 @@
 	<button
 		class="daisy-btn daisy-btn-neutral text-token m-1"
 		on:click={() => {
+			toastStore.clear();
 			$nextBuilderState = 'EDIT';
 		}}
 	>
@@ -38,6 +43,7 @@
 	<button
 		class="daisy-btn daisy-btn-neutral text-token m-1"
 		on:click={() => {
+			toastStore.clear();
 			$currentDragonConfig = undefined;
 		}}
 	>
@@ -46,6 +52,7 @@
 	<button
 		class="daisy-btn daisy-btn-neutral text-token m-1"
 		on:click={() => {
+			toastStore.clear();
 			$nextBuilderState = 'HISTORY';
 		}}
 	>
