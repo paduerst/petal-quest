@@ -27,10 +27,6 @@
 		}
 	}
 
-	onMount(() => {
-		setEditedConfig($currentDragonConfig);
-	});
-
 	function onDiscardEdits() {
 		editedConfig.cleanup();
 		const discardedConfig = DragonConfig.newFromDragonConfig(editedConfig);
@@ -69,12 +65,23 @@
 	$: outerWrapperHeight = innerClientHeight;
 
 	let heightTransitionDuration = 100;
+
+	let sectionControlElements: (HTMLElement | undefined)[] = Array(FORM_SECTION_NAMES.length).fill(
+		undefined
+	);
+	onMount(() => {
+		setEditedConfig($currentDragonConfig);
+		if (sectionControlElements[0] !== undefined) {
+			sectionControlElements[0].focus();
+		}
+	});
 </script>
 
 <div class="flex flex-col items-center">
 	<div class="daisy-tabs daisy-tabs-boxed font-semibold border border-black gap-1">
-		{#each FORM_SECTION_NAMES as name}
+		{#each FORM_SECTION_NAMES as name, i}
 			<button
+				bind:this={sectionControlElements[i]}
 				class="daisy-tab"
 				class:daisy-btn-ghost={currentSectionName !== name}
 				class:daisy-btn-neutral={currentSectionName === name}

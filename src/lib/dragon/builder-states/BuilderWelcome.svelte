@@ -1,15 +1,24 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+
 	import { nextBuilderState, currentDragonConfig, dragonBuilderHistory } from '.';
 	import { DragonConfig } from '../dragon-config';
 	import FormSubsectionWelcome from './edit-form/FormSubsectionWelcome.svelte';
 
 	let newConfig: DragonConfig = new DragonConfig();
+
+	let firstElement: HTMLElement | undefined;
+	onMount(() => {
+		if (firstElement !== undefined) {
+			firstElement.focus();
+		}
+	});
 </script>
 
 <p class="font-bold text-xl">Welcome to the Prismatic Dragon Builder!</p>
 
 <div class="flex flex-col items-center">
-	<FormSubsectionWelcome config={newConfig} />
+	<FormSubsectionWelcome bind:firstElement config={newConfig} />
 
 	<button
 		class="daisy-btn daisy-btn-neutral m-2 mt-6"

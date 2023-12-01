@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { flip, type FlipParams } from 'svelte/animate';
 	import { fade, type FadeParams, fly, type FlyParams } from 'svelte/transition';
 	import {
@@ -86,8 +87,7 @@
 			: 100;
 
 	const historyEntriesPerPage = 4;
-	let historyPagesNeeded: number;
-	$: historyPagesNeeded = Math.ceil($dragonBuilderHistory.length / historyEntriesPerPage);
+	let historyPagesNeeded: number = Math.ceil($dragonBuilderHistory.length / historyEntriesPerPage);
 	let currentHistoryPage = 0;
 
 	function setHistoryPage(nextPage: number) {
@@ -102,6 +102,17 @@
 			}, historyFlyDuration);
 		}
 	}
+
+	let historyControlElements: (HTMLElement | undefined)[] =
+		Array(historyPagesNeeded).fill(undefined);
+	let returnButton: HTMLElement;
+	onMount(() => {
+		if (historyControlElements[0] !== undefined) {
+			historyControlElements[0].focus();
+		} else {
+			returnButton.focus();
+		}
+	});
 </script>
 
 <p class="font-bold text-xl mb-2">Builder History</p>
@@ -116,6 +127,7 @@
 		<div class="daisy-join m-2">
 			{#each [...Array(historyPagesNeeded).keys()] as index (index)}
 				<button
+					bind:this={historyControlElements[index]}
 					class="daisy-join-item daisy-btn daisy-btn-outline"
 					class:daisy-btn-active={index === currentHistoryPage}
 					on:click={() => {
@@ -153,6 +165,7 @@
 	<div class="daisy-divider my-2" />
 
 	<button
+		bind:this={returnButton}
 		class="daisy-btn daisy-btn-neutral m-2"
 		on:click={() => {
 			$nextBuilderState = returnState;

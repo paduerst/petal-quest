@@ -3,6 +3,7 @@
 	import type { DragonConfig } from '$lib/dragon/dragon-config';
 
 	export let config: DragonConfig;
+	export let firstElement: HTMLElement | undefined = undefined;
 </script>
 
 <div class="daisy-form-control w-full max-w-sm m-1">
@@ -10,6 +11,7 @@
 		<span class="daisy-label-text">Age</span>
 	</label>
 	<select
+		bind:this={firstElement}
 		bind:value={config.age}
 		class="daisy-select daisy-select-bordered bg-white"
 		name="age"
