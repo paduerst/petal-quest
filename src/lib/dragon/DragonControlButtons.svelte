@@ -3,13 +3,18 @@
 
 	import { currentDragonConfig, nextBuilderState } from './builder-states';
 
-	const dispatch = createEventDispatcher<{ click: { buttonText: string } }>();
+	const dispatch = createEventDispatcher<{
+		click: { buttonText: string; clickedButton?: HTMLElement };
+	}>();
 
-	function dispatchClick(buttonText: string) {
+	function dispatchClick(buttonText: string, clickedButton?: HTMLElement) {
 		dispatch('click', {
-			buttonText: buttonText
+			buttonText,
+			clickedButton
 		});
 	}
+
+	let shareButton: HTMLElement;
 </script>
 
 <div class="flex flex-wrap justify-center print:hidden">
@@ -23,8 +28,9 @@
 	</button>
 	<button
 		class="daisy-btn daisy-btn-neutral text-token m-1"
+		bind:this={shareButton}
 		on:click={() => {
-			dispatchClick('SHARE');
+			dispatchClick('SHARE', shareButton);
 		}}
 	>
 		Share Dragon

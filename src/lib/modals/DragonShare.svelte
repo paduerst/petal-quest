@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { onDestroy } from 'svelte';
+
 	// Props
 	/** Exposes parent props to this component. */
 	export let parent: {
@@ -31,11 +33,19 @@
 	const modalStore = getModalStore();
 
 	import { BASE_SHARE_URL } from '$lib';
+	import type { DragonConfig } from '$lib/dragon/dragon-config';
+
+	let shareInfo: { dragon?: DragonConfig; onDestroyFocusElement?: HTMLElement } =
+		$modalStore[0].value;
 
 	let shareURL =
-		$modalStore[0].value === undefined
-			? BASE_SHARE_URL
-			: `${BASE_SHARE_URL}?${$modalStore[0].value}`;
+		shareInfo.dragon === undefined ? BASE_SHARE_URL : `${BASE_SHARE_URL}?${shareInfo.dragon}`;
+
+	onDestroy(() => {
+		if (shareInfo.onDestroyFocusElement !== undefined) {
+			shareInfo.onDestroyFocusElement.focus();
+		}
+	});
 </script>
 
 {#if $modalStore[0]}

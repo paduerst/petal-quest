@@ -21,7 +21,7 @@
 
 	export let classes = 'underline print:no-underline';
 
-	export let thisSpan: HTMLSpanElement;
+	export let thisElement: HTMLElement | undefined = undefined;
 </script>
 
 <span
@@ -30,6 +30,6 @@
 	on:keydown={handleKeydown}
 	on:keyup={handleKeyup}
 	on:click={dispatchClick}
-	bind:this={thisSpan}
+	bind:this={thisElement}
 	class={classes}><slot /></span
 >

@@ -51,14 +51,16 @@
 	}
 
 	// Click Handling
-	function handleShareClick() {
-		shareModal.value = $currentDragonConfig;
+	function handleShareClick(clickedButton?: HTMLElement) {
+		shareModal.value = { dragon: $currentDragonConfig, onDestroyFocusElement: clickedButton };
 		modalStore.trigger(shareModal);
 	}
 
-	function handleControlClick(event: { detail: { buttonText: string } }): void {
+	function handleControlClick(event: {
+		detail: { buttonText: string; clickedButton?: HTMLElement };
+	}): void {
 		if (event.detail.buttonText === 'SHARE') {
-			handleShareClick();
+			handleShareClick(event.detail.clickedButton);
 		} else {
 			console.log(`Unhandled buttonText of ${event.detail.buttonText}`);
 		}
@@ -66,10 +68,12 @@
 
 	const debugEnabled: boolean = false && dev;
 
-	function handleDebugClick(event: { detail: { debugText: string } }): void {
+	function handleDebugClick(event: {
+		detail: { debugText: string; clickedButton?: HTMLElement };
+	}): void {
 		if (debugEnabled) {
 			if (event.detail.debugText === 'SHARE') {
-				handleShareClick();
+				handleShareClick(event.detail.clickedButton);
 			} else {
 				console.log(`Unhandled debugText of ${event.detail.debugText}`);
 			}

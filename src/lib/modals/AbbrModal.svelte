@@ -32,12 +32,15 @@
 	import { getModalStore } from '@skeletonlabs/skeleton';
 	const modalStore = getModalStore();
 
-	let abbrInfo: { abbreviation: string; definition: string; onDestroy?: () => void } =
-		$modalStore[0].value;
+	let abbrInfo: {
+		abbreviation: string;
+		definition: string;
+		onDestroyFocusElement?: HTMLElement;
+	} = $modalStore[0].value;
 
 	onDestroy(() => {
-		if (abbrInfo.onDestroy !== undefined) {
-			abbrInfo.onDestroy();
+		if (abbrInfo.onDestroyFocusElement !== undefined) {
+			abbrInfo.onDestroyFocusElement.focus();
 		}
 	});
 </script>
