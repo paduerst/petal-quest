@@ -20,6 +20,8 @@
 	}
 
 	export let classes = 'underline print:no-underline';
+
+	export let thisSpan: HTMLSpanElement;
 </script>
 
 <span
@@ -28,5 +30,6 @@
 	on:keydown={handleKeydown}
 	on:keyup={handleKeyup}
 	on:click={dispatchClick}
+	bind:this={thisSpan}
 	class={classes}><slot /></span
 >

@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { onDestroy } from 'svelte';
+
 	// Props
 	/** Exposes parent props to this component. */
 	export let parent: {
@@ -30,7 +32,14 @@
 	import { getModalStore } from '@skeletonlabs/skeleton';
 	const modalStore = getModalStore();
 
-	let abbrInfo: { abbreviation: string; definition: string } = $modalStore[0].value;
+	let abbrInfo: { abbreviation: string; definition: string; onDestroy?: () => void } =
+		$modalStore[0].value;
+
+	onDestroy(() => {
+		if (abbrInfo.onDestroy !== undefined) {
+			abbrInfo.onDestroy();
+		}
+	});
 </script>
 
 {#if $modalStore[0]}
