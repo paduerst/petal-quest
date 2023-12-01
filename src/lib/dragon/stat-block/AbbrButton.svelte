@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { getModalStore, type ModalSettings } from '@skeletonlabs/skeleton';
 
+	import SpanButton from '$lib/SpanButton.svelte';
+
 	const modalStore = getModalStore();
 	const modalConfig: ModalSettings = {
 		type: 'component',
@@ -14,25 +16,6 @@
 		modalConfig.value = { abbreviation, definition };
 		modalStore.trigger(modalConfig);
 	}
-
-	function handleKeydown(e: KeyboardEvent) {
-		if (e.key === ' ') {
-			handleClick();
-		}
-	}
-
-	function handleKeyup(e: KeyboardEvent) {
-		if (e.key === 'Enter') {
-			handleClick();
-		}
-	}
 </script>
 
-<span
-	role="button"
-	tabindex="0"
-	on:keydown={handleKeydown}
-	on:keyup={handleKeyup}
-	on:click={handleClick}
-	class="underline print:no-underline">{abbreviation}</span
->
+<SpanButton on:click={handleClick}>{abbreviation}</SpanButton>

@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { spellNameToID } from '.';
-
 	import { getModalStore, type ModalSettings } from '@skeletonlabs/skeleton';
+
+	import SpanButton from '$lib/SpanButton.svelte';
+	import { spellNameToID } from '.';
 
 	const modalStore = getModalStore();
 	const spellModal: ModalSettings = {
@@ -17,25 +18,8 @@
 		spellModal.value = { name: spellName, id: spellID };
 		modalStore.trigger(spellModal);
 	}
-
-	function handleKeydown(e: KeyboardEvent) {
-		if (e.key === ' ') {
-			handleClick();
-		}
-	}
-
-	function handleKeyup(e: KeyboardEvent) {
-		if (e.key === 'Enter') {
-			handleClick();
-		}
-	}
 </script>
 
-<span
-	role="button"
-	tabindex="0"
-	on:click={handleClick}
-	on:keydown={handleKeydown}
-	on:keyup={handleKeyup}
-	class="italic underline print:no-underline">{spellName}</span
+<SpanButton on:click={handleClick} classes="italic underline print:no-underline"
+	>{spellName}</SpanButton
 >
