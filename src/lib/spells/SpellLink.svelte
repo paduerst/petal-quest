@@ -13,13 +13,14 @@
 	export let spellName: string;
 
 	let spellID = spellNameToID(spellName);
+	let thisElement: HTMLElement | undefined;
 
 	function handleClick() {
-		spellModal.value = { name: spellName, id: spellID };
+		spellModal.value = { name: spellName, id: spellID, onDestroyFocusElement: thisElement };
 		modalStore.trigger(spellModal);
 	}
 </script>
 
-<SpanButton on:click={handleClick} classes="italic underline print:no-underline"
+<SpanButton on:click={handleClick} bind:thisElement classes="italic underline print:no-underline"
 	>{spellName}</SpanButton
 >

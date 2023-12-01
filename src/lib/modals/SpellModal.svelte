@@ -26,7 +26,7 @@
 		onClose: () => void;
 	};
 
-	import { onMount } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 
 	import { getModalStore, type ModalSettings } from '@skeletonlabs/skeleton';
 	const modalStore = getModalStore();
@@ -46,7 +46,8 @@
 	import Spell from '$lib/spells/Spell.svelte';
 	import SpellCornerButtons from '$lib/spells/SpellCornerButtons.svelte';
 
-	let spellInfo: { name: string; id: string } = $modalStore[0].value;
+	let spellInfo: { name: string; id: string; onDestroyFocusElement?: HTMLElement } =
+		$modalStore[0].value;
 	let asAppSpell = stringToAppSpell(spellInfo.id);
 	let asDDBSpell = stringToDDBSpell(spellInfo.id);
 	let spellURL = spellNameToURL(spellInfo.name);
@@ -61,14 +62,25 @@
 
 	function manageLocalURLs() {
 		parent.onClose();
+		manageLocalSpells.value = {
+			onDestroyFocusElement: spellInfo.onDestroyFocusElement
+		};
+		spellInfo.onDestroyFocusElement = undefined;
 		modalStore.trigger(manageLocalSpells);
 	}
 
 	function addLocalURL() {
 		parent.onClose();
-		addLocalSpell.value = spellInfo;
+		addLocalSpell.value = { ...spellInfo };
+		spellInfo.onDestroyFocusElement = undefined;
 		modalStore.trigger(addLocalSpell);
 	}
+
+	onDestroy(() => {
+		if (spellInfo.onDestroyFocusElement !== undefined) {
+			spellInfo.onDestroyFocusElement.focus();
+		}
+	});
 </script>
 
 {#if $modalStore[0]}

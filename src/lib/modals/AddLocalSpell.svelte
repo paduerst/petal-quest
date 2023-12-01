@@ -26,7 +26,7 @@
 		onClose: () => void;
 	};
 
-	import { onMount } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 
 	import { getModalStore, type ModalSettings } from '@skeletonlabs/skeleton';
 	const modalStore = getModalStore();
@@ -42,7 +42,12 @@
 
 	import SpellCornerButtons from '$lib/spells/SpellCornerButtons.svelte';
 
-	let spellInfo: { name?: string; id?: string; fromManage?: boolean } = $modalStore[0].value;
+	let spellInfo: {
+		name?: string;
+		id?: string;
+		onDestroyFocusElement?: HTMLElement;
+		fromManage?: boolean;
+	} = $modalStore[0].value;
 
 	let currentSpellName: string = '';
 	let currentSpellURL: string = '';
@@ -66,11 +71,19 @@
 	const baseClasses = 'card max-w-4xl shadow-xl space-y-4 max-h-[80vh] overflow-y-auto';
 	let modalClasses = `${baseClasses}`;
 
+	function openLocalSpellsManager() {
+		manageLocalSpells.value = {
+			onDestroyFocusElement: spellInfo.onDestroyFocusElement
+		};
+		spellInfo.onDestroyFocusElement = undefined;
+		modalStore.trigger(manageLocalSpells);
+	}
+
 	function onCancel() {
 		parent.onClose();
 		if (spellInfo.fromManage) {
 			// re-open the manage local spells modal
-			modalStore.trigger(manageLocalSpells);
+			openLocalSpellsManager();
 		}
 	}
 
@@ -82,9 +95,15 @@
 		}
 		if (spellInfo.fromManage) {
 			// re-open the manage local spells modal
-			modalStore.trigger(manageLocalSpells);
+			openLocalSpellsManager();
 		}
 	}
+
+	onDestroy(() => {
+		if (spellInfo.onDestroyFocusElement !== undefined) {
+			spellInfo.onDestroyFocusElement.focus();
+		}
+	});
 </script>
 
 {#if $modalStore[0]}
