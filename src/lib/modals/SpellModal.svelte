@@ -1,57 +1,63 @@
 <script lang="ts">
-	import type { SkeletonModalParentType } from '.';
-
-	export let parent: SkeletonModalParentType;
-
 	import { onMount, onDestroy } from 'svelte';
 
 	import { getModalStore, type ModalSettings } from '@skeletonlabs/skeleton';
-	const modalStore = getModalStore();
 
+	import { stringToAppSpell, spellNameToURL } from '$lib/spells';
+	import { stringToDDBSpell } from '$lib/spells/ddb-spells';
+	import type {
+		SkeletonModalParentType,
+		SpellModalValue,
+		AddLocalSpellModalValue,
+		ManageLocalSpellsModalValue
+	} from '.';
+
+	import Spell from '$lib/spells/Spell.svelte';
+	import SpellCornerButtons from '$lib/spells/SpellCornerButtons.svelte';
+
+	const modalStore = getModalStore();
 	const settingsForManageLocalSpells: ModalSettings = {
 		type: 'component',
 		component: 'manageLocalSpells'
 	};
-
 	const settingsForAddLocalSpell: ModalSettings = {
 		type: 'component',
 		component: 'addLocalSpell'
 	};
+	const baseClasses = 'card max-w-4xl shadow-xl space-y-4 max-h-[80vh] overflow-y-auto';
 
-	import { stringToAppSpell, spellNameToURL } from '$lib/spells';
-	import { stringToDDBSpell } from '$lib/spells/ddb-spells';
-	import Spell from '$lib/spells/Spell.svelte';
-	import SpellCornerButtons from '$lib/spells/SpellCornerButtons.svelte';
+	export let parent: SkeletonModalParentType;
 
-	let spellInfo: { name: string; id: string; onDestroyFocusElement?: HTMLElement } =
-		$modalStore[0].value;
+	let spellInfo: SpellModalValue = $modalStore[0].value;
 	let asAppSpell = stringToAppSpell(spellInfo.id);
 	let asDDBSpell = stringToDDBSpell(spellInfo.id);
 	let spellURL = spellNameToURL(spellInfo.name);
-
-	let divElement: HTMLDivElement;
-	onMount(() => {
-		divElement.scrollTo(0, 0);
-	});
-
-	const baseClasses = 'card max-w-4xl shadow-xl space-y-4 max-h-[80vh] overflow-y-auto';
 	let modalClasses = `${baseClasses} ${asAppSpell !== undefined ? 'w-11/12' : ''}`;
+	let divElement: HTMLDivElement;
 
 	function manageLocalURLs() {
 		parent.onClose();
-		settingsForManageLocalSpells.value = {
+
+		const valueForManageLocalSpells: ManageLocalSpellsModalValue = {
 			onDestroyFocusElement: spellInfo.onDestroyFocusElement
 		};
+		settingsForManageLocalSpells.value = valueForManageLocalSpells;
 		spellInfo.onDestroyFocusElement = undefined;
 		modalStore.trigger(settingsForManageLocalSpells);
 	}
 
 	function addLocalURL() {
 		parent.onClose();
-		settingsForAddLocalSpell.value = { ...spellInfo };
+
+		const valueForAddLocalSpell: AddLocalSpellModalValue = { ...spellInfo };
+		settingsForAddLocalSpell.value = valueForAddLocalSpell;
 		spellInfo.onDestroyFocusElement = undefined;
 		modalStore.trigger(settingsForAddLocalSpell);
 	}
+
+	onMount(() => {
+		divElement.scrollTo(0, 0);
+	});
 
 	onDestroy(() => {
 		if (spellInfo.onDestroyFocusElement !== undefined) {

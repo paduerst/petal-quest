@@ -1,8 +1,10 @@
 <script lang="ts">
 	import { getModalStore, type ModalSettings } from '@skeletonlabs/skeleton';
 
-	import SpanButton from '$lib/SpanButton.svelte';
 	import { spellNameToID } from '.';
+	import type { SpellModalValue } from '$lib/modals';
+
+	import SpanButton from '$lib/SpanButton.svelte';
 
 	const modalStore = getModalStore();
 	const spellModal: ModalSettings = {
@@ -16,7 +18,12 @@
 	let thisElement: HTMLElement | undefined;
 
 	function handleClick() {
-		spellModal.value = { name: spellName, id: spellID, onDestroyFocusElement: thisElement };
+		const valueForSpellModal: SpellModalValue = {
+			name: spellName,
+			id: spellID,
+			onDestroyFocusElement: thisElement
+		};
+		spellModal.value = valueForSpellModal;
 		modalStore.trigger(spellModal);
 	}
 </script>

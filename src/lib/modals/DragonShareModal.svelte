@@ -1,20 +1,16 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
 
-	import type { SkeletonModalParentType } from '.';
+	import { getModalStore, clipboard } from '@skeletonlabs/skeleton';
+
+	import type { SkeletonModalParentType, DragonShareModalValue } from '.';
+	import { BASE_SHARE_URL } from '$lib';
+
+	const modalStore = getModalStore();
 
 	export let parent: SkeletonModalParentType;
 
-	// Stores
-	import { getModalStore, clipboard } from '@skeletonlabs/skeleton';
-	const modalStore = getModalStore();
-
-	import { BASE_SHARE_URL } from '$lib';
-	import type { DragonConfig } from '$lib/dragon/dragon-config';
-
-	let shareInfo: { dragon?: DragonConfig; onDestroyFocusElement?: HTMLElement } =
-		$modalStore[0].value;
-
+	let shareInfo: DragonShareModalValue = $modalStore[0].value;
 	let shareURL =
 		shareInfo.dragon === undefined ? BASE_SHARE_URL : `${BASE_SHARE_URL}?${shareInfo.dragon}`;
 

@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { getModalStore, type ModalSettings } from '@skeletonlabs/skeleton';
 
+	import type { AbbrModalValue } from '$lib/modals';
+
 	import SpanButton from '$lib/SpanButton.svelte';
 
 	const modalStore = getModalStore();
@@ -15,7 +17,12 @@
 	let thisElement: HTMLElement | undefined;
 
 	function handleClick() {
-		modalConfig.value = { abbreviation, definition, onDestroyFocusElement: thisElement };
+		const valueForAbbrModal: AbbrModalValue = {
+			abbreviation,
+			definition,
+			onDestroyFocusElement: thisElement
+		};
+		modalConfig.value = valueForAbbrModal;
 		modalStore.trigger(modalConfig);
 	}
 </script>

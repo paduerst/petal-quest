@@ -15,6 +15,7 @@
 		currentDragonConfig,
 		builderFadeParams
 	} from './builder-states';
+	import type { DragonShareModalValue } from '$lib/modals';
 
 	import DragonContainer from './DragonContainer.svelte';
 	import BuilderLoading from './builder-states/BuilderLoading.svelte';
@@ -52,7 +53,11 @@
 
 	// Click Handling
 	function handleShareClick(clickedButton?: HTMLElement) {
-		shareModal.value = { dragon: $currentDragonConfig, onDestroyFocusElement: clickedButton };
+		const valueForDragonShareModal: DragonShareModalValue = {
+			dragon: $currentDragonConfig,
+			onDestroyFocusElement: clickedButton
+		};
+		shareModal.value = valueForDragonShareModal;
 		modalStore.trigger(shareModal);
 	}
 

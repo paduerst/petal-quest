@@ -1,57 +1,40 @@
 <script lang="ts">
-	import type { SkeletonModalParentType } from '.';
-
-	export let parent: SkeletonModalParentType;
-
 	import { onMount, onDestroy } from 'svelte';
 
 	import { getModalStore, type ModalSettings } from '@skeletonlabs/skeleton';
-	const modalStore = getModalStore();
 
 	import { isValidURL } from '$lib/text-utils';
 	import { spellNameToID } from '$lib/spells';
 	import { localSpellURLs } from '$lib/spells/local-spells';
+	import type {
+		SkeletonModalParentType,
+		AddLocalSpellModalValue,
+		ManageLocalSpellsModalValue
+	} from '.';
 
+	import SpellCornerButtons from '$lib/spells/SpellCornerButtons.svelte';
+
+	const modalStore = getModalStore();
 	const settingsForManageLocalSpells: ModalSettings = {
 		type: 'component',
 		component: 'manageLocalSpells'
 	};
+	const baseClasses = 'card max-w-4xl shadow-xl space-y-4 max-h-[80vh] overflow-y-auto';
 
-	import SpellCornerButtons from '$lib/spells/SpellCornerButtons.svelte';
+	export let parent: SkeletonModalParentType;
 
-	let spellInfo: {
-		name?: string;
-		id?: string;
-		onDestroyFocusElement?: HTMLElement;
-		fromManage?: boolean;
-	} = $modalStore[0].value;
-
+	let spellInfo: AddLocalSpellModalValue = $modalStore[0].value;
 	let currentSpellName: string = '';
 	let currentSpellURL: string = '';
 	let editNotAdd: boolean = false;
-
-	let divElement: HTMLDivElement;
-	onMount(() => {
-		divElement.scrollTo(0, 0);
-		if (spellInfo.name) {
-			currentSpellName = spellInfo.name;
-
-			const spellID = spellNameToID(currentSpellName);
-			const storedURL = $localSpellURLs[spellID];
-			if (storedURL !== undefined) {
-				currentSpellURL = storedURL;
-				editNotAdd = true;
-			}
-		}
-	});
-
-	const baseClasses = 'card max-w-4xl shadow-xl space-y-4 max-h-[80vh] overflow-y-auto';
 	let modalClasses = `${baseClasses}`;
+	let divElement: HTMLDivElement;
 
 	function openLocalSpellsManager() {
-		settingsForManageLocalSpells.value = {
+		const valueForManageLocalSpells: ManageLocalSpellsModalValue = {
 			onDestroyFocusElement: spellInfo.onDestroyFocusElement
 		};
+		settingsForManageLocalSpells.value = valueForManageLocalSpells;
 		spellInfo.onDestroyFocusElement = undefined;
 		modalStore.trigger(settingsForManageLocalSpells);
 	}
@@ -75,6 +58,20 @@
 			openLocalSpellsManager();
 		}
 	}
+
+	onMount(() => {
+		divElement.scrollTo(0, 0);
+		if (spellInfo.name) {
+			currentSpellName = spellInfo.name;
+
+			const spellID = spellNameToID(currentSpellName);
+			const storedURL = $localSpellURLs[spellID];
+			if (storedURL !== undefined) {
+				currentSpellURL = storedURL;
+				editNotAdd = true;
+			}
+		}
+	});
 
 	onDestroy(() => {
 		if (spellInfo.onDestroyFocusElement !== undefined) {

@@ -3,17 +3,13 @@
 
 	import { getModalStore } from '@skeletonlabs/skeleton';
 
-	import type { SkeletonModalParentType } from '.';
+	import type { SkeletonModalParentType, AbbrModalValue } from '.';
 
 	const modalStore = getModalStore();
 
 	export let parent: SkeletonModalParentType;
 
-	let abbrInfo: {
-		abbreviation: string;
-		definition: string;
-		onDestroyFocusElement?: HTMLElement;
-	} = $modalStore[0].value;
+	let abbrInfo: AbbrModalValue = $modalStore[0].value;
 
 	onDestroy(() => {
 		if (abbrInfo.onDestroyFocusElement !== undefined) {
