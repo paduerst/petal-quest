@@ -1,54 +1,64 @@
 <script lang="ts">
-	// Props
-	/** Exposes parent props to this component. */
-	export let parent: {
-		position: string;
-		// ---
-		background: string;
-		width: string;
-		height: string;
-		padding: string;
-		spacing: string;
-		rounded: string;
-		shadow: string;
-		// ---
-		buttonNeutral: string;
-		buttonPositive: string;
-		buttonTextCancel: string;
-		buttonTextConfirm: string;
-		buttonTextSubmit: string;
-		// ---
-		regionBackdrop: string;
-		regionHeader: string;
-		regionBody: string;
-		regionFooter: string;
-		// ---
-		onClose: () => void;
-	};
-
-	import { onMount } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 
 	import { getModalStore, type ModalSettings } from '@skeletonlabs/skeleton';
-	const modalStore = getModalStore();
 
 	import { isValidURL } from '$lib/text-utils';
 	import { spellNameToID } from '$lib/spells';
 	import { localSpellURLs } from '$lib/spells/local-spells';
-
-	const manageLocalSpells: ModalSettings = {
-		type: 'component',
-		component: 'manageLocalSpells'
-	};
+	import type {
+		SkeletonModalParentType,
+		AddLocalSpellModalValue,
+		ManageLocalSpellsModalValue
+	} from '.';
 
 	import SpellCornerButtons from '$lib/spells/SpellCornerButtons.svelte';
 
-	let spellInfo: { name?: string; id?: string; fromManage?: boolean } = $modalStore[0].value;
+	const modalStore = getModalStore();
+	const settingsForManageLocalSpells: ModalSettings = {
+		type: 'component',
+		component: 'manageLocalSpells'
+	};
+	const baseClasses = 'card max-w-4xl shadow-xl space-y-4 max-h-[80vh] overflow-y-auto';
 
+	export let parent: SkeletonModalParentType;
+
+	let spellInfo: AddLocalSpellModalValue = $modalStore[0].value;
 	let currentSpellName: string = '';
 	let currentSpellURL: string = '';
 	let editNotAdd: boolean = false;
-
+	let modalClasses = `${baseClasses}`;
 	let divElement: HTMLDivElement;
+
+	function openLocalSpellsManager() {
+		const valueForManageLocalSpells: ManageLocalSpellsModalValue = {
+			onDestroyFocusElement: spellInfo.onDestroyFocusElement
+		};
+		settingsForManageLocalSpells.value = valueForManageLocalSpells;
+		spellInfo.onDestroyFocusElement = undefined;
+		modalStore.trigger(settingsForManageLocalSpells);
+	}
+
+	function onCancel() {
+		parent.onClose();
+		if (spellInfo.fromManage) {
+			// re-open the manage local spells modal
+			openLocalSpellsManager();
+		}
+	}
+
+	function onSet() {
+		parent.onClose();
+		if (isValidURL(currentSpellURL)) {
+			const spellID = spellNameToID(currentSpellName);
+			localSpellURLs.add(spellID, currentSpellURL);
+		}
+		if (spellInfo.fromManage) {
+			// re-open the manage local spells modal
+			openLocalSpellsManager();
+		}
+	}
+
 	onMount(() => {
 		divElement.scrollTo(0, 0);
 		if (spellInfo.name) {
@@ -63,28 +73,11 @@
 		}
 	});
 
-	const baseClasses = 'card max-w-4xl shadow-xl space-y-4 max-h-[80vh] overflow-y-auto';
-	let modalClasses = `${baseClasses}`;
-
-	function onCancel() {
-		parent.onClose();
-		if (spellInfo.fromManage) {
-			// re-open the manage local spells modal
-			modalStore.trigger(manageLocalSpells);
+	onDestroy(() => {
+		if (spellInfo.onDestroyFocusElement !== undefined) {
+			spellInfo.onDestroyFocusElement.focus();
 		}
-	}
-
-	function onSet() {
-		parent.onClose();
-		if (isValidURL(currentSpellURL)) {
-			const spellID = spellNameToID(currentSpellName);
-			localSpellURLs.add(spellID, currentSpellURL);
-		}
-		if (spellInfo.fromManage) {
-			// re-open the manage local spells modal
-			modalStore.trigger(manageLocalSpells);
-		}
-	}
+	});
 </script>
 
 {#if $modalStore[0]}

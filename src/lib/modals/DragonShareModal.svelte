@@ -1,41 +1,24 @@
 <script lang="ts">
-	// Props
-	/** Exposes parent props to this component. */
-	export let parent: {
-		position: string;
-		// ---
-		background: string;
-		width: string;
-		height: string;
-		padding: string;
-		spacing: string;
-		rounded: string;
-		shadow: string;
-		// ---
-		buttonNeutral: string;
-		buttonPositive: string;
-		buttonTextCancel: string;
-		buttonTextConfirm: string;
-		buttonTextSubmit: string;
-		// ---
-		regionBackdrop: string;
-		regionHeader: string;
-		regionBody: string;
-		regionFooter: string;
-		// ---
-		onClose: () => void;
-	};
+	import { onDestroy } from 'svelte';
 
-	// Stores
 	import { getModalStore, clipboard } from '@skeletonlabs/skeleton';
-	const modalStore = getModalStore();
 
+	import type { SkeletonModalParentType, DragonShareModalValue } from '.';
 	import { BASE_SHARE_URL } from '$lib';
 
+	const modalStore = getModalStore();
+
+	export let parent: SkeletonModalParentType;
+
+	let shareInfo: DragonShareModalValue = $modalStore[0].value;
 	let shareURL =
-		$modalStore[0].value === undefined
-			? BASE_SHARE_URL
-			: `${BASE_SHARE_URL}?${$modalStore[0].value}`;
+		shareInfo.dragon === undefined ? BASE_SHARE_URL : `${BASE_SHARE_URL}?${shareInfo.dragon}`;
+
+	onDestroy(() => {
+		if (shareInfo.onDestroyFocusElement !== undefined) {
+			shareInfo.onDestroyFocusElement.focus();
+		}
+	});
 </script>
 
 {#if $modalStore[0]}

@@ -1,52 +1,29 @@
 <script lang="ts">
-	// Props
-	/** Exposes parent props to this component. */
-	export let parent: {
-		position: string;
-		// ---
-		background: string;
-		width: string;
-		height: string;
-		padding: string;
-		spacing: string;
-		rounded: string;
-		shadow: string;
-		// ---
-		buttonNeutral: string;
-		buttonPositive: string;
-		buttonTextCancel: string;
-		buttonTextConfirm: string;
-		buttonTextSubmit: string;
-		// ---
-		regionBackdrop: string;
-		regionHeader: string;
-		regionBody: string;
-		regionFooter: string;
-		// ---
-		onClose: () => void;
-	};
-
-	import { onMount } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 
 	import { getModalStore, type ModalSettings } from '@skeletonlabs/skeleton';
-	const modalStore = getModalStore();
 
 	import { localSpellURLs } from '$lib/spells/local-spells';
-
-	const addLocalSpell: ModalSettings = {
-		type: 'component',
-		component: 'addLocalSpell'
-	};
+	import type {
+		SkeletonModalParentType,
+		ManageLocalSpellsModalValue,
+		AddLocalSpellModalValue
+	} from '.';
 
 	import SpellCornerButtons from '$lib/spells/SpellCornerButtons.svelte';
 
-	let divElement: HTMLDivElement;
-	onMount(() => {
-		divElement.scrollTo(0, 0);
-	});
-
+	const modalStore = getModalStore();
+	const settingsForAddLocalSpell: ModalSettings = {
+		type: 'component',
+		component: 'addLocalSpell'
+	};
 	const baseClasses = 'card max-w-4xl shadow-xl space-y-4 max-h-[80vh] overflow-y-auto';
+
+	export let parent: SkeletonModalParentType;
+
+	let spellInfo: ManageLocalSpellsModalValue = $modalStore[0].value;
 	let modalClasses = `${baseClasses}`;
+	let divElement: HTMLDivElement;
 
 	function onCancel() {
 		parent.onClose();
@@ -54,22 +31,42 @@
 
 	function onAdd() {
 		parent.onClose();
-		addLocalSpell.value = { fromManage: true };
-		modalStore.trigger(addLocalSpell);
+
+		const valueForAddLocalSpell: AddLocalSpellModalValue = {
+			onDestroyFocusElement: spellInfo.onDestroyFocusElement,
+			fromManage: true
+		};
+		settingsForAddLocalSpell.value = valueForAddLocalSpell;
+		spellInfo.onDestroyFocusElement = undefined;
+		modalStore.trigger(settingsForAddLocalSpell);
 	}
 
 	function onEdit(spell: string) {
 		parent.onClose();
-		addLocalSpell.value = {
+
+		const valueForAddLocalSpell: AddLocalSpellModalValue = {
 			name: spell,
+			onDestroyFocusElement: spellInfo.onDestroyFocusElement,
 			fromManage: true
 		};
-		modalStore.trigger(addLocalSpell);
+		settingsForAddLocalSpell.value = valueForAddLocalSpell;
+		spellInfo.onDestroyFocusElement = undefined;
+		modalStore.trigger(settingsForAddLocalSpell);
 	}
 
 	function onDelete(spell: string) {
 		localSpellURLs.remove(spell);
 	}
+
+	onMount(() => {
+		divElement.scrollTo(0, 0);
+	});
+
+	onDestroy(() => {
+		if (spellInfo.onDestroyFocusElement !== undefined) {
+			spellInfo.onDestroyFocusElement.focus();
+		}
+	});
 </script>
 
 {#if $modalStore[0]}
