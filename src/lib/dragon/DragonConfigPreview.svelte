@@ -11,7 +11,7 @@
 	export let showDeleteButton: boolean = true;
 </script>
 
-<div class="daisy-card daisy-card-compact w-full bg-white">
+<div class="daisy-card daisy-card-compact w-full bg-white border border-black">
 	<div
 		class="daisy-card-body rounded-[inherit]"
 		style="background: {RGBToRGBA(config.getTheme(), 0.35)};"
