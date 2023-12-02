@@ -1,36 +1,13 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
 
-	// Props
-	/** Exposes parent props to this component. */
-	export let parent: {
-		position: string;
-		// ---
-		background: string;
-		width: string;
-		height: string;
-		padding: string;
-		spacing: string;
-		rounded: string;
-		shadow: string;
-		// ---
-		buttonNeutral: string;
-		buttonPositive: string;
-		buttonTextCancel: string;
-		buttonTextConfirm: string;
-		buttonTextSubmit: string;
-		// ---
-		regionBackdrop: string;
-		regionHeader: string;
-		regionBody: string;
-		regionFooter: string;
-		// ---
-		onClose: () => void;
-	};
-
-	// Stores
 	import { getModalStore } from '@skeletonlabs/skeleton';
+
+	import type { SkeletonModalParentType } from '.';
+
 	const modalStore = getModalStore();
+
+	export let parent: SkeletonModalParentType;
 
 	let abbrInfo: {
 		abbreviation: string;

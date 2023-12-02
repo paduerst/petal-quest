@@ -1,30 +1,7 @@
 <script lang="ts">
-	// Props
-	/** Exposes parent props to this component. */
-	export let parent: {
-		position: string;
-		// ---
-		background: string;
-		width: string;
-		height: string;
-		padding: string;
-		spacing: string;
-		rounded: string;
-		shadow: string;
-		// ---
-		buttonNeutral: string;
-		buttonPositive: string;
-		buttonTextCancel: string;
-		buttonTextConfirm: string;
-		buttonTextSubmit: string;
-		// ---
-		regionBackdrop: string;
-		regionHeader: string;
-		regionBody: string;
-		regionFooter: string;
-		// ---
-		onClose: () => void;
-	};
+	import type { SkeletonModalParentType } from '.';
+
+	export let parent: SkeletonModalParentType;
 
 	import { onMount, onDestroy } from 'svelte';
 
@@ -35,7 +12,7 @@
 	import { spellNameToID } from '$lib/spells';
 	import { localSpellURLs } from '$lib/spells/local-spells';
 
-	const manageLocalSpells: ModalSettings = {
+	const settingsForManageLocalSpells: ModalSettings = {
 		type: 'component',
 		component: 'manageLocalSpells'
 	};
@@ -72,11 +49,11 @@
 	let modalClasses = `${baseClasses}`;
 
 	function openLocalSpellsManager() {
-		manageLocalSpells.value = {
+		settingsForManageLocalSpells.value = {
 			onDestroyFocusElement: spellInfo.onDestroyFocusElement
 		};
 		spellInfo.onDestroyFocusElement = undefined;
-		modalStore.trigger(manageLocalSpells);
+		modalStore.trigger(settingsForManageLocalSpells);
 	}
 
 	function onCancel() {

@@ -1,42 +1,19 @@
 <script lang="ts">
-	// Props
-	/** Exposes parent props to this component. */
-	export let parent: {
-		position: string;
-		// ---
-		background: string;
-		width: string;
-		height: string;
-		padding: string;
-		spacing: string;
-		rounded: string;
-		shadow: string;
-		// ---
-		buttonNeutral: string;
-		buttonPositive: string;
-		buttonTextCancel: string;
-		buttonTextConfirm: string;
-		buttonTextSubmit: string;
-		// ---
-		regionBackdrop: string;
-		regionHeader: string;
-		regionBody: string;
-		regionFooter: string;
-		// ---
-		onClose: () => void;
-	};
+	import type { SkeletonModalParentType } from '.';
+
+	export let parent: SkeletonModalParentType;
 
 	import { onMount, onDestroy } from 'svelte';
 
 	import { getModalStore, type ModalSettings } from '@skeletonlabs/skeleton';
 	const modalStore = getModalStore();
 
-	const manageLocalSpells: ModalSettings = {
+	const settingsForManageLocalSpells: ModalSettings = {
 		type: 'component',
 		component: 'manageLocalSpells'
 	};
 
-	const addLocalSpell: ModalSettings = {
+	const settingsForAddLocalSpell: ModalSettings = {
 		type: 'component',
 		component: 'addLocalSpell'
 	};
@@ -62,18 +39,18 @@
 
 	function manageLocalURLs() {
 		parent.onClose();
-		manageLocalSpells.value = {
+		settingsForManageLocalSpells.value = {
 			onDestroyFocusElement: spellInfo.onDestroyFocusElement
 		};
 		spellInfo.onDestroyFocusElement = undefined;
-		modalStore.trigger(manageLocalSpells);
+		modalStore.trigger(settingsForManageLocalSpells);
 	}
 
 	function addLocalURL() {
 		parent.onClose();
-		addLocalSpell.value = { ...spellInfo };
+		settingsForAddLocalSpell.value = { ...spellInfo };
 		spellInfo.onDestroyFocusElement = undefined;
-		modalStore.trigger(addLocalSpell);
+		modalStore.trigger(settingsForAddLocalSpell);
 	}
 
 	onDestroy(() => {
