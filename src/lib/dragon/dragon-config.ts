@@ -34,8 +34,8 @@ export class DragonConfig {
 	name?: string;
 	disableNameCapitalization?: boolean;
 	statBlockTitle?: string;
-	size?: Size; // not a visible "Edit Dragon" option
-	type?: string; // not a visible "Edit Dragon" option
+	size?: Size; // not visible, for development only. support not guaranteed
+	type?: string; // not visible, for development only. support not guaranteed
 	alignment?: string;
 	languages?: string;
 	pronouns?: Pronouns;
@@ -70,19 +70,19 @@ export class DragonConfig {
 	skillStealth?: ProficiencyLevel;
 	skillSurvival?: ProficiencyLevel;
 
-	vulnerabilities?: string; // not a visible "Edit Dragon" option
-	resistances?: string; // not a visible "Edit Dragon" option
-	immunities?: string; // not a visible "Edit Dragon" option
+	vulnerabilities?: string; // not visible, for development only. support not guaranteed
+	resistances?: string; // not visible, for development only. support not guaranteed
+	immunities?: string; // not visible, for development only. support not guaranteed
 
-	blindsight?: number | null; // not a visible "Edit Dragon" option
-	darkvision?: number | null; // not a visible "Edit Dragon" option
+	blindsight?: number | null; // not visible, for development only. support not guaranteed
+	darkvision?: number | null; // not visible, for development only. support not guaranteed
 
 	spellcasting?: SpellcastingConfig;
 	atWillSpells?: string;
 	dailySpells?: string;
 	displaySpellStats?: DisplaySpellStats;
 
-	shapechanged?: boolean; // not a visible "Edit Dragon" option
+	shapechanged?: boolean; // not visible, for development only. support not guaranteed
 
 	/**
 	 * Returns the title for this DragonConfig.

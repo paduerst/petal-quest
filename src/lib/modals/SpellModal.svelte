@@ -75,7 +75,7 @@
 				<SpellCornerButtons {spellURL} on:click={parent.onClose} />
 
 				<div class="p-4">
-					<h1 class="spell-name mb-2">{spellInfo.name}</h1>
+					<h1 class="spell-name mb-2">External Spell: {spellInfo.name}</h1>
 					{#if asDDBSpell !== undefined}
 						<p>This spell's description is on D&D Beyond:</p>
 					{:else}
@@ -100,7 +100,7 @@
 				<SpellCornerButtons on:click={parent.onClose} />
 
 				<div class="p-4">
-					<h1 class="spell-name mb-2">{spellInfo.name}</h1>
+					<h1 class="spell-name mb-2">Unknown Spell: {spellInfo.name}</h1>
 					<p>This spell is not recognized.</p>
 					<p>
 						You can specify a URL for it which will be stored in this browser's local storage for

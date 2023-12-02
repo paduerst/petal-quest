@@ -2,12 +2,7 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 
-	import {
-		currentDragonConfig,
-		discardedDragonEditsToRestore,
-		currentBuilderState,
-		nextBuilderState
-	} from '.';
+	import { currentDragonConfig, discardedDragonEditsToRestore, nextBuilderState } from '.';
 	import { DEFAULT_PRONOUNS } from '..';
 	import { DragonConfig } from '../dragon-config';
 	import FormSectionBasics from './edit-form/FormSectionBasics.svelte';
@@ -38,7 +33,7 @@
 		setEditedConfig($currentDragonConfig);
 
 		if (discardedConfig.toString() !== editedConfig.toString()) {
-			// we're discarding actual changes, so let's offter to undo that
+			// we're discarding actual changes, so let's offer to undo that
 			const t: ToastSettings = {
 				message: 'Edits discarded.',
 				timeout: 10000,
@@ -46,12 +41,8 @@
 				action: {
 					label: 'Undo',
 					response: () => {
-						if ($currentBuilderState === 'EDIT') {
-							setEditedConfig(discardedConfig);
-						} else {
-							$discardedDragonEditsToRestore = discardedConfig;
-							$nextBuilderState = 'EDIT';
-						}
+						$discardedDragonEditsToRestore = discardedConfig;
+						$nextBuilderState = 'EDIT';
 					}
 				}
 			};
