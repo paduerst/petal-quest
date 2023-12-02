@@ -25,10 +25,13 @@
 
 	let spellInfo: AddLocalSpellModalValue = $modalStore[0].value;
 	let currentSpellName: string = '';
+	let currentSpellId: string = '';
 	let currentSpellURL: string = '';
 	let editNotAdd: boolean = false;
 	let modalClasses = `${baseClasses}`;
 	let divElement: HTMLDivElement;
+
+	$: currentSpellId = spellNameToID(currentSpellName);
 
 	function openLocalSpellsManager() {
 		const valueForManageLocalSpells: ManageLocalSpellsModalValue = {
@@ -39,7 +42,7 @@
 		modalStore.trigger(settingsForManageLocalSpells);
 	}
 
-	function onCancel() {
+	function closeAndPossiblyReopenManager() {
 		parent.onClose();
 		if (spellInfo.fromManage) {
 			// re-open the manage local spells modal
@@ -48,15 +51,11 @@
 	}
 
 	function onSet() {
-		parent.onClose();
 		if (isValidURL(currentSpellURL)) {
 			const spellID = spellNameToID(currentSpellName);
 			localSpellURLs.add(spellID, currentSpellURL);
 		}
-		if (spellInfo.fromManage) {
-			// re-open the manage local spells modal
-			openLocalSpellsManager();
-		}
+		closeAndPossiblyReopenManager();
 	}
 
 	onMount(() => {
@@ -64,8 +63,7 @@
 		if (spellInfo.name) {
 			currentSpellName = spellInfo.name;
 
-			const spellID = spellNameToID(currentSpellName);
-			const storedURL = $localSpellURLs[spellID];
+			const storedURL = $localSpellURLs[spellNameToID(currentSpellName)];
 			if (storedURL !== undefined) {
 				currentSpellURL = storedURL;
 				editNotAdd = true;
@@ -107,6 +105,21 @@
 				</div>
 
 				<div class="daisy-form-control w-full max-w-sm m-1">
+					<label class="daisy-label" for="currentSpellId">
+						<span class="daisy-label-text text-token">Spell ID</span>
+					</label>
+					<input
+						disabled
+						type="text"
+						bind:value={currentSpellId}
+						class="daisy-input daisy-input-bordered"
+						name="currentSpellId"
+						id="currentSpellId"
+						data-1p-ignore
+					/>
+				</div>
+
+				<div class="daisy-form-control w-full max-w-sm m-1">
 					<label class="daisy-label" for="currentSpellURL">
 						<span class="daisy-label-text text-token">Spell URL</span>
 					</label>
@@ -122,7 +135,9 @@
 			</div>
 
 			<footer class="p-4 {parent.regionFooter}">
-				<button class="btn {parent.buttonNeutral}" on:click={onCancel}> Cancel </button>
+				<button class="btn {parent.buttonNeutral}" on:click={closeAndPossiblyReopenManager}>
+					Cancel
+				</button>
 				<button class="btn {parent.buttonPositive}" on:click={onSet}> Set URL </button>
 			</footer>
 		</div>

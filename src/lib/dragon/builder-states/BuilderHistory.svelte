@@ -87,7 +87,8 @@
 			: 100;
 
 	const historyEntriesPerPage = 4;
-	let historyPagesNeeded: number = Math.ceil($dragonBuilderHistory.length / historyEntriesPerPage);
+	let historyPagesNeeded: number;
+	$: historyPagesNeeded = Math.ceil($dragonBuilderHistory.length / historyEntriesPerPage);
 	let currentHistoryPage = 0;
 
 	function setHistoryPage(nextPage: number) {
@@ -105,12 +106,9 @@
 
 	let historyControlElements: (HTMLElement | undefined)[] =
 		Array(historyPagesNeeded).fill(undefined);
-	let returnButton: HTMLElement;
 	onMount(() => {
 		if (historyControlElements[0] !== undefined) {
 			historyControlElements[0].focus();
-		} else {
-			returnButton.focus();
 		}
 	});
 </script>
@@ -165,7 +163,6 @@
 	<div class="daisy-divider my-2" />
 
 	<button
-		bind:this={returnButton}
 		class="daisy-btn daisy-btn-neutral m-2"
 		on:click={() => {
 			$nextBuilderState = returnState;
