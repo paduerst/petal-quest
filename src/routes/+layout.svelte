@@ -7,9 +7,9 @@
 	import { initializeStores, type ModalComponent } from '@skeletonlabs/skeleton';
 	import { AppShell, Modal, Toast } from '@skeletonlabs/skeleton';
 	import AbbrModal from '$lib/modals/AbbrModal.svelte';
-	import AddLocalSpell from '$lib/modals/AddLocalSpell.svelte';
-	import ManageLocalSpells from '$lib/modals/ManageLocalSpells.svelte';
-	import DragonShare from '$lib/modals/DragonShare.svelte';
+	import AddLocalSpellModal from '$lib/modals/AddLocalSpellModal.svelte';
+	import ManageLocalSpellsModal from '$lib/modals/ManageLocalSpellsModal.svelte';
+	import DragonShareModal from '$lib/modals/DragonShareModal.svelte';
 	import SpellModal from '$lib/modals/SpellModal.svelte';
 	import Drawer from '$lib/Drawer.svelte';
 	import Header from '$lib/Header.svelte';
@@ -22,13 +22,13 @@
 			ref: AbbrModal
 		},
 		addLocalSpell: {
-			ref: AddLocalSpell
+			ref: AddLocalSpellModal
 		},
 		manageLocalSpells: {
-			ref: ManageLocalSpells
+			ref: ManageLocalSpellsModal
 		},
 		dragonShare: {
-			ref: DragonShare
+			ref: DragonShareModal
 		},
 		spellModal: {
 			ref: SpellModal

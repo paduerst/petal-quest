@@ -1,6 +1,10 @@
 <script lang="ts">
 	import { getModalStore, type ModalSettings } from '@skeletonlabs/skeleton';
 
+	import type { AbbrModalValue } from '$lib/modals';
+
+	import SpanButton from '$lib/SpanButton.svelte';
+
 	const modalStore = getModalStore();
 	const modalConfig: ModalSettings = {
 		type: 'component',
@@ -10,29 +14,17 @@
 	export let abbreviation: string;
 	export let definition: string;
 
+	let thisElement: HTMLElement | undefined;
+
 	function handleClick() {
-		modalConfig.value = { abbreviation, definition };
+		const valueForAbbrModal: AbbrModalValue = {
+			abbreviation,
+			definition,
+			onDestroyFocusElement: thisElement
+		};
+		modalConfig.value = valueForAbbrModal;
 		modalStore.trigger(modalConfig);
-	}
-
-	function handleKeydown(e: KeyboardEvent) {
-		if (e.key === ' ') {
-			handleClick();
-		}
-	}
-
-	function handleKeyup(e: KeyboardEvent) {
-		if (e.key === 'Enter') {
-			handleClick();
-		}
 	}
 </script>
 
-<span
-	role="button"
-	tabindex="0"
-	on:keydown={handleKeydown}
-	on:keyup={handleKeyup}
-	on:click={handleClick}
-	class="underline print:no-underline">{abbreviation}</span
->
+<SpanButton on:click={handleClick} bind:thisElement>{abbreviation}</SpanButton>

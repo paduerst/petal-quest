@@ -1,74 +1,69 @@
 <script lang="ts">
-	// Props
-	/** Exposes parent props to this component. */
-	export let parent: {
-		position: string;
-		// ---
-		background: string;
-		width: string;
-		height: string;
-		padding: string;
-		spacing: string;
-		rounded: string;
-		shadow: string;
-		// ---
-		buttonNeutral: string;
-		buttonPositive: string;
-		buttonTextCancel: string;
-		buttonTextConfirm: string;
-		buttonTextSubmit: string;
-		// ---
-		regionBackdrop: string;
-		regionHeader: string;
-		regionBody: string;
-		regionFooter: string;
-		// ---
-		onClose: () => void;
-	};
-
-	import { onMount } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 
 	import { getModalStore, type ModalSettings } from '@skeletonlabs/skeleton';
-	const modalStore = getModalStore();
-
-	const manageLocalSpells: ModalSettings = {
-		type: 'component',
-		component: 'manageLocalSpells'
-	};
-
-	const addLocalSpell: ModalSettings = {
-		type: 'component',
-		component: 'addLocalSpell'
-	};
 
 	import { stringToAppSpell, spellNameToURL } from '$lib/spells';
 	import { stringToDDBSpell } from '$lib/spells/ddb-spells';
+	import type {
+		SkeletonModalParentType,
+		SpellModalValue,
+		AddLocalSpellModalValue,
+		ManageLocalSpellsModalValue
+	} from '.';
+
 	import Spell from '$lib/spells/Spell.svelte';
 	import SpellCornerButtons from '$lib/spells/SpellCornerButtons.svelte';
 
-	let spellInfo: { name: string; id: string } = $modalStore[0].value;
+	const modalStore = getModalStore();
+	const settingsForManageLocalSpells: ModalSettings = {
+		type: 'component',
+		component: 'manageLocalSpells'
+	};
+	const settingsForAddLocalSpell: ModalSettings = {
+		type: 'component',
+		component: 'addLocalSpell'
+	};
+	const baseClasses = 'card max-w-4xl shadow-xl space-y-4 max-h-[80vh] overflow-y-auto';
+
+	export let parent: SkeletonModalParentType;
+
+	let spellInfo: SpellModalValue = $modalStore[0].value;
 	let asAppSpell = stringToAppSpell(spellInfo.id);
 	let asDDBSpell = stringToDDBSpell(spellInfo.id);
 	let spellURL = spellNameToURL(spellInfo.name);
-
-	let divElement: HTMLDivElement;
-	onMount(() => {
-		divElement.scrollTo(0, 0);
-	});
-
-	const baseClasses = 'card max-w-4xl shadow-xl space-y-4 max-h-[80vh] overflow-y-auto';
 	let modalClasses = `${baseClasses} ${asAppSpell !== undefined ? 'w-11/12' : ''}`;
+	let divElement: HTMLDivElement;
 
 	function manageLocalURLs() {
 		parent.onClose();
-		modalStore.trigger(manageLocalSpells);
+
+		const valueForManageLocalSpells: ManageLocalSpellsModalValue = {
+			onDestroyFocusElement: spellInfo.onDestroyFocusElement
+		};
+		settingsForManageLocalSpells.value = valueForManageLocalSpells;
+		spellInfo.onDestroyFocusElement = undefined;
+		modalStore.trigger(settingsForManageLocalSpells);
 	}
 
 	function addLocalURL() {
 		parent.onClose();
-		addLocalSpell.value = spellInfo;
-		modalStore.trigger(addLocalSpell);
+
+		const valueForAddLocalSpell: AddLocalSpellModalValue = { ...spellInfo };
+		settingsForAddLocalSpell.value = valueForAddLocalSpell;
+		spellInfo.onDestroyFocusElement = undefined;
+		modalStore.trigger(settingsForAddLocalSpell);
 	}
+
+	onMount(() => {
+		divElement.scrollTo(0, 0);
+	});
+
+	onDestroy(() => {
+		if (spellInfo.onDestroyFocusElement !== undefined) {
+			spellInfo.onDestroyFocusElement.focus();
+		}
+	});
 </script>
 
 {#if $modalStore[0]}

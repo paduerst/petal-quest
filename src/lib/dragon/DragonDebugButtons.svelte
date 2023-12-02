@@ -9,11 +9,14 @@
 		currentDragonConfig
 	} from './builder-states';
 
-	const dispatch = createEventDispatcher<{ click: { debugText: string } }>();
+	const dispatch = createEventDispatcher<{
+		click: { debugText: string; clickedButton?: HTMLElement };
+	}>();
 
-	function dispatchClick(debugText: string) {
+	function dispatchClick(debugText: string, clickedButton?: HTMLElement) {
 		dispatch('click', {
-			debugText: debugText
+			debugText,
+			clickedButton
 		});
 	}
 
@@ -34,6 +37,8 @@
 		newConfig.fromString(configString);
 		debugConfigs.push(newConfig);
 	}
+
+	let shareButton: HTMLElement;
 </script>
 
 <div transition:fade class="flex flex-wrap justify-center print:hidden">
@@ -49,8 +54,9 @@
 	{/each}
 	<button
 		class="btn variant-filled-surface m-1"
+		bind:this={shareButton}
 		on:click={() => {
-			dispatchClick('SHARE');
+			dispatchClick('SHARE', shareButton);
 		}}
 	>
 		{'SHARE'}
