@@ -1,6 +1,7 @@
 import { expect, test } from 'vitest';
 import { DragonConfig } from './dragon-config';
-import { AGES, AGES_UPPER, COLORS, COLOR_TO_THEME } from '.';
+import { AGES, COLORS, COLOR_TO_THEME } from '.';
+import { capitalizeFirstLetter } from '$lib/text-utils';
 
 test('DragonConfig.title behavior', () => {
 	const dragonConfig = new DragonConfig();
@@ -11,7 +12,7 @@ test('DragonConfig.title behavior', () => {
 	// other ages have a different format
 	for (let i = 1; i < AGES.length; i++) {
 		dragonConfig.age = AGES[i];
-		expect(dragonConfig.title).toBe(`${AGES_UPPER[i]} Red Dragon`);
+		expect(dragonConfig.title).toBe(`${capitalizeFirstLetter(dragonConfig.age)} Red Dragon`);
 	}
 
 	// adding a name puts the default title in parentheses

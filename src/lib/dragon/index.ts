@@ -1,8 +1,4 @@
-import { capitalizeFirstLetter } from '$lib/text-utils';
-
 export const AGES = ['wyrmling', 'young', 'adult', 'ancient', 'cosmic'] as const;
-export const AGES_UPPER = AGES.map(capitalizeFirstLetter) as ReadonlyArray<string>;
-export const AGES_CAPS = AGES.map((age) => age.toUpperCase()) as ReadonlyArray<string>;
 export type Age = (typeof AGES)[number];
 
 export const HIDDEN_AGES: readonly Age[] = ['cosmic'] as const;
@@ -29,8 +25,6 @@ export const COLORS = [
 	'white',
 	'black'
 ] as const;
-export const COLORS_UPPER = COLORS.map(capitalizeFirstLetter) as ReadonlyArray<string>;
-export const COLORS_CAPS = COLORS.map((color) => color.toUpperCase()) as ReadonlyArray<string>;
 export type Color = (typeof COLORS)[number];
 
 export const HIDDEN_COLORS: readonly Color[] = ['magenta', 'white', 'black'] as const;
