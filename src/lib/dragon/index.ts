@@ -25,13 +25,15 @@ export const COLORS = [
 	'blue',
 	'indigo',
 	'violet',
-	'magenta'
+	'magenta',
+	'white',
+	'black'
 ] as const;
 export const COLORS_UPPER = COLORS.map(capitalizeFirstLetter) as ReadonlyArray<string>;
 export const COLORS_CAPS = COLORS.map((color) => color.toUpperCase()) as ReadonlyArray<string>;
 export type Color = (typeof COLORS)[number];
 
-export const HIDDEN_COLORS: readonly Color[] = ['magenta'] as const;
+export const HIDDEN_COLORS: readonly Color[] = ['magenta', 'white', 'black'] as const;
 
 /**
  * Converts input string to Color if possible, returning undefined if not.
@@ -53,10 +55,10 @@ export const COLOR_TO_ALIGNMENT: {
 	blue: 'Typically Chaotic',
 	indigo: 'Typically Chaotic',
 	violet: 'Typically Lawful',
-	magenta: 'Any Alignment'
+	magenta: 'Any Alignment',
+	white: 'Any Alignment',
+	black: 'Any Alignment'
 } as const;
-// white: 'Any Alignment',
-// black: 'Any Alignment',
 
 export type RGB = `rgb(${number}, ${number}, ${number})`;
 export const COLOR_TO_THEME: {
@@ -69,10 +71,10 @@ export const COLOR_TO_THEME: {
 	blue: 'rgb(0, 100, 150)',
 	indigo: 'rgb(31, 0, 156)',
 	violet: 'rgb(118, 43, 158)',
-	magenta: 'rgb(173, 12, 117)'
+	magenta: 'rgb(173, 12, 117)',
+	white: 'rgb(127, 128, 119)',
+	black: 'rgb(60, 60, 60)'
 } as const;
-// white: 'rgb(127, 128, 119)',
-// black: 'rgb(60, 60, 60)',
 
 export const SIZES = ['Tiny', 'Small', 'Medium', 'Large', 'Huge', 'Gargantuan'] as const;
 export type Size = (typeof SIZES)[number];

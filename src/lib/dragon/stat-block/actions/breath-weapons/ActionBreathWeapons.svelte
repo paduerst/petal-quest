@@ -16,6 +16,10 @@
 	import Breath2Violet from './Breath2Violet.svelte';
 	import Breath1Magenta from './Breath1Magenta.svelte';
 	import Breath2Magenta from './Breath2Magenta.svelte';
+	import Breath1White from './Breath1White.svelte';
+	import Breath2White from './Breath2White.svelte';
+	import Breath1Black from './Breath1Black.svelte';
+	import Breath2Black from './Breath2Black.svelte';
 
 	export let dragon: DragonStats;
 
@@ -27,7 +31,9 @@
 		blue: [Breath1Blue, Breath2Blue],
 		indigo: [Breath1Indigo, Breath2Indigo],
 		violet: [Breath1Violet, Breath2Violet],
-		magenta: [Breath1Magenta, Breath2Magenta]
+		magenta: [Breath1Magenta, Breath2Magenta],
+		white: [Breath1White, Breath2White],
+		black: [Breath1Black, Breath2Black]
 	} as const;
 </script>
 

@@ -18,7 +18,9 @@
 		id="age"
 	>
 		{#each AGES as age, index}
-			<option value={age} hidden={HIDDEN_AGES.includes(age)}>{AGES_UPPER[index]}</option>
+			<option value={age} hidden={HIDDEN_AGES.includes(age)}
+				>{AGES_UPPER[index]}{HIDDEN_AGES.includes(age) ? ' (In Development)' : ''}</option
+			>
 		{/each}
 	</select>
 </div>
@@ -34,7 +36,9 @@
 		id="color"
 	>
 		{#each COLORS as color, index}
-			<option value={color} hidden={HIDDEN_COLORS.includes(color)}>{COLORS_UPPER[index]}</option>
+			<option value={color} hidden={HIDDEN_COLORS.includes(color)}
+				>{COLORS_UPPER[index]}{HIDDEN_COLORS.includes(color) ? ' (In Development)' : ''}</option
+			>
 		{/each}
 	</select>
 </div>
