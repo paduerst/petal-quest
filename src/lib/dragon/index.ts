@@ -17,12 +17,21 @@ export function stringToAge(ageString: string): Age | undefined {
 	return AGES.find((age) => age === ageString);
 }
 
-export const COLORS = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'] as const;
+export const COLORS = [
+	'red',
+	'orange',
+	'yellow',
+	'green',
+	'blue',
+	'indigo',
+	'violet',
+	'magenta'
+] as const;
 export const COLORS_UPPER = COLORS.map(capitalizeFirstLetter) as ReadonlyArray<string>;
 export const COLORS_CAPS = COLORS.map((color) => color.toUpperCase()) as ReadonlyArray<string>;
 export type Color = (typeof COLORS)[number];
 
-export const HIDDEN_COLORS: readonly Color[] = [] as const;
+export const HIDDEN_COLORS: readonly Color[] = ['magenta'] as const;
 
 /**
  * Converts input string to Color if possible, returning undefined if not.
@@ -43,8 +52,11 @@ export const COLOR_TO_ALIGNMENT: {
 	green: 'Typically Neutral',
 	blue: 'Typically Chaotic',
 	indigo: 'Typically Chaotic',
-	violet: 'Typically Lawful'
+	violet: 'Typically Lawful',
+	magenta: 'Any Alignment'
 } as const;
+// white: 'Any Alignment',
+// black: 'Any Alignment',
 
 export type RGB = `rgb(${number}, ${number}, ${number})`;
 export const COLOR_TO_THEME: {
@@ -56,8 +68,11 @@ export const COLOR_TO_THEME: {
 	green: 'rgb(28, 128, 0)',
 	blue: 'rgb(0, 100, 150)',
 	indigo: 'rgb(31, 0, 156)',
-	violet: 'rgb(118, 43, 158)'
+	violet: 'rgb(118, 43, 158)',
+	magenta: 'rgb(173, 12, 117)'
 } as const;
+// white: 'rgb(127, 128, 119)',
+// black: 'rgb(60, 60, 60)',
 
 export const SIZES = ['Tiny', 'Small', 'Medium', 'Large', 'Huge', 'Gargantuan'] as const;
 export type Size = (typeof SIZES)[number];
