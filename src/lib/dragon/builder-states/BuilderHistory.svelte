@@ -104,12 +104,9 @@
 		}
 	}
 
-	let historyControlElements: (HTMLElement | undefined)[] =
-		Array(historyPagesNeeded).fill(undefined);
+	let returnButton: HTMLElement;
 	onMount(() => {
-		if (historyControlElements[0] !== undefined) {
-			historyControlElements[0].focus();
-		}
+		returnButton.focus();
 	});
 </script>
 
@@ -121,11 +118,20 @@
 </p>
 
 <div class="flex flex-col items-center">
+	<button
+		bind:this={returnButton}
+		class="daisy-btn daisy-btn-neutral m-2"
+		on:click={() => {
+			$nextBuilderState = returnState;
+		}}
+	>
+		Return to Builder {capitalizeFirstLetter(returnState.toLowerCase())}
+	</button>
+
 	{#if historyPagesNeeded > 1}
 		<div class="daisy-join m-2">
 			{#each [...Array(historyPagesNeeded).keys()] as index (index)}
 				<button
-					bind:this={historyControlElements[index]}
 					class="daisy-join-item daisy-btn daisy-btn-outline"
 					class:daisy-btn-active={index === currentHistoryPage}
 					on:click={() => {
@@ -162,14 +168,21 @@
 
 	<div class="daisy-divider my-2" />
 
-	<button
-		class="daisy-btn daisy-btn-neutral m-2"
-		on:click={() => {
-			$nextBuilderState = returnState;
-		}}
-	>
-		Return to Builder {capitalizeFirstLetter(returnState.toLowerCase())}
-	</button>
+	{#if historyPagesNeeded > 1}
+		<div class="daisy-join m-2">
+			{#each [...Array(historyPagesNeeded).keys()] as index (index)}
+				<button
+					class="daisy-join-item daisy-btn daisy-btn-outline"
+					class:daisy-btn-active={index === currentHistoryPage}
+					on:click={() => {
+						setHistoryPage(index);
+					}}
+				>
+					{index + 1}
+				</button>
+			{/each}
+		</div>
+	{/if}
 
 	{#if $dragonBuilderHistory.length > 0}
 		<button

@@ -10,7 +10,7 @@
 	$: pageTitle =
 		$currentDragonConfig === undefined
 			? defaultTitle
-			: `${$currentDragonConfig.getTitle()} - ${defaultTitle}`;
+			: `${$currentDragonConfig.title} - ${defaultTitle}`;
 
 	onMount(() => {
 		pageTitle = defaultTitle;

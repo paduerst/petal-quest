@@ -14,9 +14,9 @@
 <div class="daisy-card daisy-card-compact w-full bg-white border border-black">
 	<div
 		class="daisy-card-body rounded-[inherit]"
-		style="background: {RGBToRGBA(config.getTheme(), 0.35)};"
+		style="background: {RGBToRGBA(config.theme, 0.35)};"
 	>
-		<h2 class="daisy-card-title">{config.getTitle()}</h2>
+		<h2 class="daisy-card-title">{config.title}</h2>
 		<p>{config.toString()}</p>
 		<div class="daisy-card-actions justify-end">
 			{#if showDeleteButton}

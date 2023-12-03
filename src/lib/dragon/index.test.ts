@@ -1,10 +1,8 @@
 import { expect, test } from 'vitest';
 import {
 	AGES,
-	AGES_UPPER,
 	stringToAge,
 	COLORS,
-	COLORS_UPPER,
 	stringToColor,
 	SIZES,
 	stringToSize,
@@ -14,28 +12,12 @@ import {
 	RGBToRGBA
 } from '.';
 
-test('AGES_UPPER are Wyrmling, Young, Adult, Ancient, and Cosmic', () => {
-	expect(AGES_UPPER).toStrictEqual(['Wyrmling', 'Young', 'Adult', 'Ancient', 'Cosmic']);
-});
-
 test('stringToAge() behavior', () => {
 	expect(stringToAge('This is not a valid age.')).toBe(undefined);
 
 	for (const age of AGES) {
 		expect(stringToAge(age)).toBe(age);
 	}
-});
-
-test('COLORS_UPPER are Red, Orange, Yellow, Green, Blue, Indigo, and Violet', () => {
-	expect(COLORS_UPPER).toStrictEqual([
-		'Red',
-		'Orange',
-		'Yellow',
-		'Green',
-		'Blue',
-		'Indigo',
-		'Violet'
-	]);
 });
 
 test('stringToSize() behavior', () => {

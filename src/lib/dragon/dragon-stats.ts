@@ -47,13 +47,13 @@ export class DragonStats {
 		this.#vals = JSON.parse(JSON.stringify(DRAGON_VALS[this.color][this.age]));
 		this.aVsAnColor = this.#getAVsAnColor();
 
-		this.theme = this.#config.getTheme();
+		this.theme = this.#config.theme;
 		this.name = this.#config.name ?? 'the dragon';
 		this.nameUpper =
 			this.#config.disableNameCapitalization === true
 				? this.name
 				: capitalizeFirstLetter(this.name);
-		this.title = this.#config.getTitle();
+		this.title = this.#config.title;
 		this.alignment = this.#config.alignment ?? COLOR_TO_ALIGNMENT[this.color];
 
 		const pronouns = this.#getPronounsConfig();
