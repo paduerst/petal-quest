@@ -1,1 +1,3 @@
-<p>This is the incapacitated description.</p>
+<ul>
+	<li>An incapacitated creature can’t take actions or reactions.</li>
+</ul>

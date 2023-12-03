@@ -1,1 +1,3 @@
-<p>This is the poisoned description.</p>
+<ul>
+	<li>A poisoned creature has disadvantage on attack rolls and ability checks.</li>
+</ul>
