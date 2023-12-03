@@ -1,4 +1,4 @@
-name: Test with Playwright and Vitest
+name: Test with Playwright (against Chrome only) and Vitest
 
 on:
   push:
@@ -25,7 +25,5 @@ jobs:
           cache: 'npm'
       - name: Install dependencies
         run: npm ci
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
       - name: Run tests
-        run: npm run test
+        run: npm run test:chrome

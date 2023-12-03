@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { COLORS, COLORS_UPPER, HIDDEN_COLORS, AGES, AGES_UPPER, HIDDEN_AGES } from '$lib/dragon';
+	import { COLORS, HIDDEN_COLORS, AGES, HIDDEN_AGES } from '$lib/dragon';
 	import type { DragonConfig } from '$lib/dragon/dragon-config';
+	import { capitalizeFirstLetter } from '$lib/text-utils';
 
 	export let config: DragonConfig;
 	export let firstElement: HTMLElement | undefined = undefined;
@@ -17,8 +18,10 @@
 		name="age"
 		id="age"
 	>
-		{#each AGES as age, index}
-			<option value={age} hidden={HIDDEN_AGES.includes(age)}>{AGES_UPPER[index]}</option>
+		{#each AGES as age}
+			<option value={age} hidden={HIDDEN_AGES.includes(age)}
+				>{capitalizeFirstLetter(age)}{HIDDEN_AGES.includes(age) ? ' (In Development)' : ''}</option
+			>
 		{/each}
 	</select>
 </div>
@@ -33,8 +36,12 @@
 		name="color"
 		id="color"
 	>
-		{#each COLORS as color, index}
-			<option value={color} hidden={HIDDEN_COLORS.includes(color)}>{COLORS_UPPER[index]}</option>
+		{#each COLORS as color}
+			<option value={color} hidden={HIDDEN_COLORS.includes(color)}
+				>{capitalizeFirstLetter(color)}{HIDDEN_COLORS.includes(color)
+					? ' (In Development)'
+					: ''}</option
+			>
 		{/each}
 	</select>
 </div>
