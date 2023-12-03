@@ -28,6 +28,6 @@
 	}
 </script>
 
-<SpanButton on:click={handleClick} bind:thisElement classes="italic underline print:no-underline"
+<SpanButton on:click={handleClick} bind:thisElement additionalClasses="italic"
 	>{spellName}</SpanButton
 >

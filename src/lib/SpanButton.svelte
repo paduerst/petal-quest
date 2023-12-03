@@ -19,17 +19,26 @@
 		}
 	}
 
-	export let classes = 'underline print:no-underline';
+	const baseActiveClasses = 'underline print:no-underline';
 
+	export let additionalClasses = '';
 	export let thisElement: HTMLElement | undefined = undefined;
+	export let disabled = false;
+
+	let classes: string;
+	$: classes = disabled ? additionalClasses : `${baseActiveClasses} ${additionalClasses}`;
 </script>
 
-<span
-	role="button"
-	tabindex="0"
-	on:keydown={handleKeydown}
-	on:keyup={handleKeyup}
-	on:click={dispatchClick}
-	bind:this={thisElement}
-	class={classes}><slot /></span
->
+{#if disabled}
+	<span bind:this={thisElement} class={classes}><slot /></span>
+{:else}
+	<span
+		role="button"
+		tabindex="0"
+		on:keydown={handleKeydown}
+		on:keyup={handleKeyup}
+		on:click={dispatchClick}
+		bind:this={thisElement}
+		class={classes}><slot /></span
+	>
+{/if}
