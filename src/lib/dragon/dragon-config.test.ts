@@ -2,37 +2,37 @@ import { expect, test } from 'vitest';
 import { DragonConfig } from './dragon-config';
 import { AGES, AGES_UPPER, COLORS, COLOR_TO_THEME } from '.';
 
-test('DragonConfig.getTitle() behavior', () => {
+test('DragonConfig.title behavior', () => {
 	const dragonConfig = new DragonConfig();
 
 	// default behavior
-	expect(dragonConfig.getTitle()).toBe('Red Dragon Wyrmling');
+	expect(dragonConfig.title).toBe('Red Dragon Wyrmling');
 
 	// other ages have a different format
 	for (let i = 1; i < AGES.length; i++) {
 		dragonConfig.age = AGES[i];
-		expect(dragonConfig.getTitle()).toBe(`${AGES_UPPER[i]} Red Dragon`);
+		expect(dragonConfig.title).toBe(`${AGES_UPPER[i]} Red Dragon`);
 	}
 
 	// adding a name puts the default title in parentheses
 	dragonConfig.age = 'wyrmling'; // reset
 	dragonConfig.name = 'Amara';
-	expect(dragonConfig.getTitle()).toBe('Amara (Red Dragon Wyrmling)');
+	expect(dragonConfig.title).toBe('Amara (Red Dragon Wyrmling)');
 
 	// it will ignore the name if it's the empty string though
 	dragonConfig.name = '';
-	expect(dragonConfig.getTitle()).toBe('Red Dragon Wyrmling');
+	expect(dragonConfig.title).toBe('Red Dragon Wyrmling');
 });
 
-test('DragonConfig.getTheme() behavior', () => {
+test('DragonConfig.theme behavior', () => {
 	const dragonConfig = new DragonConfig();
 
 	// default behavior
-	expect(dragonConfig.getTheme()).toBe(COLOR_TO_THEME['red']);
+	expect(dragonConfig.theme).toBe(COLOR_TO_THEME['red']);
 
 	for (const color of COLORS) {
 		dragonConfig.color = color;
-		expect(dragonConfig.getTheme()).toBe(COLOR_TO_THEME[color]);
+		expect(dragonConfig.theme).toBe(COLOR_TO_THEME[color]);
 	}
 });
 

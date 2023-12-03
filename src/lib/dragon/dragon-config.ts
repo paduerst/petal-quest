@@ -85,11 +85,12 @@ export class DragonConfig {
 	shapechanged?: boolean; // not visible, for development only. support not guaranteed
 
 	/**
-	 * Returns the title for this DragonConfig.
-	 * @return {*}  {string}
+	 * The title for this DragonConfig.
+	 * @readonly
+	 * @type {string}
 	 * @memberof DragonConfig
 	 */
-	getTitle(): string {
+	get title(): string {
 		if (this.statBlockTitle !== undefined) {
 			return this.statBlockTitle;
 		}
@@ -115,11 +116,12 @@ export class DragonConfig {
 	}
 
 	/**
-	 * Returns the RGB theme for this DragonConfig.
-	 * @return {*}  {RGB}
+	 * The RGB theme for this DragonConfig.
+	 * @readonly
+	 * @type {RGB}
 	 * @memberof DragonConfig
 	 */
-	getTheme(): RGB {
+	get theme(): RGB {
 		return COLOR_TO_THEME[this.color];
 	}
 
