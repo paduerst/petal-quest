@@ -1,10 +1,22 @@
-import type { Size } from '$lib/dragon';
+import type { Size, Die } from '$lib/dragon';
 
 export type StatsForPreambleHeader = {
 	title: string;
+
 	size: Size;
 	type: string;
 	alignment: string;
+};
+
+export type StatsForPreambleACHPSpeed = {
+	ac: number;
+
+	expectedHitPoints: number;
+	numberOfHitDice: number;
+	hitDie: Die;
+	con: number;
+
+	speeds: string;
 };
 
 export type StatsForPreambleAbilityScores = {
@@ -23,4 +35,6 @@ export type StatsForPreambleAbilityScores = {
 	cha: number;
 };
 
-export type StatsForPreamble = StatsForPreambleHeader & StatsForPreambleAbilityScores;
+export type StatsForPreamble = StatsForPreambleHeader &
+	StatsForPreambleACHPSpeed &
+	StatsForPreambleAbilityScores;
