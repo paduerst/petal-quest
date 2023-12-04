@@ -12,14 +12,15 @@
 		ManageLocalSpellsModalValue
 	} from '.';
 
-	import SpellCornerButtons from '$lib/spells/SpellCornerButtons.svelte';
+	import ModalScrollableContainer from './ModalScrollableContainer.svelte';
+	import StandardCard from '$lib/StandardCard.svelte';
+	import CardCornerButtons from '$lib/CardCornerButtons.svelte';
 
 	const modalStore = getModalStore();
 	const settingsForManageLocalSpells: ModalSettings = {
 		type: 'component',
 		component: 'manageLocalSpells'
 	};
-	const baseClasses = 'card max-w-4xl shadow-xl space-y-4 max-h-[80vh] overflow-y-auto';
 
 	export let parent: SkeletonModalParentType;
 
@@ -28,8 +29,6 @@
 	let currentSpellId: string = '';
 	let currentSpellURL: string = '';
 	let editNotAdd: boolean = false;
-	let modalClasses = `${baseClasses}`;
-	let divElement: HTMLDivElement;
 
 	$: currentSpellId = spellNameToID(currentSpellName);
 
@@ -59,7 +58,6 @@
 	}
 
 	onMount(() => {
-		divElement.scrollTo(0, 0);
 		if (spellInfo.name) {
 			currentSpellName = spellInfo.name;
 
@@ -79,9 +77,9 @@
 </script>
 
 {#if $modalStore[0]}
-	<div class={modalClasses} bind:this={divElement}>
-		<div class="card text-token text-left relative">
-			<SpellCornerButtons on:click={parent.onClose} />
+	<ModalScrollableContainer>
+		<StandardCard>
+			<CardCornerButtons on:click={parent.onClose} />
 
 			<div class="p-4">
 				<h1 class="spell-name mb-2">{editNotAdd ? 'Edit' : 'Add'} Spell URL</h1>
@@ -140,6 +138,6 @@
 				</button>
 				<button class="btn {parent.buttonPositive}" on:click={onSet}> Set URL </button>
 			</footer>
-		</div>
-	</div>
+		</StandardCard>
+	</ModalScrollableContainer>
 {/if}

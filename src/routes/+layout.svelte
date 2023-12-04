@@ -8,6 +8,7 @@
 	import { AppShell, Modal, Toast } from '@skeletonlabs/skeleton';
 	import AbbrModal from '$lib/modals/AbbrModal.svelte';
 	import AddLocalSpellModal from '$lib/modals/AddLocalSpellModal.svelte';
+	import ConditionModal from '$lib/modals/ConditionModal.svelte';
 	import ManageLocalSpellsModal from '$lib/modals/ManageLocalSpellsModal.svelte';
 	import DragonShareModal from '$lib/modals/DragonShareModal.svelte';
 	import SpellModal from '$lib/modals/SpellModal.svelte';
@@ -23,6 +24,9 @@
 		},
 		addLocalSpell: {
 			ref: AddLocalSpellModal
+		},
+		conditionModal: {
+			ref: ConditionModal
 		},
 		manageLocalSpells: {
 			ref: ManageLocalSpellsModal

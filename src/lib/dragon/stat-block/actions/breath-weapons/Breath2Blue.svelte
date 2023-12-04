@@ -2,6 +2,7 @@
 	import { capitalizeFirstLetter } from '$lib/text-utils';
 	import type { DragonStats } from '$lib/dragon/dragon-stats';
 	import SpellLink from '$lib/spells/SpellLink.svelte';
+	import ConditionLink from '$lib/conditions/ConditionLink.svelte';
 
 	export let dragon: DragonStats;
 
@@ -27,9 +28,9 @@
 		</p>
 
 		<p class="blue-breath-option">
-			<i>2. Blue Glow.</i> The creature is outlined in blue light, shedding dim light in a 10-foot radius.
-			Any attack roll against the creature has advantage if the attacker can see it, and the creature
-			can't benefit from being invisible.
+			<i>2. Blue Glow.</i> The creature is outlined in blue light, shedding dim light in a 10-foot
+			radius. Any attack roll against the creature has advantage if the attacker can see it, and the
+			creature can't benefit from being <ConditionLink condition="invisible" />.
 		</p>
 
 		<p class="blue-breath-option">

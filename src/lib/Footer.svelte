@@ -16,7 +16,7 @@
 			</div>
 		</div>
 		<hr class="my-4" />
-		<p class=" text-sm">
+		<p class="text-sm text-token">
 			This website includes material taken from the System Reference Document 5.1 (“SRD 5.1”) by
 			Wizards of the Coast LLC and available at <a
 				href="https://dnd.wizards.com/resources/systems-reference-document"
