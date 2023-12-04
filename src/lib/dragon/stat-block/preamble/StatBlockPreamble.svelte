@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { DragonStats } from '$lib/dragon/dragon-stats';
-	import PreambleHeader from './PreambleHeader.svelte';
+	import PreambleHeader from '$lib/stat-block/preamble/PreambleHeader.svelte';
 	import PreambleACHPSpeed from './PreambleACHPSpeed.svelte';
 	import PreambleAbilityScores from './PreambleAbilityScores.svelte';
 	import PreambleStatsList from './PreambleStatsList.svelte';
@@ -10,7 +10,7 @@
 	export let dragon: DragonStats;
 </script>
 
-<PreambleHeader {dragon} />
+<PreambleHeader stats={dragon} />
 
 <StatBlockDivider color={dragon.theme} height={dividerHeightThick} />
 
