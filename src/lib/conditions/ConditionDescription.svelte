@@ -5,4 +5,6 @@
 	export let condition: Condition;
 </script>
 
-<svelte:component this={CONDITION_DESCRIPTIONS[condition]} />
+<div class="condition-description">
+	<svelte:component this={CONDITION_DESCRIPTIONS[condition]} />
+</div>
