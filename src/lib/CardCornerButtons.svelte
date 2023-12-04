@@ -1,8 +1,11 @@
 <script lang="ts">
-	export let url: string = '';
+	export let showCloseButton = true;
+	export let url = '';
 </script>
 
-<button on:click class="btn btn-icon-base variant-ghost-error m-2 float-right">✕</button>
+{#if showCloseButton}
+	<button on:click class="btn btn-icon-base variant-ghost-error m-2 float-right">✕</button>
+{/if}
 
 {#if url.length > 0}
 	<a href={url} target="_blank" class="p-2 aspect-square m-2 float-right">

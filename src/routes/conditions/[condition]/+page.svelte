@@ -5,6 +5,8 @@
 	import PageMeta from '$lib/PageMeta.svelte';
 	import ConditionCard from '$lib/conditions/ConditionCard.svelte';
 
+	const showButtons = false;
+
 	export let data: PageData;
 </script>
 
@@ -14,4 +16,8 @@
 	url={`https://www.petalquest.com/conditions/${data.condition}/`}
 />
 
-<ConditionCard condition={data.condition} />
+<ConditionCard
+	condition={data.condition}
+	showCloseButton={showButtons}
+	showUrlButton={showButtons}
+/>

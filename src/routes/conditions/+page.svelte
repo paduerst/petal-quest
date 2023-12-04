@@ -1,7 +1,11 @@
 <script lang="ts">
-	import PageMeta from '$lib/PageMeta.svelte';
 	import { CONDITIONS } from '$lib/conditions';
 	import { capitalizeFirstLetter } from '$lib/text-utils';
+
+	import PageMeta from '$lib/PageMeta.svelte';
+	import ConditionCard from '$lib/conditions/ConditionCard.svelte';
+
+	const showCloseButton = false;
 </script>
 
 <PageMeta
@@ -14,8 +18,8 @@
 
 <ul>
 	{#each CONDITIONS as condition}
-		<li>
-			<a href={`${condition}/`}>{capitalizeFirstLetter(condition)}</a>
+		<li class="my-4">
+			<ConditionCard {condition} {showCloseButton} />
 		</li>
 	{/each}
 </ul>
