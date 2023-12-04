@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
+	import { onDestroy } from 'svelte';
 
 	import { getModalStore, type ModalSettings } from '@skeletonlabs/skeleton';
 
@@ -14,6 +14,7 @@
 
 	import Spell from '$lib/spells/Spell.svelte';
 	import SpellCornerButtons from '$lib/spells/SpellCornerButtons.svelte';
+	import ModalScrollableContainer from './ModalScrollableContainer.svelte';
 
 	const modalStore = getModalStore();
 	const settingsForManageLocalSpells: ModalSettings = {
@@ -24,7 +25,6 @@
 		type: 'component',
 		component: 'addLocalSpell'
 	};
-	const baseClasses = 'card max-w-4xl shadow-xl space-y-4 max-h-[80vh] overflow-y-auto';
 
 	export let parent: SkeletonModalParentType;
 
@@ -32,8 +32,7 @@
 	let asAppSpell = stringToAppSpell(spellInfo.id);
 	let asDDBSpell = stringToDDBSpell(spellInfo.id);
 	let spellURL = spellNameToURL(spellInfo.name);
-	let modalClasses = `${baseClasses} ${asAppSpell !== undefined ? 'w-11/12' : ''}`;
-	let divElement: HTMLDivElement;
+	let additionalClasses = asAppSpell !== undefined ? 'w-11/12' : '';
 
 	function manageLocalURLs() {
 		parent.onClose();
@@ -55,10 +54,6 @@
 		modalStore.trigger(settingsForAddLocalSpell);
 	}
 
-	onMount(() => {
-		divElement.scrollTo(0, 0);
-	});
-
 	onDestroy(() => {
 		if (spellInfo.onDestroyFocusElement !== undefined) {
 			spellInfo.onDestroyFocusElement.focus();
@@ -67,7 +62,7 @@
 </script>
 
 {#if $modalStore[0]}
-	<div class={modalClasses} bind:this={divElement}>
+	<ModalScrollableContainer {additionalClasses}>
 		<div class="card text-token text-left relative">
 			<SpellCornerButtons {spellURL} on:click={parent.onClose} />
 
@@ -111,5 +106,5 @@
 				</footer>
 			{/if}
 		</div>
-	</div>
+	</ModalScrollableContainer>
 {/if}
