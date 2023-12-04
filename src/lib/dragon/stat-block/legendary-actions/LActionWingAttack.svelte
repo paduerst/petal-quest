@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { numberWithSign } from '$lib/text-utils';
 	import type { DragonStats } from '$lib/dragon/dragon-stats';
+	import ConditionLink from '$lib/conditions/ConditionLink.svelte';
 
 	export let dragon: DragonStats;
 </script>
@@ -16,7 +17,8 @@
 			>{dragon.wingAttackExpectedDamage} ({dragon.wingAttackDiceCount}d{dragon.wingAttackDiceType}
 			{numberWithSign(dragon.str, ' ')})</span
 		>
-		bludgeoning damage and be knocked prone. {dragon.nameUpper} can then fly up to half {dragon.pronounPossessiveAdjective}
+		bludgeoning damage and be knocked <ConditionLink condition="prone" />. {dragon.nameUpper} can then
+		fly up to half {dragon.pronounPossessiveAdjective}
 		flying speed.
 	</p>
 </div>
