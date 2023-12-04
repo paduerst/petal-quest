@@ -68,12 +68,12 @@
 
 {#if $modalStore[0]}
 	<div class={modalClasses} bind:this={divElement}>
-		{#if asAppSpell !== undefined}
-			<Spell spell={asAppSpell} showButtons on:click={parent.onClose} />
-		{:else if spellURL.length > 0}
-			<div class="card text-token text-left relative">
-				<SpellCornerButtons {spellURL} on:click={parent.onClose} />
+		<div class="card text-token text-left relative">
+			<SpellCornerButtons {spellURL} on:click={parent.onClose} />
 
+			{#if asAppSpell !== undefined}
+				<Spell spell={asAppSpell} />
+			{:else if spellURL.length > 0}
 				<div class="p-4">
 					<h1 class="spell-name mb-2">External Spell: {spellInfo.name}</h1>
 					{#if asDDBSpell !== undefined}
@@ -94,11 +94,7 @@
 						</button>
 					</footer>
 				{/if}
-			</div>
-		{:else}
-			<div class="card text-token text-left relative">
-				<SpellCornerButtons on:click={parent.onClose} />
-
+			{:else}
 				<div class="p-4">
 					<h1 class="spell-name mb-2">Unknown Spell: {spellInfo.name}</h1>
 					<p>This spell is not recognized.</p>
@@ -113,7 +109,7 @@
 						Add URL for {spellInfo.name}
 					</button>
 				</footer>
-			</div>
-		{/if}
+			{/if}
+		</div>
 	</div>
 {/if}

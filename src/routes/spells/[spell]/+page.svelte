@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import PageMeta from '$lib/PageMeta.svelte';
-	import Spell from '$lib/spells/Spell.svelte';
+	import SpellCard from '$lib/spells/SpellCard.svelte';
 	import { APP_SPELL_VALS } from '$lib/spells';
 
 	export let data: PageData;
@@ -13,4 +13,4 @@
 	url={`https://www.petalquest.com/spells/${data.spell}/`}
 />
 
-<Spell spell={data.spell} />
+<SpellCard spell={data.spell} />
