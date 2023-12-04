@@ -21,7 +21,7 @@
 	<div class="card-header rounded-t-[--theme-rounded-container]">
 		<h1 class="condition-name">
 			{#if headerIsLink}
-				<a href={url}> {capitalizeFirstLetter(condition)}</a>
+				<a href={url}>{capitalizeFirstLetter(condition)}</a>
 			{:else}
 				{capitalizeFirstLetter(condition)}
 			{/if}
