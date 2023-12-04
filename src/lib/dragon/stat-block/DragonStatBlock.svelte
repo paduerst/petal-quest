@@ -14,7 +14,7 @@
 
 <div
 	class="columns-1 md:columns-2 print:min-[480px]:columns-2 text-left text-sm leading-[1.2]"
-	style="--dragon-theme: {dragon.theme}"
+	style="--stat-block-theme: {dragon.theme}"
 >
 	<StatBlockPreamble {dragon} />
 	<StatBlockFeatures {dragon} />
