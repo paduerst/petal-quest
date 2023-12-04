@@ -4,7 +4,7 @@
 	import BActionSupernova from './BActionSupernova.svelte';
 	import BActionVariableRadiance from './BActionVariableRadiance.svelte';
 	import StatBlockDivider from '$lib/stat-block/StatBlockDivider.svelte';
-	import { dividerHeightThin } from '..';
+	import { dividerHeightThin } from '$lib/stat-block';
 
 	export let dragon: DragonStats;
 </script>

@@ -1,4 +1,4 @@
-import type { Size, Die } from '$lib/dragon';
+import type { Size, Die, RGB } from '$lib/dragon';
 import type { CR } from '$lib/dragon/challenge-rating';
 
 export type StatsForPreambleHeader = {
@@ -59,4 +59,7 @@ export type StatsForPreambleStatsList = {
 
 export type StatsForPreamble = StatsForPreambleHeader &
 	StatsForPreambleACHPSpeed &
-	StatsForPreambleAbilityScores;
+	StatsForPreambleAbilityScores &
+	StatsForPreambleStatsList & {
+		theme: RGB;
+	};

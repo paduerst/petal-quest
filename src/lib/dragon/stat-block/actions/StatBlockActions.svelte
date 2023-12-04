@@ -5,7 +5,7 @@
 	import ActionChangeShape from './ActionChangeShape.svelte';
 	import ActionWallOfLight from './ActionWallOfLight.svelte';
 	import StatBlockDivider from '$lib/stat-block/StatBlockDivider.svelte';
-	import { dividerHeightThin } from '..';
+	import { dividerHeightThin } from '$lib/stat-block';
 
 	export let dragon: DragonStats;
 </script>
