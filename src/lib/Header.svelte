@@ -1,7 +1,11 @@
 <script lang="ts">
-	import { AppBar, getDrawerStore } from '@skeletonlabs/skeleton';
-	import Logo from '$lib/Logo.svelte';
+	import { dev } from '$app/environment';
+
+	import { AppBar, getDrawerStore, LightSwitch } from '@skeletonlabs/skeleton';
+
 	import { NAV_LINKS } from '$lib';
+
+	import Logo from '$lib/Logo.svelte';
 	import HeaderNavLink from './HeaderNavLink.svelte';
 
 	const drawerStore = getDrawerStore();
@@ -17,6 +21,10 @@
 		</svelte:fragment>
 
 		<svelte:fragment slot="trail">
+			{#if dev}
+				<LightSwitch />
+			{/if}
+
 			<nav class="hidden lg:flex">
 				<ul class="list-none flex items-center flex-row">
 					{#each NAV_LINKS as link}
