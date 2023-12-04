@@ -3,8 +3,9 @@
 	import { CONDITION_DESCRIPTIONS } from './descriptions';
 
 	export let condition: Condition;
+	export let disableLinks = false;
 </script>
 
 <div class="condition-description">
-	<svelte:component this={CONDITION_DESCRIPTIONS[condition]} />
+	<svelte:component this={CONDITION_DESCRIPTIONS[condition]} {disableLinks} />
 </div>

@@ -1,3 +1,9 @@
+<script lang="ts">
+	import ConditionLink from '../ConditionLink.svelte';
+
+	export let disableLinks = false;
+</script>
+
 <ul>
 	<li>
 		A petrified creature is transformed, along with any nonmagical object it is wearing or carrying,
@@ -5,8 +11,8 @@
 		it ceases aging.
 	</li>
 	<li>
-		The creature is incapacitated (see the condition), can’t move or speak, and is unaware of its
-		surroundings.
+		The creature is <ConditionLink disabled={disableLinks} condition="incapacitated" />, can’t move
+		or speak, and is unaware of its surroundings.
 	</li>
 	<li>Attack rolls against the creature have advantage.</li>
 	<li>The creature automatically fails Strength and Dexterity saving throws.</li>

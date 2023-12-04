@@ -29,6 +29,7 @@
 			condition={conditionInfo.condition}
 			showCloseButton={showButtons}
 			showUrlButton={showButtons}
+			disableDescriptionLinks={true}
 		/>
 	</ModalScrollableContainer>
 {/if}

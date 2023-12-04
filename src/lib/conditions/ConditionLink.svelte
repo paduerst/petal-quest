@@ -13,6 +13,7 @@
 	};
 
 	export let condition: Condition;
+	export let disabled = false;
 
 	let thisElement: HTMLElement | undefined;
 
@@ -26,4 +27,4 @@
 	}
 </script>
 
-<SpanButton on:click={handleClick} bind:thisElement>{condition}</SpanButton>
+<SpanButton {disabled} on:click={handleClick} bind:thisElement>{condition}</SpanButton>

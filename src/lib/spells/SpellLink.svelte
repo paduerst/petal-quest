@@ -13,6 +13,7 @@
 	};
 
 	export let spellName: string;
+	export let disabled = false;
 
 	let spellID = spellNameToID(spellName);
 	let thisElement: HTMLElement | undefined;
@@ -28,6 +29,6 @@
 	}
 </script>
 
-<SpanButton on:click={handleClick} bind:thisElement additionalClasses="italic"
+<SpanButton {disabled} on:click={handleClick} bind:thisElement additionalClasses="italic"
 	>{spellName}</SpanButton
 >

@@ -10,14 +10,13 @@
 	export let showCloseButton = false;
 	export let showUrlButton = false;
 	export let headerIsLink = false;
+	export let disableDescriptionLinks = false;
 
 	let url = `/conditions/${condition}/`;
-	let urlForButton = '';
-	$: urlForButton = showUrlButton ? url : '';
 </script>
 
 <StandardCard>
-	<CardCornerButtons on:click {showCloseButton} url={urlForButton} />
+	<CardCornerButtons on:click {showCloseButton} url={showUrlButton ? url : ''} />
 
 	<div class="card-header rounded-t-[--theme-rounded-container]">
 		<h1 class="condition-name">
@@ -30,6 +29,6 @@
 	</div>
 
 	<div class="p-4 pt-0">
-		<ConditionDescription {condition} />
+		<ConditionDescription {condition} disableLinks={disableDescriptionLinks} />
 	</div>
 </StandardCard>

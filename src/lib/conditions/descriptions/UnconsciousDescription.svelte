@@ -1,7 +1,13 @@
+<script lang="ts">
+	import ConditionLink from '../ConditionLink.svelte';
+
+	export let disableLinks = false;
+</script>
+
 <ul>
 	<li>
-		An unconscious creature is incapacitated (see the condition), can’t move or speak, and is
-		unaware of its surroundings.
+		An unconscious creature is <ConditionLink disabled={disableLinks} condition="incapacitated" />,
+		can’t move or speak, and is unaware of its surroundings.
 	</li>
 	<li>The creature drops whatever it’s holding and falls prone.</li>
 	<li>The creature automatically fails Strength and Dexterity saving throws.</li>
