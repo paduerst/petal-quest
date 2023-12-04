@@ -1,12 +1,7 @@
 <script lang="ts">
-	import type { Size } from '$lib/dragon';
+	import type { StatsForPreambleHeader } from '.';
 
-	export let stats: {
-		title: string;
-		size: Size;
-		type: string;
-		alignment: string;
-	};
+	export let stats: StatsForPreambleHeader;
 </script>
 
 <div class="stat-block-header">
