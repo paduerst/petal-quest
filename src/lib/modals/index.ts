@@ -1,4 +1,5 @@
 import type { DragonConfig } from '$lib/dragon/dragon-config';
+import type { Condition } from '$lib/conditions';
 
 export type SkeletonModalParentType = {
 	position: string;
@@ -38,6 +39,10 @@ export type AddLocalSpellModalValue = BaseModalValue & {
 	name?: string;
 	id?: string;
 	fromManage?: boolean;
+};
+
+export type ConditionModalValue = BaseModalValue & {
+	condition: Condition;
 };
 
 export type DragonShareModalValue = BaseModalValue & {

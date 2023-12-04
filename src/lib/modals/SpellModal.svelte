@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
+	import { onDestroy } from 'svelte';
 
 	import { getModalStore, type ModalSettings } from '@skeletonlabs/skeleton';
 
@@ -13,7 +13,9 @@
 	} from '.';
 
 	import Spell from '$lib/spells/Spell.svelte';
-	import SpellCornerButtons from '$lib/spells/SpellCornerButtons.svelte';
+	import ModalScrollableContainer from './ModalScrollableContainer.svelte';
+	import StandardCard from '$lib/StandardCard.svelte';
+	import CardCornerButtons from '$lib/CardCornerButtons.svelte';
 
 	const modalStore = getModalStore();
 	const settingsForManageLocalSpells: ModalSettings = {
@@ -24,7 +26,6 @@
 		type: 'component',
 		component: 'addLocalSpell'
 	};
-	const baseClasses = 'card max-w-4xl shadow-xl space-y-4 max-h-[80vh] overflow-y-auto';
 
 	export let parent: SkeletonModalParentType;
 
@@ -32,8 +33,7 @@
 	let asAppSpell = stringToAppSpell(spellInfo.id);
 	let asDDBSpell = stringToDDBSpell(spellInfo.id);
 	let spellURL = spellNameToURL(spellInfo.name);
-	let modalClasses = `${baseClasses} ${asAppSpell !== undefined ? 'w-11/12' : ''}`;
-	let divElement: HTMLDivElement;
+	let additionalClasses = asAppSpell !== undefined ? 'w-11/12' : '';
 
 	function manageLocalURLs() {
 		parent.onClose();
@@ -55,10 +55,6 @@
 		modalStore.trigger(settingsForAddLocalSpell);
 	}
 
-	onMount(() => {
-		divElement.scrollTo(0, 0);
-	});
-
 	onDestroy(() => {
 		if (spellInfo.onDestroyFocusElement !== undefined) {
 			spellInfo.onDestroyFocusElement.focus();
@@ -67,13 +63,13 @@
 </script>
 
 {#if $modalStore[0]}
-	<div class={modalClasses} bind:this={divElement}>
-		{#if asAppSpell !== undefined}
-			<Spell spell={asAppSpell} showButtons on:click={parent.onClose} />
-		{:else if spellURL.length > 0}
-			<div class="card text-token text-left relative">
-				<SpellCornerButtons {spellURL} on:click={parent.onClose} />
+	<ModalScrollableContainer {additionalClasses}>
+		<StandardCard>
+			<CardCornerButtons url={spellURL} on:click={parent.onClose} />
 
+			{#if asAppSpell !== undefined}
+				<Spell spell={asAppSpell} />
+			{:else if spellURL.length > 0}
 				<div class="p-4">
 					<h1 class="spell-name mb-2">External Spell: {spellInfo.name}</h1>
 					{#if asDDBSpell !== undefined}
@@ -94,11 +90,7 @@
 						</button>
 					</footer>
 				{/if}
-			</div>
-		{:else}
-			<div class="card text-token text-left relative">
-				<SpellCornerButtons on:click={parent.onClose} />
-
+			{:else}
 				<div class="p-4">
 					<h1 class="spell-name mb-2">Unknown Spell: {spellInfo.name}</h1>
 					<p>This spell is not recognized.</p>
@@ -113,7 +105,7 @@
 						Add URL for {spellInfo.name}
 					</button>
 				</footer>
-			</div>
-		{/if}
-	</div>
+			{/if}
+		</StandardCard>
+	</ModalScrollableContainer>
 {/if}

@@ -23,7 +23,7 @@
 
 <div class="flex flex-wrap justify-center print:hidden">
 	<button
-		class="daisy-btn daisy-btn-neutral text-token m-1"
+		class="daisy-btn daisy-btn-neutral text-white m-1"
 		on:click={() => {
 			toastStore.clear();
 			$nextBuilderState = 'EDIT';
@@ -32,7 +32,7 @@
 		Edit Dragon
 	</button>
 	<button
-		class="daisy-btn daisy-btn-neutral text-token m-1"
+		class="daisy-btn daisy-btn-neutral text-white m-1"
 		bind:this={shareButton}
 		on:click={() => {
 			dispatchClick('SHARE', shareButton);
@@ -41,7 +41,7 @@
 		Share Dragon
 	</button>
 	<button
-		class="daisy-btn daisy-btn-neutral text-token m-1"
+		class="daisy-btn daisy-btn-neutral text-white m-1"
 		on:click={() => {
 			toastStore.clear();
 			$currentDragonConfig = undefined;
@@ -50,7 +50,7 @@
 		Build a New Dragon
 	</button>
 	<button
-		class="daisy-btn daisy-btn-neutral text-token m-1"
+		class="daisy-btn daisy-btn-neutral text-white m-1"
 		on:click={() => {
 			toastStore.clear();
 			$nextBuilderState = 'HISTORY';
