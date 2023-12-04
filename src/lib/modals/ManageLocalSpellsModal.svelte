@@ -10,8 +10,8 @@
 		AddLocalSpellModalValue
 	} from '.';
 
-	import SpellCornerButtons from '$lib/spells/SpellCornerButtons.svelte';
 	import ModalScrollableContainer from './ModalScrollableContainer.svelte';
+	import CardCornerButtons from '$lib/CardCornerButtons.svelte';
 
 	const modalStore = getModalStore();
 	const settingsForAddLocalSpell: ModalSettings = {
@@ -65,39 +65,36 @@
 
 {#if $modalStore[0]}
 	<ModalScrollableContainer>
-		<div class="card text-token text-left relative">
-			<SpellCornerButtons on:click={parent.onClose} />
+		<CardCornerButtons on:click={parent.onClose} />
 
-			<div class="p-4">
-				<h1 class="spell-name mb-6">Local Spell URLs</h1>
-				{#if Object.keys($localSpellURLs).length === 0}
-					<p>No spell URLs in local storage!</p>
-				{:else}
-					<ul class="flex flex-col">
-						{#each Object.keys($localSpellURLs) as spell}
-							<li class="card variant-filled p-2 mx-2 my-1 flex flex-nowrap gap-2 w-full min-w-fit">
-								<button class="btn variant-filled-error" on:click={() => onDelete(spell)}
-									>Delete</button
-								>
-								<button class="btn variant-filled-primary" on:click={() => onEdit(spell)}
-									>Edit</button
-								>
-								<div class="card variant-filled-surface p-2 w-full">
-									<p>{spell}</p>
-									<a href={$localSpellURLs[spell]} target="_blank">
-										{$localSpellURLs[spell]}
-									</a>
-								</div>
-							</li>
-						{/each}
-					</ul>
-				{/if}
-			</div>
-
-			<footer class="p-4 {parent.regionFooter}">
-				<button class="btn {parent.buttonNeutral}" on:click={onCancel}> Cancel </button>
-				<button class="btn {parent.buttonPositive}" on:click={onAdd}> Add Spell URL </button>
-			</footer>
+		<div class="p-4">
+			<h1 class="spell-name mb-6">Local Spell URLs</h1>
+			{#if Object.keys($localSpellURLs).length === 0}
+				<p>No spell URLs in local storage!</p>
+			{:else}
+				<ul class="flex flex-col">
+					{#each Object.keys($localSpellURLs) as spell}
+						<li class="card variant-filled p-2 mx-2 my-1 flex flex-nowrap gap-2 w-full min-w-fit">
+							<button class="btn variant-filled-error" on:click={() => onDelete(spell)}
+								>Delete</button
+							>
+							<button class="btn variant-filled-primary" on:click={() => onEdit(spell)}>Edit</button
+							>
+							<div class="card variant-filled-surface p-2 w-full">
+								<p>{spell}</p>
+								<a href={$localSpellURLs[spell]} target="_blank">
+									{$localSpellURLs[spell]}
+								</a>
+							</div>
+						</li>
+					{/each}
+				</ul>
+			{/if}
 		</div>
+
+		<footer class="p-4 {parent.regionFooter}">
+			<button class="btn {parent.buttonNeutral}" on:click={onCancel}> Cancel </button>
+			<button class="btn {parent.buttonPositive}" on:click={onAdd}> Add Spell URL </button>
+		</footer>
 	</ModalScrollableContainer>
 {/if}

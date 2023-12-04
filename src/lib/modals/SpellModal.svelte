@@ -13,8 +13,8 @@
 	} from '.';
 
 	import Spell from '$lib/spells/Spell.svelte';
-	import SpellCornerButtons from '$lib/spells/SpellCornerButtons.svelte';
 	import ModalScrollableContainer from './ModalScrollableContainer.svelte';
+	import CardCornerButtons from '$lib/CardCornerButtons.svelte';
 
 	const modalStore = getModalStore();
 	const settingsForManageLocalSpells: ModalSettings = {
@@ -63,48 +63,46 @@
 
 {#if $modalStore[0]}
 	<ModalScrollableContainer {additionalClasses}>
-		<div class="card text-token text-left relative">
-			<SpellCornerButtons {spellURL} on:click={parent.onClose} />
+		<CardCornerButtons url={spellURL} on:click={parent.onClose} />
 
-			{#if asAppSpell !== undefined}
-				<Spell spell={asAppSpell} />
-			{:else if spellURL.length > 0}
-				<div class="p-4">
-					<h1 class="spell-name mb-2">External Spell: {spellInfo.name}</h1>
-					{#if asDDBSpell !== undefined}
-						<p>This spell's description is on D&D Beyond:</p>
-					{:else}
-						<p>
-							This spell isn't on this website, but this browser's local storage has the following
-							URL for it:
-						</p>
-					{/if}
-					<p><a href={spellURL} target="_blank">{spellURL}</a></p>
-				</div>
-
-				{#if asDDBSpell === undefined}
-					<footer class="p-4 {parent.regionFooter}">
-						<button class="btn {parent.buttonPositive}" on:click={manageLocalURLs}>
-							Manage URLs in local storage
-						</button>
-					</footer>
-				{/if}
-			{:else}
-				<div class="p-4">
-					<h1 class="spell-name mb-2">Unknown Spell: {spellInfo.name}</h1>
-					<p>This spell is not recognized.</p>
+		{#if asAppSpell !== undefined}
+			<Spell spell={asAppSpell} />
+		{:else if spellURL.length > 0}
+			<div class="p-4">
+				<h1 class="spell-name mb-2">External Spell: {spellInfo.name}</h1>
+				{#if asDDBSpell !== undefined}
+					<p>This spell's description is on D&D Beyond:</p>
+				{:else}
 					<p>
-						You can specify a URL for it which will be stored in this browser's local storage for
-						future reference.
+						This spell isn't on this website, but this browser's local storage has the following URL
+						for it:
 					</p>
-				</div>
+				{/if}
+				<p><a href={spellURL} target="_blank">{spellURL}</a></p>
+			</div>
 
+			{#if asDDBSpell === undefined}
 				<footer class="p-4 {parent.regionFooter}">
-					<button class="btn {parent.buttonPositive}" on:click={addLocalURL}>
-						Add URL for {spellInfo.name}
+					<button class="btn {parent.buttonPositive}" on:click={manageLocalURLs}>
+						Manage URLs in local storage
 					</button>
 				</footer>
 			{/if}
-		</div>
+		{:else}
+			<div class="p-4">
+				<h1 class="spell-name mb-2">Unknown Spell: {spellInfo.name}</h1>
+				<p>This spell is not recognized.</p>
+				<p>
+					You can specify a URL for it which will be stored in this browser's local storage for
+					future reference.
+				</p>
+			</div>
+
+			<footer class="p-4 {parent.regionFooter}">
+				<button class="btn {parent.buttonPositive}" on:click={addLocalURL}>
+					Add URL for {spellInfo.name}
+				</button>
+			</footer>
+		{/if}
 	</ModalScrollableContainer>
 {/if}

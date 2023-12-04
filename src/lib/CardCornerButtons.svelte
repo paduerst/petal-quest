@@ -1,11 +1,11 @@
 <script lang="ts">
-	export let spellURL: string = '';
+	export let url: string = '';
 </script>
 
 <button on:click class="btn btn-icon-base variant-ghost-error m-2 float-right">✕</button>
 
-{#if spellURL.length > 0}
-	<a href={spellURL} target="_blank" class="p-2 aspect-square m-2 float-right">
+{#if url.length > 0}
+	<a href={url} target="_blank" class="p-2 aspect-square m-2 float-right">
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			width="27"
