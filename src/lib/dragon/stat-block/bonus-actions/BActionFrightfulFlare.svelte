@@ -2,6 +2,7 @@
 	import type { DragonStats } from '$lib/dragon/dragon-stats';
 	import { FLARE_DISADVANTAGE_FOR_CLOSE_CREATURES } from '.';
 	import AbbrButton from '../AbbrButton.svelte';
+	import ConditionLink from '$lib/conditions/ConditionLink.svelte';
 
 	export let dragon: DragonStats;
 
@@ -25,7 +26,8 @@
 					Creatures within {dragon.prismaticRadianceRadius} feet of
 					{dragon.pronounObjective} have disadvantage on this save.
 				{/if}
-				On a failed save, a creature is frightened until the end of {dragon.name}'s next turn.
+				On a failed save, a creature is <ConditionLink condition="frightened" /> until the end of {dragon.name}'s
+				next turn.
 			{:else}
 				<i>
 					<b>Frightful Shadow (<AbbrButton {abbreviation} {definition} />). </b>
@@ -39,7 +41,8 @@
 					Creatures within {dragon.prismaticRadianceRadius} feet of
 					{dragon.pronounObjective} have disadvantage on this save.
 				{/if}
-				On a failed save, a creature is frightened until the end of {dragon.name}'s next turn.
+				On a failed save, a creature is <ConditionLink condition="frightened" /> until the end of {dragon.name}'s
+				next turn.
 			{/if}
 		</p>
 	</div>
