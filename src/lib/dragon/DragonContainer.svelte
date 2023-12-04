@@ -2,7 +2,7 @@
 	import { type RGB, COLOR_TO_THEME, COLORS } from '.';
 	import type { DragonConfig } from './dragon-config';
 
-	import StatBlockContainer from '$lib/stat-blocks/StatBlockContainer.svelte';
+	import StatBlockContainer from '$lib/stat-block/StatBlockContainer.svelte';
 
 	export let config: DragonConfig | undefined = undefined;
 	let dragonTheme: RGB;

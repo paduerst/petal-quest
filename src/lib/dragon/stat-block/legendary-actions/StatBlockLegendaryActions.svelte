@@ -3,7 +3,7 @@
 	import LActionTailAttack from './LActionTailAttack.svelte';
 	import LActionWingAttack from './LActionWingAttack.svelte';
 	import LActionBreathBeam from './LActionBreathBeam.svelte';
-	import StatBlockDivider from '../StatBlockDivider.svelte';
+	import StatBlockDivider from '$lib/stat-block/StatBlockDivider.svelte';
 	import { dividerHeightThin } from '..';
 
 	export let dragon: DragonStats;

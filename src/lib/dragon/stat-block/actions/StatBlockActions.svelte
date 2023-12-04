@@ -4,7 +4,7 @@
 	import ActionBreathWeapons from './breath-weapons/ActionBreathWeapons.svelte';
 	import ActionChangeShape from './ActionChangeShape.svelte';
 	import ActionWallOfLight from './ActionWallOfLight.svelte';
-	import StatBlockDivider from '../StatBlockDivider.svelte';
+	import StatBlockDivider from '$lib/stat-block/StatBlockDivider.svelte';
 	import { dividerHeightThin } from '..';
 
 	export let dragon: DragonStats;

@@ -4,7 +4,7 @@
 	import PreambleACHPSpeed from './PreambleACHPSpeed.svelte';
 	import PreambleAbilityScores from './PreambleAbilityScores.svelte';
 	import PreambleStatsList from './PreambleStatsList.svelte';
-	import StatBlockDivider from '../StatBlockDivider.svelte';
+	import StatBlockDivider from '$lib/stat-block/StatBlockDivider.svelte';
 	import { dividerHeightThick, dividerHeightThin } from '..';
 
 	export let dragon: DragonStats;
