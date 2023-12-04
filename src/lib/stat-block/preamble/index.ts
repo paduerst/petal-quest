@@ -1,4 +1,5 @@
 import type { Size, Die } from '$lib/dragon';
+import type { CR } from '$lib/dragon/challenge-rating';
 
 export type StatsForPreambleHeader = {
 	title: string;
@@ -33,6 +34,27 @@ export type StatsForPreambleAbilityScores = {
 	int: number;
 	wis: number;
 	cha: number;
+};
+
+export type StatsForPreambleStatsList = {
+	savingThrows: string[];
+	skills: string[];
+
+	vulnerabilities: string;
+	resistances: string;
+	immunities: string;
+	conditionImmunities: string;
+
+	truesight: number;
+	blindsight: number;
+	darkvision: number;
+	passivePerception: number;
+
+	languages: string;
+
+	cr: CR;
+	xp: number;
+	proficiencyBonus: number;
 };
 
 export type StatsForPreamble = StatsForPreambleHeader &

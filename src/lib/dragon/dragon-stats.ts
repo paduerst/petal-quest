@@ -98,6 +98,7 @@ export class DragonStats {
 		this.vulnerabilities = this.#getVulnerabilities();
 		this.conditionImmunities = this.#vals.conditionImmunities;
 
+		this.truesight = this.#getTruesight();
 		this.blindsight = this.#getBlindsight();
 		this.darkvision = this.#getDarkvision();
 
@@ -386,6 +387,18 @@ export class DragonStats {
 		return this.#config.vulnerabilities ?? this.vulnerability;
 	}
 
+	#getTruesight(): number {
+		if (
+			this.#config.blindsight !== undefined &&
+			this.#config.blindsight !== null &&
+			!Number.isNaN(this.#config.blindsight)
+		) {
+			return this.#config.blindsight;
+		} else {
+			return this.age === 'cosmic' ? this.#vals.blindsight : 0;
+		}
+	}
+
 	#getBlindsight(): number {
 		if (
 			this.#config.blindsight !== undefined &&
@@ -394,7 +407,7 @@ export class DragonStats {
 		) {
 			return this.#config.blindsight;
 		} else {
-			return this.#vals.blindsight;
+			return this.age === 'cosmic' ? 0 : this.#vals.blindsight;
 		}
 	}
 
@@ -406,7 +419,7 @@ export class DragonStats {
 		) {
 			return this.#config.darkvision;
 		} else {
-			return this.#vals.darkvision;
+			return this.age === 'cosmic' ? 0 : this.#vals.darkvision;
 		}
 	}
 
@@ -538,6 +551,7 @@ export class DragonStats {
 	vulnerabilities: string;
 	conditionImmunities: string;
 
+	truesight: number;
 	blindsight: number;
 	darkvision: number;
 

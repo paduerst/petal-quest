@@ -3,7 +3,7 @@
 	import PreambleHeader from '$lib/stat-block/preamble/PreambleHeader.svelte';
 	import PreambleACHPSpeed from '../../../stat-block/preamble/PreambleACHPSpeed.svelte';
 	import PreambleAbilityScores from '../../../stat-block/preamble/PreambleAbilityScores.svelte';
-	import PreambleStatsList from './PreambleStatsList.svelte';
+	import PreambleStatsList from '../../../stat-block/preamble/PreambleStatsList.svelte';
 	import StatBlockDivider from '$lib/stat-block/StatBlockDivider.svelte';
 	import { dividerHeightThick, dividerHeightThin } from '..';
 
@@ -22,6 +22,6 @@
 
 <StatBlockDivider color={dragon.theme} height={dividerHeightThin} />
 
-<PreambleStatsList {dragon} />
+<PreambleStatsList stats={dragon} />
 
 <StatBlockDivider color={dragon.theme} height={dividerHeightThick} />
