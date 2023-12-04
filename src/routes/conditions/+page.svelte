@@ -1,11 +1,10 @@
 <script lang="ts">
 	import { CONDITIONS } from '$lib/conditions';
-	import { capitalizeFirstLetter } from '$lib/text-utils';
 
 	import PageMeta from '$lib/PageMeta.svelte';
 	import ConditionCard from '$lib/conditions/ConditionCard.svelte';
 
-	const showCloseButton = false;
+	const headerIsLink = true;
 </script>
 
 <PageMeta
@@ -19,7 +18,7 @@
 <ul>
 	{#each CONDITIONS as condition}
 		<li class="my-4">
-			<ConditionCard {condition} {showCloseButton} />
+			<ConditionCard {condition} {headerIsLink} />
 		</li>
 	{/each}
 </ul>

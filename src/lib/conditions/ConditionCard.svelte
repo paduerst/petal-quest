@@ -7,29 +7,29 @@
 	import ConditionDescription from './ConditionDescription.svelte';
 
 	export let condition: Condition;
-	export let showCloseButton = true;
-	export let showUrlButton = true;
+	export let showCloseButton = false;
+	export let showUrlButton = false;
+	export let headerIsLink = false;
 
-	let url = '';
-	$: url = showUrlButton ? `/conditions/${condition}/` : '';
+	let url = `/conditions/${condition}/`;
+	let urlForButton = '';
+	$: urlForButton = showUrlButton ? url : '';
 </script>
 
 <StandardCard>
-	<CardCornerButtons on:click {showCloseButton} {url} />
+	<CardCornerButtons on:click {showCloseButton} url={urlForButton} />
 
 	<div class="card-header rounded-t-[--theme-rounded-container]">
-		<h1 class="condition-name">{capitalizeFirstLetter(condition)}</h1>
+		<h1 class="condition-name">
+			{#if headerIsLink}
+				<a href={url}> {capitalizeFirstLetter(condition)}</a>
+			{:else}
+				{capitalizeFirstLetter(condition)}
+			{/if}
+		</h1>
 	</div>
 
 	<div class="p-4 pt-0">
 		<ConditionDescription {condition} />
 	</div>
 </StandardCard>
-
-<style>
-	.condition-name {
-		font-size: 1.5rem;
-		margin: 0;
-		padding: 0;
-	}
-</style>
