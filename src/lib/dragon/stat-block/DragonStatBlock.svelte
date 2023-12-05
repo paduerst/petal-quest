@@ -2,10 +2,10 @@
 	import type { DragonConfig } from '../dragon-config';
 	import { DragonStats } from '../dragon-stats';
 
-	import StatBlockFeatures from './features/StatBlockFeatures.svelte';
-	import StatBlockActions from './actions/StatBlockActions.svelte';
-	import StatBlockBonusActions from './bonus-actions/StatBlockBonusActions.svelte';
-	import StatBlockLegendaryActions from './legendary-actions/StatBlockLegendaryActions.svelte';
+	import DragonFeatures from './features/DragonFeatures.svelte';
+	import DragonActions from './actions/DragonActions.svelte';
+	import DragonBonusActions from './bonus-actions/DragonBonusActions.svelte';
+	import DragonLegendaryActions from './legendary-actions/DragonLegendaryActions.svelte';
 	import StatBlockContents from '$lib/stat-block/StatBlockContents.svelte';
 
 	export let config: DragonConfig;
@@ -24,33 +24,33 @@
 	{#if dragon.age !== 'wyrmling' && dragon.age !== 'young' && !dragon.isShapechanged}
 		<StatBlockContents stats={dragon}>
 			<svelte:fragment slot="features">
-				<StatBlockFeatures {dragon} />
+				<DragonFeatures {dragon} />
 			</svelte:fragment>
 
 			<svelte:fragment slot="actions">
-				<StatBlockActions {dragon} />
+				<DragonActions {dragon} />
 			</svelte:fragment>
 
 			<svelte:fragment slot="bonus-actions">
-				<StatBlockBonusActions {dragon} />
+				<DragonBonusActions {dragon} />
 			</svelte:fragment>
 
 			<svelte:fragment slot="legendary-actions">
-				<StatBlockLegendaryActions {dragon} />
+				<DragonLegendaryActions {dragon} />
 			</svelte:fragment>
 		</StatBlockContents>
 	{:else}
 		<StatBlockContents stats={dragon}>
 			<svelte:fragment slot="features">
-				<StatBlockFeatures {dragon} />
+				<DragonFeatures {dragon} />
 			</svelte:fragment>
 
 			<svelte:fragment slot="actions">
-				<StatBlockActions {dragon} />
+				<DragonActions {dragon} />
 			</svelte:fragment>
 
 			<svelte:fragment slot="bonus-actions">
-				<StatBlockBonusActions {dragon} />
+				<DragonBonusActions {dragon} />
 			</svelte:fragment>
 		</StatBlockContents>
 	{/if}
