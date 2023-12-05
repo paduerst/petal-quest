@@ -24,7 +24,7 @@
 
 	<div class="mt-4">
 		<slot />
-		<DragonDescription {age} {color} />
+		<DragonDescription {config} />
 	</div>
 
 	<div class="max-w-xl w-fit mx-auto">

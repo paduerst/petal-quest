@@ -1,18 +1,23 @@
 <script lang="ts">
-	import type { Age, Color } from '..';
+	import type { DragonConfig } from '../dragon-config';
 
 	import ColorDescriptionRed from './ColorDescriptionRed.svelte';
 
 	import AgeDescriptionWyrmling from './AgeDescriptionWyrmling.svelte';
 
-	export let age: Age;
-	export let color: Color;
+	export let config: DragonConfig | undefined;
 </script>
 
-{#if color === 'red'}
-	<ColorDescriptionRed />
-{/if}
+{#if config !== undefined}
+	<div>
+		{#if config?.color === 'red'}
+			<ColorDescriptionRed />
+		{/if}
+	</div>
 
-{#if age === 'wyrmling'}
-	<AgeDescriptionWyrmling />
+	<div class="mt-2">
+		{#if config?.age === 'wyrmling'}
+			<AgeDescriptionWyrmling />
+		{/if}
+	</div>
 {/if}

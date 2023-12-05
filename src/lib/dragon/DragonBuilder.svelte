@@ -26,6 +26,8 @@
 	import BuilderDebug from './builder-states/BuilderDebug.svelte';
 	import DragonControlButtons from './DragonControlButtons.svelte';
 	import DragonDebugButtons from './DragonDebugButtons.svelte';
+	import StandardCard from '$lib/StandardCard.svelte';
+	import DragonDescription from './descriptions/DragonDescription.svelte';
 
 	const modalStore = getModalStore();
 	const shareModal: ModalSettings = {
@@ -145,8 +147,14 @@
 	</DragonContainer>
 
 	{#if $currentBuilderState === 'DISPLAY' && $nextBuilderState === undefined}
-		<div transition:fade={builderFadeParams} class="w-fit">
-			<DragonControlButtons on:click={handleControlClick} />
+		<div transition:fade={builderFadeParams} class="w-full">
+			<div class="w-fit mx-auto">
+				<DragonControlButtons on:click={handleControlClick} />
+			</div>
+
+			<StandardCard additionalClasses="p-4 mt-2">
+				<DragonDescription config={$currentDragonConfig} />
+			</StandardCard>
 		</div>
 	{/if}
 
