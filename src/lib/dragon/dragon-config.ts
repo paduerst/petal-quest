@@ -22,6 +22,7 @@ import {
 import type { Size, ProficiencyLevel } from '$lib/monsters';
 import { stringToSize, ABILITIES, SKILLS } from '$lib/monsters';
 
+import { BASE_SHARE_URL } from '$lib';
 import { capitalizeFirstLetter, type RGB } from '$lib/text-utils';
 
 export class DragonConfig {
@@ -119,6 +120,10 @@ export class DragonConfig {
 	 */
 	get theme(): RGB {
 		return COLOR_TO_THEME[this.color];
+	}
+
+	get url(): string {
+		return `${BASE_SHARE_URL}?${this.toString()}`;
 	}
 
 	/**

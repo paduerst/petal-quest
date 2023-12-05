@@ -5,6 +5,7 @@
 	import MonsterHeading from '$lib/monsters/MonsterHeading.svelte';
 	import StatBlockContainer from '$lib/stat-block/StatBlockContainer.svelte';
 	import DragonStatBlock from '$lib/dragon/stat-block/DragonStatBlock.svelte';
+	import DragonDescription from '$lib/dragon/descriptions/DragonDescription.svelte';
 
 	export let age: Age;
 	export let color: Color;
@@ -21,9 +22,14 @@
 		<DragonStatBlock {config} />
 	</StatBlockContainer>
 
-	{#if $$slots.default}
-		<div class="mt-4">
-			<slot />
-		</div>
-	{/if}
+	<div class="mt-4">
+		<slot />
+		<DragonDescription {age} {color} />
+	</div>
+
+	<div class="max-w-xl w-fit mx-auto">
+		<a href={`/dragon-builder/?${config}`} class="daisy-btn daisy-btn-neutral !text-white mt-4"
+			>Edit in the Dragon Builder</a
+		>
+	</div>
 </div>
