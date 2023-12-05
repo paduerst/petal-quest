@@ -1,3 +1,7 @@
+import type { RGB } from '$lib/text-utils';
+import type { Size, Die, SkillKey } from '$lib/monsters';
+import { SIZE_TO_HIT_DIE } from '$lib/monsters';
+
 export const AGES = ['wyrmling', 'young', 'adult', 'ancient', 'cosmic'] as const;
 export type Age = (typeof AGES)[number];
 
@@ -54,7 +58,6 @@ export const COLOR_TO_ALIGNMENT: {
 	black: 'Any Alignment'
 } as const;
 
-export type RGB = `rgb(${number}, ${number}, ${number})`;
 export const COLOR_TO_THEME: {
 	[key in Color]: RGB;
 } = {
@@ -70,19 +73,6 @@ export const COLOR_TO_THEME: {
 	black: 'rgb(60, 60, 60)'
 } as const;
 
-export const SIZES = ['Tiny', 'Small', 'Medium', 'Large', 'Huge', 'Gargantuan'] as const;
-export type Size = (typeof SIZES)[number];
-
-/**
- * Converts input string to Size if possible, returning undefined if not.
- * @export
- * @param {string} sizeString
- * @return {*}  {(Size | undefined)}
- */
-export function stringToSize(sizeString: string): Size | undefined {
-	return SIZES.find((size) => size === sizeString);
-}
-
 export const AGE_TO_SIZE: {
 	[key in Age]: Size;
 } = {
@@ -91,20 +81,6 @@ export const AGE_TO_SIZE: {
 	adult: 'Huge',
 	ancient: 'Gargantuan',
 	cosmic: 'Gargantuan'
-} as const;
-
-export const DICE = [4, 6, 8, 10, 12, 20] as const;
-export type Die = (typeof DICE)[number];
-
-export const SIZE_TO_HIT_DIE: {
-	[key in Size]: Die;
-} = {
-	Tiny: 4,
-	Small: 6,
-	Medium: 8,
-	Large: 10,
-	Huge: 12,
-	Gargantuan: 20
 } as const;
 
 /**
@@ -117,170 +93,29 @@ export function ageToHitDie(age: Age): Die {
 	return SIZE_TO_HIT_DIE[AGE_TO_SIZE[age]];
 }
 
-export const ABILITIES = [
-	['strength', 'str'],
-	['dexterity', 'dex'],
-	['constitution', 'con'],
-	['intelligence', 'int'],
-	['wisdom', 'wis'],
-	['charisma', 'cha']
-] as const;
-
-export const abilityMin = 1;
-export const abilityMax = 30;
-
 const standardDefaultSkillDescription = 'Varies with age and color';
-export const SKILLS = [
-	{
-		name: 'Acrobatics',
-		key: 'skillAcrobatics',
-		ability: 'dex',
-		defaultDescription: standardDefaultSkillDescription
-	},
-	{
-		name: 'Animal Handling',
-		key: 'skillAnimalHandling',
-		ability: 'wis',
-		defaultDescription: standardDefaultSkillDescription
-	},
-	{
-		name: 'Arcana',
-		key: 'skillArcana',
-		ability: 'int',
-		defaultDescription: standardDefaultSkillDescription
-	},
-	{
-		name: 'Athletics',
-		key: 'skillAthletics',
-		ability: 'str',
-		defaultDescription: standardDefaultSkillDescription
-	},
-	{
-		name: 'Deception',
-		key: 'skillDeception',
-		ability: 'cha',
-		defaultDescription: standardDefaultSkillDescription
-	},
-	{
-		name: 'History',
-		key: 'skillHistory',
-		ability: 'int',
-		defaultDescription: standardDefaultSkillDescription
-	},
-	{
-		name: 'Insight',
-		key: 'skillInsight',
-		ability: 'wis',
-		defaultDescription: standardDefaultSkillDescription
-	},
-	{
-		name: 'Intimidation',
-		key: 'skillIntimidation',
-		ability: 'cha',
-		defaultDescription: standardDefaultSkillDescription
-	},
-	{
-		name: 'Investigation',
-		key: 'skillInvestigation',
-		ability: 'int',
-		defaultDescription: standardDefaultSkillDescription
-	},
-	{
-		name: 'Medicine',
-		key: 'skillMedicine',
-		ability: 'wis',
-		defaultDescription: standardDefaultSkillDescription
-	},
-	{
-		name: 'Nature',
-		key: 'skillNature',
-		ability: 'int',
-		defaultDescription: standardDefaultSkillDescription
-	},
-	{
-		name: 'Perception',
-		key: 'skillPerception',
-		ability: 'wis',
-		defaultDescription: 'Typically 2x proficiency'
-	},
-	{
-		name: 'Performance',
-		key: 'skillPerformance',
-		ability: 'cha',
-		defaultDescription: standardDefaultSkillDescription
-	},
-	{
-		name: 'Persuasion',
-		key: 'skillPersuasion',
-		ability: 'cha',
-		defaultDescription: standardDefaultSkillDescription
-	},
-	{
-		name: 'Religion',
-		key: 'skillReligion',
-		ability: 'int',
-		defaultDescription: standardDefaultSkillDescription
-	},
-	{
-		name: 'Sleight of Hand',
-		key: 'skillSleightOfHand',
-		ability: 'dex',
-		defaultDescription: standardDefaultSkillDescription
-	},
-	{
-		name: 'Stealth',
-		key: 'skillStealth',
-		ability: 'dex',
-		defaultDescription: 'Typically 1x proficiency'
-	},
-	{
-		name: 'Survival',
-		key: 'skillSurvival',
-		ability: 'wis',
-		defaultDescription: standardDefaultSkillDescription
-	}
-] as const;
-
-export type ProficiencyLevel = 0.0 | 0.5 | 1.0 | 2.0;
-
-/**
- * Calculates the ability modifier given the ability score.
- * @export
- * @param {number} score
- * @return {*}  {number}
- */
-export function scoreToMod(score: number): number {
-	return Math.floor((score - 10) / 2);
-}
-
-/**
- * Calculates the expected value of a dice roll, with an optional modifier and minimumResult
- * @export
- * @param {number} numberOfDice
- * @param {Die} typeOfDice
- * @param {number} [modifier=0]
- * @param {number} [minimumResult=0]
- * @return {*}  {number}
- */
-export function expectedDiceResult(
-	numberOfDice: number,
-	typeOfDice: Die,
-	modifier: number = 0,
-	minimumResult: number = 0
-): number {
-	return Math.max(minimumResult, Math.floor(numberOfDice * (0.5 + typeOfDice / 2) + modifier));
-}
-
-/**
- * Returns an RGBA string with the given RGB and A value.
- * @export
- * @param {RGB} rgb
- * @param {number} a
- * @return {*}  {string}
- */
-export function RGBToRGBA(rgb: RGB, a: number): string {
-	return `rgba(${rgb.substring(4, rgb.length - 1)}, ${a})`;
-}
+export const DEFAULT_SKILL_DESCRIPTIONS: {
+	[key in SkillKey]: string;
+} = {
+	skillAcrobatics: standardDefaultSkillDescription,
+	skillAnimalHandling: standardDefaultSkillDescription,
+	skillArcana: standardDefaultSkillDescription,
+	skillAthletics: standardDefaultSkillDescription,
+	skillDeception: standardDefaultSkillDescription,
+	skillHistory: standardDefaultSkillDescription,
+	skillInsight: standardDefaultSkillDescription,
+	skillIntimidation: standardDefaultSkillDescription,
+	skillInvestigation: standardDefaultSkillDescription,
+	skillMedicine: standardDefaultSkillDescription,
+	skillNature: standardDefaultSkillDescription,
+	skillPerception: 'Typically 2x proficiency',
+	skillPerformance: standardDefaultSkillDescription,
+	skillPersuasion: standardDefaultSkillDescription,
+	skillReligion: standardDefaultSkillDescription,
+	skillSleightOfHand: standardDefaultSkillDescription,
+	skillStealth: 'Typically 1x proficiency',
+	skillSurvival: standardDefaultSkillDescription
+} as const;
 
 export const BASIC_PRONOUN_OPTIONS = ['it-its', 'she-her', 'he-him', 'they-them', 'ey-em'] as const;
 export type BasicPronouns = (typeof BASIC_PRONOUN_OPTIONS)[number];
@@ -329,6 +164,9 @@ export const BASIC_PRONOUN_CONFIGS: {
 		possessiveAdjective: 'eir'
 	}
 } as const;
+
+export const abilityMin = 1;
+export const abilityMax = 30;
 
 export const maxHPMin = 1;
 export const maxHPMax = 9999;

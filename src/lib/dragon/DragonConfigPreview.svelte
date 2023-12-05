@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 	import { page } from '$app/stores';
-	import { RGBToRGBA } from '.';
+
+	import { RGBToRGBA } from '$lib/text-utils';
 	import type { DragonConfig } from './dragon-config';
 	import { currentDragonConfig, nextBuilderState } from './builder-states';
 

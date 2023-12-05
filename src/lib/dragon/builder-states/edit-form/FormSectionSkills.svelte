@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { SKILLS } from '$lib/dragon';
+	import { DEFAULT_SKILL_DESCRIPTIONS } from '$lib/dragon';
 	import type { DragonConfig } from '$lib/dragon/dragon-config';
+	import { SKILLS } from '$lib/monsters';
 
 	export let config: DragonConfig;
 </script>
@@ -16,7 +17,9 @@
 			name={skill.key}
 			id={skill.key}
 		>
-			<option value={undefined}>Default Proficiency ({skill.defaultDescription})</option>
+			<option value={undefined}
+				>Default Proficiency ({DEFAULT_SKILL_DESCRIPTIONS[skill.key]})</option
+			>
 			<option value={0.0}>Not Proficient (0x proficiency)</option>
 			<option value={0.5}>Half Proficiency (0.5x proficiency)</option>
 			<option value={1.0}>Proficient (1x proficiency)</option>

@@ -18,6 +18,7 @@ const config = {
 	},
 
 	plugins: [
+		require('@tailwindcss/container-queries'),
 		require('@tailwindcss/forms'),
 		require('daisyui'),
 		skeleton({

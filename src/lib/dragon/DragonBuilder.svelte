@@ -107,7 +107,10 @@
 </script>
 
 <div class="flex flex-col items-center">
-	<DragonContainer config={$currentDragonConfig}>
+	<DragonContainer
+		config={$currentDragonConfig}
+		standardizeColumnsAndText={$currentBuilderState === 'DISPLAY'}
+	>
 		{#if $currentBuilderState === 'LOADING' && $nextBuilderState === undefined}
 			<div transition:fade={builderFadeParams} on:outroend={transition}>
 				<BuilderLoading />

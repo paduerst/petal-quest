@@ -1,4 +1,5 @@
-import type { Color, Age, Die, ProficiencyLevel } from '.';
+import type { Color, Age } from '.';
+import type { Die, ProficiencyLevel } from '$lib/monsters';
 import type { CRNumber } from './challenge-rating';
 
 // TODO: Remove the following values, as they are not needed:

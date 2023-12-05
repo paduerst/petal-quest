@@ -1,27 +1,28 @@
+import type { Age, Color, PronounsConfig } from '.';
 import {
 	COLOR_TO_ALIGNMENT,
 	AGE_TO_SIZE,
 	ageToHitDie,
-	ABILITIES,
-	SKILLS,
 	DEFAULT_PRONOUNS,
 	BASIC_PRONOUN_CONFIGS,
+	abilityMin,
+	abilityMax,
 	maxHPMin,
 	maxHPMax,
 	numberOfHitDiceMin,
 	numberOfHitDiceMax,
-	abilityMin,
-	abilityMax,
-	scoreToMod,
-	expectedDiceResult,
 	SHAPE_CHANGE_RETAINS_LEGENDARY_RESISTANCE,
 	SHAPE_CHANGE_RETAINS_INNATE_SPELLCASTING
 } from '.';
-import { capitalizeFirstLetter, numberWithSign } from '$lib/text-utils';
-import type { Age, Color, RGB, Size, Die, ProficiencyLevel, PronounsConfig } from '.';
+
 import { DragonConfig } from './dragon-config';
 import { DRAGON_VALS, type DragonVals } from './dragon-vals';
 import { type CR, CRNumberToString, CR_TABLE } from './challenge-rating';
+
+import type { Size, Die, ProficiencyLevel } from '$lib/monsters';
+import { ABILITIES, SKILLS, scoreToMod, expectedDiceResult } from '$lib/monsters';
+
+import { capitalizeFirstLetter, numberWithSign, type RGB } from '$lib/text-utils';
 import { type SpellLevel, SPELL_LEVELS } from '$lib/spells';
 
 // copied from https://stackoverflow.com/a/9030062
@@ -98,6 +99,7 @@ export class DragonStats {
 		this.vulnerabilities = this.#getVulnerabilities();
 		this.conditionImmunities = this.#vals.conditionImmunities;
 
+		this.truesight = this.#getTruesight();
 		this.blindsight = this.#getBlindsight();
 		this.darkvision = this.#getDarkvision();
 
@@ -386,6 +388,18 @@ export class DragonStats {
 		return this.#config.vulnerabilities ?? this.vulnerability;
 	}
 
+	#getTruesight(): number {
+		if (
+			this.#config.blindsight !== undefined &&
+			this.#config.blindsight !== null &&
+			!Number.isNaN(this.#config.blindsight)
+		) {
+			return this.#config.blindsight;
+		} else {
+			return this.age === 'cosmic' ? this.#vals.blindsight : 0;
+		}
+	}
+
 	#getBlindsight(): number {
 		if (
 			this.#config.blindsight !== undefined &&
@@ -394,7 +408,7 @@ export class DragonStats {
 		) {
 			return this.#config.blindsight;
 		} else {
-			return this.#vals.blindsight;
+			return this.age === 'cosmic' ? 0 : this.#vals.blindsight;
 		}
 	}
 
@@ -406,7 +420,7 @@ export class DragonStats {
 		) {
 			return this.#config.darkvision;
 		} else {
-			return this.#vals.darkvision;
+			return this.age === 'cosmic' ? 0 : this.#vals.darkvision;
 		}
 	}
 
@@ -538,6 +552,7 @@ export class DragonStats {
 	vulnerabilities: string;
 	conditionImmunities: string;
 
+	truesight: number;
 	blindsight: number;
 	darkvision: number;
 
