@@ -22,7 +22,7 @@
 			: 100;
 </script>
 
-<div class="stat-block-container" style="--stat-block-theme: {theme};">
+<div class="stat-block-container @container/stat-block" style="--stat-block-theme: {theme};">
 	<div class="stat-block-container-top-edge" />
 	<div
 		class="outer-wrapper"
@@ -32,7 +32,7 @@
 		<div class="inner-wrapper" bind:clientHeight={innerClientHeight}>
 			{#if standardizeColumnsAndText}
 				<div
-					class="columns-1 md:columns-2 print:min-[480px]:columns-2 text-left text-sm leading-[1.2]"
+					class="columns-1 @3xl/stat-block:columns-2 print:@2xl/stat-block:columns-2 text-left text-sm leading-[1.2]"
 				>
 					<slot />
 				</div>
