@@ -10,6 +10,7 @@
 	import AddLocalSpellModal from '$lib/modals/AddLocalSpellModal.svelte';
 	import ConditionModal from '$lib/modals/ConditionModal.svelte';
 	import ManageLocalSpellsModal from '$lib/modals/ManageLocalSpellsModal.svelte';
+	import MonsterModal from '$lib/modals/MonsterModal.svelte';
 	import DragonShareModal from '$lib/modals/DragonShareModal.svelte';
 	import SpellModal from '$lib/modals/SpellModal.svelte';
 	import Drawer from '$lib/Drawer.svelte';
@@ -30,6 +31,9 @@
 		},
 		manageLocalSpells: {
 			ref: ManageLocalSpellsModal
+		},
+		monsterModal: {
+			ref: MonsterModal
 		},
 		dragonShare: {
 			ref: DragonShareModal
