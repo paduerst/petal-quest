@@ -4,9 +4,11 @@
 	import type { RGB } from '$lib/text-utils';
 
 	export let theme: RGB = COLOR_TO_THEME['red'];
+	export let standardizeColumnsAndText = true;
+
+	const minHeight = 300;
 
 	let innerClientHeight: number;
-	const minHeight = 300;
 	let outerWrapperHeight: number;
 	$: if (innerClientHeight < minHeight) {
 		outerWrapperHeight = minHeight;
@@ -28,12 +30,15 @@
 		data-theme="statBlockContents"
 	>
 		<div class="inner-wrapper" bind:clientHeight={innerClientHeight}>
-			<div
-				class="columns-1 md:columns-2 print:min-[480px]:columns-2 text-left text-sm leading-[1.2]"
-				style="--stat-block-theme: {theme}"
-			>
+			{#if standardizeColumnsAndText}
+				<div
+					class="columns-1 md:columns-2 print:min-[480px]:columns-2 text-left text-sm leading-[1.2]"
+				>
+					<slot />
+				</div>
+			{:else}
 				<slot />
-			</div>
+			{/if}
 		</div>
 	</div>
 	<div class="stat-block-container-bot-edge" />

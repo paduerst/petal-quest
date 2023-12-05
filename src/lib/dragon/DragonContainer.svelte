@@ -6,6 +6,8 @@
 	import StatBlockContainer from '$lib/stat-block/StatBlockContainer.svelte';
 
 	export let config: DragonConfig | undefined = undefined;
+	export let standardizeColumnsAndText = false;
+
 	let dragonTheme: RGB;
 
 	let iColor = 0;
@@ -26,6 +28,6 @@
 	}
 </script>
 
-<StatBlockContainer theme={dragonTheme}>
+<StatBlockContainer theme={dragonTheme} {standardizeColumnsAndText}>
 	<slot />
 </StatBlockContainer>
