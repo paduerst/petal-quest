@@ -1,5 +1,8 @@
 <script lang="ts">
 	import type { DragonConfig } from '../dragon-config';
+	import { DragonStats } from '../dragon-stats';
+
+	import DragonLairActions from '../stat-block/lair-actions/DragonLairActions.svelte';
 
 	import ColorDescriptionRed from './ColorDescriptionRed.svelte';
 	import ColorDescriptionOrange from './ColorDescriptionOrange.svelte';
@@ -19,10 +22,18 @@
 	import AgeDescriptionCosmic from './AgeDescriptionCosmic.svelte';
 
 	export let config: DragonConfig | undefined;
+
+	let dragon: DragonStats | undefined;
+
+	$: dragon = config !== undefined ? new DragonStats(config) : undefined;
 </script>
 
 {#if config !== undefined}
-	<div>
+	{#if dragon !== undefined}
+		<DragonLairActions {dragon} />
+	{/if}
+
+	<div class="mb-2">
 		{#if config.color === 'red'}
 			<ColorDescriptionRed />
 		{:else if config.color === 'orange'}
@@ -46,7 +57,7 @@
 		{/if}
 	</div>
 
-	<div class="mt-2">
+	<div>
 		{#if config.age === 'wyrmling'}
 			<AgeDescriptionWyrmling />
 		{:else if config.age === 'young'}
