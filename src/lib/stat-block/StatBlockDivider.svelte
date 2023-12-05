@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { RGB } from '$lib/dragon';
+	import type { RGB } from '$lib/text-utils';
 
 	export let color: RGB;
 	export let height = '1px';

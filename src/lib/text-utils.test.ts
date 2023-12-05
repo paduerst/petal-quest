@@ -6,7 +6,9 @@ import {
 	isAlnum,
 	normalizeString,
 	signFromNumber,
-	numberWithSign
+	numberWithSign,
+	type RGB,
+	RGBToRGBA
 } from '$lib/text-utils';
 
 test('numberWithOrdinalSuffix() behavior', () => {
@@ -93,4 +95,9 @@ test('numberWithSign() behavior', () => {
 
 	expect(numberWithSign(1, ' ')).toBe('+ 1');
 	expect(numberWithSign(1, ' anything-can_g0 here ')).toBe('+ anything-can_g0 here 1');
+});
+
+test('RGBToRGBA() behavior', () => {
+	const rgb: RGB = `rgb(${0}, ${0}, ${0})`;
+	expect(RGBToRGBA(rgb, 0.5)).toBe(`rgba(${0}, ${0}, ${0}, ${0.5})`);
 });

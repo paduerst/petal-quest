@@ -26,7 +26,7 @@
 
 {#if dragon.cantrips.length > 0 || dragon.spells.length > 0}
 	<div class="break-inside-avoid">
-		<div class="dragon-trait">
+		<div class="stat-block-trait">
 			<p>
 				<i>
 					<b>

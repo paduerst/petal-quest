@@ -1,5 +1,6 @@
 import type { DragonConfig } from '$lib/dragon/dragon-config';
 import type { Condition } from '$lib/conditions';
+import type { AppMonster } from '$lib/monsters';
 
 export type SkeletonModalParentType = {
 	position: string;
@@ -50,6 +51,10 @@ export type DragonShareModalValue = BaseModalValue & {
 };
 
 export type ManageLocalSpellsModalValue = BaseModalValue;
+
+export type MonsterModalValue = BaseModalValue & {
+	monster: AppMonster;
+};
 
 export type SpellModalValue = BaseModalValue & {
 	name: string;

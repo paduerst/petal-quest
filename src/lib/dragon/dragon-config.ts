@@ -1,32 +1,28 @@
 import type {
 	Age,
 	Color,
-	RGB,
 	Pronouns,
 	PronounsConfig,
-	ProficiencyLevel,
 	SpellcastingConfig,
-	DisplaySpellStats,
-	Size
+	DisplaySpellStats
 } from '.';
-
 import {
 	stringToAge,
 	stringToColor,
-	stringToSize,
 	COLOR_TO_THEME,
 	DEFAULT_PRONOUNS,
-	ABILITIES,
 	abilityMin,
 	abilityMax,
-	SKILLS,
 	maxHPMin,
 	maxHPMax,
 	numberOfHitDiceMin,
 	numberOfHitDiceMax
 } from '.';
 
-import { capitalizeFirstLetter } from '$lib/text-utils';
+import type { Size, ProficiencyLevel } from '$lib/monsters';
+import { stringToSize, ABILITIES, SKILLS } from '$lib/monsters';
+
+import { capitalizeFirstLetter, type RGB } from '$lib/text-utils';
 
 export class DragonConfig {
 	age: Age = 'wyrmling';

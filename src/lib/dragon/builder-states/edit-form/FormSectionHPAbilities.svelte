@@ -1,11 +1,11 @@
 <script lang="ts">
 	import {
+		abilityMin,
+		abilityMax,
 		maxHPMin,
 		maxHPMax,
 		numberOfHitDiceMin,
-		numberOfHitDiceMax,
-		abilityMin,
-		abilityMax
+		numberOfHitDiceMax
 	} from '$lib/dragon';
 	import type { DragonConfig } from '$lib/dragon/dragon-config';
 

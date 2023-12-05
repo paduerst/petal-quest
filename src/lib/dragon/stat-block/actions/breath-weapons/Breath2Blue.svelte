@@ -3,6 +3,7 @@
 	import type { DragonStats } from '$lib/dragon/dragon-stats';
 	import SpellLink from '$lib/spells/SpellLink.svelte';
 	import ConditionLink from '$lib/conditions/ConditionLink.svelte';
+	import MonsterLink from '$lib/monsters/MonsterLink.svelte';
 
 	export let dragon: DragonStats;
 
@@ -39,7 +40,8 @@
 		</p>
 
 		<p class="blue-breath-option">
-			<i>4. Froggy Jinx.</i> The creature is transformed into a frog, as if by the
+			<i>4. Froggy Jinx.</i> The creature is transformed into a <MonsterLink monster={'frog'} />, as
+			if by the
 			<SpellLink spellName="polymorph" /> spell.
 		</p>
 	{:else}
@@ -64,7 +66,9 @@
 				<SpellLink spellName="Levitate" />, and the creature's flying speed becomes 0.
 			</li>
 			<li>
-				<SpellLink spellName="Polymorph" />; the creature becomes a frog.
+				<SpellLink spellName="Polymorph" />; the creature becomes a <MonsterLink
+					monster={'frog'}
+				/>.
 			</li>
 		</ol>
 	{/if}
