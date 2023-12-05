@@ -1,3 +1,4 @@
+import type { Age, Color, ProficiencyLevel, PronounsConfig } from '.';
 import {
 	COLOR_TO_ALIGNMENT,
 	AGE_TO_SIZE,
@@ -17,11 +18,13 @@ import {
 	SHAPE_CHANGE_RETAINS_LEGENDARY_RESISTANCE,
 	SHAPE_CHANGE_RETAINS_INNATE_SPELLCASTING
 } from '.';
-import { capitalizeFirstLetter, numberWithSign, type RGB } from '$lib/text-utils';
-import type { Age, Color, Size, Die, ProficiencyLevel, PronounsConfig } from '.';
+
 import { DragonConfig } from './dragon-config';
 import { DRAGON_VALS, type DragonVals } from './dragon-vals';
 import { type CR, CRNumberToString, CR_TABLE } from './challenge-rating';
+
+import type { Size, Die } from '$lib/monsters';
+import { capitalizeFirstLetter, numberWithSign, type RGB } from '$lib/text-utils';
 import { type SpellLevel, SPELL_LEVELS } from '$lib/spells';
 
 // copied from https://stackoverflow.com/a/9030062

@@ -5,14 +5,12 @@ import type {
 	PronounsConfig,
 	ProficiencyLevel,
 	SpellcastingConfig,
-	DisplaySpellStats,
-	Size
+	DisplaySpellStats
 } from '.';
 
 import {
 	stringToAge,
 	stringToColor,
-	stringToSize,
 	COLOR_TO_THEME,
 	DEFAULT_PRONOUNS,
 	ABILITIES,
@@ -24,6 +22,10 @@ import {
 	numberOfHitDiceMin,
 	numberOfHitDiceMax
 } from '.';
+
+import type { Size } from '$lib/monsters';
+
+import { stringToSize } from '$lib/monsters';
 
 import { capitalizeFirstLetter, type RGB } from '$lib/text-utils';
 

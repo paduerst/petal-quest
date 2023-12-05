@@ -1,28 +1,11 @@
 import { expect, test } from 'vitest';
-import {
-	AGES,
-	stringToAge,
-	COLORS,
-	stringToColor,
-	SIZES,
-	stringToSize,
-	scoreToMod,
-	expectedDiceResult
-} from '.';
+import { AGES, stringToAge, COLORS, stringToColor, scoreToMod, expectedDiceResult } from '.';
 
 test('stringToAge() behavior', () => {
 	expect(stringToAge('This is not a valid age.')).toBe(undefined);
 
 	for (const age of AGES) {
 		expect(stringToAge(age)).toBe(age);
-	}
-});
-
-test('stringToSize() behavior', () => {
-	expect(stringToSize('This is not a valid size.')).toBe(undefined);
-
-	for (const size of SIZES) {
-		expect(stringToSize(size)).toBe(size);
 	}
 });
 

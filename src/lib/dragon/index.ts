@@ -1,4 +1,6 @@
 import type { RGB } from '$lib/text-utils';
+import type { Size, Die } from '$lib/monsters';
+import { SIZE_TO_HIT_DIE } from '$lib/monsters';
 
 export const AGES = ['wyrmling', 'young', 'adult', 'ancient', 'cosmic'] as const;
 export type Age = (typeof AGES)[number];
@@ -71,19 +73,6 @@ export const COLOR_TO_THEME: {
 	black: 'rgb(60, 60, 60)'
 } as const;
 
-export const SIZES = ['Tiny', 'Small', 'Medium', 'Large', 'Huge', 'Gargantuan'] as const;
-export type Size = (typeof SIZES)[number];
-
-/**
- * Converts input string to Size if possible, returning undefined if not.
- * @export
- * @param {string} sizeString
- * @return {*}  {(Size | undefined)}
- */
-export function stringToSize(sizeString: string): Size | undefined {
-	return SIZES.find((size) => size === sizeString);
-}
-
 export const AGE_TO_SIZE: {
 	[key in Age]: Size;
 } = {
@@ -92,20 +81,6 @@ export const AGE_TO_SIZE: {
 	adult: 'Huge',
 	ancient: 'Gargantuan',
 	cosmic: 'Gargantuan'
-} as const;
-
-export const DICE = [4, 6, 8, 10, 12, 20] as const;
-export type Die = (typeof DICE)[number];
-
-export const SIZE_TO_HIT_DIE: {
-	[key in Size]: Die;
-} = {
-	Tiny: 4,
-	Small: 6,
-	Medium: 8,
-	Large: 10,
-	Huge: 12,
-	Gargantuan: 20
 } as const;
 
 /**
@@ -270,17 +245,6 @@ export function expectedDiceResult(
 	minimumResult: number = 0
 ): number {
 	return Math.max(minimumResult, Math.floor(numberOfDice * (0.5 + typeOfDice / 2) + modifier));
-}
-
-/**
- * Returns an RGBA string with the given RGB and A value.
- * @export
- * @param {RGB} rgb
- * @param {number} a
- * @return {*}  {string}
- */
-export function RGBToRGBA(rgb: RGB, a: number): string {
-	return `rgba(${rgb.substring(4, rgb.length - 1)}, ${a})`;
 }
 
 export const BASIC_PRONOUN_OPTIONS = ['it-its', 'she-her', 'he-him', 'they-them', 'ey-em'] as const;

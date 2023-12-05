@@ -1,4 +1,4 @@
-import type { Size, Die } from '$lib/dragon';
+import type { Size, Die } from '$lib/monsters';
 import type { CR } from '$lib/dragon/challenge-rating';
 import type { RGB } from '$lib/text-utils';
 
