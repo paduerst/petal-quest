@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { type RGB, COLOR_TO_THEME, COLORS } from '.';
+	import { COLOR_TO_THEME, COLORS } from '.';
 	import type { DragonConfig } from './dragon-config';
+	import type { RGB } from '$lib/text-utils';
 
 	import StatBlockContainer from '$lib/stat-block/StatBlockContainer.svelte';
 

@@ -1,5 +1,6 @@
-import type { Size, Die, RGB } from '$lib/dragon';
+import type { Size, Die } from '$lib/dragon';
 import type { CR } from '$lib/dragon/challenge-rating';
+import type { RGB } from '$lib/text-utils';
 
 export type StatsForPreambleHeader = {
 	title: string;

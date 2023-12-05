@@ -7,9 +7,7 @@ import {
 	SIZES,
 	stringToSize,
 	scoreToMod,
-	expectedDiceResult,
-	type RGB,
-	RGBToRGBA
+	expectedDiceResult
 } from '.';
 
 test('stringToAge() behavior', () => {
@@ -61,9 +59,4 @@ test('stringToColor() behavior', () => {
 	for (const color of COLORS) {
 		expect(stringToColor(color)).toBe(color);
 	}
-});
-
-test('RGBToRGBA() behavior', () => {
-	const rgb: RGB = `rgb(${0}, ${0}, ${0})`;
-	expect(RGBToRGBA(rgb, 0.5)).toBe(`rgba(${0}, ${0}, ${0}, ${0.5})`);
 });

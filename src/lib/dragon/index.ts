@@ -1,3 +1,5 @@
+import type { RGB } from '$lib/text-utils';
+
 export const AGES = ['wyrmling', 'young', 'adult', 'ancient', 'cosmic'] as const;
 export type Age = (typeof AGES)[number];
 
@@ -54,7 +56,6 @@ export const COLOR_TO_ALIGNMENT: {
 	black: 'Any Alignment'
 } as const;
 
-export type RGB = `rgb(${number}, ${number}, ${number})`;
 export const COLOR_TO_THEME: {
 	[key in Color]: RGB;
 } = {

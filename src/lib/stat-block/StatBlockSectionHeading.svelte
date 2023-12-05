@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { RGB } from '$lib/dragon';
+	import type { RGB } from '$lib/text-utils';
 	import { dividerHeightThin } from '.';
 
 	import StatBlockDivider from './StatBlockDivider.svelte';

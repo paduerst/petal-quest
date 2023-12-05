@@ -115,3 +115,16 @@ export function numberWithSign(number: number, spacing: string = ''): string {
 		return `+${spacing}${number.toString()}`;
 	}
 }
+
+export type RGB = `rgb(${number}, ${number}, ${number})`;
+
+/**
+ * Returns an RGBA string with the given RGB and A value.
+ * @export
+ * @param {RGB} rgb
+ * @param {number} a
+ * @return {*}  {string}
+ */
+export function RGBToRGBA(rgb: RGB, a: number): string {
+	return `rgba(${rgb.substring(4, rgb.length - 1)}, ${a})`;
+}

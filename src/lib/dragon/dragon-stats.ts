@@ -17,8 +17,8 @@ import {
 	SHAPE_CHANGE_RETAINS_LEGENDARY_RESISTANCE,
 	SHAPE_CHANGE_RETAINS_INNATE_SPELLCASTING
 } from '.';
-import { capitalizeFirstLetter, numberWithSign } from '$lib/text-utils';
-import type { Age, Color, RGB, Size, Die, ProficiencyLevel, PronounsConfig } from '.';
+import { capitalizeFirstLetter, numberWithSign, type RGB } from '$lib/text-utils';
+import type { Age, Color, Size, Die, ProficiencyLevel, PronounsConfig } from '.';
 import { DragonConfig } from './dragon-config';
 import { DRAGON_VALS, type DragonVals } from './dragon-vals';
 import { type CR, CRNumberToString, CR_TABLE } from './challenge-rating';

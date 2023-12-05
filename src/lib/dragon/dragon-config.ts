@@ -1,7 +1,6 @@
 import type {
 	Age,
 	Color,
-	RGB,
 	Pronouns,
 	PronounsConfig,
 	ProficiencyLevel,
@@ -26,7 +25,7 @@ import {
 	numberOfHitDiceMax
 } from '.';
 
-import { capitalizeFirstLetter } from '$lib/text-utils';
+import { capitalizeFirstLetter, type RGB } from '$lib/text-utils';
 
 export class DragonConfig {
 	age: Age = 'wyrmling';

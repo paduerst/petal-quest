@@ -1,6 +1,8 @@
 <script lang="ts">
-	import { type RGB, COLOR_TO_THEME } from '$lib/dragon';
+	import { COLOR_TO_THEME } from '$lib/dragon';
 	import { builderFadeParams } from '$lib/dragon/builder-states';
+	import type { RGB } from '$lib/text-utils';
+
 	export let theme: RGB = COLOR_TO_THEME['red'];
 
 	let innerClientHeight: number;
