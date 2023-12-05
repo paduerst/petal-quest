@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { COLOR_TO_THEME } from '$lib/dragon';
+	import { DEFAULT_THEME } from '.';
 	import { builderFadeParams } from '$lib/dragon/builder-states';
 	import type { RGB } from '$lib/text-utils';
 
-	export let theme: RGB = COLOR_TO_THEME['red'];
+	export let theme: RGB = DEFAULT_THEME;
 	export let standardizeColumnsAndText = true;
 
 	const minHeight = 300;
