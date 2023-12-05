@@ -11,7 +11,7 @@
 
 <PageMeta
 	title={`${APP_MONSTER_TITLES[data.monster]} - Monsters - Petal Quest`}
-	description="Monsters for 5th edition, from the SRD."
+	description="Monsters for 5th edition, both homebrew and from the SRD."
 	url={`https://www.petalquest.com/monsters/${data.monster}/`}
 />
 
