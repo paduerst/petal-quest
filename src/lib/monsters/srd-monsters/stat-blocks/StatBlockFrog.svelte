@@ -11,7 +11,19 @@
 <StatBlockContainer theme={stats.theme}>
 	<StatBlockContents {stats}>
 		<svelte:fragment slot="features">
-			<p>Features</p>
+			<div class="stat-block-trait break-inside-avoid">
+				<p>
+					<i><b>Amphibious.</b></i>
+					The frog can breathe air and water.
+				</p>
+			</div>
+			<div class="stat-block-trait break-inside-avoid">
+				<p>
+					<i><b>Standing Leap.</b></i>
+					The frog’s long jump is up to 10 feet and its high jump is up to 5 feet, with or without a
+					running start.
+				</p>
+			</div>
 		</svelte:fragment>
 	</StatBlockContents>
 </StatBlockContainer>

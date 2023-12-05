@@ -5,17 +5,19 @@
 </script>
 
 <ul class="dragon-stats">
-	<li class="dragon-saves my-1">
-		<p class="-indent-4 pl-4">
-			<span class="stat-block-label">Saving Throws</span>
-			<span>
-				{#each stats.savingThrows as save, index}
-					<span class="whitespace-nowrap">{save}</span
-					>{#if index < stats.savingThrows.length - 1}{', '}{/if}
-				{/each}
-			</span>
-		</p>
-	</li>
+	{#if stats.savingThrows.length > 0}
+		<li class="dragon-saves my-1">
+			<p class="-indent-4 pl-4">
+				<span class="stat-block-label">Saving Throws</span>
+				<span>
+					{#each stats.savingThrows as save, index}
+						<span class="whitespace-nowrap">{save}</span
+						>{#if index < stats.savingThrows.length - 1}{', '}{/if}
+					{/each}
+				</span>
+			</p>
+		</li>
+	{/if}
 
 	{#if stats.skills.length > 0}
 		<li class="dragon-skills my-1">
