@@ -1,4 +1,4 @@
-export const PETAL_MONSTERS = [] as const;
+export const PETAL_MONSTERS = ['red-dragon-wyrmling'] as const;
 
 export type PetalMonster = (typeof PETAL_MONSTERS)[number];
 
@@ -11,3 +11,9 @@ export type PetalMonster = (typeof PETAL_MONSTERS)[number];
 export function stringToPetalMonster(monsterString: string): PetalMonster | undefined {
 	return PETAL_MONSTERS.find((monster) => monster === monsterString);
 }
+
+export const PETAL_MONSTER_TITLES: {
+	[key in PetalMonster]: string;
+} = {
+	'red-dragon-wyrmling': 'Red Dragon Wyrmling'
+} as const;
