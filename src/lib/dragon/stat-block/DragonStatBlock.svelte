@@ -17,41 +17,36 @@
 	// https://github.com/sveltejs/svelte/issues/5604
 </script>
 
-<div
-	class="columns-1 md:columns-2 print:min-[480px]:columns-2 text-left text-sm leading-[1.2]"
-	style="--stat-block-theme: {dragon.theme}"
->
-	{#if dragon.age !== 'wyrmling' && dragon.age !== 'young' && !dragon.isShapechanged}
-		<StatBlockContents stats={dragon}>
-			<svelte:fragment slot="features">
-				<DragonFeatures {dragon} />
-			</svelte:fragment>
+{#if dragon.age !== 'wyrmling' && dragon.age !== 'young' && !dragon.isShapechanged}
+	<StatBlockContents stats={dragon}>
+		<svelte:fragment slot="features">
+			<DragonFeatures {dragon} />
+		</svelte:fragment>
 
-			<svelte:fragment slot="actions">
-				<DragonActions {dragon} />
-			</svelte:fragment>
+		<svelte:fragment slot="actions">
+			<DragonActions {dragon} />
+		</svelte:fragment>
 
-			<svelte:fragment slot="bonus-actions">
-				<DragonBonusActions {dragon} />
-			</svelte:fragment>
+		<svelte:fragment slot="bonus-actions">
+			<DragonBonusActions {dragon} />
+		</svelte:fragment>
 
-			<svelte:fragment slot="legendary-actions">
-				<DragonLegendaryActions {dragon} />
-			</svelte:fragment>
-		</StatBlockContents>
-	{:else}
-		<StatBlockContents stats={dragon}>
-			<svelte:fragment slot="features">
-				<DragonFeatures {dragon} />
-			</svelte:fragment>
+		<svelte:fragment slot="legendary-actions">
+			<DragonLegendaryActions {dragon} />
+		</svelte:fragment>
+	</StatBlockContents>
+{:else}
+	<StatBlockContents stats={dragon}>
+		<svelte:fragment slot="features">
+			<DragonFeatures {dragon} />
+		</svelte:fragment>
 
-			<svelte:fragment slot="actions">
-				<DragonActions {dragon} />
-			</svelte:fragment>
+		<svelte:fragment slot="actions">
+			<DragonActions {dragon} />
+		</svelte:fragment>
 
-			<svelte:fragment slot="bonus-actions">
-				<DragonBonusActions {dragon} />
-			</svelte:fragment>
-		</StatBlockContents>
-	{/if}
-</div>
+		<svelte:fragment slot="bonus-actions">
+			<DragonBonusActions {dragon} />
+		</svelte:fragment>
+	</StatBlockContents>
+{/if}

@@ -26,7 +26,12 @@
 		data-theme="statBlockContents"
 	>
 		<div class="inner-wrapper" bind:clientHeight={innerClientHeight}>
-			<slot />
+			<div
+				class="columns-1 md:columns-2 print:min-[480px]:columns-2 text-left text-sm leading-[1.2]"
+				style="--stat-block-theme: {theme}"
+			>
+				<slot />
+			</div>
 		</div>
 	</div>
 	<div class="stat-block-container-bot-edge" />
