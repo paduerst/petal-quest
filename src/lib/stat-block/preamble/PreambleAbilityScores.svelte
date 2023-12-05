@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { StatsForPreambleAbilityScores } from '.';
-	import { ABILITIES } from '$lib/dragon';
+	import { ABILITIES } from '$lib/monsters';
 	import { numberWithSign } from '$lib/text-utils';
 
 	export let stats: StatsForPreambleAbilityScores;

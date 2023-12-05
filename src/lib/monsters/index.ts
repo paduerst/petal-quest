@@ -41,3 +41,137 @@ export const SIZE_TO_HIT_DIE: {
 	Huge: 12,
 	Gargantuan: 20
 } as const;
+
+export const ABILITIES = [
+	['strength', 'str'],
+	['dexterity', 'dex'],
+	['constitution', 'con'],
+	['intelligence', 'int'],
+	['wisdom', 'wis'],
+	['charisma', 'cha']
+] as const;
+
+export const SKILLS = [
+	{
+		name: 'Acrobatics',
+		key: 'skillAcrobatics',
+		ability: 'dex'
+	},
+	{
+		name: 'Animal Handling',
+		key: 'skillAnimalHandling',
+		ability: 'wis'
+	},
+	{
+		name: 'Arcana',
+		key: 'skillArcana',
+		ability: 'int'
+	},
+	{
+		name: 'Athletics',
+		key: 'skillAthletics',
+		ability: 'str'
+	},
+	{
+		name: 'Deception',
+		key: 'skillDeception',
+		ability: 'cha'
+	},
+	{
+		name: 'History',
+		key: 'skillHistory',
+		ability: 'int'
+	},
+	{
+		name: 'Insight',
+		key: 'skillInsight',
+		ability: 'wis'
+	},
+	{
+		name: 'Intimidation',
+		key: 'skillIntimidation',
+		ability: 'cha'
+	},
+	{
+		name: 'Investigation',
+		key: 'skillInvestigation',
+		ability: 'int'
+	},
+	{
+		name: 'Medicine',
+		key: 'skillMedicine',
+		ability: 'wis'
+	},
+	{
+		name: 'Nature',
+		key: 'skillNature',
+		ability: 'int'
+	},
+	{
+		name: 'Perception',
+		key: 'skillPerception',
+		ability: 'wis'
+	},
+	{
+		name: 'Performance',
+		key: 'skillPerformance',
+		ability: 'cha'
+	},
+	{
+		name: 'Persuasion',
+		key: 'skillPersuasion',
+		ability: 'cha'
+	},
+	{
+		name: 'Religion',
+		key: 'skillReligion',
+		ability: 'int'
+	},
+	{
+		name: 'Sleight of Hand',
+		key: 'skillSleightOfHand',
+		ability: 'dex'
+	},
+	{
+		name: 'Stealth',
+		key: 'skillStealth',
+		ability: 'dex'
+	},
+	{
+		name: 'Survival',
+		key: 'skillSurvival',
+		ability: 'wis'
+	}
+] as const;
+
+export type SkillKey = (typeof SKILLS)[number]['key'];
+
+export type ProficiencyLevel = 0.0 | 0.5 | 1.0 | 2.0;
+
+/**
+ * Calculates the ability modifier given the ability score.
+ * @export
+ * @param {number} score
+ * @return {*}  {number}
+ */
+export function scoreToMod(score: number): number {
+	return Math.floor((score - 10) / 2);
+}
+
+/**
+ * Calculates the expected value of a dice roll, with an optional modifier and minimumResult
+ * @export
+ * @param {number} numberOfDice
+ * @param {Die} typeOfDice
+ * @param {number} [modifier=0]
+ * @param {number} [minimumResult=0]
+ * @return {*}  {number}
+ */
+export function expectedDiceResult(
+	numberOfDice: number,
+	typeOfDice: Die,
+	modifier: number = 0,
+	minimumResult: number = 0
+): number {
+	return Math.max(minimumResult, Math.floor(numberOfDice * (0.5 + typeOfDice / 2) + modifier));
+}

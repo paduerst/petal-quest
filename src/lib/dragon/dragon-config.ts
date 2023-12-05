@@ -3,29 +3,24 @@ import type {
 	Color,
 	Pronouns,
 	PronounsConfig,
-	ProficiencyLevel,
 	SpellcastingConfig,
 	DisplaySpellStats
 } from '.';
-
 import {
 	stringToAge,
 	stringToColor,
 	COLOR_TO_THEME,
 	DEFAULT_PRONOUNS,
-	ABILITIES,
 	abilityMin,
 	abilityMax,
-	SKILLS,
 	maxHPMin,
 	maxHPMax,
 	numberOfHitDiceMin,
 	numberOfHitDiceMax
 } from '.';
 
-import type { Size } from '$lib/monsters';
-
-import { stringToSize } from '$lib/monsters';
+import type { Size, ProficiencyLevel } from '$lib/monsters';
+import { stringToSize, ABILITIES, SKILLS } from '$lib/monsters';
 
 import { capitalizeFirstLetter, type RGB } from '$lib/text-utils';
 

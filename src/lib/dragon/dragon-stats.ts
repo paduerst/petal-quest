@@ -1,20 +1,16 @@
-import type { Age, Color, ProficiencyLevel, PronounsConfig } from '.';
+import type { Age, Color, PronounsConfig } from '.';
 import {
 	COLOR_TO_ALIGNMENT,
 	AGE_TO_SIZE,
 	ageToHitDie,
-	ABILITIES,
-	SKILLS,
 	DEFAULT_PRONOUNS,
 	BASIC_PRONOUN_CONFIGS,
+	abilityMin,
+	abilityMax,
 	maxHPMin,
 	maxHPMax,
 	numberOfHitDiceMin,
 	numberOfHitDiceMax,
-	abilityMin,
-	abilityMax,
-	scoreToMod,
-	expectedDiceResult,
 	SHAPE_CHANGE_RETAINS_LEGENDARY_RESISTANCE,
 	SHAPE_CHANGE_RETAINS_INNATE_SPELLCASTING
 } from '.';
@@ -23,7 +19,9 @@ import { DragonConfig } from './dragon-config';
 import { DRAGON_VALS, type DragonVals } from './dragon-vals';
 import { type CR, CRNumberToString, CR_TABLE } from './challenge-rating';
 
-import type { Size, Die } from '$lib/monsters';
+import type { Size, Die, ProficiencyLevel } from '$lib/monsters';
+import { ABILITIES, SKILLS, scoreToMod, expectedDiceResult } from '$lib/monsters';
+
 import { capitalizeFirstLetter, numberWithSign, type RGB } from '$lib/text-utils';
 import { type SpellLevel, SPELL_LEVELS } from '$lib/spells';
 
