@@ -9,7 +9,8 @@
 	<div class="mb-2">
 		<h5 class="font-bold text-base">Lair Actions</h5>
 		<p>
-			{dragon.nameUpper} has lair actions.
+			{dragon.nameUpper} will have lair actions once they are written. For now, this section is only
+			visible while in development mode.
 		</p>
 	</div>
 {/if}
