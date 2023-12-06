@@ -17,7 +17,7 @@ import {
 
 import { DragonConfig } from './dragon-config';
 import { DRAGON_VALS, type DragonVals } from './dragon-vals';
-import { type CR, CRNumberToString, CR_TABLE } from './challenge-rating';
+import { type CR, CR_TABLE } from './challenge-rating';
 
 import type { Size, Die, ProficiencyLevel } from '$lib/monsters';
 import { ABILITIES, scoreToMod, expectedDiceResult } from '$lib/monsters';
@@ -107,7 +107,7 @@ export class DragonStats {
 
 		this.languages = this.#config.languages ?? this.#vals.languages;
 
-		this.cr = CRNumberToString(this.#vals.cr);
+		this.cr = this.#vals.cr;
 		this.xp = CR_TABLE[this.cr].xp;
 		this.proficiencyBonus = CR_TABLE[this.cr].proficiencyBonus;
 

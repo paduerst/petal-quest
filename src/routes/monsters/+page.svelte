@@ -1,6 +1,9 @@
 <script lang="ts">
-	import { PETAL_MONSTERS, PETAL_MONSTER_TITLES } from '$lib/monsters/petal-monsters';
-	import { SRD_MONSTERS, SRD_MONSTER_TITLES } from '$lib/monsters/srd-monsters';
+	import { PETAL_MONSTERS } from '$lib/monsters/petal-monsters';
+	import { PETAL_MONSTER_VALS } from '$lib/monsters/petal-monsters/petal-monster.vals';
+
+	import { SRD_MONSTERS } from '$lib/monsters/srd-monsters';
+	import { SRD_MONSTER_VALS } from '$lib/monsters/srd-monsters/srd-monster-vals';
 
 	import PageMeta from '$lib/PageMeta.svelte';
 
@@ -20,7 +23,7 @@
 <ul>
 	{#each PETAL_MONSTERS as monster}
 		<li>
-			<a href={getMonsterURL(monster)}>{PETAL_MONSTER_TITLES[monster]}</a>
+			<a href={getMonsterURL(monster)}>{PETAL_MONSTER_VALS[monster].title}</a>
 		</li>
 	{/each}
 </ul>
@@ -30,7 +33,7 @@
 <ul>
 	{#each SRD_MONSTERS as monster}
 		<li>
-			<a href={getMonsterURL(monster)}>{SRD_MONSTER_TITLES[monster]}</a>
+			<a href={getMonsterURL(monster)}>{SRD_MONSTER_VALS[monster].title}</a>
 		</li>
 	{/each}
 </ul>
