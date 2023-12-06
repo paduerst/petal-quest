@@ -1,5 +1,12 @@
+<script lang="ts">
+	import SpellLink from '$lib/spells/SpellLink.svelte';
+</script>
+
 <h3 class="text-lg font-bold">Ancient Dragons</h3>
 <p>
-	Prismatic dragons become ancient around the age of 1000 years old. Their scales are so strong now
-	that nonmagical weapons aren't as effective against them.
+	Ancient prismatic dragons are generally at least 1000 years old, with only a few centuries
+	remaining in their natural life span. They have unlocked the ability to <SpellLink
+		spellName="teleport"
+	/> themselves daily, and their scales have become so strong that nonmagical weapons aren't as effective
+	against them.
 </p>
