@@ -87,7 +87,7 @@ export function getPassivePerception(
 	wisdomMod: number,
 	proficiencies?: SkillProficiencies
 ): number {
-	let output = 8 + wisdomMod;
+	let output = 10 + wisdomMod;
 	if (
 		proficiencies !== undefined &&
 		proficiencies.skillPerception !== undefined &&

@@ -2,6 +2,7 @@
 	import { SRD_MONSTER_VALS } from '../srd-monster-vals';
 	import { statsFromMonsterVals } from '../../monster-vals';
 
+	import MonsterHeading from '$lib/monsters/MonsterHeading.svelte';
 	import StatBlockContainer from '$lib/stat-block/StatBlockContainer.svelte';
 	import StatBlockContents from '$lib/stat-block/StatBlockContents.svelte';
 
@@ -9,10 +10,7 @@
 </script>
 
 <div class="max-w-xl mx-auto">
-	<div class="mb-2">
-		<h1 class="monster-name">Frog</h1>
-		<p><b>Source:</b> SRD 5.1</p>
-	</div>
+	<MonsterHeading source="SRD 5.1">Frog</MonsterHeading>
 
 	<StatBlockContainer theme={stats.theme}>
 		<StatBlockContents {stats}>

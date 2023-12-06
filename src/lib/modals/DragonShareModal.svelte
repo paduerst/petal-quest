@@ -11,8 +11,7 @@
 	export let parent: SkeletonModalParentType;
 
 	let shareInfo: DragonShareModalValue = $modalStore[0].value;
-	let shareURL =
-		shareInfo.dragon === undefined ? BASE_SHARE_URL : `${BASE_SHARE_URL}?${shareInfo.dragon}`;
+	let shareURL = shareInfo.dragon === undefined ? BASE_SHARE_URL : shareInfo.dragon.url;
 
 	onDestroy(() => {
 		if (shareInfo.onDestroyFocusElement !== undefined) {
