@@ -1,12 +1,11 @@
 import type { SRDMonster } from '.';
-import { SRD_MONSTER_TITLES } from '.';
 import type { MonsterVals } from '../monster-vals';
 
 export const SRD_MONSTER_VALS: {
 	[key in SRDMonster]: MonsterVals;
 } = {
 	frog: {
-		title: SRD_MONSTER_TITLES['frog'],
+		title: 'Frog',
 		size: 'Tiny',
 		type: 'beast',
 		alignment: 'unaligned',

@@ -13,7 +13,8 @@
 	url="https://www.petalquest.com/conditions/"
 />
 
-<h2 class="mt-4">Conditions</h2>
+<h1>Conditions</h1>
+<p>Conditions from the SRD 5.1.</p>
 
 <ul>
 	{#each CONDITIONS as condition}

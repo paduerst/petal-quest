@@ -6,6 +6,7 @@
 	import StatBlockContainer from '$lib/stat-block/StatBlockContainer.svelte';
 	import DragonStatBlock from '$lib/dragon/stat-block/DragonStatBlock.svelte';
 	import DragonDescription from '$lib/dragon/descriptions/DragonDescription.svelte';
+	import ButtonLink from '$lib/ButtonLink.svelte';
 
 	export let age: Age;
 	export let color: Color;
@@ -28,8 +29,6 @@
 	</div>
 
 	<div class="max-w-xl w-fit mx-auto">
-		<a href={`/dragon-builder/?${config}`} class="daisy-btn daisy-btn-neutral !text-white mt-4"
-			>Edit in the Dragon Builder</a
-		>
+		<ButtonLink href={`/dragon-builder/?${config}`}>Open in the Dragon Builder</ButtonLink>
 	</div>
 </div>
