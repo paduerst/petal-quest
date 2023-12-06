@@ -14,8 +14,8 @@
 />
 
 <article class="card p-6 pt-4 text-token text-left">
-	<div class="flex gap-12">
-		<figure class="shrink-0">
+	<div class="flex flex-wrap sm:flex-nowrap sm:gap-12">
+		<figure class="shrink-0 w-fit mx-auto">
 			<img
 				src="/images/dragon_art_white.png"
 				alt="A rainbow-colored, geometric drawing of a dragon's silhouette and a wireframe d20 on a white background."
@@ -72,7 +72,6 @@
 	article {
 		h2 {
 			margin-top: 1rem;
-			font-size: 2rem;
 			font-weight: bold;
 		}
 
