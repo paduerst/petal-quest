@@ -18,6 +18,21 @@ export const NAV_LINKS = [
 	}
 ] as const;
 
+export const DEV_NAV_LINKS = [
+	{
+		href: '/monsters/',
+		text: 'Monsters'
+	},
+	{
+		href: '/spells/',
+		text: 'Spells'
+	},
+	{
+		href: '/conditions/',
+		text: 'Conditions'
+	}
+] as const;
+
 /**
  * Returns a unique ID string for the given Nav Link. Uniqueness is guaranteed by testing.
  * @export

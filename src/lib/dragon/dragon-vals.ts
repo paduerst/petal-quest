@@ -1,6 +1,6 @@
 import type { Color, Age } from '.';
-import type { Die, ProficiencyLevel } from '$lib/monsters';
-import type { CRNumber } from './challenge-rating';
+import type { Size, Die, ProficiencyLevel } from '$lib/monsters';
+import type { CR } from './challenge-rating';
 
 // TODO: Remove the following values, as they are not needed:
 // - size
@@ -14,8 +14,10 @@ import type { CRNumber } from './challenge-rating';
 // END of TODO list
 
 export type DragonVals = {
-	cr: CRNumber;
-	size: string;
+	cr: CR;
+	title: string;
+	size: Size;
+	type: string;
 	alignment: string;
 	immunity: string;
 	additionalImmunities: string;
@@ -103,8 +105,10 @@ export const DRAGON_VALS: {
 } = {
 	red: {
 		wyrmling: {
-			cr: 2,
+			cr: '2',
+			title: 'Red Dragon Wyrmling',
 			size: 'Medium',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Typically Chaotic',
 			immunity: 'Fire',
 			additionalImmunities: '',
@@ -185,8 +189,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		young: {
-			cr: 6,
+			cr: '6',
+			title: 'Young Red Dragon',
 			size: 'Large',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Typically Chaotic',
 			immunity: 'Fire',
 			additionalImmunities: '',
@@ -267,8 +273,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		adult: {
-			cr: 13,
+			cr: '13',
+			title: 'Adult Red Dragon',
 			size: 'Huge',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Typically Chaotic',
 			immunity: 'Fire',
 			additionalImmunities: '',
@@ -349,8 +357,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		ancient: {
-			cr: 20,
+			cr: '20',
+			title: 'Ancient Red Dragon',
 			size: 'Gargantuan',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Typically Chaotic',
 			immunity: 'Fire',
 			additionalImmunities: '',
@@ -432,8 +442,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		cosmic: {
-			cr: 28,
+			cr: '28',
+			title: 'Cosmic Red Dragon',
 			size: 'Gargantuan',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Typically Chaotic',
 			immunity: 'Fire',
 			additionalImmunities: '; Bludgeoning, Piercing, and Slashing from Nonmagical Attacks',
@@ -517,8 +529,10 @@ export const DRAGON_VALS: {
 	},
 	orange: {
 		wyrmling: {
-			cr: 2,
+			cr: '2',
+			title: 'Orange Dragon Wyrmling',
 			size: 'Medium',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Typically Lawful',
 			immunity: 'Acid',
 			additionalImmunities: '',
@@ -599,8 +613,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		young: {
-			cr: 7,
+			cr: '7',
+			title: 'Young Orange Dragon',
 			size: 'Large',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Typically Lawful',
 			immunity: 'Acid',
 			additionalImmunities: '',
@@ -681,8 +697,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		adult: {
-			cr: 14,
+			cr: '14',
+			title: 'Adult Orange Dragon',
 			size: 'Huge',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Typically Lawful',
 			immunity: 'Acid',
 			additionalImmunities: '',
@@ -763,8 +781,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		ancient: {
-			cr: 21,
+			cr: '21',
+			title: 'Ancient Orange Dragon',
 			size: 'Gargantuan',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Typically Lawful',
 			immunity: 'Acid',
 			additionalImmunities: '',
@@ -845,8 +865,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		cosmic: {
-			cr: 28,
+			cr: '28',
+			title: 'Cosmic Orange Dragon',
 			size: 'Gargantuan',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Typically Lawful',
 			immunity: 'Acid',
 			additionalImmunities: '; Bludgeoning, Piercing, and Slashing from Nonmagical Attacks',
@@ -929,8 +951,10 @@ export const DRAGON_VALS: {
 	},
 	yellow: {
 		wyrmling: {
-			cr: 3,
+			cr: '3',
+			title: 'Yellow Dragon Wyrmling',
 			size: 'Medium',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Typically Lawful',
 			immunity: 'Lightning',
 			additionalImmunities: '',
@@ -1011,8 +1035,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		young: {
-			cr: 8,
+			cr: '8',
+			title: 'Young Yellow Dragon',
 			size: 'Large',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Typically Lawful',
 			immunity: 'Lightning',
 			additionalImmunities: '',
@@ -1093,8 +1119,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		adult: {
-			cr: 15,
+			cr: '15',
+			title: 'Adult Yellow Dragon',
 			size: 'Huge',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Typically Lawful',
 			immunity: 'Lightning',
 			additionalImmunities: '',
@@ -1175,8 +1203,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		ancient: {
-			cr: 22,
+			cr: '22',
+			title: 'Ancient Yellow Dragon',
 			size: 'Gargantuan',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Typically Lawful',
 			immunity: 'Lightning',
 			additionalImmunities: '',
@@ -1257,8 +1287,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		cosmic: {
-			cr: 28,
+			cr: '28',
+			title: 'Cosmic Yellow Dragon',
 			size: 'Gargantuan',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Typically Lawful',
 			immunity: 'Lightning',
 			additionalImmunities: '; Bludgeoning, Piercing, and Slashing from Nonmagical Attacks',
@@ -1342,8 +1374,10 @@ export const DRAGON_VALS: {
 	},
 	green: {
 		wyrmling: {
-			cr: 3,
+			cr: '3',
+			title: 'Green Dragon Wyrmling',
 			size: 'Medium',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Typically Neutral',
 			immunity: 'Poison',
 			additionalImmunities: '',
@@ -1424,8 +1458,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		young: {
-			cr: 9,
+			cr: '9',
+			title: 'Young Green Dragon',
 			size: 'Large',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Typically Neutral',
 			immunity: 'Poison',
 			additionalImmunities: '',
@@ -1506,8 +1542,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		adult: {
-			cr: 16,
+			cr: '16',
+			title: 'Adult Green Dragon',
 			size: 'Huge',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Typically Neutral',
 			immunity: 'Poison',
 			additionalImmunities: '',
@@ -1589,8 +1627,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		ancient: {
-			cr: 23,
+			cr: '23',
+			title: 'Ancient Green Dragon',
 			size: 'Gargantuan',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Typically Neutral',
 			immunity: 'Poison',
 			additionalImmunities: '',
@@ -1673,8 +1713,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		cosmic: {
-			cr: 28,
+			cr: '28',
+			title: 'Cosmic Green Dragon',
 			size: 'Gargantuan',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Typically Neutral',
 			immunity: 'Poison',
 			additionalImmunities: '; Bludgeoning, Piercing, and Slashing from Nonmagical Attacks',
@@ -1759,8 +1801,10 @@ export const DRAGON_VALS: {
 	},
 	blue: {
 		wyrmling: {
-			cr: 4,
+			cr: '4',
+			title: 'Blue Dragon Wyrmling',
 			size: 'Medium',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Typically Chaotic',
 			immunity: 'Cold',
 			additionalImmunities: '',
@@ -1842,8 +1886,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		young: {
-			cr: 10,
+			cr: '10',
+			title: 'Young Blue Dragon',
 			size: 'Large',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Typically Chaotic',
 			immunity: 'Cold',
 			additionalImmunities: '',
@@ -1925,8 +1971,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		adult: {
-			cr: 17,
+			cr: '17',
+			title: 'Adult Blue Dragon',
 			size: 'Huge',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Typically Chaotic',
 			immunity: 'Cold',
 			additionalImmunities: '',
@@ -2008,8 +2056,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		ancient: {
-			cr: 24,
+			cr: '24',
+			title: 'Ancient Blue Dragon',
 			size: 'Gargantuan',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Typically Chaotic',
 			immunity: 'Cold',
 			additionalImmunities: '',
@@ -2092,8 +2142,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		cosmic: {
-			cr: 28,
+			cr: '28',
+			title: 'Cosmic Blue Dragon',
 			size: 'Gargantuan',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Typically Chaotic',
 			immunity: 'Cold',
 			additionalImmunities: '; Bludgeoning, Piercing, and Slashing from Nonmagical Attacks',
@@ -2178,8 +2230,10 @@ export const DRAGON_VALS: {
 	},
 	indigo: {
 		wyrmling: {
-			cr: 4,
+			cr: '4',
+			title: 'Indigo Dragon Wyrmling',
 			size: 'Medium',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Typically Chaotic',
 			immunity: 'Thunder',
 			additionalImmunities: '',
@@ -2260,8 +2314,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		young: {
-			cr: 10,
+			cr: '10',
+			title: 'Young Indigo Dragon',
 			size: 'Large',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Typically Chaotic',
 			immunity: 'Thunder',
 			additionalImmunities: '',
@@ -2342,8 +2398,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		adult: {
-			cr: 17,
+			cr: '17',
+			title: 'Adult Indigo Dragon',
 			size: 'Huge',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Typically Chaotic',
 			immunity: 'Thunder',
 			additionalImmunities: '',
@@ -2424,8 +2482,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		ancient: {
-			cr: 24,
+			cr: '24',
+			title: 'Ancient Indigo Dragon',
 			size: 'Gargantuan',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Typically Chaotic',
 			immunity: 'Thunder',
 			additionalImmunities: '',
@@ -2507,8 +2567,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		cosmic: {
-			cr: 28,
+			cr: '28',
+			title: 'Cosmic Indigo Dragon',
 			size: 'Gargantuan',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Typically Chaotic',
 			immunity: 'Thunder',
 			additionalImmunities: '; Bludgeoning, Piercing, and Slashing from Nonmagical Attacks',
@@ -2592,8 +2654,10 @@ export const DRAGON_VALS: {
 	},
 	violet: {
 		wyrmling: {
-			cr: 5,
+			cr: '5',
+			title: 'Violet Dragon Wyrmling',
 			size: 'Medium',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Typically Lawful',
 			immunity: 'Force',
 			additionalImmunities: '',
@@ -2675,8 +2739,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		young: {
-			cr: 11,
+			cr: '11',
+			title: 'Young Violet Dragon',
 			size: 'Large',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Typically Lawful',
 			immunity: 'Force',
 			additionalImmunities: '',
@@ -2758,8 +2824,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		adult: {
-			cr: 18,
+			cr: '18',
+			title: 'Adult Violet Dragon',
 			size: 'Huge',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Typically Lawful',
 			immunity: 'Force',
 			additionalImmunities: '',
@@ -2841,8 +2909,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		ancient: {
-			cr: 25,
+			cr: '25',
+			title: 'Ancient Violet Dragon',
 			size: 'Gargantuan',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Typically Lawful',
 			immunity: 'Force',
 			additionalImmunities: '',
@@ -2924,8 +2994,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		cosmic: {
-			cr: 28,
+			cr: '28',
+			title: 'Cosmic Violet Dragon',
 			size: 'Gargantuan',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Typically Lawful',
 			immunity: 'Force',
 			additionalImmunities: '; Bludgeoning, Piercing, and Slashing from Nonmagical Attacks',
@@ -3009,8 +3081,10 @@ export const DRAGON_VALS: {
 	},
 	magenta: {
 		wyrmling: {
-			cr: 5,
+			cr: '5',
+			title: 'Magenta Dragon Wyrmling',
 			size: 'Medium',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Any Alignment',
 			immunity: 'Psychic',
 			additionalImmunities: '',
@@ -3092,8 +3166,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		young: {
-			cr: 11,
+			cr: '11',
+			title: 'Young Magenta Dragon',
 			size: 'Large',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Any Alignment',
 			immunity: 'Psychic',
 			additionalImmunities: '',
@@ -3176,8 +3252,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		adult: {
-			cr: 18,
+			cr: '18',
+			title: 'Adult Magenta Dragon',
 			size: 'Huge',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Any Alignment',
 			immunity: 'Psychic',
 			additionalImmunities: '',
@@ -3259,8 +3337,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		ancient: {
-			cr: 25,
+			cr: '25',
+			title: 'Ancient Magenta Dragon',
 			size: 'Gargantuan',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Any Alignment',
 			immunity: 'Psychic',
 			additionalImmunities: '',
@@ -3342,8 +3422,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		cosmic: {
-			cr: 28,
+			cr: '28',
+			title: 'Cosmic Magenta Dragon',
 			size: 'Gargantuan',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Any Alignment',
 			immunity: 'Psychic',
 			additionalImmunities: '; Bludgeoning, Piercing, and Slashing from Nonmagical Attacks',
@@ -3427,8 +3509,10 @@ export const DRAGON_VALS: {
 	},
 	white: {
 		wyrmling: {
-			cr: 6,
+			cr: '6',
+			title: 'White Dragon Wyrmling',
 			size: 'Medium',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Any Alignment',
 			immunity: 'Radiant',
 			additionalImmunities: '',
@@ -3509,8 +3593,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		young: {
-			cr: 12,
+			cr: '12',
+			title: 'Young White Dragon',
 			size: 'Large',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Any Alignment',
 			immunity: 'Radiant',
 			additionalImmunities: '',
@@ -3592,8 +3678,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		adult: {
-			cr: 19,
+			cr: '19',
+			title: 'Adult White Dragon',
 			size: 'Huge',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Any Alignment',
 			immunity: 'Radiant',
 			additionalImmunities: '',
@@ -3675,8 +3763,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		ancient: {
-			cr: 26,
+			cr: '26',
+			title: 'Ancient White Dragon',
 			size: 'Gargantuan',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Any Alignment',
 			immunity: 'Radiant',
 			additionalImmunities: '',
@@ -3758,8 +3848,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		cosmic: {
-			cr: 28,
+			cr: '28',
+			title: 'Cosmic White Dragon',
 			size: 'Gargantuan',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Any Alignment',
 			immunity: 'Radiant',
 			additionalImmunities: '; Bludgeoning, Piercing, and Slashing from Nonmagical Attacks',
@@ -3843,8 +3935,10 @@ export const DRAGON_VALS: {
 	},
 	black: {
 		wyrmling: {
-			cr: 4,
+			cr: '4',
+			title: 'Black Dragon Wyrmling',
 			size: 'Medium',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Any Alignment',
 			immunity: 'Necrotic',
 			additionalImmunities: '',
@@ -3925,8 +4019,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		young: {
-			cr: 11,
+			cr: '11',
+			title: 'Young Black Dragon',
 			size: 'Large',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Any Alignment',
 			immunity: 'Necrotic',
 			additionalImmunities: '',
@@ -4007,8 +4103,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		adult: {
-			cr: 19,
+			cr: '19',
+			title: 'Adult Black Dragon',
 			size: 'Huge',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Any Alignment',
 			immunity: 'Necrotic',
 			additionalImmunities: '',
@@ -4089,8 +4187,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		ancient: {
-			cr: 26,
+			cr: '26',
+			title: 'Ancient Black Dragon',
 			size: 'Gargantuan',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Any Alignment',
 			immunity: 'Necrotic',
 			additionalImmunities: '',
@@ -4172,8 +4272,10 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		cosmic: {
-			cr: 28,
+			cr: '28',
+			title: 'Cosmic Black Dragon',
 			size: 'Gargantuan',
+			type: 'Dragon (Prismatic)',
 			alignment: 'Any Alignment',
 			immunity: 'Necrotic',
 			additionalImmunities: '; Bludgeoning, Piercing, and Slashing from Nonmagical Attacks',
