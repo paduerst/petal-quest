@@ -7,8 +7,8 @@ export const SRD_MONSTER_VALS: {
 	frog: {
 		title: 'Frog',
 		size: 'Tiny',
-		type: 'beast',
-		alignment: 'unaligned',
+		type: 'Beast',
+		alignment: 'Unaligned',
 		ac: 11,
 		numberOfHitDice: 1,
 		speeds: '20 ft., swim 20 ft.',
