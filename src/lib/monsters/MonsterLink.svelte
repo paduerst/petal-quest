@@ -13,6 +13,7 @@
 	};
 
 	export let monster: AppMonster;
+	export let monsterText: string | undefined = undefined;
 	export let disabled = false;
 
 	let thisElement: HTMLElement | undefined;
@@ -27,4 +28,4 @@
 	}
 </script>
 
-<SpanButton {disabled} on:click={handleClick} bind:thisElement>{monster}</SpanButton>
+<SpanButton {disabled} on:click={handleClick} bind:thisElement>{monsterText ?? monster}</SpanButton>

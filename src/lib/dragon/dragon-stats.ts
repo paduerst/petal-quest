@@ -20,9 +20,11 @@ import { DRAGON_VALS, type DragonVals } from './dragon-vals';
 import { type CR, CRNumberToString, CR_TABLE } from './challenge-rating';
 
 import type { Size, Die, ProficiencyLevel } from '$lib/monsters';
-import { ABILITIES, SKILLS, scoreToMod, expectedDiceResult } from '$lib/monsters';
+import { ABILITIES, scoreToMod, expectedDiceResult } from '$lib/monsters';
+import type { SavingThrowProficiencies } from '$lib/monsters/monster-vals';
+import { getSavingThrows, getSkills } from '$lib/monsters/monster-vals';
 
-import { capitalizeFirstLetter, numberWithSign, type RGB } from '$lib/text-utils';
+import { capitalizeFirstLetter, type RGB } from '$lib/text-utils';
 import { type SpellLevel, SPELL_LEVELS } from '$lib/spells';
 
 // copied from https://stackoverflow.com/a/9030062
@@ -139,9 +141,13 @@ export class DragonStats {
 
 		this.skills = this.#getSkills();
 
-		this.passiveInsight = 10 + this.wis + this.skillInsight * this.proficiencyBonus;
-		this.passiveInvestigation = 10 + this.int + this.skillInvestigation * this.proficiencyBonus;
-		this.passivePerception = 10 + this.wis + this.skillPerception * this.proficiencyBonus;
+		this.passiveInsight = Math.floor(10 + this.wis + this.skillInsight * this.proficiencyBonus);
+		this.passiveInvestigation = Math.floor(
+			10 + this.int + this.skillInvestigation * this.proficiencyBonus
+		);
+		this.passivePerception = Math.floor(
+			10 + this.wis + this.skillPerception * this.proficiencyBonus
+		);
 
 		this.amphibious = this.#vals.amphibious > 0;
 
@@ -352,24 +358,17 @@ export class DragonStats {
 	}
 
 	#getSavingThrows(): string[] {
-		const savingThrowProficiencies = ['dex', 'con', 'wis', 'cha'] as const;
-		const outputArr: string[] = [];
-		for (const prof of savingThrowProficiencies) {
-			outputArr.push(`${prof.toUpperCase()} ${numberWithSign(this.proficiencyBonus + this[prof])}`);
-		}
-		return outputArr;
+		const defaultDragonSavingThrowProficiencies: SavingThrowProficiencies = {
+			dexteritySaveProficiency: 1,
+			constitutionSaveProficiency: 1,
+			wisdomSaveProficiency: 1,
+			charismaSaveProficiency: 1
+		} as const;
+		return getSavingThrows(this.proficiencyBonus, this, defaultDragonSavingThrowProficiencies);
 	}
 
 	#getSkills(): string[] {
-		const skillsOutput: string[] = [];
-		for (const skill of SKILLS) {
-			const skillProf = this[skill.key];
-			if (skillProf > 0) {
-				const skillMod = Math.floor(this[skill.ability] + skillProf * this.proficiencyBonus);
-				skillsOutput.push(`${skill.name} ${numberWithSign(skillMod)}`);
-			}
-		}
-		return skillsOutput;
+		return getSkills(this.proficiencyBonus, this, this);
 	}
 
 	#getImmunities(): string {

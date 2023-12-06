@@ -1,14 +1,18 @@
 import type { ComponentType } from 'svelte';
 
-import { PETAL_MONSTERS } from './petal-monsters';
+import { PETAL_MONSTERS, PETAL_MONSTER_TITLES } from './petal-monsters';
 import { PETAL_MONSTER_STAT_BLOCKS } from './petal-monsters/petal-monster-stat-blocks';
 
-import { SRD_MONSTERS } from './srd-monsters';
+import { SRD_MONSTERS, SRD_MONSTER_TITLES } from './srd-monsters';
 import { SRD_MONSTER_STAT_BLOCKS } from './srd-monsters/srd-monster-stat-blocks';
 
 export const APP_MONSTERS = [...PETAL_MONSTERS, ...SRD_MONSTERS] as const;
 
 export type AppMonster = (typeof APP_MONSTERS)[number];
+
+export const APP_MONSTER_TITLES: {
+	[key in AppMonster]: string;
+} = { ...PETAL_MONSTER_TITLES, ...SRD_MONSTER_TITLES } as const;
 
 export const APP_MONSTER_STAT_BLOCKS: {
 	[key in AppMonster]: ComponentType;
