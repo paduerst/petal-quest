@@ -107,7 +107,6 @@ export type MonsterVals = {
 
 	ac: number;
 	numberOfHitDice: number;
-	speeds: string;
 
 	strength: number;
 	dexterity: number;
@@ -123,6 +122,7 @@ export type MonsterVals = {
 	acDescription?: string;
 	expectedHitPoints?: number;
 	hitDie?: Die;
+	speeds?: string;
 
 	savingThrows?: SavingThrowProficiencies;
 	skills?: SkillProficiencies;
@@ -160,6 +160,8 @@ export function statsFromMonsterVals(vals: MonsterVals): Stats {
 	const wisdom = vals.wisdom;
 	const charisma = vals.charisma;
 
+	const languages = vals.languages.length > 0 ? vals.languages : '—';
+
 	const cr = vals.cr;
 
 	// now the calculated values
@@ -179,7 +181,7 @@ export function statsFromMonsterVals(vals: MonsterVals): Stats {
 	const expectedHitPoints =
 		vals.expectedHitPoints ?? expectedDiceResult(numberOfHitDice, hitDie, numberOfHitDice * con, 1);
 
-	const speeds = vals.speeds.length > 0 ? vals.speeds : '—';
+	const speeds = vals.speeds !== undefined && vals.speeds.length > 0 ? vals.speeds : '—';
 
 	const abilityMods = { str, dex, con, int, wis, cha };
 	const savingThrows: string[] =
@@ -199,8 +201,6 @@ export function statsFromMonsterVals(vals: MonsterVals): Stats {
 	const truesight = vals.truesight ?? 0;
 	const blindsight = vals.blindsight ?? 0;
 	const darkvision = vals.darkvision ?? 0;
-
-	const languages = vals.languages.length > 0 ? vals.languages : '—';
 
 	const theme = vals.theme ?? DEFAULT_THEME;
 
