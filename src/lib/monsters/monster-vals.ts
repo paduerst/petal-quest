@@ -106,8 +106,8 @@ export type MonsterVals = {
 	alignment: string;
 
 	ac: number;
-
 	numberOfHitDice: number;
+	speeds: string;
 
 	strength: number;
 	dexterity: number;
@@ -116,12 +116,12 @@ export type MonsterVals = {
 	wisdom: number;
 	charisma: number;
 
+	languages: string;
+
 	cr: CR;
 
 	expectedHitPoints?: number;
 	hitDie?: Die;
-
-	speeds?: string;
 
 	savingThrows?: SavingThrowProficiencies;
 	skills?: SkillProficiencies;
@@ -134,8 +134,6 @@ export type MonsterVals = {
 	truesight?: number;
 	blindsight?: number;
 	darkvision?: number;
-
-	languages?: string;
 
 	theme?: RGB;
 };
@@ -176,7 +174,7 @@ export function statsFromMonsterVals(vals: MonsterVals): Stats {
 	const expectedHitPoints =
 		vals.expectedHitPoints ?? expectedDiceResult(numberOfHitDice, hitDie, numberOfHitDice * con, 1);
 
-	const speeds = vals.speeds ?? '—';
+	const speeds = vals.speeds.length > 0 ? vals.speeds : '—';
 
 	const abilityMods = { str, dex, con, int, wis, cha };
 	const savingThrows: string[] =
@@ -197,7 +195,7 @@ export function statsFromMonsterVals(vals: MonsterVals): Stats {
 	const blindsight = vals.blindsight ?? 0;
 	const darkvision = vals.darkvision ?? 0;
 
-	const languages = vals.languages ?? '—';
+	const languages = vals.languages.length > 0 ? vals.languages : '—';
 
 	const theme = vals.theme ?? DEFAULT_THEME;
 

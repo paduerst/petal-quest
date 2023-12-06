@@ -23,6 +23,7 @@ export const SRD_MONSTER_VALS: {
 			skillStealth: 1
 		},
 		darkvision: 30,
+		languages: '',
 		cr: '0',
 		theme: 'rgb(20, 108, 0)'
 	}
