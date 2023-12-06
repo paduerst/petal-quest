@@ -29,7 +29,7 @@
 
 	<div class="max-w-xl w-fit mx-auto">
 		<a href={`/dragon-builder/?${config}`} class="daisy-btn daisy-btn-neutral !text-white mt-4"
-			>Edit in the Dragon Builder</a
+			>Open in the Dragon Builder</a
 		>
 	</div>
 </div>
