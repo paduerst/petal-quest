@@ -120,6 +120,7 @@ export type MonsterVals = {
 
 	cr: CR;
 
+	acDescription?: string;
 	expectedHitPoints?: number;
 	hitDie?: Die;
 
@@ -134,6 +135,8 @@ export type MonsterVals = {
 	truesight?: number;
 	blindsight?: number;
 	darkvision?: number;
+
+	xp?: number;
 
 	theme?: RGB;
 };
@@ -160,7 +163,7 @@ export function statsFromMonsterVals(vals: MonsterVals): Stats {
 	const cr = vals.cr;
 
 	// now the calculated values
-	const xp = CR_TABLE[cr].xp;
+	const xp = vals.xp ?? CR_TABLE[cr].xp;
 	const proficiencyBonus = CR_TABLE[cr].proficiencyBonus;
 
 	const str = scoreToMod(strength);
@@ -169,6 +172,8 @@ export function statsFromMonsterVals(vals: MonsterVals): Stats {
 	const int = scoreToMod(intelligence);
 	const wis = scoreToMod(wisdom);
 	const cha = scoreToMod(charisma);
+
+	const acDescription = vals.acDescription ?? '';
 
 	const hitDie = SIZE_TO_HIT_DIE[size];
 	const expectedHitPoints =
@@ -207,6 +212,7 @@ export function statsFromMonsterVals(vals: MonsterVals): Stats {
 		alignment,
 
 		ac,
+		acDescription,
 
 		expectedHitPoints,
 		numberOfHitDice,

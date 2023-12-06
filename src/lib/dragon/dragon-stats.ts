@@ -68,6 +68,7 @@ export class DragonStats {
 		this.size = this.#getSize();
 		this.type = this.#getType();
 		this.ac = this.#vals.ac;
+		this.acDescription = 'Natural Armor';
 		this.numberOfHitDice = this.#getNumberOfHitDice();
 		this.hitDie = ageToHitDie(this.age);
 
@@ -518,6 +519,7 @@ export class DragonStats {
 	size: Size;
 	type: string;
 	ac: number;
+	acDescription: string;
 	numberOfHitDice: number;
 	hitDie: Die;
 

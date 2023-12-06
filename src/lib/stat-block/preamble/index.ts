@@ -12,6 +12,7 @@ export type StatsForPreambleHeader = {
 
 export type StatsForPreambleACHPSpeed = {
 	ac: number;
+	acDescription: string;
 
 	expectedHitPoints: number;
 	numberOfHitDice: number;
