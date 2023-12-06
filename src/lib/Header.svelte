@@ -3,12 +3,13 @@
 
 	import { AppBar, getDrawerStore, LightSwitch } from '@skeletonlabs/skeleton';
 
-	import { NAV_LINKS } from '$lib';
+	import { NAV_LINKS, DEV_NAV_LINKS } from '$lib';
 
 	import Logo from '$lib/Logo.svelte';
 	import HeaderNavLink from './HeaderNavLink.svelte';
 
 	const drawerStore = getDrawerStore();
+
 	function drawerOpen(): void {
 		drawerStore.open({});
 	}
@@ -22,7 +23,13 @@
 
 		<svelte:fragment slot="trail">
 			{#if dev}
-				<LightSwitch />
+				<div class="flex gap-4 bg-warning-backdrop-token p-3 rounded">
+					<LightSwitch />
+
+					{#each DEV_NAV_LINKS as link}
+						<a href={link.href}>{link.text}</a>
+					{/each}
+				</div>
 			{/if}
 
 			<nav class="hidden lg:flex">
