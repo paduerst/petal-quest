@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { PETAL_MONSTERS } from '$lib/monsters/petal-monsters';
+	import { PRISMATIC_DRAGONS, OTHER_PETAL_MONSTERS } from '$lib/monsters/petal-monsters';
 	import { SRD_MONSTERS } from '$lib/monsters/srd-monsters';
 
 	import PageMeta from '$lib/PageMeta.svelte';
@@ -22,10 +22,20 @@
 <h2 class="mt-4">Homebrew Monsters</h2>
 <p>Monsters created by Petal Quest.</p>
 
-<h3 class="mt-2">The Prismatic Dragons</h3>
+<h3 class="mt-3">The Prismatic Dragons</h3>
 <p>The prismatic dragons are a new family of dragons for 5th edition.</p>
 <ul>
-	{#each PETAL_MONSTERS as monster}
+	{#each PRISMATIC_DRAGONS as monster}
+		<li class="my-2 max-w-xl mx-auto">
+			<MonsterPreview {monster} />
+		</li>
+	{/each}
+</ul>
+
+<h3 class="mt-3">Other Homebrew Monsters</h3>
+<p>These are other monsters created by Petal Quest.</p>
+<ul>
+	{#each OTHER_PETAL_MONSTERS as monster}
 		<li class="my-2 max-w-xl mx-auto">
 			<MonsterPreview {monster} />
 		</li>
