@@ -22,20 +22,30 @@
 		<StatBlockContents {stats}>
 			<svelte:fragment slot="features">
 				<div class="stat-block-trait break-inside-avoid">
-					<div class="stat-block-trait break-inside-avoid">
-						<p>
-							<i><b>False Appearance.</b></i>
-							While the card remains motionless and isn’t flying, it is indistinguishable from a normal
-							playing card.
-						</p>
-					</div>
+					<p>
+						<i><b>False Appearance.</b></i>
+						While the card remains motionless and isn’t flying, it is indistinguishable from a normal
+						playing card.
+					</p>
+				</div>
 
+				<div class="stat-block-trait break-inside-avoid">
 					<p>
 						<i><b>Severe Antimagic Susceptibility.</b></i>
 						The card is <ConditionLink disabled={disableLinks} condition="incapacitated" /> while in
 						the area of an <SpellLink disabled={disableLinks} spellName="antimagic field" />. If
 						targeted by <SpellLink disabled={disableLinks} spellName="dispel magic" />, the card
 						dies as the magic which animates it is permanently dispelled.
+					</p>
+				</div>
+
+				<div class="stat-block-trait break-inside-avoid">
+					<p>
+						<i><b>Take a Card.</b></i>
+						If a creature attempts to grapple the card, it must make a Dexterity (Sleight of Hand) check
+						instead of a Strength (Athletics) check. If the card attempts to escape from a grapple, the
+						grappling creature can choose to contest with a Strength (Athletics) or Dexterity (Sleight
+						of Hand) check.
 					</p>
 				</div>
 			</svelte:fragment>
