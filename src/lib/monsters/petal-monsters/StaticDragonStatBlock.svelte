@@ -8,12 +8,11 @@
 	import DragonDescription from '$lib/dragon/descriptions/DragonDescription.svelte';
 	import ButtonLink from '$lib/ButtonLink.svelte';
 
-	export let age: Age;
-	export let color: Color;
+	export let dragon: { age: Age; color: Color };
 
 	const config: DragonConfig = new DragonConfig();
-	$: config.age = age;
-	$: config.color = color;
+	$: config.age = dragon.age;
+	$: config.color = dragon.color;
 </script>
 
 <div class="mx-auto">

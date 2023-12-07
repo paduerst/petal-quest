@@ -72,7 +72,21 @@ export function stringToPrismaticDragon(monsterString: string): PrismaticDragon 
 	return PRISMATIC_DRAGONS.find((monster) => monster === monsterString);
 }
 
-export const PETAL_MONSTERS = [...PRISMATIC_DRAGONS] as const;
+export const OTHER_PETAL_MONSTERS = ['animated-card', 'animated-deck-of-cards'] as const;
+
+export type OtherPetalMonster = (typeof OTHER_PETAL_MONSTERS)[number];
+
+/**
+ * Converts input string to OtherPetalMonster if possible, returning undefined if not.
+ * @export
+ * @param {string} monsterString
+ * @return {*}  {(OtherPetalMonster | undefined)}
+ */
+export function stringToOtherPetalMonster(monsterString: string): OtherPetalMonster | undefined {
+	return OTHER_PETAL_MONSTERS.find((monster) => monster === monsterString);
+}
+
+export const PETAL_MONSTERS = [...PRISMATIC_DRAGONS, ...OTHER_PETAL_MONSTERS] as const;
 
 export type PetalMonster = (typeof PETAL_MONSTERS)[number];
 
