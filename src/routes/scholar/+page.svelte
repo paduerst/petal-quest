@@ -35,7 +35,9 @@
 			</p>
 
 			<div class="w-fit mx-auto">
-				<ButtonLink href={externalHref}>Get it on DMsGuild</ButtonLink>
+				<ButtonLink href={externalHref} external={true} openInNewTab={true}
+					>Get it on DMsGuild</ButtonLink
+				>
 			</div>
 		</div>
 	</div>
@@ -57,7 +59,7 @@
 	</p>
 	<p>
 		The price is "Pay What You Want" so you can get it for free! If you try it out, like it, and
-		want to support me monetarily, you can always come back and buy it later for the suggested price
+		want to support us monetarily, you can always come back and buy it later for the suggested price
 		of $2.
 	</p>
 </article>
