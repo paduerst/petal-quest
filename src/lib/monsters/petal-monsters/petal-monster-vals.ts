@@ -69,8 +69,8 @@ export const PRISMATIC_DRAGON_VALS: {
 export const OTHER_PETAL_MONSTER_VALS: {
 	[key in OtherPetalMonster]: MonsterVals;
 } = {
-	'animated-deck-of-many-things': {
-		title: 'Animated Deck of Many Things',
+	'animated-deck-of-cards': {
+		title: 'Animated Deck of Cards',
 		size: 'Medium',
 		type: 'swarm of Tiny Constructs',
 		alignment: 'Unaligned',

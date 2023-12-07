@@ -72,7 +72,7 @@ export function stringToPrismaticDragon(monsterString: string): PrismaticDragon 
 	return PRISMATIC_DRAGONS.find((monster) => monster === monsterString);
 }
 
-export const OTHER_PETAL_MONSTERS = ['animated-deck-of-many-things'] as const;
+export const OTHER_PETAL_MONSTERS = ['animated-deck-of-cards'] as const;
 
 export type OtherPetalMonster = (typeof OTHER_PETAL_MONSTERS)[number];
 

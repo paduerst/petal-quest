@@ -7,7 +7,7 @@
 	import StatBlockContents from '$lib/stat-block/StatBlockContents.svelte';
 	import SpellLink from '$lib/spells/SpellLink.svelte';
 
-	const stats = statsFromMonsterVals(OTHER_PETAL_MONSTER_VALS['animated-deck-of-many-things']);
+	const stats = statsFromMonsterVals(OTHER_PETAL_MONSTER_VALS['animated-deck-of-cards']);
 </script>
 
 <div class="max-w-xl mx-auto">
@@ -30,14 +30,12 @@
 					<p>
 						<i><b>False Appearance.</b></i>
 						While the swarm remains motionless and isn’t flying, it is indistinguishable from a normal
-						<i>deck of many things</i>.
+						deck of playing cards.
 					</p>
 				</div>
 			</svelte:fragment>
 		</StatBlockContents>
 	</StatBlockContainer>
 
-	<p class="mt-4">
-		This is an animated <i>deck of many things</i>.
-	</p>
+	<p class="mt-4">This is an animated deck of playing cards.</p>
 </div>
