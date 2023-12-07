@@ -2,18 +2,9 @@ import type { Color, Age } from '.';
 import type { Size, Die, ProficiencyLevel } from '$lib/monsters';
 import type { CR } from './challenge-rating';
 
-// TODO: Remove the following values, as they are not needed:
-// - size
-// - alignment
-// END of TODO list
-
-// TODO: Add the following values to DragonStats once they are needed:
-// - altVulnerabilitySaveDcBaseValue
-// - altVulnerabilityDiceCount
-// - altVulnerabilityDiceType
-// END of TODO list
-
 export type DragonVals = {
+	color: Color;
+	age: Age;
 	cr: CR;
 	title: string;
 	size: Size;
@@ -105,6 +96,8 @@ export const DRAGON_VALS: {
 } = {
 	red: {
 		wyrmling: {
+			color: 'red',
+			age: 'wyrmling',
 			cr: '2',
 			title: 'Red Dragon Wyrmling',
 			size: 'Medium',
@@ -189,6 +182,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		young: {
+			color: 'red',
+			age: 'young',
 			cr: '6',
 			title: 'Young Red Dragon',
 			size: 'Large',
@@ -273,6 +268,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		adult: {
+			color: 'red',
+			age: 'adult',
 			cr: '13',
 			title: 'Adult Red Dragon',
 			size: 'Huge',
@@ -357,6 +354,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		ancient: {
+			color: 'red',
+			age: 'ancient',
 			cr: '20',
 			title: 'Ancient Red Dragon',
 			size: 'Gargantuan',
@@ -442,6 +441,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		cosmic: {
+			color: 'red',
+			age: 'cosmic',
 			cr: '28',
 			title: 'Cosmic Red Dragon',
 			size: 'Gargantuan',
@@ -529,6 +530,8 @@ export const DRAGON_VALS: {
 	},
 	orange: {
 		wyrmling: {
+			color: 'orange',
+			age: 'wyrmling',
 			cr: '2',
 			title: 'Orange Dragon Wyrmling',
 			size: 'Medium',
@@ -613,6 +616,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		young: {
+			color: 'orange',
+			age: 'young',
 			cr: '7',
 			title: 'Young Orange Dragon',
 			size: 'Large',
@@ -697,6 +702,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		adult: {
+			color: 'orange',
+			age: 'adult',
 			cr: '14',
 			title: 'Adult Orange Dragon',
 			size: 'Huge',
@@ -781,6 +788,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		ancient: {
+			color: 'orange',
+			age: 'ancient',
 			cr: '21',
 			title: 'Ancient Orange Dragon',
 			size: 'Gargantuan',
@@ -865,6 +874,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		cosmic: {
+			color: 'orange',
+			age: 'cosmic',
 			cr: '28',
 			title: 'Cosmic Orange Dragon',
 			size: 'Gargantuan',
@@ -951,6 +962,8 @@ export const DRAGON_VALS: {
 	},
 	yellow: {
 		wyrmling: {
+			color: 'yellow',
+			age: 'wyrmling',
 			cr: '3',
 			title: 'Yellow Dragon Wyrmling',
 			size: 'Medium',
@@ -1035,6 +1048,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		young: {
+			color: 'yellow',
+			age: 'young',
 			cr: '8',
 			title: 'Young Yellow Dragon',
 			size: 'Large',
@@ -1119,6 +1134,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		adult: {
+			color: 'yellow',
+			age: 'adult',
 			cr: '15',
 			title: 'Adult Yellow Dragon',
 			size: 'Huge',
@@ -1203,6 +1220,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		ancient: {
+			color: 'yellow',
+			age: 'ancient',
 			cr: '22',
 			title: 'Ancient Yellow Dragon',
 			size: 'Gargantuan',
@@ -1287,6 +1306,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		cosmic: {
+			color: 'yellow',
+			age: 'cosmic',
 			cr: '28',
 			title: 'Cosmic Yellow Dragon',
 			size: 'Gargantuan',
@@ -1374,6 +1395,8 @@ export const DRAGON_VALS: {
 	},
 	green: {
 		wyrmling: {
+			color: 'green',
+			age: 'wyrmling',
 			cr: '3',
 			title: 'Green Dragon Wyrmling',
 			size: 'Medium',
@@ -1458,6 +1481,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		young: {
+			color: 'green',
+			age: 'young',
 			cr: '9',
 			title: 'Young Green Dragon',
 			size: 'Large',
@@ -1542,6 +1567,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		adult: {
+			color: 'green',
+			age: 'adult',
 			cr: '16',
 			title: 'Adult Green Dragon',
 			size: 'Huge',
@@ -1627,6 +1654,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		ancient: {
+			color: 'green',
+			age: 'ancient',
 			cr: '23',
 			title: 'Ancient Green Dragon',
 			size: 'Gargantuan',
@@ -1713,6 +1742,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		cosmic: {
+			color: 'green',
+			age: 'cosmic',
 			cr: '28',
 			title: 'Cosmic Green Dragon',
 			size: 'Gargantuan',
@@ -1801,6 +1832,8 @@ export const DRAGON_VALS: {
 	},
 	blue: {
 		wyrmling: {
+			color: 'blue',
+			age: 'wyrmling',
 			cr: '4',
 			title: 'Blue Dragon Wyrmling',
 			size: 'Medium',
@@ -1886,6 +1919,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		young: {
+			color: 'blue',
+			age: 'young',
 			cr: '10',
 			title: 'Young Blue Dragon',
 			size: 'Large',
@@ -1971,6 +2006,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		adult: {
+			color: 'blue',
+			age: 'adult',
 			cr: '17',
 			title: 'Adult Blue Dragon',
 			size: 'Huge',
@@ -2056,6 +2093,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		ancient: {
+			color: 'blue',
+			age: 'ancient',
 			cr: '24',
 			title: 'Ancient Blue Dragon',
 			size: 'Gargantuan',
@@ -2142,6 +2181,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		cosmic: {
+			color: 'blue',
+			age: 'cosmic',
 			cr: '28',
 			title: 'Cosmic Blue Dragon',
 			size: 'Gargantuan',
@@ -2230,6 +2271,8 @@ export const DRAGON_VALS: {
 	},
 	indigo: {
 		wyrmling: {
+			color: 'indigo',
+			age: 'wyrmling',
 			cr: '4',
 			title: 'Indigo Dragon Wyrmling',
 			size: 'Medium',
@@ -2314,6 +2357,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		young: {
+			color: 'indigo',
+			age: 'young',
 			cr: '10',
 			title: 'Young Indigo Dragon',
 			size: 'Large',
@@ -2398,6 +2443,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		adult: {
+			color: 'indigo',
+			age: 'adult',
 			cr: '17',
 			title: 'Adult Indigo Dragon',
 			size: 'Huge',
@@ -2482,6 +2529,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		ancient: {
+			color: 'indigo',
+			age: 'ancient',
 			cr: '24',
 			title: 'Ancient Indigo Dragon',
 			size: 'Gargantuan',
@@ -2567,6 +2616,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		cosmic: {
+			color: 'indigo',
+			age: 'cosmic',
 			cr: '28',
 			title: 'Cosmic Indigo Dragon',
 			size: 'Gargantuan',
@@ -2654,6 +2705,8 @@ export const DRAGON_VALS: {
 	},
 	violet: {
 		wyrmling: {
+			color: 'violet',
+			age: 'wyrmling',
 			cr: '5',
 			title: 'Violet Dragon Wyrmling',
 			size: 'Medium',
@@ -2739,6 +2792,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		young: {
+			color: 'violet',
+			age: 'young',
 			cr: '11',
 			title: 'Young Violet Dragon',
 			size: 'Large',
@@ -2824,6 +2879,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		adult: {
+			color: 'violet',
+			age: 'adult',
 			cr: '18',
 			title: 'Adult Violet Dragon',
 			size: 'Huge',
@@ -2909,6 +2966,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		ancient: {
+			color: 'violet',
+			age: 'ancient',
 			cr: '25',
 			title: 'Ancient Violet Dragon',
 			size: 'Gargantuan',
@@ -2994,6 +3053,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		cosmic: {
+			color: 'violet',
+			age: 'cosmic',
 			cr: '28',
 			title: 'Cosmic Violet Dragon',
 			size: 'Gargantuan',
@@ -3081,6 +3142,8 @@ export const DRAGON_VALS: {
 	},
 	magenta: {
 		wyrmling: {
+			color: 'magenta',
+			age: 'wyrmling',
 			cr: '5',
 			title: 'Magenta Dragon Wyrmling',
 			size: 'Medium',
@@ -3166,6 +3229,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		young: {
+			color: 'magenta',
+			age: 'young',
 			cr: '11',
 			title: 'Young Magenta Dragon',
 			size: 'Large',
@@ -3252,6 +3317,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		adult: {
+			color: 'magenta',
+			age: 'adult',
 			cr: '18',
 			title: 'Adult Magenta Dragon',
 			size: 'Huge',
@@ -3337,6 +3404,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		ancient: {
+			color: 'magenta',
+			age: 'ancient',
 			cr: '25',
 			title: 'Ancient Magenta Dragon',
 			size: 'Gargantuan',
@@ -3422,6 +3491,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		cosmic: {
+			color: 'magenta',
+			age: 'cosmic',
 			cr: '28',
 			title: 'Cosmic Magenta Dragon',
 			size: 'Gargantuan',
@@ -3509,6 +3580,8 @@ export const DRAGON_VALS: {
 	},
 	white: {
 		wyrmling: {
+			color: 'white',
+			age: 'wyrmling',
 			cr: '6',
 			title: 'White Dragon Wyrmling',
 			size: 'Medium',
@@ -3593,6 +3666,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		young: {
+			color: 'white',
+			age: 'young',
 			cr: '12',
 			title: 'Young White Dragon',
 			size: 'Large',
@@ -3678,6 +3753,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		adult: {
+			color: 'white',
+			age: 'adult',
 			cr: '19',
 			title: 'Adult White Dragon',
 			size: 'Huge',
@@ -3763,6 +3840,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		ancient: {
+			color: 'white',
+			age: 'ancient',
 			cr: '26',
 			title: 'Ancient White Dragon',
 			size: 'Gargantuan',
@@ -3848,6 +3927,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		cosmic: {
+			color: 'white',
+			age: 'cosmic',
 			cr: '28',
 			title: 'Cosmic White Dragon',
 			size: 'Gargantuan',
@@ -3935,6 +4016,8 @@ export const DRAGON_VALS: {
 	},
 	black: {
 		wyrmling: {
+			color: 'black',
+			age: 'wyrmling',
 			cr: '4',
 			title: 'Black Dragon Wyrmling',
 			size: 'Medium',
@@ -4019,6 +4102,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		young: {
+			color: 'black',
+			age: 'young',
 			cr: '11',
 			title: 'Young Black Dragon',
 			size: 'Large',
@@ -4103,6 +4188,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		adult: {
+			color: 'black',
+			age: 'adult',
 			cr: '19',
 			title: 'Adult Black Dragon',
 			size: 'Huge',
@@ -4187,6 +4274,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		ancient: {
+			color: 'black',
+			age: 'ancient',
 			cr: '26',
 			title: 'Ancient Black Dragon',
 			size: 'Gargantuan',
@@ -4272,6 +4361,8 @@ export const DRAGON_VALS: {
 			wingAttackDiceType: 6
 		},
 		cosmic: {
+			color: 'black',
+			age: 'cosmic',
 			cr: '28',
 			title: 'Cosmic Black Dragon',
 			size: 'Gargantuan',

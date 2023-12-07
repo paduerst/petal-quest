@@ -4,7 +4,7 @@ export const NAV_LINKS = [
 	{
 		href: '/prismatic-dragons/',
 		text: 'Prismatic Dragons',
-		children: [{ href: '/prismatic-dragons/colors/', text: 'Colors' }]
+		children: []
 	},
 	{
 		href: '/dragon-builder/',

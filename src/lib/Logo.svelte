@@ -14,7 +14,7 @@
 	class="logo-anchor hover:bg-primary-hover-token border border-transparent"
 	on:click={dispatchClick}
 >
-	<img src="/favicon.png" alt="Petal Quest logo" class="logo-img" />
+	<img src="/images/favicon.png" alt="Petal Quest logo" class="logo-img" />
 	<span class="logo-txt">Petal Quest</span>
 </a>
 

@@ -3,13 +3,17 @@
 	import { numberWithSign } from '$lib/text-utils';
 
 	export let stats: StatsForPreambleACHPSpeed;
+
+	let acText: string = '';
+	$: acText =
+		stats.acDescription.length > 0 ? `${stats.ac} (${stats.acDescription})` : `${stats.ac}`;
 </script>
 
 <ul>
 	<li class="my-1">
 		<p>
 			<span class="stat-block-label">Armor Class</span>
-			<span>{stats.ac} (Natural Armor)</span>
+			<span>{acText}</span>
 		</p>
 	</li>
 

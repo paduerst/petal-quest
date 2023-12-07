@@ -1,8 +1,9 @@
-import type { PetalMonster } from '.';
+import type { PrismaticDragon, PetalMonster } from '.';
 import { DRAGON_VALS, type DragonVals } from '$lib/dragon/dragon-vals';
+import type { MonsterVals } from '../monster-vals';
 
-export const PETAL_MONSTER_VALS: {
-	[key in PetalMonster]: DragonVals;
+export const PRISMATIC_DRAGON_VALS: {
+	[key in PrismaticDragon]: DragonVals;
 } = {
 	'red-dragon-wyrmling': DRAGON_VALS['red']['wyrmling'],
 	'young-red-dragon': DRAGON_VALS['red']['young'],
@@ -63,4 +64,10 @@ export const PETAL_MONSTER_VALS: {
 	'adult-black-dragon': DRAGON_VALS['black']['adult'],
 	'ancient-black-dragon': DRAGON_VALS['black']['ancient'],
 	'cosmic-black-dragon': DRAGON_VALS['black']['cosmic']
+} as const;
+
+export const PETAL_MONSTER_VALS: {
+	[key in PetalMonster]: MonsterVals;
+} = {
+	...PRISMATIC_DRAGON_VALS
 } as const;
