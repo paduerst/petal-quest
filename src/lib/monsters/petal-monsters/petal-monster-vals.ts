@@ -104,7 +104,7 @@ export const OTHER_PETAL_MONSTER_VALS: {
 		intelligence: 1,
 		wisdom: 5,
 		charisma: 1,
-		resistances: 'bludgeoning, piercing, slashing',
+		resistances: 'bludgeoning, piercing',
 		immunities: 'poison, psychic',
 		conditionImmunities:
 			'blinded, charmed, deafened, frightened, grappled, paralyzed, petrified, poisoned, prone, restrained, stunned',

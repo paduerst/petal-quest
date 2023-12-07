@@ -22,6 +22,14 @@
 		<StatBlockContents {stats}>
 			<svelte:fragment slot="features">
 				<div class="stat-block-trait break-inside-avoid">
+					<div class="stat-block-trait break-inside-avoid">
+						<p>
+							<i><b>False Appearance.</b></i>
+							While the swarm remains motionless and isn’t flying, it is indistinguishable from a normal
+							deck of playing cards.
+						</p>
+					</div>
+
 					<p>
 						<i><b>Severe Antimagic Susceptibility (Swarm).</b></i>
 						The swarm is <ConditionLink disabled={disableLinks} condition="incapacitated" /> while in
@@ -31,22 +39,13 @@
 						21 (6d6) force damage on a failed save, or half as much damage on a successful one.
 					</p>
 				</div>
-				<div class="stat-block-trait break-inside-avoid">
-					<p>
-						<i><b>False Appearance.</b></i>
-						While the swarm remains motionless and isn’t flying, it is indistinguishable from a normal
-						deck of playing cards.
-					</p>
-				</div>
+
 				<div class="stat-block-trait break-inside-avoid">
 					<p>
 						<i><b>Swarm.</b></i>
 						The swarm can occupy another creature’s space and vice versa, and the swarm can move through
-						any opening large enough for a Tiny <MonsterLink
-							disabled={disableLinks}
-							monster="animated-card"
-							monsterText="playing card"
-						/>. The swarm can’t regain hit points or gain temporary hit points.
+						any opening large enough for a Tiny playing card. The swarm can’t regain hit points or gain
+						temporary hit points.
 					</p>
 				</div>
 			</svelte:fragment>
