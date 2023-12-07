@@ -1,10 +1,12 @@
 <script lang="ts">
-	import { COLORS } from '$lib/dragon';
+	import { COLORS, HIDDEN_COLORS } from '$lib/dragon';
 
 	import PageMeta from '$lib/PageMeta.svelte';
 	import SpellLink from '$lib/spells/SpellLink.svelte';
 	import ButtonLink from '$lib/ButtonLink.svelte';
 	import ColorDescription from '$lib/dragon/descriptions/ColorDescription.svelte';
+
+	const SHOW_HIDDEN_COLOR_STUFF = false;
 </script>
 
 <PageMeta
@@ -48,12 +50,14 @@
 		<SpellLink spellName="prismatic wall" /> spell. Each layer has a unique effect and weakness which
 		correspond to the breath weapons and vulnerabilities of the prismatic dragons.
 	</p>
-	<p>
-		The colors don't stop at ROYGBIV. There are white, black, and even magenta prismatic dragons.
-	</p>
+	{#if SHOW_HIDDEN_COLOR_STUFF}
+		<p>
+			The colors don't stop at ROYGBIV. There are white, black, and even magenta prismatic dragons.
+		</p>
+	{/if}
 
 	<ul class="px-8">
-		{#each COLORS as color}
+		{#each COLORS.filter((color) => SHOW_HIDDEN_COLOR_STUFF || !HIDDEN_COLORS.includes(color)) as color}
 			<li>
 				<div class="my-4">
 					<ColorDescription {color} includeAgeParagraph={false} />
