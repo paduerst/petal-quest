@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { OTHER_PETAL_MONSTER_VALS } from '../petal-monster.vals';
+	import { OTHER_PETAL_MONSTER_VALS } from '../petal-monster-vals';
 	import { statsFromMonsterVals } from '../../monster-vals';
 
 	import MonsterHeading from '$lib/monsters/MonsterHeading.svelte';

@@ -1,14 +1,10 @@
-import type { ComponentType } from 'svelte';
-
 import type { MonsterVals } from './monster-vals';
 
 import { PETAL_MONSTERS } from './petal-monsters';
-import { PETAL_MONSTER_VALS } from './petal-monsters/petal-monster.vals';
-import { PETAL_MONSTER_STAT_BLOCKS } from './petal-monsters/petal-monster-stat-blocks';
+import { PETAL_MONSTER_VALS } from './petal-monsters/petal-monster-vals';
 
 import { SRD_MONSTERS } from './srd-monsters';
 import { SRD_MONSTER_VALS } from './srd-monsters/srd-monster-vals';
-import { SRD_MONSTER_STAT_BLOCKS } from './srd-monsters/srd-monster-stat-blocks';
 
 export const APP_MONSTERS = [...PETAL_MONSTERS, ...SRD_MONSTERS] as const;
 
@@ -17,10 +13,6 @@ export type AppMonster = (typeof APP_MONSTERS)[number];
 export const APP_MONSTER_VALS: {
 	[key in AppMonster]: MonsterVals;
 } = { ...PETAL_MONSTER_VALS, ...SRD_MONSTER_VALS } as const;
-
-export const APP_MONSTER_STAT_BLOCKS: {
-	[key in AppMonster]: ComponentType;
-} = { ...PETAL_MONSTER_STAT_BLOCKS, ...SRD_MONSTER_STAT_BLOCKS } as const;
 
 /**
  * Converts input string to AppMonster if possible, returning undefined if not.
