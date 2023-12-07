@@ -10,7 +10,7 @@
 </script>
 
 <div class="max-w-xl mx-auto">
-	<MonsterHeading source="SRD 5.1">Frog</MonsterHeading>
+	<MonsterHeading source="SRD 5.1">{stats.title}</MonsterHeading>
 
 	<StatBlockContainer theme={stats.theme}>
 		<StatBlockContents {stats}>

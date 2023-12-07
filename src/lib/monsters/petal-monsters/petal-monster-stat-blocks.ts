@@ -1,6 +1,6 @@
 import type { ComponentType } from 'svelte';
 
-import type { PetalMonster } from '.';
+import type { PrismaticDragon, OtherPetalMonster, PetalMonster } from '.';
 
 import StatBlockPrismaticRedWyrmling__SvelteComponent_ from './stat-blocks/StatBlock__PrismaticRedWyrmling.svelte';
 import StatBlockPrismaticRedYoung__SvelteComponent_ from './stat-blocks/StatBlock__PrismaticRedYoung.svelte';
@@ -62,8 +62,10 @@ import StatBlockPrismaticBlackAdult__SvelteComponent_ from './stat-blocks/StatBl
 import StatBlockPrismaticBlackAncient__SvelteComponent_ from './stat-blocks/StatBlock__PrismaticBlackAncient.svelte';
 import StatBlockPrismaticBlackCosmic__SvelteComponent_ from './stat-blocks/StatBlock__PrismaticBlackCosmic.svelte';
 
-export const PETAL_MONSTER_STAT_BLOCKS: {
-	[key in PetalMonster]: ComponentType;
+import StatBlockAnimatedDeckOfManyThings__SvelteComponent_ from './stat-blocks/StatBlock__AnimatedDeckOfManyThings.svelte';
+
+export const PRISMATIC_DRAGON_STAT_BLOCKS: {
+	[key in PrismaticDragon]: ComponentType;
 } = {
 	'red-dragon-wyrmling': StatBlockPrismaticRedWyrmling__SvelteComponent_,
 	'young-red-dragon': StatBlockPrismaticRedYoung__SvelteComponent_,
@@ -124,4 +126,17 @@ export const PETAL_MONSTER_STAT_BLOCKS: {
 	'adult-black-dragon': StatBlockPrismaticBlackAdult__SvelteComponent_,
 	'ancient-black-dragon': StatBlockPrismaticBlackAncient__SvelteComponent_,
 	'cosmic-black-dragon': StatBlockPrismaticBlackCosmic__SvelteComponent_
+} as const;
+
+export const OTHER_PETAL_MONSTER_STAT_BLOCKS: {
+	[key in OtherPetalMonster]: ComponentType;
+} = {
+	'animated-deck-of-many-things': StatBlockAnimatedDeckOfManyThings__SvelteComponent_
+} as const;
+
+export const PETAL_MONSTER_STAT_BLOCKS: {
+	[key in PetalMonster]: ComponentType;
+} = {
+	...PRISMATIC_DRAGON_STAT_BLOCKS,
+	...OTHER_PETAL_MONSTER_STAT_BLOCKS
 } as const;
