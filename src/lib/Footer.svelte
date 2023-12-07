@@ -16,6 +16,10 @@
 			</div>
 		</div>
 		<hr class="my-4" />
+		<div class="card variant-ghost-primary p-4 mx-auto text-center">
+			<p>© 2023 Petal Quest. All rights reserved.</p>
+		</div>
+		<hr class="my-4" />
 		<p class="text-sm text-token">
 			This website includes material taken from the System Reference Document 5.1 (“SRD 5.1”) by
 			Wizards of the Coast LLC and available at <a

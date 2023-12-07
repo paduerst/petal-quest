@@ -106,7 +106,6 @@ export type MonsterVals = {
 	alignment: string;
 
 	ac: number;
-
 	numberOfHitDice: number;
 
 	strength: number;
@@ -116,11 +115,13 @@ export type MonsterVals = {
 	wisdom: number;
 	charisma: number;
 
+	languages: string;
+
 	cr: CR;
 
+	acDescription?: string;
 	expectedHitPoints?: number;
 	hitDie?: Die;
-
 	speeds?: string;
 
 	savingThrows?: SavingThrowProficiencies;
@@ -135,7 +136,7 @@ export type MonsterVals = {
 	blindsight?: number;
 	darkvision?: number;
 
-	languages?: string;
+	xp?: number;
 
 	theme?: RGB;
 };
@@ -159,10 +160,12 @@ export function statsFromMonsterVals(vals: MonsterVals): Stats {
 	const wisdom = vals.wisdom;
 	const charisma = vals.charisma;
 
+	const languages = vals.languages.length > 0 ? vals.languages : '—';
+
 	const cr = vals.cr;
 
 	// now the calculated values
-	const xp = CR_TABLE[cr].xp;
+	const xp = vals.xp ?? CR_TABLE[cr].xp;
 	const proficiencyBonus = CR_TABLE[cr].proficiencyBonus;
 
 	const str = scoreToMod(strength);
@@ -172,11 +175,13 @@ export function statsFromMonsterVals(vals: MonsterVals): Stats {
 	const wis = scoreToMod(wisdom);
 	const cha = scoreToMod(charisma);
 
+	const acDescription = vals.acDescription ?? '';
+
 	const hitDie = SIZE_TO_HIT_DIE[size];
 	const expectedHitPoints =
 		vals.expectedHitPoints ?? expectedDiceResult(numberOfHitDice, hitDie, numberOfHitDice * con, 1);
 
-	const speeds = vals.speeds ?? '—';
+	const speeds = vals.speeds !== undefined && vals.speeds.length > 0 ? vals.speeds : '—';
 
 	const abilityMods = { str, dex, con, int, wis, cha };
 	const savingThrows: string[] =
@@ -197,8 +202,6 @@ export function statsFromMonsterVals(vals: MonsterVals): Stats {
 	const blindsight = vals.blindsight ?? 0;
 	const darkvision = vals.darkvision ?? 0;
 
-	const languages = vals.languages ?? '—';
-
 	const theme = vals.theme ?? DEFAULT_THEME;
 
 	const output: Stats = {
@@ -209,6 +212,7 @@ export function statsFromMonsterVals(vals: MonsterVals): Stats {
 		alignment,
 
 		ac,
+		acDescription,
 
 		expectedHitPoints,
 		numberOfHitDice,

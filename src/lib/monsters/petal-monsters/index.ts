@@ -1,4 +1,4 @@
-export const PETAL_MONSTERS = [
+export const PRISMATIC_DRAGONS = [
 	'red-dragon-wyrmling',
 	'young-red-dragon',
 	'adult-red-dragon',
@@ -59,6 +59,20 @@ export const PETAL_MONSTERS = [
 	'ancient-black-dragon',
 	'cosmic-black-dragon'
 ] as const;
+
+export type PrismaticDragon = (typeof PRISMATIC_DRAGONS)[number];
+
+/**
+ * Converts input string to PrismaticDragon if possible, returning undefined if not.
+ * @export
+ * @param {string} monsterString
+ * @return {*}  {(PrismaticDragon | undefined)}
+ */
+export function stringToPrismaticDragon(monsterString: string): PrismaticDragon | undefined {
+	return PRISMATIC_DRAGONS.find((monster) => monster === monsterString);
+}
+
+export const PETAL_MONSTERS = [...PRISMATIC_DRAGONS] as const;
 
 export type PetalMonster = (typeof PETAL_MONSTERS)[number];
 
