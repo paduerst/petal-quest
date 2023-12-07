@@ -95,6 +95,7 @@ test('numberWithSign() behavior', () => {
 
 	expect(numberWithSign(1, ' ')).toBe('+ 1');
 	expect(numberWithSign(1, ' anything-can_g0 here ')).toBe('+ anything-can_g0 here 1');
+	expect(numberWithSign(-1.5, ' ')).toBe('- 1.5');
 });
 
 test('RGBToRGBA() behavior', () => {
