@@ -12,6 +12,11 @@ export const NAV_LINKS = [
 		children: []
 	},
 	{
+		href: '/scholar/',
+		text: 'Scholar',
+		children: []
+	},
+	{
 		href: '/about/',
 		text: 'About',
 		children: []
