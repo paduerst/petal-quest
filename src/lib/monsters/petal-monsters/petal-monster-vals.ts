@@ -69,6 +69,23 @@ export const PRISMATIC_DRAGON_VALS: {
 export const OTHER_PETAL_MONSTER_VALS: {
 	[key in OtherPetalMonster]: MonsterVals;
 } = {
+	'animated-card': {
+		title: 'Animated Card',
+		size: 'Tiny',
+		type: 'Construct',
+		alignment: 'Unaligned',
+		ac: 12,
+		numberOfHitDice: 1,
+		speeds: '0 ft., fly 30 ft. (hover)',
+		strength: 3,
+		dexterity: 13,
+		constitution: 8,
+		intelligence: 1,
+		wisdom: 5,
+		charisma: 3,
+		languages: '',
+		cr: '0'
+	},
 	'animated-deck-of-cards': {
 		title: 'Animated Deck of Cards',
 		size: 'Medium',

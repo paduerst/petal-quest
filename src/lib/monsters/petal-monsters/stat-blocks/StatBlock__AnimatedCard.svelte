@@ -8,7 +8,7 @@
 	import SpellLink from '$lib/spells/SpellLink.svelte';
 	import ConditionLink from '$lib/conditions/ConditionLink.svelte';
 
-	const stats = statsFromMonsterVals(OTHER_PETAL_MONSTER_VALS['animated-deck-of-cards']);
+	const stats = statsFromMonsterVals(OTHER_PETAL_MONSTER_VALS['animated-card']);
 </script>
 
 <div class="max-w-xl mx-auto">
@@ -20,9 +20,9 @@
 				<div class="stat-block-trait break-inside-avoid">
 					<p>
 						<i><b>Antimagic Susceptibility.</b></i>
-						The swarm is <ConditionLink condition="incapacitated" /> while in the area of an <SpellLink
+						The card is <ConditionLink condition="incapacitated" /> while in the area of an <SpellLink
 							spellName="antimagic field"
-						/>. If targeted by <SpellLink spellName="dispel magic" />, the swarm must succeed on a
+						/>. If targeted by <SpellLink spellName="dispel magic" />, the card must succeed on a
 						Constitution saving throw against the caster’s spell save DC or fall <ConditionLink
 							condition="unconscious"
 						/> for 1 minute.
@@ -31,13 +31,13 @@
 				<div class="stat-block-trait break-inside-avoid">
 					<p>
 						<i><b>False Appearance.</b></i>
-						While the swarm remains motionless and isn’t flying, it is indistinguishable from a normal
-						deck of playing cards.
+						While the card remains motionless and isn’t flying, it is indistinguishable from a normal
+						playing card.
 					</p>
 				</div>
 			</svelte:fragment>
 		</StatBlockContents>
 	</StatBlockContainer>
 
-	<p class="mt-4">This is an animated deck of playing cards.</p>
+	<p class="mt-4">This is an animated playing card.</p>
 </div>
