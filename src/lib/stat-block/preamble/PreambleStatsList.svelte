@@ -2,6 +2,40 @@
 	import type { StatsForPreambleStatsList } from '.';
 
 	export let stats: StatsForPreambleStatsList;
+
+	let truesightText: string = '';
+	let blindsightText: string = '';
+	let darkvisionText: string = '';
+
+	$: if (stats.truesight > 0) {
+		let truesightDescription =
+			stats.truesightDescription !== undefined && stats.truesightDescription.length > 0
+				? ` (${stats.truesightDescription})`
+				: '';
+		truesightText = `truesight ${stats.truesight} ft.${truesightDescription},`;
+	} else {
+		truesightText = '';
+	}
+
+	$: if (stats.blindsight > 0) {
+		let blindsightDescription =
+			stats.blindsightDescription !== undefined && stats.blindsightDescription.length > 0
+				? ` (${stats.blindsightDescription})`
+				: '';
+		blindsightText = `blindsight ${stats.blindsight} ft.${blindsightDescription},`;
+	} else {
+		blindsightText = '';
+	}
+
+	$: if (stats.darkvision > 0) {
+		let darkvisionDescription =
+			stats.darkvisionDescription !== undefined && stats.darkvisionDescription.length > 0
+				? ` (${stats.darkvisionDescription})`
+				: '';
+		darkvisionText = `darkvision ${stats.darkvision} ft.${darkvisionDescription},`;
+	} else {
+		darkvisionText = '';
+	}
 </script>
 
 <ul class="dragon-stats">
@@ -73,23 +107,14 @@
 		<p class="-indent-4 pl-4">
 			<span class="stat-block-label">Senses</span>
 			<span>
-				{#if stats.truesight > 0}
-					<span class="whitespace-nowrap">
-						truesight
-						{stats.truesight} ft.,
-					</span>
+				{#if truesightText.length > 0}
+					<span class="whitespace-nowrap">{truesightText}</span>
 				{/if}
-				{#if stats.blindsight > 0}
-					<span class="whitespace-nowrap">
-						blindsight
-						{stats.blindsight} ft.,
-					</span>
+				{#if blindsightText.length > 0}
+					<span class="whitespace-nowrap">{blindsightText}</span>
 				{/if}
-				{#if stats.darkvision > 0}
-					<span class="whitespace-nowrap">
-						darkvision
-						{stats.darkvision} ft.,
-					</span>
+				{#if darkvisionText.length > 0}
+					<span class="whitespace-nowrap">{darkvisionText}</span>
 				{/if}
 				<span class="whitespace-nowrap">passive Perception {stats.passivePerception}</span>
 			</span>
