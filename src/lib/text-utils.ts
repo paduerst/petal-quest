@@ -110,7 +110,7 @@ export function signFromNumber(number: number): '+' | '-' {
  */
 export function numberWithSign(number: number, spacing: string = ''): string {
 	if (number < 0) {
-		return number.toString();
+		return `-${spacing}${Math.abs(number).toString()}`;
 	} else {
 		return `+${spacing}${number.toString()}`;
 	}

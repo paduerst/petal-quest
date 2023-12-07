@@ -4,6 +4,7 @@
 	import ConditionLink from '$lib/conditions/ConditionLink.svelte';
 
 	export let dragon: DragonStats;
+	export let disableLinks = false;
 </script>
 
 <div class="dragon-action breath-option">
@@ -11,7 +12,7 @@
 		<b>{dragon.breath2Name} Breath.</b>
 		{capitalizeFirstLetter(dragon.color)} rays of magical light flash from {dragon.name}'s mouth in
 		a {dragon.breathConeSize}-foot cone. Each creature in that area must succeed on a DC {dragon.saveDCCon}
-		Wisdom saving throw or fall <ConditionLink condition="unconscious" />
+		Wisdom saving throw or fall <ConditionLink condition="unconscious" disabled={disableLinks} />
 		{dragon.breath2SpecialValue}. The creature wakes up if it takes damage or if another creature
 		uses an action to shake it awake.
 	</p>

@@ -9,6 +9,7 @@
 	import StatBlockContents from '$lib/stat-block/StatBlockContents.svelte';
 
 	export let config: DragonConfig;
+	export let disableLinks = false;
 
 	const dragon: DragonStats = new DragonStats(config);
 
@@ -20,33 +21,33 @@
 {#if dragon.age !== 'wyrmling' && dragon.age !== 'young' && !dragon.isShapechanged}
 	<StatBlockContents stats={dragon}>
 		<svelte:fragment slot="features">
-			<DragonFeatures {dragon} />
+			<DragonFeatures {dragon} {disableLinks} />
 		</svelte:fragment>
 
 		<svelte:fragment slot="actions">
-			<DragonActions {dragon} />
+			<DragonActions {dragon} {disableLinks} />
 		</svelte:fragment>
 
 		<svelte:fragment slot="bonus-actions">
-			<DragonBonusActions {dragon} />
+			<DragonBonusActions {dragon} {disableLinks} />
 		</svelte:fragment>
 
 		<svelte:fragment slot="legendary-actions">
-			<DragonLegendaryActions {dragon} />
+			<DragonLegendaryActions {dragon} {disableLinks} />
 		</svelte:fragment>
 	</StatBlockContents>
 {:else}
 	<StatBlockContents stats={dragon}>
 		<svelte:fragment slot="features">
-			<DragonFeatures {dragon} />
+			<DragonFeatures {dragon} {disableLinks} />
 		</svelte:fragment>
 
 		<svelte:fragment slot="actions">
-			<DragonActions {dragon} />
+			<DragonActions {dragon} {disableLinks} />
 		</svelte:fragment>
 
 		<svelte:fragment slot="bonus-actions">
-			<DragonBonusActions {dragon} />
+			<DragonBonusActions {dragon} {disableLinks} />
 		</svelte:fragment>
 	</StatBlockContents>
 {/if}

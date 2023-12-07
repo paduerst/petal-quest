@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { capitalizeFirstLetter } from '$lib/text-utils';
 	import type { DragonStats } from '$lib/dragon/dragon-stats';
 
 	export let dragon: DragonStats;

@@ -29,6 +29,7 @@
 			monster={monsterInfo.monster}
 			showCloseButton={showButtons}
 			showUrlButton={showButtons}
+			disableLinks={true}
 		/>
 	</ModalScrollableContainer>
 {/if}

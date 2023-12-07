@@ -22,6 +22,7 @@
 	import Breath2Black from './Breath2Black.svelte';
 
 	export let dragon: DragonStats;
+	export let disableLinks = false;
 
 	const breathsByColor = {
 		red: [Breath1Red, Breath2Red],
@@ -44,6 +45,6 @@
 	</p>
 </div>
 
-<svelte:component this={breathsByColor[dragon.color][0]} {dragon} />
+<svelte:component this={breathsByColor[dragon.color][0]} {dragon} {disableLinks} />
 
-<svelte:component this={breathsByColor[dragon.color][1]} {dragon} />
+<svelte:component this={breathsByColor[dragon.color][1]} {dragon} {disableLinks} />
