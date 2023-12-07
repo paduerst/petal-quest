@@ -23,7 +23,8 @@
 						<i><b>Severe Antimagic Susceptibility.</b></i>
 						The card is <ConditionLink condition="incapacitated" /> while in the area of an <SpellLink
 							spellName="antimagic field"
-						/>. If targeted by <SpellLink spellName="dispel magic" />, the card dies.
+						/>. If targeted by <SpellLink spellName="dispel magic" />, the card dies as the magic
+						which animates it is permanently dispelled.
 					</p>
 				</div>
 				<div class="stat-block-trait break-inside-avoid">
