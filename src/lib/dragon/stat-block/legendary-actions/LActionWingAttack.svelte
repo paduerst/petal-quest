@@ -4,6 +4,7 @@
 	import ConditionLink from '$lib/conditions/ConditionLink.svelte';
 
 	export let dragon: DragonStats;
+	export let disableLinks = false;
 </script>
 
 <div class="dragon-legendary-action">
@@ -17,8 +18,8 @@
 			>{dragon.wingAttackExpectedDamage} ({dragon.wingAttackDiceCount}d{dragon.wingAttackDiceType}
 			{numberWithSign(dragon.str, ' ')})</span
 		>
-		bludgeoning damage and be knocked <ConditionLink condition="prone" />. {dragon.nameUpper} can then
-		fly up to half {dragon.pronounPossessiveAdjective}
+		bludgeoning damage and be knocked <ConditionLink condition="prone" disabled={disableLinks} />. {dragon.nameUpper}
+		can then fly up to half {dragon.pronounPossessiveAdjective}
 		flying speed.
 	</p>
 </div>

@@ -5,6 +5,7 @@
 	import ConditionLink from '$lib/conditions/ConditionLink.svelte';
 
 	export let dragon: DragonStats;
+	export let disableLinks = false;
 </script>
 
 <div class="dragon-action breath-option">
@@ -14,9 +15,13 @@
 		a {dragon.breathConeSize}-foot cone. Each creature in that area must make a DC {dragon.saveDCCon}
 		Constitution saving throw. On a failed save, the creature is <ConditionLink
 			condition="restrained"
+			disabled={disableLinks}
 		/> until the end of its next turn, at which time it must repeat the saving throw. If it fails this
-		second save as well, the creature turns to stone and is <ConditionLink condition="petrified" />
+		second save as well, the creature turns to stone and is <ConditionLink
+			condition="petrified"
+			disabled={disableLinks}
+		/>
 		{dragon.breath2SpecialValue}until freed by the
-		<SpellLink spellName="greater restoration" /> spell or other magic.
+		<SpellLink spellName="greater restoration" disabled={disableLinks} /> spell or other magic.
 	</p>
 </div>

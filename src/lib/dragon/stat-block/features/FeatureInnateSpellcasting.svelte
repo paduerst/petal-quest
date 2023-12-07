@@ -5,6 +5,7 @@
 	import UpcastAbbr from '../UpcastAbbr.svelte';
 
 	export let dragon: DragonStats;
+	export let disableLinks = false;
 
 	let spellsDCString = '';
 	$: if (dragon.spellcastingDisplayAttack || dragon.spellcastingDisplaySave) {
@@ -47,6 +48,7 @@
 					{#each dragon.cantrips as cantrip, index}
 						<FeatureInnateSpellcastingSpell
 							spell={cantrip}
+							disabled={disableLinks}
 						/>{#if index < dragon.cantrips.length - 1}{', '}{/if}
 					{/each}
 				</p>
@@ -60,6 +62,7 @@
 					{#each dragon.spells as spell, index}
 						<FeatureInnateSpellcastingSpell
 							{spell}
+							disabled={disableLinks}
 						/>{#if index < dragon.spells.length - 1}{', '}{/if}
 					{/each}
 				</p>

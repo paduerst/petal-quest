@@ -20,7 +20,7 @@
 	<MonsterHeading source="Petal Quest">{config.title}</MonsterHeading>
 
 	<StatBlockContainer theme={config.theme}>
-		<DragonStatBlock {config} />
+		<DragonStatBlock {config} {disableLinks} />
 	</StatBlockContainer>
 
 	<div class="mt-4">

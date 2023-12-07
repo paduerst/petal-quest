@@ -5,10 +5,11 @@
 	import BActionVariableRadiance from './BActionVariableRadiance.svelte';
 
 	export let dragon: DragonStats;
+	export let disableLinks = false;
 </script>
 
 {#if !dragon.isShapechanged}
-	<BActionFrightfulFlare {dragon} />
+	<BActionFrightfulFlare {dragon} {disableLinks} />
 
 	<BActionSupernova {dragon} />
 

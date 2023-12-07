@@ -6,6 +6,7 @@
 	import ActionWallOfLight from './ActionWallOfLight.svelte';
 
 	export let dragon: DragonStats;
+	export let disableLinks = false;
 </script>
 
 {#if dragon.isShapechanged}
@@ -13,9 +14,9 @@
 {:else}
 	<ActionAttacks {dragon} />
 
-	<ActionBreathWeapons {dragon} />
+	<ActionBreathWeapons {dragon} {disableLinks} />
 
 	<ActionChangeShape {dragon} />
 
-	<ActionWallOfLight {dragon} />
+	<ActionWallOfLight {dragon} {disableLinks} />
 {/if}
