@@ -76,7 +76,7 @@ export const OTHER_PETAL_MONSTER_VALS: {
 		alignment: 'Unaligned',
 		ac: 11,
 		numberOfHitDice: 1,
-		speeds: '0 ft., fly 20 ft. (hover)',
+		speeds: '5 ft., fly 30 ft. (hover)',
 		strength: 1,
 		dexterity: 13,
 		constitution: 8,
@@ -96,17 +96,23 @@ export const OTHER_PETAL_MONSTER_VALS: {
 		size: 'Medium',
 		type: 'swarm of Tiny Constructs',
 		alignment: 'Unaligned',
-		ac: 12,
-		numberOfHitDice: 5,
+		ac: 11,
+		numberOfHitDice: 8,
 		speeds: '0 ft., fly 30 ft. (hover)',
-		strength: 3,
+		strength: 4,
 		dexterity: 13,
-		constitution: 8,
+		constitution: 14,
 		intelligence: 1,
 		wisdom: 5,
-		charisma: 3,
+		charisma: 1,
+		resistances: 'bludgeoning, piercing, slashing',
+		immunities: 'poison, psychic',
+		conditionImmunities:
+			'blinded, charmed, deafened, frightened, grappled, paralyzed, petrified, poisoned, prone, restrained, stunned',
+		blindsight: 60,
+		blindsightDescription: 'blind beyond this radius',
 		languages: '',
-		cr: '9'
+		cr: '1'
 	}
 } as const;
 

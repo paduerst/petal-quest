@@ -8,6 +8,7 @@
 	import StatBlockContents from '$lib/stat-block/StatBlockContents.svelte';
 	import SpellLink from '$lib/spells/SpellLink.svelte';
 	import ConditionLink from '$lib/conditions/ConditionLink.svelte';
+	import MonsterLink from '$lib/monsters/MonsterLink.svelte';
 
 	const stats = statsFromMonsterVals(OTHER_PETAL_MONSTER_VALS['animated-card']);
 </script>
@@ -48,4 +49,11 @@
 			</svelte:fragment>
 		</StatBlockContents>
 	</StatBlockContainer>
+
+	<p class="mt-4">
+		This is an animated playing card. For a whole deck of animated cards, use the <MonsterLink
+			monster="animated-deck-of-cards"
+			monsterText="animated deck of cards"
+		/> stat block.
+	</p>
 </div>
