@@ -22,7 +22,7 @@
 <h2 class="mt-4">Homebrew Monsters</h2>
 <p>Monsters created by Petal Quest.</p>
 
-<h3 class="mt-2">The Prismatic Dragons</h3>
+<h3 class="mt-3">The Prismatic Dragons</h3>
 <p>The prismatic dragons are a new family of dragons for 5th edition.</p>
 <ul>
 	{#each PRISMATIC_DRAGONS as monster}
@@ -32,7 +32,7 @@
 	{/each}
 </ul>
 
-<h3 class="mt-2">Other Homebrew Monsters</h3>
+<h3 class="mt-3">Other Homebrew Monsters</h3>
 <p>These are other monsters created by Petal Quest.</p>
 <ul>
 	{#each OTHER_PETAL_MONSTERS as monster}
