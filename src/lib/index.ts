@@ -15,11 +15,6 @@ export const NAV_LINKS = [
 		href: '/scholar/',
 		text: 'Scholar',
 		children: []
-	},
-	{
-		href: '/about/',
-		text: 'About',
-		children: []
 	}
 ] as const;
 
@@ -35,6 +30,11 @@ export const DEV_NAV_LINKS = [
 	{
 		href: '/conditions/',
 		text: 'Conditions'
+	},
+	{
+		href: '/about/',
+		text: 'About',
+		children: []
 	}
 ] as const;
 
