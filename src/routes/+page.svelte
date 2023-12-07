@@ -14,7 +14,7 @@
 	<h1 class="text-center">Petal Quest</h1>
 	<p class="text-center italic">Peter + Tal = Petal</p>
 
-	<p class="px-12">
+	<p class="px-2 sm:px-6">
 		<b>Hello!</b> We're <span class="whitespace-nowrap"><b>Peter D</b> (he/him)</span> and
 		<span class="whitespace-nowrap"><b>Tal S</b> (she/her)</span>, publishing content for 5th
 		edition under the title

@@ -56,7 +56,7 @@
 		</p>
 	{/if}
 
-	<ul class="px-8">
+	<ul class="px-2">
 		{#each COLORS.filter((color) => SHOW_HIDDEN_COLOR_STUFF || !HIDDEN_COLORS.includes(color)) as color}
 			<li>
 				<div class="my-4">
