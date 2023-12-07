@@ -88,7 +88,7 @@ export const OTHER_PETAL_MONSTER_VALS: {
 		blindsight: 60,
 		blindsightDescription: 'blind beyond this radius',
 		languages: '',
-		cr: '0'
+		cr: '1/8'
 	},
 	'animated-deck-of-cards': {
 		title: 'Animated Deck of Cards',
@@ -111,7 +111,7 @@ export const OTHER_PETAL_MONSTER_VALS: {
 		blindsight: 60,
 		blindsightDescription: 'blind beyond this radius',
 		languages: '',
-		cr: '1'
+		cr: '3'
 	}
 } as const;
 
