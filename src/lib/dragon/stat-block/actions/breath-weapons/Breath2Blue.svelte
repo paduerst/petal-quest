@@ -6,6 +6,7 @@
 	import MonsterLink from '$lib/monsters/MonsterLink.svelte';
 
 	export let dragon: DragonStats;
+	export let disableLinks = false;
 
 	const OLD_VERSION = false;
 
@@ -25,13 +26,17 @@
 
 		<p class="blue-breath-option">
 			<i>1. Floating Feeling.</i> The creature levitates (as if affected by the
-			<SpellLink spellName="levitate" /> spell), and its flying speed (if any) becomes 0.
+			<SpellLink spellName="levitate" disabled={disableLinks} /> spell), and its flying speed (if any)
+			becomes 0.
 		</p>
 
 		<p class="blue-breath-option">
 			<i>2. Blue Glow.</i> The creature is outlined in blue light, shedding dim light in a 10-foot
 			radius. Any attack roll against the creature has advantage if the attacker can see it, and the
-			creature can't benefit from being <ConditionLink condition="invisible" />.
+			creature can't benefit from being <ConditionLink
+				condition="invisible"
+				disabled={disableLinks}
+			/>.
 		</p>
 
 		<p class="blue-breath-option">
@@ -40,9 +45,11 @@
 		</p>
 
 		<p class="blue-breath-option">
-			<i>4. Froggy Jinx.</i> The creature is transformed into a <MonsterLink monster={'frog'} />, as
-			if by the
-			<SpellLink spellName="polymorph" /> spell.
+			<i>4. Froggy Jinx.</i> The creature is transformed into a <MonsterLink
+				monster={'frog'}
+				disabled={disableLinks}
+			/>, as if by the
+			<SpellLink spellName="polymorph" disabled={disableLinks} /> spell.
 		</p>
 	{:else}
 		<p>
@@ -56,18 +63,21 @@
 
 		<ol class="list-decimal ml-8 mt-1">
 			<li>
-				<SpellLink spellName="Hideous Laughter" />, and the creature can choose to take {diceCount}d{diceType}
+				<SpellLink spellName="Hideous Laughter" disabled={disableLinks} />, and the creature can
+				choose to take {diceCount}d{diceType}
 				psychic damage at the start of any of its turns.
 			</li>
 			<li>
-				<SpellLink spellName="Faerie Fire" />, but the light is always blue.
+				<SpellLink spellName="Faerie Fire" disabled={disableLinks} />, but the light is always blue.
 			</li>
 			<li>
-				<SpellLink spellName="Levitate" />, and the creature's flying speed becomes 0.
+				<SpellLink spellName="Levitate" disabled={disableLinks} />, and the creature's flying speed
+				becomes 0.
 			</li>
 			<li>
-				<SpellLink spellName="Polymorph" />; the creature becomes a <MonsterLink
+				<SpellLink spellName="Polymorph" disabled={disableLinks} />; the creature becomes a <MonsterLink
 					monster={'frog'}
+					disabled={disableLinks}
 				/>.
 			</li>
 		</ol>

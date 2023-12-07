@@ -10,11 +10,12 @@
 	import FeatureMagicWeapons from './FeatureMagicWeapons.svelte';
 
 	export let dragon: DragonStats;
+	export let disableLinks = false;
 </script>
 
 {#if dragon.isShapechanged}
 	{#if SHAPE_CHANGE_RETAINS_INNATE_SPELLCASTING}
-		<FeatureInnateSpellcasting {dragon} />
+		<FeatureInnateSpellcasting {dragon} {disableLinks} />
 	{/if}
 
 	{#if SHAPE_CHANGE_RETAINS_LEGENDARY_RESISTANCE}
@@ -23,7 +24,7 @@
 {:else}
 	<FeatureAmphibious {dragon} />
 
-	<FeatureInnateSpellcasting {dragon} />
+	<FeatureInnateSpellcasting {dragon} {disableLinks} />
 
 	<FeatureLegendaryResistance {dragon} />
 

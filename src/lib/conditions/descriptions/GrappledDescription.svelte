@@ -16,6 +16,7 @@
 	<li>
 		The condition also ends if an effect removes the grappled creature from the reach of the
 		grappler or grappling effect, such as when a creature is hurled away by the <SpellLink
+			disabled={disableLinks}
 			spellName="thunderwave"
 		/>
 		spell.

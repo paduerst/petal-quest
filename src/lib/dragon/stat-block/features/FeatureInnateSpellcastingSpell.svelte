@@ -2,6 +2,7 @@
 	import SpellLink from '$lib/spells/SpellLink.svelte';
 
 	export let spell: string;
+	export let disabled = false;
 	$: spell.trim();
 
 	let spellArr: string[];
@@ -18,4 +19,4 @@
 	}
 </script>
 
-<SpellLink {spellName} />{spellParenthetical}
+<SpellLink {spellName} {disabled} />{spellParenthetical}

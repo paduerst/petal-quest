@@ -48,8 +48,14 @@ export type StatsForPreambleStatsList = {
 	conditionImmunities: string;
 
 	truesight: number;
+	truesightDescription?: string;
+
 	blindsight: number;
+	blindsightDescription?: string;
+
 	darkvision: number;
+	darkvisionDescription?: string;
+
 	passivePerception: number;
 
 	languages: string;

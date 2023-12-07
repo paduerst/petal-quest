@@ -135,6 +135,9 @@ export type MonsterVals = {
 	truesight?: number;
 	blindsight?: number;
 	darkvision?: number;
+	truesightDescription?: string;
+	blindsightDescription?: string;
+	darkvisionDescription?: string;
 
 	xp?: number;
 
@@ -202,6 +205,10 @@ export function statsFromMonsterVals(vals: MonsterVals): Stats {
 	const blindsight = vals.blindsight ?? 0;
 	const darkvision = vals.darkvision ?? 0;
 
+	const truesightDescription = vals.truesightDescription;
+	const blindsightDescription = vals.blindsightDescription;
+	const darkvisionDescription = vals.darkvisionDescription;
+
 	const theme = vals.theme ?? DEFAULT_THEME;
 
 	const output: Stats = {
@@ -243,8 +250,11 @@ export function statsFromMonsterVals(vals: MonsterVals): Stats {
 		conditionImmunities,
 
 		truesight,
+		truesightDescription,
 		blindsight,
+		blindsightDescription,
 		darkvision,
+		darkvisionDescription,
 		passivePerception,
 
 		languages,

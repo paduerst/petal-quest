@@ -5,6 +5,7 @@
 	import ConditionLink from '$lib/conditions/ConditionLink.svelte';
 
 	export let dragon: DragonStats;
+	export let disableLinks = false;
 
 	let abbreviation = '1/SR';
 	let definition = 'Recharges after a Short or Long Rest';
@@ -26,8 +27,10 @@
 					Creatures within {dragon.prismaticRadianceRadius} feet of
 					{dragon.pronounObjective} have disadvantage on this save.
 				{/if}
-				On a failed save, a creature is <ConditionLink condition="frightened" /> until the end of {dragon.name}'s
-				next turn.
+				On a failed save, a creature is <ConditionLink
+					condition="frightened"
+					disabled={disableLinks}
+				/> until the end of {dragon.name}'s next turn.
 			{:else}
 				<i>
 					<b>Frightful Shadow (<AbbrButton {abbreviation} {definition} />). </b>
@@ -41,8 +44,10 @@
 					Creatures within {dragon.prismaticRadianceRadius} feet of
 					{dragon.pronounObjective} have disadvantage on this save.
 				{/if}
-				On a failed save, a creature is <ConditionLink condition="frightened" /> until the end of {dragon.name}'s
-				next turn.
+				On a failed save, a creature is <ConditionLink
+					condition="frightened"
+					disabled={disableLinks}
+				/> until the end of {dragon.name}'s next turn.
 			{/if}
 		</p>
 	</div>

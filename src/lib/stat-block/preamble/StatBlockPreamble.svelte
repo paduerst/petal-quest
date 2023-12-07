@@ -21,8 +21,8 @@
 
 <PreambleAbilityScores {stats} />
 
-<StatBlockDivider color={stats.theme} height={dividerHeightThin} />
+<StatBlockDivider color={stats.theme} height={dividerHeightThin} classes="break-before-avoid" />
 
 <PreambleStatsList {stats} />
 
-<StatBlockDivider color={stats.theme} height={dividerHeightThick} />
+<StatBlockDivider color={stats.theme} height={dividerHeightThick} classes="break-before-avoid" />

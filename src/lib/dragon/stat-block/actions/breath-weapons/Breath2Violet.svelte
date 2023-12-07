@@ -4,6 +4,7 @@
 	import ConditionLink from '$lib/conditions/ConditionLink.svelte';
 
 	export let dragon: DragonStats;
+	export let disableLinks = false;
 </script>
 
 <div class="dragon-action breath-option">
@@ -13,6 +14,7 @@
 		a {dragon.breathConeSize}-foot cone. Each creature in that area must make a DC {dragon.saveDCCon}
 		Constitution saving throw. On a failed save, the creature is <ConditionLink
 			condition="blinded"
+			disabled={disableLinks}
 		/> until the end of its next turn, at which time it must make a DC {dragon.saveDCCon} Charisma saving
 		throw. If it fails this second save as well, the creature is banished to another plane of the GM's
 		choosing. Typically, a creature that is on a plane that isn't its home plane is banished home, while

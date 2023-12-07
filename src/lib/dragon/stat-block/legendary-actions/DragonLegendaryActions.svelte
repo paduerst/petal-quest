@@ -5,6 +5,7 @@
 	import LActionBreathBeam from './LActionBreathBeam.svelte';
 
 	export let dragon: DragonStats;
+	export let disableLinks = false;
 </script>
 
 {#if dragon.age !== 'wyrmling' && dragon.age !== 'young' && !dragon.isShapechanged}
@@ -16,7 +17,7 @@
 
 	<LActionTailAttack {dragon} />
 
-	<LActionWingAttack {dragon} />
+	<LActionWingAttack {dragon} {disableLinks} />
 
 	<LActionBreathBeam {dragon} />
 {/if}

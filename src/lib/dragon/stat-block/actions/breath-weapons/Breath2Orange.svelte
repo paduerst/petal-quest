@@ -4,6 +4,7 @@
 	import ConditionLink from '$lib/conditions/ConditionLink.svelte';
 
 	export let dragon: DragonStats;
+	export let disableLinks = false;
 </script>
 
 <div class="dragon-action breath-option">
@@ -13,7 +14,8 @@
 		a {dragon.breathConeSize}-foot cone. Each creature in that area must make a DC {dragon.saveDCCon}
 		Constitution saving throw. On a failed save, the creature is <ConditionLink
 			condition="restrained"
-		/> for 1 minute. While <ConditionLink condition="restrained" />
+			disabled={disableLinks}
+		/> for 1 minute. While <ConditionLink condition="restrained" disabled={disableLinks} />
 		in this way, it can't speak or cast spells which include a verbal component. The creature can repeat
 		the saving throw at the end of each of its turns, ending the effect on itself with a success.
 	</p>
