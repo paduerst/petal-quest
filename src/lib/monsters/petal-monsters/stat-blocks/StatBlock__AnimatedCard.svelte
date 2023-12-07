@@ -10,6 +10,8 @@
 	import ConditionLink from '$lib/conditions/ConditionLink.svelte';
 	import MonsterLink from '$lib/monsters/MonsterLink.svelte';
 
+	export let disableLinks = false;
+
 	const stats = statsFromMonsterVals(OTHER_PETAL_MONSTER_VALS['animated-card']);
 </script>
 
@@ -22,10 +24,10 @@
 				<div class="stat-block-trait break-inside-avoid">
 					<p>
 						<i><b>Severe Antimagic Susceptibility.</b></i>
-						The card is <ConditionLink condition="incapacitated" /> while in the area of an <SpellLink
-							spellName="antimagic field"
-						/>. If targeted by <SpellLink spellName="dispel magic" />, the card dies as the magic
-						which animates it is permanently dispelled.
+						The card is <ConditionLink disabled={disableLinks} condition="incapacitated" /> while in
+						the area of an <SpellLink disabled={disableLinks} spellName="antimagic field" />. If
+						targeted by <SpellLink disabled={disableLinks} spellName="dispel magic" />, the card
+						dies as the magic which animates it is permanently dispelled.
 					</p>
 				</div>
 				<div class="stat-block-trait break-inside-avoid">
@@ -42,7 +44,9 @@
 					<p>
 						<i><b>Paper Cut.</b> Melee Weapon Attack:</i>
 						{numberWithSign(stats.proficiencyBonus + stats.dex)} to hit, reach 5 ft., one target.
-						<span class="whitespace-nowrap"><i>Hit:</i> 1</span>
+						<span class="whitespace-nowrap"
+							><i>Hit:</i> {2 + stats.dex} (1d4 {numberWithSign(stats.dex, ' ')})</span
+						>
 						slashing damage.
 					</p>
 				</div>
@@ -51,9 +55,12 @@
 	</StatBlockContainer>
 
 	<p class="mt-4">
-		This is an animated playing card. For a whole deck of animated cards, use the <MonsterLink
-			monster="animated-deck-of-cards"
-			monsterText="animated deck of cards"
-		/> stat block.
+		This is an animated playing card. For a whole deck of animated cards, use the <i>
+			<MonsterLink
+				disabled={disableLinks}
+				monster="animated-deck-of-cards"
+				monsterText="animated deck of cards"
+			/>
+		</i> stat block.
 	</p>
 </div>

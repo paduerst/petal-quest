@@ -9,6 +9,7 @@
 	import ButtonLink from '$lib/ButtonLink.svelte';
 
 	export let dragon: { age: Age; color: Color };
+	export let disableLinks = false;
 
 	const config: DragonConfig = new DragonConfig();
 	$: config.age = dragon.age;
@@ -27,7 +28,9 @@
 		<DragonDescription {config} />
 	</div>
 
-	<div class="max-w-xl w-fit mx-auto">
-		<ButtonLink href={`/dragon-builder/?${config}`}>Open in the Dragon Builder</ButtonLink>
-	</div>
+	{#if !disableLinks}
+		<div class="max-w-xl w-fit mx-auto">
+			<ButtonLink href={`/dragon-builder/?${config}`}>Open in the Dragon Builder</ButtonLink>
+		</div>
+	{/if}
 </div>

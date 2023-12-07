@@ -14,6 +14,7 @@
 	export let monster: AppMonster;
 	export let showCloseButton = false;
 	export let showUrlButton = false;
+	export let disableLinks = false;
 
 	let url = `/monsters/${monster}/`;
 	let monsterAsPrismaticDragon = stringToPrismaticDragon(monster);
@@ -26,11 +27,17 @@
 
 	<div class="p-4">
 		{#if monsterAsPrismaticDragon !== undefined}
-			<StaticDragonStatBlock dragon={PRISMATIC_DRAGON_VALS[monsterAsPrismaticDragon]} />
+			<StaticDragonStatBlock
+				dragon={PRISMATIC_DRAGON_VALS[monsterAsPrismaticDragon]}
+				{disableLinks}
+			/>
 		{:else if monsterAsOtherPetalMonster !== undefined}
-			<svelte:component this={OTHER_PETAL_MONSTER_STAT_BLOCKS[monsterAsOtherPetalMonster]} />
+			<svelte:component
+				this={OTHER_PETAL_MONSTER_STAT_BLOCKS[monsterAsOtherPetalMonster]}
+				{disableLinks}
+			/>
 		{:else if monsterAsSRDMonster !== undefined}
-			<svelte:component this={SRD_MONSTER_STAT_BLOCKS[monsterAsSRDMonster]} />
+			<svelte:component this={SRD_MONSTER_STAT_BLOCKS[monsterAsSRDMonster]} {disableLinks} />
 		{:else}
 			<p>Unknown monster: {monster}</p>
 		{/if}
