@@ -52,19 +52,22 @@
 		The colors don't stop at ROYGBIV. There are white, black, and even magenta prismatic dragons.
 	</p>
 
-	{#each COLORS as color}
-		<div class="my-3">
-			<ColorDescription {color} includeAgeParagraph={false} />
-		</div>
-	{/each}
+	<ul class="px-8">
+		{#each COLORS as color}
+			<li>
+				<div class="my-4">
+					<ColorDescription {color} includeAgeParagraph={false} />
+				</div>
+			</li>
+		{/each}
+	</ul>
 
 	<h2>Publication Forthcoming</h2>
 	<p>
 		Petal Quest is currently working on a prismatic dragons product for publishing. The latest
 		versions of the the prismatic dragon stat blocks can be found in our <a href="/dragon-builder/"
 			>Prismatic Dragon Builder</a
-		>. If you try them out and want to let us know how it went, we'd love to hear your thoughts by
-		sending us an email at (email to-be-added).
+		>.
 	</p>
 </article>
 
