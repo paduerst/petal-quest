@@ -1,5 +1,7 @@
 <script lang="ts">
 	import PageMeta from '$lib/PageMeta.svelte';
+	import ArtFavicon from '$lib/art/ArtFavicon.svelte';
+	import ArtPalladiumTurtle from '$lib/art/ArtPalladiumTurtle.svelte';
 </script>
 
 <PageMeta
@@ -24,14 +26,7 @@
 	<div class="daisy-divider mt-2" />
 
 	<div class="flex flex-wrap sm:flex-nowrap sm:gap-12">
-		<figure class="shrink-0 w-fit mx-auto">
-			<img
-				src="/images/PalladiumTurtleAvatarSmall.png"
-				alt="PalladiumTurtle logo"
-				class="h-48 aspect-square shrink-0"
-			/>
-			<figcaption class="italic m-1">Artwork by Peter D.</figcaption>
-		</figure>
+		<ArtPalladiumTurtle />
 		<div>
 			<h2 class="">Peter D</h2>
 			<p class="italic">Pronouns: he/him</p>
@@ -48,10 +43,7 @@
 	<div class="daisy-divider mt-2" />
 
 	<div class="flex flex-wrap sm:flex-nowrap sm:gap-12">
-		<figure class="shrink-0 w-fit mx-auto">
-			<img src="/images/favicon.png" alt="Petal Quest logo" class="h-48 aspect-square shrink-0" />
-			<figcaption class="italic m-1">Artwork by Peter D.</figcaption>
-		</figure>
+		<ArtFavicon />
 		<div>
 			<h2 class="">Tal S</h2>
 			<p class="italic">Pronouns: she/her</p>

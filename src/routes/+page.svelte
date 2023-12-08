@@ -2,6 +2,8 @@
 	import PageMeta from '$lib/PageMeta.svelte';
 	import SpellLink from '$lib/spells/SpellLink.svelte';
 	import ButtonLink from '$lib/ButtonLink.svelte';
+	import ArtPrismaticDragons from '$lib/art/ArtPrismaticDragons.svelte';
+	import ArtScholar from '$lib/art/ArtScholar.svelte';
 </script>
 
 <PageMeta
@@ -27,14 +29,7 @@
 	<div class="daisy-divider mt-2" />
 
 	<div class="flex flex-wrap sm:flex-nowrap sm:gap-12">
-		<figure class="shrink-0 w-fit mx-auto">
-			<img
-				src="/images/dragon_art_white.png"
-				alt="A rainbow-colored, geometric drawing of a dragon's silhouette and a wireframe d20 on a white background."
-				class="h-64 aspect-square shrink-0"
-			/>
-			<figcaption class="italic m-1">Artwork by Tal S.</figcaption>
-		</figure>
+		<ArtPrismaticDragons />
 		<div>
 			<h2><a href="/prismatic-dragons/">The Prismatic Dragons</a></h2>
 			<p class="italic">A new family of dragons for 5th edition.</p>
@@ -55,14 +50,7 @@
 	<div class="daisy-divider mt-2" />
 
 	<div class="flex flex-wrap sm:flex-nowrap sm:gap-12">
-		<figure class="shrink-0 w-fit mx-auto">
-			<img
-				src="/images/scholar_glasses_with_scroll.jpg"
-				alt="An illustration of glasses on an unfurled scroll covered in arcane runes."
-				class="h-64 aspect-square shrink-0"
-			/>
-			<figcaption class="italic m-1">Artwork by Tal S.</figcaption>
-		</figure>
+		<ArtScholar />
 		<div>
 			<h2><a href="/scholar/">The Scholar</a></h2>
 			<p class="italic">A new Artificer Specialist for 5th edition.</p>

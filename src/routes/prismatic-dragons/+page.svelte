@@ -5,6 +5,7 @@
 	import SpellLink from '$lib/spells/SpellLink.svelte';
 	import ButtonLink from '$lib/ButtonLink.svelte';
 	import ColorDescription from '$lib/dragon/descriptions/ColorDescription.svelte';
+	import ArtPrismaticDragons from '$lib/art/ArtPrismaticDragons.svelte';
 
 	const SHOW_HIDDEN_COLOR_STUFF = false;
 </script>
@@ -17,14 +18,7 @@
 
 <article class="card p-6 pt-4 text-token text-left">
 	<div class="flex flex-wrap sm:flex-nowrap sm:gap-12">
-		<figure class="shrink-0 w-fit mx-auto">
-			<img
-				src="/images/dragon_art_white.png"
-				alt="A rainbow-colored, geometric drawing of a dragon's silhouette and a wireframe d20 on a white background."
-				class="h-64 aspect-square shrink-0"
-			/>
-			<figcaption class="italic m-1">Artwork by Tal S.</figcaption>
-		</figure>
+		<ArtPrismaticDragons />
 		<div>
 			<h1 class="text-center">The Prismatic Dragons</h1>
 			<p class="text-center italic">A new family of dragons for 5th edition.</p>
