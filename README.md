@@ -21,4 +21,4 @@ To create a production version of the website:
 npm run build
 ```
 
-You can preview the production build with `npm run preview`.
+You can preview the production build with `npm run preview`. Then you can make it available on other devices using `cloudflared tunnel --url localhost:4173/` (assuming you have `cloudflared` installed).

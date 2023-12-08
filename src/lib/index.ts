@@ -30,11 +30,6 @@ export const DEV_NAV_LINKS = [
 	{
 		href: '/conditions/',
 		text: 'Conditions'
-	},
-	{
-		href: '/about/',
-		text: 'About',
-		children: []
 	}
 ] as const;
 

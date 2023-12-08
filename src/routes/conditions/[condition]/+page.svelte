@@ -12,7 +12,7 @@
 
 <PageMeta
 	title={`${capitalizeFirstLetter(data.condition)} - Conditions - Petal Quest`}
-	description="Conditions for 5th edition from the SRD."
+	description="Conditions for 5th edition from the SRD 5.1."
 	url={`https://www.petalquest.com/conditions/${data.condition}/`}
 />
 

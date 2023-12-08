@@ -5,7 +5,7 @@
 	import DragonBuilder from '$lib/dragon/DragonBuilder.svelte';
 	import { currentDragonConfig } from '$lib/dragon/builder-states';
 
-	const defaultTitle = 'Dragon Builder - Petal Quest';
+	const defaultTitle = 'Prismatic Dragon Builder - Petal Quest';
 	let pageTitle: string = defaultTitle;
 	$: pageTitle =
 		$currentDragonConfig === undefined
@@ -19,7 +19,7 @@
 
 <PageMeta
 	title={pageTitle}
-	description="Build your own prismatic dragon stat block using the Dragon Builder."
+	description="Build your own prismatic dragon stat block."
 	url="https://www.petalquest.com/dragon-builder/"
 />
 
