@@ -1,9 +1,9 @@
 import type { MonsterVals } from './monster-vals';
 
-import { PETAL_MONSTERS, PETAL_MONSTER_ALIASES } from './petal-monsters';
+import { PETAL_MONSTERS, PETAL_MONSTER_ALIASES, PETAL_MONSTER_ALIAS_MAP } from './petal-monsters';
 import { PETAL_MONSTER_VALS } from './petal-monsters/petal-monster-vals';
 
-import { SRD_MONSTERS, SRD_MONSTER_ALIASES } from './srd-monsters';
+import { SRD_MONSTERS, SRD_MONSTER_ALIASES, SRD_MONSTER_ALIAS_MAP } from './srd-monsters';
 import { SRD_MONSTER_VALS } from './srd-monsters/srd-monster-vals';
 
 export const APP_MONSTERS = [...PETAL_MONSTERS, ...SRD_MONSTERS] as const;
@@ -24,11 +24,15 @@ export function stringToAppMonster(monsterString: string): AppMonster | undefine
 	return APP_MONSTERS.find((monster) => monster === monsterString);
 }
 
-export const APP_MONSTER_ALIASES: {
-	[key: string]: AppMonster;
+export const APP_MONSTER_ALIASES = [...PETAL_MONSTER_ALIASES, ...SRD_MONSTER_ALIASES] as const;
+
+export type AppMonsterAlias = (typeof APP_MONSTER_ALIASES)[number];
+
+export const APP_MONSTER_ALIAS_MAP: {
+	[key in AppMonsterAlias]: AppMonster;
 } = {
-	...PETAL_MONSTER_ALIASES,
-	...SRD_MONSTER_ALIASES
+	...PETAL_MONSTER_ALIAS_MAP,
+	...SRD_MONSTER_ALIAS_MAP
 } as const;
 
 export const SIZES = ['Tiny', 'Small', 'Medium', 'Large', 'Huge', 'Gargantuan'] as const;
