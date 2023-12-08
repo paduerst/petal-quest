@@ -72,6 +72,10 @@ export function stringToPrismaticDragon(monsterString: string): PrismaticDragon 
 	return PRISMATIC_DRAGONS.find((monster) => monster === monsterString);
 }
 
+export const PRISMATIC_DRAGON_ALIASES: {
+	[key: string]: PrismaticDragon;
+} = {} as const;
+
 export const OTHER_PETAL_MONSTERS = ['animated-card', 'animated-deck-of-cards'] as const;
 
 export type OtherPetalMonster = (typeof OTHER_PETAL_MONSTERS)[number];
@@ -86,6 +90,13 @@ export function stringToOtherPetalMonster(monsterString: string): OtherPetalMons
 	return OTHER_PETAL_MONSTERS.find((monster) => monster === monsterString);
 }
 
+export const OTHER_PETAL_MONSTER_ALIASES: {
+	[key: string]: OtherPetalMonster;
+} = {
+	card: 'animated-card',
+	'deck-of-cards': 'animated-deck-of-cards'
+} as const;
+
 export const PETAL_MONSTERS = [...PRISMATIC_DRAGONS, ...OTHER_PETAL_MONSTERS] as const;
 
 export type PetalMonster = (typeof PETAL_MONSTERS)[number];
@@ -99,3 +110,10 @@ export type PetalMonster = (typeof PETAL_MONSTERS)[number];
 export function stringToPetalMonster(monsterString: string): PetalMonster | undefined {
 	return PETAL_MONSTERS.find((monster) => monster === monsterString);
 }
+
+export const PETAL_MONSTER_ALIASES: {
+	[key: string]: PetalMonster;
+} = {
+	...PRISMATIC_DRAGON_ALIASES,
+	...OTHER_PETAL_MONSTER_ALIASES
+} as const;
