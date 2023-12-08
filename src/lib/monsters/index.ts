@@ -1,9 +1,9 @@
 import type { MonsterVals } from './monster-vals';
 
-import { PETAL_MONSTERS, PETAL_MONSTER_ALIASES } from './petal-monsters';
+import { PETAL_MONSTERS } from './petal-monsters';
 import { PETAL_MONSTER_VALS } from './petal-monsters/petal-monster-vals';
 
-import { SRD_MONSTERS, SRD_MONSTER_ALIASES } from './srd-monsters';
+import { SRD_MONSTERS } from './srd-monsters';
 import { SRD_MONSTER_VALS } from './srd-monsters/srd-monster-vals';
 
 export const APP_MONSTERS = [...PETAL_MONSTERS, ...SRD_MONSTERS] as const;
@@ -23,13 +23,6 @@ export const APP_MONSTER_VALS: {
 export function stringToAppMonster(monsterString: string): AppMonster | undefined {
 	return APP_MONSTERS.find((monster) => monster === monsterString);
 }
-
-export const APP_MONSTER_ALIASES: {
-	[key: string]: AppMonster;
-} = {
-	...PETAL_MONSTER_ALIASES,
-	...SRD_MONSTER_ALIASES
-} as const;
 
 export const SIZES = ['Tiny', 'Small', 'Medium', 'Large', 'Huge', 'Gargantuan'] as const;
 export type Size = (typeof SIZES)[number];

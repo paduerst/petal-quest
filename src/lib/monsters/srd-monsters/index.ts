@@ -11,9 +11,3 @@ export type SRDMonster = (typeof SRD_MONSTERS)[number];
 export function stringToSRDMonster(monsterString: string): SRDMonster | undefined {
 	return SRD_MONSTERS.find((monster) => monster === monsterString);
 }
-
-export const SRD_MONSTER_ALIASES: {
-	[key: string]: SRDMonster;
-} = {
-	toad: 'frog'
-} as const;
