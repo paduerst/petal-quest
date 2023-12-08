@@ -8,7 +8,7 @@
 
 <PageMeta
 	title="Monsters - Petal Quest"
-	description="Monsters for 5th edition, both homebrew and from the SRD."
+	description="Monsters for 5th edition, both homebrew and from the SRD 5.1."
 	url="https://www.petalquest.com/monsters/"
 />
 

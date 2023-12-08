@@ -8,7 +8,7 @@
 
 <PageMeta
 	title="Petal Quest"
-	description="Petal Quest is making TTRPG content."
+	description="Petal Quest is making homebrew content for 5th edition."
 	url="https://www.petalquest.com/"
 />
 
