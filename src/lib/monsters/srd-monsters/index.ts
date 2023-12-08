@@ -12,12 +12,8 @@ export function stringToSRDMonster(monsterString: string): SRDMonster | undefine
 	return SRD_MONSTERS.find((monster) => monster === monsterString);
 }
 
-export const SRD_MONSTER_ALIASES = ['toad'] as const;
-
-export type SRDMonsterAlias = (typeof SRD_MONSTER_ALIASES)[number];
-
-export const SRD_MONSTER_ALIAS_MAP: {
-	[key in SRDMonsterAlias]: SRDMonster;
+export const SRD_MONSTER_ALIASES: {
+	[key: string]: SRDMonster;
 } = {
 	toad: 'frog'
 } as const;

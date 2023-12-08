@@ -72,12 +72,8 @@ export function stringToPrismaticDragon(monsterString: string): PrismaticDragon 
 	return PRISMATIC_DRAGONS.find((monster) => monster === monsterString);
 }
 
-export const PRISMATIC_DRAGON_ALIASES = [] as const;
-
-export type PrismaticDragonAlias = (typeof PRISMATIC_DRAGON_ALIASES)[number];
-
-export const PRISMATIC_DRAGON_ALIAS_MAP: {
-	[key in PrismaticDragonAlias]: PrismaticDragon;
+export const PRISMATIC_DRAGON_ALIASES: {
+	[key: string]: PrismaticDragon;
 } = {} as const;
 
 export const OTHER_PETAL_MONSTERS = ['animated-card', 'animated-deck-of-cards'] as const;
@@ -94,12 +90,8 @@ export function stringToOtherPetalMonster(monsterString: string): OtherPetalMons
 	return OTHER_PETAL_MONSTERS.find((monster) => monster === monsterString);
 }
 
-export const OTHER_PETAL_MONSTER_ALIASES = ['card', 'deck-of-cards'] as const;
-
-export type OtherPetalMonsterAlias = (typeof OTHER_PETAL_MONSTER_ALIASES)[number];
-
-export const OTHER_PETAL_MONSTER_ALIAS_MAP: {
-	[key in OtherPetalMonsterAlias]: OtherPetalMonster;
+export const OTHER_PETAL_MONSTER_ALIASES: {
+	[key: string]: OtherPetalMonster;
 } = {
 	card: 'animated-card',
 	'deck-of-cards': 'animated-deck-of-cards'
@@ -119,16 +111,9 @@ export function stringToPetalMonster(monsterString: string): PetalMonster | unde
 	return PETAL_MONSTERS.find((monster) => monster === monsterString);
 }
 
-export const PETAL_MONSTER_ALIASES = [
+export const PETAL_MONSTER_ALIASES: {
+	[key: string]: PetalMonster;
+} = {
 	...PRISMATIC_DRAGON_ALIASES,
 	...OTHER_PETAL_MONSTER_ALIASES
-] as const;
-
-export type PetalMonsterAlias = (typeof PETAL_MONSTER_ALIASES)[number];
-
-export const PETAL_MONSTER_ALIAS_MAP: {
-	[key in PetalMonsterAlias]: PetalMonster;
-} = {
-	...PRISMATIC_DRAGON_ALIAS_MAP,
-	...OTHER_PETAL_MONSTER_ALIAS_MAP
 } as const;
