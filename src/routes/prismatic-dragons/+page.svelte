@@ -1,12 +1,8 @@
 <script lang="ts">
-	import { COLORS, HIDDEN_COLORS } from '$lib/dragon';
-
 	import PageMeta from '$lib/PageMeta.svelte';
 	import SpellLink from '$lib/spells/SpellLink.svelte';
 	import ButtonLink from '$lib/ButtonLink.svelte';
-	import ColorDescription from '$lib/dragon/descriptions/ColorDescription.svelte';
-
-	const SHOW_HIDDEN_COLOR_STUFF = false;
+	import ArtPrismaticDragons from '$lib/art/ArtPrismaticDragons.svelte';
 </script>
 
 <PageMeta
@@ -17,14 +13,7 @@
 
 <article class="card p-6 pt-4 text-token text-left">
 	<div class="flex flex-wrap sm:flex-nowrap sm:gap-12">
-		<figure class="shrink-0 w-fit mx-auto">
-			<img
-				src="/images/dragon_art_white.png"
-				alt="A rainbow-colored, geometric drawing of a dragon's silhouette and a wireframe d20 on a white background."
-				class="h-64 aspect-square shrink-0"
-			/>
-			<figcaption class="italic m-1">Artwork by Tal S.</figcaption>
-		</figure>
+		<ArtPrismaticDragons />
 		<div>
 			<h1 class="text-center">The Prismatic Dragons</h1>
 			<p class="text-center italic">A new family of dragons for 5th edition.</p>
@@ -50,28 +39,15 @@
 		<SpellLink spellName="prismatic wall" /> spell. Each layer has a unique effect and weakness which
 		correspond to the breath weapons and vulnerabilities of the prismatic dragons.
 	</p>
-	{#if SHOW_HIDDEN_COLOR_STUFF}
-		<p>
-			The colors don't stop at ROYGBIV. There are white, black, and even magenta prismatic dragons.
-		</p>
-	{/if}
-
-	<ul class="px-8">
-		{#each COLORS.filter((color) => SHOW_HIDDEN_COLOR_STUFF || !HIDDEN_COLORS.includes(color)) as color}
-			<li>
-				<div class="my-4">
-					<ColorDescription {color} includeAgeParagraph={false} />
-				</div>
-			</li>
-		{/each}
-	</ul>
+	<p>
+		To learn more about the many colors of prismatic dragon, check out the latest versions of their
+		stat blocks in the <a href="/dragon-builder/">Prismatic Dragon Builder</a>.
+	</p>
 
 	<h2>Publication Forthcoming</h2>
 	<p>
-		Petal Quest is currently working on a prismatic dragons product for publishing. The latest
-		versions of the the prismatic dragon stat blocks can be found in our <a href="/dragon-builder/"
-			>Prismatic Dragon Builder</a
-		>.
+		Petal Quest is currently working on a prismatic dragons product for publishing. We'll update
+		this page when we have more to share.
 	</p>
 </article>
 

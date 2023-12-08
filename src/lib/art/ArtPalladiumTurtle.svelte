@@ -1,0 +1,12 @@
+<script>
+	export let heightClass = 'h-48';
+</script>
+
+<figure class="shrink-0 w-fit mx-auto">
+	<img
+		src="/images/PalladiumTurtleAvatarSmall.png"
+		alt="PalladiumTurtle logo"
+		class="{heightClass} aspect-square shrink-0"
+	/>
+	<figcaption class="italic m-1">Artwork by Peter D.</figcaption>
+</figure>

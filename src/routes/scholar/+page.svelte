@@ -1,6 +1,7 @@
 <script lang="ts">
 	import PageMeta from '$lib/PageMeta.svelte';
 	import ButtonLink from '$lib/ButtonLink.svelte';
+	import ArtScholar from '$lib/art/ArtScholar.svelte';
 
 	const externalHref =
 		'https://www.dmsguild.com/product/381129/Scholar-Artificer-Specialist?src=PQweb1';
@@ -14,14 +15,7 @@
 
 <article class="card p-6 pt-4 text-token text-left">
 	<div class="flex flex-wrap sm:flex-nowrap sm:gap-12">
-		<figure class="shrink-0 w-fit mx-auto">
-			<img
-				src="/images/scholar_glasses_with_scroll.jpg"
-				alt="An illustration of glasses on an unfurled scroll covered in arcane runes."
-				class="h-64 aspect-square shrink-0"
-			/>
-			<figcaption class="italic m-1">Artwork by Tal S.</figcaption>
-		</figure>
+		<ArtScholar />
 		<div>
 			<h1 class="text-center">The Scholar</h1>
 			<p class="text-center italic">A new Artificer Specialist for 5th edition.</p>
