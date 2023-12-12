@@ -1,5 +1,7 @@
 <script lang="ts">
+	import { BREATH_BEAM_ENABLED } from '.';
 	import type { DragonStats } from '$lib/dragon/dragon-stats';
+
 	import LActionTailAttack from './LActionTailAttack.svelte';
 	import LActionWingAttack from './LActionWingAttack.svelte';
 	import LActionBreathBeam from './LActionBreathBeam.svelte';
@@ -19,5 +21,7 @@
 
 	<LActionWingAttack {dragon} {disableLinks} />
 
-	<LActionBreathBeam {dragon} />
+	{#if BREATH_BEAM_ENABLED}
+		<LActionBreathBeam {dragon} />
+	{/if}
 {/if}
