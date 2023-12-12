@@ -3,6 +3,7 @@
 	import { DragonStats } from '../dragon-stats';
 
 	import DragonLairActions from '../stat-block/lair-actions/DragonLairActions.svelte';
+	import DragonRegionalEffects from '../stat-block/regional-effects/DragonRegionalEffects.svelte';
 	import ColorDescription from './ColorDescription.svelte';
 	import AgeDescription from './AgeDescription.svelte';
 
@@ -16,6 +17,8 @@
 {#if config !== undefined}
 	{#if dragon !== undefined}
 		<DragonLairActions {dragon} />
+
+		<DragonRegionalEffects {dragon} />
 	{/if}
 
 	<div class="mb-2">
