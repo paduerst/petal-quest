@@ -60,10 +60,3 @@
 		</ol>
 	{/if}
 </div>
-
-<style>
-	.blue-breath-option {
-		margin: 0.25rem 0;
-		padding-left: 1rem;
-	}
-</style>
