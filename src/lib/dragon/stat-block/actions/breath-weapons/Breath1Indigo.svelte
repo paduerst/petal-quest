@@ -17,6 +17,6 @@
 			condition="deafened"
 			disabled={disableLinks}
 		/>. A creature made of inorganic material such as stone, crystal, or metal has disadvantage on
-		this saving throw and is shattered if reduced to 0 hit points by this damage.
+		this saving throw.
 	</p>
 </div>
