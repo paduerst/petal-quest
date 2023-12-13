@@ -6,7 +6,10 @@
 		RADIANCE_PENALIZES_FRIGHTFUL_FLARE_SAVES
 	} from '.';
 
+	import ConditionLink from '$lib/conditions/ConditionLink.svelte';
+
 	export let dragon: DragonStats;
+	export let disableLinks = false;
 
 	let penalties: string;
 	let penalize_secondary_breath_saves = RADIANCE_PENALIZES_SECONDARY_BREATH_SAVES;
@@ -39,7 +42,8 @@
 				{penalties}.
 			{/if}
 			{dragon.nameUpper} stops glowing if {dragon.pronounNominative}
-			{dragon.pronounsPlural ? 'die' : 'dies'} or
+			{dragon.pronounsPlural ? 'die' : 'dies'}, {dragon.pronounsPlural ? 'fall' : 'falls'}
+			<ConditionLink condition="unconscious" disabled={disableLinks} />, or
 			{dragon.pronounsPlural ? 'choose' : 'chooses'} to stop as a bonus action.
 		{:else}
 			<i><b>Variable Shadow.</b></i>
@@ -52,7 +56,10 @@
 				{dragon.name}'s
 				{penalties}.
 			{/if}
-			This effect ends if {dragon.name} dies or chooses to stop as a bonus action.
+			This effect ends if {dragon.name} dies, falls <ConditionLink
+				condition="unconscious"
+				disabled={disableLinks}
+			/>, or chooses to stop as a bonus action.
 		{/if}
 	</p>
 </div>

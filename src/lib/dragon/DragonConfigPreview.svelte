@@ -18,7 +18,7 @@
 		style="background: {RGBToRGBA(config.theme, 0.35)};"
 	>
 		<h2 class="daisy-card-title">{config.title}</h2>
-		<p>{config.toString()}</p>
+		<p class="break-words">{config.toString()}</p>
 		<div class="daisy-card-actions justify-end">
 			{#if showDeleteButton}
 				<button

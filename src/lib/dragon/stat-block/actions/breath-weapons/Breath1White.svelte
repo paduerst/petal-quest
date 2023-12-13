@@ -15,6 +15,7 @@
 		({dragon.breath1DiceCount}d{dragon.breath1DiceType}) radiant damage and is <ConditionLink
 			condition="blinded"
 			disabled={disableLinks}
-		/> until the end of its next turn. On a successful save, the creature just takes half as much damage.
+		/> until the end of its next turn. On a successful save, the creature takes half as much damage and
+		isn't <ConditionLink condition="blinded" disabled={disableLinks} />.
 	</p>
 </div>

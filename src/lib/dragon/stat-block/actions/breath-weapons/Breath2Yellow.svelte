@@ -12,15 +12,14 @@
 		<b>{dragon.breath2Name} Breath.</b>
 		{capitalizeFirstLetter(dragon.color)} rays of magical light flash from {dragon.name}'s mouth in
 		a {dragon.breathConeSize}-foot cone. Each creature in that area must make a DC {dragon.saveDCCon}
-		Intelligence saving throw. On a failed save, divination magic connects the creature and {dragon.name}
-		for 1 minute. While connected, {dragon.name} is <ConditionLink
-			condition="invisible"
+		Wisdom saving throw. On a failed save, the creature is <ConditionLink
+			condition="charmed"
 			disabled={disableLinks}
-		/> to the creature, and
-		{dragon.name} knows the creature's location while they are on the same plane of existence. The creature
-		can repeat the saving throw at the end of each of its turns, ending the effect on itself with a success.
-		As a bonus action, {dragon.name} can end the effect early for one or more affected creatures, learning
-		the following about each: its name (if any), its creature type, and something that looms large in
-		its mind (such as something it worries over, loves, or hates).
+		/> for 1 minute; while <ConditionLink condition="charmed" disabled={disableLinks} /> in this way,
+		it is also <ConditionLink condition="stunned" disabled={disableLinks} /> as it relives a significant
+		memory. Divination magic allows {dragon.name} to see the memory as the creature is reliving it. The
+		creature can repeat the saving throw at the end of each of its turns, and it can repeat the saving
+		throw with a +5 bonus each time it takes damage or another creature uses an action to shake it out
+		of its trance. On a success, the effect ends.
 	</p>
 </div>

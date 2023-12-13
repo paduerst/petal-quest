@@ -27,7 +27,7 @@
 					Creatures within {dragon.prismaticRadianceRadius} feet of
 					{dragon.pronounObjective} have disadvantage on this save.
 				{/if}
-				On a failed save, a creature is <ConditionLink
+				On a failed save, the creature is <ConditionLink
 					condition="frightened"
 					disabled={disableLinks}
 				/> until the end of {dragon.name}'s next turn.
@@ -44,7 +44,7 @@
 					Creatures within {dragon.prismaticRadianceRadius} feet of
 					{dragon.pronounObjective} have disadvantage on this save.
 				{/if}
-				On a failed save, a creature is <ConditionLink
+				On a failed save, the creature is <ConditionLink
 					condition="frightened"
 					disabled={disableLinks}
 				/> until the end of {dragon.name}'s next turn.

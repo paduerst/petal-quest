@@ -24,9 +24,13 @@
 			the space it left or in the nearest unoccupied space if that space is occupied.
 		{:else}
 			As a bonus action, {dragon.name} can unbanish all the creatures {dragon.pronounNominative}
-			{dragon.pronounsPlural ? 'have' : 'has'} banished within the last hour. When a creature is unbanished,
-			it reappears in the space it left or in the nearest unoccupied space if that space is occupied.
-			This fails for any creature that is no longer on the plane it was banished to.
+			{dragon.pronounsPlural ? 'have' : 'has'} banished within the last hour.
+			{#if dragon.breath2SpecialValue.length > 0}
+				Creatures are automatically unbanished after {dragon.breath2SpecialValue}.
+			{/if}
+			When a creature is unbanished, it reappears in the space it left or in the nearest unoccupied space
+			if that space is occupied. This fails for any creature that is no longer on the plane it was banished
+			to.
 		{/if}
 	</p>
 </div>
