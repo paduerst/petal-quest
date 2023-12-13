@@ -217,7 +217,7 @@ export class DragonStats {
 		this.changeShapeRetainedFeatures = this.#getChangeShapeRetainedFeatures();
 		this.isShapechanged = this.#config.shapechanged === true && this.hasChangeShape;
 
-		this.hasWallOfLight = this.age !== 'wyrmling' && this.age !== 'young';
+		this.hasWallOfLight = this.age === 'ancient' || this.age === 'cosmic';
 		this.wallLayers = this.#vals.wallLayers;
 
 		this.hasFrightfulFlare = this.age !== 'wyrmling' && this.age !== 'young';

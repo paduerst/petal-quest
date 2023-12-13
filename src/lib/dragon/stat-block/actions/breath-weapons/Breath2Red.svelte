@@ -20,8 +20,8 @@
 			condition="charmed"
 			disabled={disableLinks}
 		/> in this way, the creature must move towards the nearest creature it can see (excluding itself
-		and {dragon.name}) and make a melee attack against it, ending its turn after doing so or if
-		unable to. The creature can repeat the saving throw at the end of each of its turns, ending the
-		effect on itself with a success.
+		and {dragon.name}) and attack it once, ending its turn after doing so or if unable to. The
+		creature can repeat the saving throw at the end of each of its turns, ending the effect on
+		itself with a success.
 	</p>
 </div>
