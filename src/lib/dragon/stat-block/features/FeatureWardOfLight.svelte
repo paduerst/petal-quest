@@ -12,23 +12,17 @@
 				<i>
 					<b>Ward of Light (1/Day).</b>
 				</i>
-				If {dragon.name} would drop to 0 hit points while glowing with {dragon.pronounPossessiveAdjective}
-				Variable Radiance, {dragon.pronounNominative} instead {dragon.pronounsPlural
-					? 'drop'
-					: 'drops'} to 1 hit point and {dragon.pronounsPlural ? 'halve' : 'halves'} the radius of {dragon.pronounPossessiveAdjective}
-				Variable Radiance as {dragon.pronounNominative}
-				{dragon.pronounsPlural ? 'condense' : 'condenses'}
+				If {dragon.name} would drop to 0 hit points while glowing with Variable Radiance, {dragon.pronounNominative}
+				can instead drop to 1 hit point and halve the radius of Variable Radiance as {dragon.pronounNominative}
+				{dragon.pronounsPlural && dragon.pronounNominativeExists ? 'condense' : 'condenses'}
 				light into a fleeting ward.
 			{:else}
 				<i>
 					<b>Ward of Shadow (1/Day).</b>
 				</i>
-				If {dragon.name} would drop to 0 hit points while {dragon.pronounPossessiveAdjective}
-				Variable Shadow is active, {dragon.pronounNominative} instead {dragon.pronounsPlural
-					? 'drop'
-					: 'drops'} to 1 hit point and {dragon.pronounsPlural ? 'halve' : 'halves'}
-				the radius of {dragon.pronounPossessiveAdjective} Variable Shadow as {dragon.pronounNominative}
-				{dragon.pronounsPlural ? 'condense' : 'condenses'}
+				If {dragon.name} would drop to 0 hit points while Variable Shadow is active, {dragon.pronounNominative}
+				can instead drop to 1 hit point and halve the radius of Variable Shadow as {dragon.pronounNominative}
+				{dragon.pronounsPlural && dragon.pronounNominativeExists ? 'condense' : 'condenses'}
 				shadow into a fleeting ward.
 			{/if}
 		</p>

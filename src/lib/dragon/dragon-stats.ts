@@ -1,4 +1,4 @@
-import type { Age, Color, PronounsConfig } from '.';
+import type { Age, Color, PronounsConfig, PronounsExistence } from '.';
 import {
 	COLOR_TO_ALIGNMENT,
 	AGE_TO_SIZE,
@@ -59,11 +59,14 @@ export class DragonStats {
 		this.title = this.#config.title;
 		this.alignment = this.#config.alignment ?? COLOR_TO_ALIGNMENT[this.color];
 
-		const pronouns = this.#getPronounsConfig();
+		const pronouns = this.#getPronouns();
 		this.pronounsPlural = pronouns.plural;
 		this.pronounNominative = pronouns.nominative;
+		this.pronounNominativeExists = pronouns.nominativeExists;
 		this.pronounObjective = pronouns.objective;
+		this.pronounObjectiveExists = pronouns.objectiveExists;
 		this.pronounPossessiveAdjective = pronouns.possessiveAdjective;
+		this.pronounPossessiveAdjectiveExists = pronouns.possessiveAdjectiveExists;
 
 		this.size = this.#getSize();
 		this.type = this.#getType();
@@ -244,15 +247,23 @@ export class DragonStats {
 		}
 	}
 
-	#getPronounsConfig(): PronounsConfig {
-		const nonePronounsConfig: PronounsConfig = {
+	#getPronouns(): PronounsConfig & PronounsExistence {
+		const nonePronounsConfig: PronounsConfig & PronounsExistence = {
 			plural: false,
 			nominative: this.name,
+			nominativeExists: false,
 			objective: this.name,
-			possessiveAdjective: `${this.name}'s`
+			objectiveExists: false,
+			possessiveAdjective: `${this.name}'s`,
+			possessiveAdjectiveExists: false
+		};
+		const pronounsExist: PronounsExistence = {
+			nominativeExists: true,
+			objectiveExists: true,
+			possessiveAdjectiveExists: true
 		};
 		if (this.#config.pronouns === undefined || this.#config.pronouns === DEFAULT_PRONOUNS) {
-			return BASIC_PRONOUN_CONFIGS[DEFAULT_PRONOUNS];
+			return { ...BASIC_PRONOUN_CONFIGS[DEFAULT_PRONOUNS], ...pronounsExist };
 		} else if (this.#config.pronouns === 'none') {
 			return nonePronounsConfig;
 		} else if (this.#config.pronouns === 'custom') {
@@ -262,18 +273,21 @@ export class DragonStats {
 				customPronounsConfig.plural = this.#config.pronounsConfig.plural;
 				if (this.#config.pronounsConfig.nominative !== '') {
 					customPronounsConfig.nominative = this.#config.pronounsConfig.nominative;
+					customPronounsConfig.nominativeExists = true;
 				}
 				if (this.#config.pronounsConfig.objective !== '') {
 					customPronounsConfig.objective = this.#config.pronounsConfig.objective;
+					customPronounsConfig.objectiveExists = true;
 				}
 				if (this.#config.pronounsConfig.possessiveAdjective !== '') {
 					customPronounsConfig.possessiveAdjective =
 						this.#config.pronounsConfig.possessiveAdjective;
+					customPronounsConfig.possessiveAdjectiveExists = true;
 				}
 			}
 			return customPronounsConfig;
 		} else {
-			return BASIC_PRONOUN_CONFIGS[this.#config.pronouns];
+			return { ...BASIC_PRONOUN_CONFIGS[this.#config.pronouns], ...pronounsExist };
 		}
 	}
 
@@ -513,8 +527,11 @@ export class DragonStats {
 
 	pronounsPlural: boolean;
 	pronounNominative: string;
+	pronounNominativeExists: boolean;
 	pronounObjective: string;
+	pronounObjectiveExists: boolean;
 	pronounPossessiveAdjective: string;
+	pronounPossessiveAdjectiveExists: boolean;
 
 	size: Size;
 	type: string;

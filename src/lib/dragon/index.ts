@@ -130,6 +130,13 @@ export type PronounsConfig = {
 	objective: string;
 	possessiveAdjective: string;
 };
+
+export type PronounsExistence = {
+	nominativeExists: boolean;
+	objectiveExists: boolean;
+	possessiveAdjectiveExists: boolean;
+};
+
 export const BASIC_PRONOUN_CONFIGS: {
 	[key in BasicPronouns]: PronounsConfig;
 } = {

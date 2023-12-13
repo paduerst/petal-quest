@@ -24,7 +24,8 @@
 			the space it left or in the nearest unoccupied space if that space is occupied.
 		{:else}
 			As a bonus action, {dragon.name} can unbanish all the creatures {dragon.pronounNominative}
-			{dragon.pronounsPlural ? 'have' : 'has'} banished within the last hour.
+			{dragon.pronounsPlural && dragon.pronounNominativeExists ? 'have' : 'has'} banished within the
+			last hour.
 			{#if dragon.breath2SpecialValue.length > 0}
 				Creatures are automatically unbanished after {dragon.breath2SpecialValue}.
 			{/if}
