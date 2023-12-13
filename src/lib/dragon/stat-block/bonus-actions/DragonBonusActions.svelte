@@ -13,5 +13,5 @@
 
 	<BActionSupernova {dragon} />
 
-	<BActionVariableRadiance {dragon} />
+	<BActionVariableRadiance {dragon} {disableLinks} />
 {/if}
