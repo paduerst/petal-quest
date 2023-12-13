@@ -16,7 +16,7 @@
 				Variable Radiance, {dragon.pronounNominative} can instead drop to 1 hit point and halve the radius
 				of {dragon.pronounPossessiveAdjective}
 				Variable Radiance as {dragon.pronounNominative}
-				{dragon.pronounsPlural ? 'condense' : 'condenses'}
+				{dragon.pronounsPlural && dragon.pronounNominativeExists ? 'condense' : 'condenses'}
 				light into a fleeting ward.
 			{:else}
 				<i>
@@ -26,7 +26,7 @@
 				Variable Shadow is active, {dragon.pronounNominative} can instead drop to 1 hit point and halve
 				the radius of {dragon.pronounPossessiveAdjective}
 				Variable Shadow as {dragon.pronounNominative}
-				{dragon.pronounsPlural ? 'condense' : 'condenses'}
+				{dragon.pronounsPlural && dragon.pronounNominativeExists ? 'condense' : 'condenses'}
 				shadow into a fleeting ward.
 			{/if}
 		</p>
