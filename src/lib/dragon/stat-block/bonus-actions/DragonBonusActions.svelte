@@ -3,6 +3,7 @@
 	import BActionFrightfulFlare from './BActionFrightfulFlare.svelte';
 	import BActionSupernova from './BActionSupernova.svelte';
 	import BActionVariableRadiance from './BActionVariableRadiance.svelte';
+	import BActionWardOfLight from './BActionWardOfLight.svelte';
 
 	export let dragon: DragonStats;
 	export let disableLinks = false;
@@ -14,4 +15,6 @@
 	<BActionSupernova {dragon} />
 
 	<BActionVariableRadiance {dragon} {disableLinks} />
+
+	<BActionWardOfLight {dragon} />
 {/if}

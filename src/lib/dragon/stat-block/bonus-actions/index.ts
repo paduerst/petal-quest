@@ -2,7 +2,7 @@
 export const RADIANCE_PENALTY = 1;
 
 // RADIANCE_PENALTY gets applied to Secondary Breath saves
-export const RADIANCE_PENALIZES_SECONDARY_BREATH_SAVES = true;
+export const RADIANCE_PENALIZES_SECONDARY_BREATH_SAVES = false;
 
 // RADIANCE_PENALTY gets applied to Frightful Flare saves
 export const RADIANCE_PENALIZES_FRIGHTFUL_FLARE_SAVES = false;
