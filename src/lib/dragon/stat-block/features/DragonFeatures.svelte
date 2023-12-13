@@ -8,6 +8,7 @@
 	import FeatureInnateSpellcasting from './FeatureInnateSpellcasting.svelte';
 	import FeatureLegendaryResistance from './FeatureLegendaryResistance.svelte';
 	import FeatureMagicWeapons from './FeatureMagicWeapons.svelte';
+	import FeatureWardOfLight from './FeatureWardOfLight.svelte';
 
 	export let dragon: DragonStats;
 	export let disableLinks = false;
@@ -29,4 +30,6 @@
 	<FeatureLegendaryResistance {dragon} />
 
 	<FeatureMagicWeapons {dragon} />
+
+	<FeatureWardOfLight {dragon} />
 {/if}

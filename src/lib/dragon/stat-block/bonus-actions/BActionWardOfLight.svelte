@@ -1,10 +1,11 @@
 <script lang="ts">
 	import type { DragonStats } from '$lib/dragon/dragon-stats';
+	import { WARD_OF_LIGHT_TYPE } from '..';
 
 	export let dragon: DragonStats;
 </script>
 
-{#if dragon.prismaticRadianceRadius >= 20}
+{#if dragon.prismaticRadianceRadius >= 20 && WARD_OF_LIGHT_TYPE === 'bonus-action'}
 	<div class="dragon-action">
 		<p>
 			{#if dragon.color !== 'black'}
