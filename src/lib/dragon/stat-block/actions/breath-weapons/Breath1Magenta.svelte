@@ -12,6 +12,6 @@
 		takes {dragon.breath1ExpectedDamage}
 		({dragon.breath1DiceCount}d{dragon.breath1DiceType}) psychic damage, and if it is concentrating
 		on a spell, it loses concentration. On a successful save, the creature takes half as much damage
-		and doesn't lose concentration.
+		and doesn't automatically lose concentration.
 	</p>
 </div>
