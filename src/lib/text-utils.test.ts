@@ -8,7 +8,8 @@ import {
 	signFromNumber,
 	numberWithSign,
 	type RGB,
-	RGBToRGBA
+	RGBToRGBA,
+	isValidHttpUrl
 } from '$lib/text-utils';
 
 test('numberWithOrdinalSuffix() behavior', () => {
@@ -101,4 +102,13 @@ test('numberWithSign() behavior', () => {
 test('RGBToRGBA() behavior', () => {
 	const rgb: RGB = `rgb(${0}, ${0}, ${0})`;
 	expect(RGBToRGBA(rgb, 0.5)).toBe(`rgba(${0}, ${0}, ${0}, ${0.5})`);
+});
+
+test('isValidHttpUrl() behavior', () => {
+	expect(isValidHttpUrl('')).toBe(false);
+
+	// from https://www.freecodecamp.org/news/how-to-validate-urls-in-javascript/
+	expect(isValidHttpUrl('https://www.freecodecamp.org/')).toBe(true);
+	expect(isValidHttpUrl('mailto://mail@freecodecamp.org')).toBe(false);
+	expect(isValidHttpUrl('freecodecamp')).toBe(false);
 });

@@ -2,9 +2,20 @@ export interface StringMap {
 	[key: string]: string;
 }
 
-export function isValidURL(url: string): boolean {
-	// TODO: More validation.
-	return url.length > 0;
+/**
+ * Returns true if the given string is a valid http or https URL.
+ * @author Benjamin Semah https://www.freecodecamp.org/news/how-to-validate-urls-in-javascript/
+ * @export
+ * @param {string} string
+ * @return {*}  {boolean}
+ */
+export function isValidHttpUrl(string: string): boolean {
+	try {
+		const newUrl = new URL(string);
+		return newUrl.protocol === 'http:' || newUrl.protocol === 'https:';
+	} catch (err) {
+		return false;
+	}
 }
 
 /**
