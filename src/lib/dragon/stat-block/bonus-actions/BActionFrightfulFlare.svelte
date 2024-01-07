@@ -1,14 +1,15 @@
 <script lang="ts">
 	import type { DragonStats } from '$lib/dragon/dragon-stats';
 	import { FLARE_DISADVANTAGE_FOR_CLOSE_CREATURES } from '.';
+
 	import AbbrButton from '../AbbrButton.svelte';
 	import ConditionLink from '$lib/conditions/ConditionLink.svelte';
 
 	export let dragon: DragonStats;
 	export let disableLinks = false;
 
-	let abbreviation = '1/SR';
-	let definition = 'Recharges after a Short or Long Rest';
+	const abbreviation = '1/SR';
+	const definition = 'Recharges after a Short or Long Rest';
 </script>
 
 {#if dragon.hasFrightfulFlare}
