@@ -42,9 +42,13 @@
 				{penalties}.
 			{/if}
 			{dragon.nameUpper} stops glowing if {dragon.pronounNominative}
-			{dragon.pronounsPlural ? 'die' : 'dies'}, {dragon.pronounsPlural ? 'fall' : 'falls'}
+			{dragon.pronounsPlural && dragon.pronounNominativeExists ? 'die' : 'dies'}, {dragon.pronounsPlural &&
+			dragon.pronounNominativeExists
+				? 'fall'
+				: 'falls'}
 			<ConditionLink condition="unconscious" disabled={disableLinks} />, or
-			{dragon.pronounsPlural ? 'choose' : 'chooses'} to stop as a bonus action.
+			{dragon.pronounsPlural && dragon.pronounNominativeExists ? 'choose' : 'chooses'} to stop as a bonus
+			action.
 		{:else}
 			<i><b>Variable Shadow.</b></i>
 			{dragon.nameUpper} chooses a radius up to {dragon.prismaticRadianceRadius}

@@ -26,10 +26,10 @@
 			<i><b>Change Shape.</b></i>
 			{dragon.nameUpper} magically transforms into a Humanoid or Beast, or back into
 			{dragon.pronounPossessiveAdjective} true form. Any objects {dragon.pronounNominative}
-			{dragon.pronounsPlural ? 'are' : 'is'} wearing or carrying are absorbed or borne by the new form
-			({dragon.name}'s choice). {dragon.nameUpper} reverts to {dragon.pronounPossessiveAdjective}
+			{dragon.pronounsPlural && dragon.pronounNominativeExists ? 'are' : 'is'} wearing or carrying are
+			absorbed or borne by the new form ({dragon.name}'s choice). {dragon.nameUpper} reverts to {dragon.pronounPossessiveAdjective}
 			true form if {dragon.pronounNominative}
-			{dragon.pronounsPlural ? 'are' : 'is'} reduced to 0 hit points.
+			{dragon.pronounsPlural && dragon.pronounNominativeExists ? 'are' : 'is'} reduced to 0 hit points.
 		</p>
 		<p>
 			In the new form, {dragon.name} retains {dragon.pronounPossessiveAdjective}

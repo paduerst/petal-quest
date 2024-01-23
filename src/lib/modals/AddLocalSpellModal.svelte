@@ -3,7 +3,7 @@
 
 	import { getModalStore, type ModalSettings } from '@skeletonlabs/skeleton';
 
-	import { isValidURL } from '$lib/text-utils';
+	import { isValidHttpUrl } from '$lib/text-utils';
 	import { spellNameToID } from '$lib/spells';
 	import { localSpellURLs } from '$lib/spells/local-spells';
 	import type {
@@ -50,7 +50,7 @@
 	}
 
 	function onSet() {
-		if (isValidURL(currentSpellURL)) {
+		if (isValidHttpUrl(currentSpellURL)) {
 			const spellID = spellNameToID(currentSpellName);
 			localSpellURLs.add(spellID, currentSpellURL);
 		}
