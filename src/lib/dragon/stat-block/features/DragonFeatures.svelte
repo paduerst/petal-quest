@@ -5,6 +5,7 @@
 	} from '$lib/dragon';
 	import type { DragonStats } from '$lib/dragon/dragon-stats';
 	import FeatureAmphibious from './FeatureAmphibious.svelte';
+	import FeatureCosmicForm from './FeatureCosmicForm.svelte';
 	import FeatureInnateSpellcasting from './FeatureInnateSpellcasting.svelte';
 	import FeatureLegendaryResistance from './FeatureLegendaryResistance.svelte';
 	import FeatureMagicWeapons from './FeatureMagicWeapons.svelte';
@@ -24,6 +25,8 @@
 	{/if}
 {:else}
 	<FeatureAmphibious {dragon} />
+
+	<FeatureCosmicForm {dragon} />
 
 	<FeatureInnateSpellcasting {dragon} {disableLinks} />
 
