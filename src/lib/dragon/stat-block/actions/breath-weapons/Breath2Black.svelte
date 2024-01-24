@@ -16,8 +16,8 @@
 		extinguished within that area, and each creature in that area must make a DC {dragon.saveDCCon}
 		Charisma saving throw. On a failed save, the creature is cursed {dragon.breath2SpecialValue}until
 		freed by the
-		<SpellLink spellName="remove curse" disabled={disableLinks} /> spell. While cursed in this way, the
-		creature is <ConditionLink condition="blinded" disabled={disableLinks} />, has its speed halved,
-		and does not age.
+		<SpellLink spellName="remove curse" disabled={disableLinks} /> spell or other magic. While cursed
+		in this way, the creature has its speed halved, it does not age, and it is cloaked in a shroud of
+		shadow which <ConditionLink condition="blinded" displayText="blinds" disabled={disableLinks} /> it.
 	</p>
 </div>
