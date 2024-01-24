@@ -9,7 +9,7 @@
 <div class="dragon-action breath-option">
 	<p>
 		<b>{dragon.breath1Name} Breath.</b>
-		Dazzling, multi-colored light flashes from {dragon.name}'s in a {dragon.breathConeSize}-foot
+		Dazzling, multi-colored light flashes from {dragon.name}'s mouth in a {dragon.breathConeSize}-foot
 		cone. Each creature in that area must make a DC {dragon.saveDCCon} Constitution saving throw. On
 		a failed save, the creature takes {dragon.breath1ExpectedDamage}
 		({dragon.breath1DiceCount}d{dragon.breath1DiceType}) radiant damage and is <ConditionLink
