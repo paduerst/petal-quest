@@ -3,6 +3,7 @@
 	import ActionAttacks from './ActionAttacks.svelte';
 	import ActionBreathWeapons from './breath-weapons/ActionBreathWeapons.svelte';
 	import ActionChangeShape from './ActionChangeShape.svelte';
+	import ActionChangeCosmicForm from './ActionChangeCosmicForm.svelte';
 	import ActionWallOfLight from './ActionWallOfLight.svelte';
 
 	export let dragon: DragonStats;
@@ -17,6 +18,8 @@
 	<ActionBreathWeapons {dragon} {disableLinks} />
 
 	<ActionChangeShape {dragon} />
+
+	<ActionChangeCosmicForm {dragon} />
 
 	<ActionWallOfLight {dragon} {disableLinks} />
 {/if}

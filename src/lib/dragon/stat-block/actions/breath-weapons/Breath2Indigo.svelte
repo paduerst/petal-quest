@@ -22,6 +22,6 @@
 			disabled={disableLinks}
 		/>
 		{dragon.breath2SpecialValue}until freed by the
-		<SpellLink spellName="greater restoration" disabled={disableLinks} /> spell or other magic.
+		<SpellLink spellName="greater restoration" disabled={disableLinks} /> spell or similar magic.
 	</p>
 </div>

@@ -6,7 +6,7 @@ export const PETAL_SPELL_VALS: {
 } = {
 	'wall-of-shadow': {
 		name: 'Wall of Shadow',
-		level: 3,
+		level: 4,
 		school: 'Abjuration',
 		castingTime: '1 action',
 		ritual: false,

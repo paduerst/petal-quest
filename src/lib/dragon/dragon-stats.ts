@@ -155,6 +155,8 @@ export class DragonStats {
 
 		this.amphibious = this.#vals.amphibious > 0;
 
+		this.cosmicForm = this.color === 'black' ? 'Singularity' : 'Supernova';
+
 		this.cantrips = this.#getCantrips();
 		this.spells = this.#getSpells();
 		this.spellcastingDisplayAttack = this.#getSpellcastingDisplayAttack();
@@ -615,6 +617,8 @@ export class DragonStats {
 	passivePerception: number;
 
 	amphibious: boolean;
+
+	cosmicForm: 'Supernova' | 'Singularity';
 
 	cantrips: string[];
 	spells: string[];
