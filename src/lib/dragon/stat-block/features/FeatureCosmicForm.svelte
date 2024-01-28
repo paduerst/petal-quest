@@ -10,7 +10,7 @@
 	const novaDiceCount = 5;
 	const novaDiceType: Die = 12;
 
-	const novaMovementDistance = 30;
+	const novaMovementDistance = 15;
 
 	let variableTraitName = dragon.cosmicForm === 'Supernova' ? 'Radiance' : 'Shadow';
 
