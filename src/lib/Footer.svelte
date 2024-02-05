@@ -17,7 +17,7 @@
 		</div>
 		<hr class="my-4" />
 		<div class="card variant-ghost-primary p-4 mx-auto text-center">
-			<p>© 2023 Petal Quest. All rights reserved.</p>
+			<p>© 2024 Petal Quest. All rights reserved.</p>
 		</div>
 		<hr class="my-4" />
 		<p class="text-sm text-token">
