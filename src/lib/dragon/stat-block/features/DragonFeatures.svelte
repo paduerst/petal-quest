@@ -26,7 +26,7 @@
 {:else}
 	<FeatureAmphibious {dragon} />
 
-	<FeatureCosmicForm {dragon} />
+	<FeatureCosmicForm {dragon} {disableLinks} />
 
 	<FeatureInnateSpellcasting {dragon} {disableLinks} />
 

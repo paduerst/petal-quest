@@ -4,13 +4,16 @@
 
 	import { expectedDiceResult } from '$lib/monsters';
 
+	import ConditionLink from '$lib/conditions/ConditionLink.svelte';
+
 	export let dragon: DragonStats;
-	// export let disableLinks = false;
+	export let disableLinks = false;
 
 	const novaDiceCount = 5;
 	const novaDiceType: Die = 12;
 
 	const novaMovementDistance = 15;
+	const novaBlindingDistance = novaMovementDistance;
 
 	let variableTraitName = dragon.cosmicForm === 'Supernova' ? 'Radiance' : 'Shadow';
 
@@ -27,6 +30,15 @@
 			While in {dragon.pronounPossessiveAdjective} cosmic form, {dragon.name} can hover, {dragon.pronounPossessiveAdjective}
 			speed is halved, and {dragon.pronounPossessiveAdjective} Variable {variableTraitName} is maxed
 			out at a radius of {dragon.prismaticRadianceRadius} feet.
+			{#if dragon.cosmicForm === 'Supernova'}
+				If another creature that can see {dragon.name} moves to within {novaBlindingDistance} feet of
+				{dragon.pronounObjective} or starts its turn there, the creature must succeed on a
+				<span class="whitespace-nowrap">DC {dragon.saveDCCon}</span> Constitution saving throw or be
+				<ConditionLink condition="blinded" disabled={disableLinks} /> until the start of its next turn.
+			{:else}
+				The area within {novaBlindingDistance} feet of {dragon.name} is utterly devoid of light; it is
+				filled with darkness that can't be illuminated by any means or seen through with darkvision.
+			{/if}
 		</p>
 		<p>
 			At the start of each of {dragon.name}'s turns while in {dragon.pronounPossessiveAdjective} cosmic
