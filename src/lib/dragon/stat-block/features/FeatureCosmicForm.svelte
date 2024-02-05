@@ -15,6 +15,8 @@
 	const novaMovementDistance = 15;
 	const novaBlindingDistance = novaMovementDistance;
 
+	const finalBlindingDistance = '1,000 feet';
+
 	let variableTraitName = dragon.cosmicForm === 'Supernova' ? 'Radiance' : 'Shadow';
 	let wardTraitName = dragon.cosmicForm === 'Supernova' ? 'Light' : 'Shadow';
 	let novaTraitName = dragon.cosmicForm === 'Supernova' ? 'Exploding' : 'Imploding';
@@ -90,10 +92,18 @@
 				loses hit points equal to the damage roll.
 			</li>
 			<li>
-				<b>Destruction.</b>
+				<b>Annihilation.</b>
 				If {dragon.name} drops to 0 hit points,
 				{dragon.name} immediately dies and {dragon.pronounPossessiveAdjective} body is destroyed without
 				a trace, bypassing {dragon.pronounPossessiveAdjective} Ward of {wardTraitName}.
+				{#if dragon.cosmicForm === 'Supernova'}
+					Each creature within {finalBlindingDistance} that can see {dragon.name} must succeed on a
+					<span class="whitespace-nowrap">DC {dragon.saveDCCon}</span>
+					Constitution saving throw or be blinded for 1 minute.
+				{:else}
+					All sources of light (except those created by an artifact or a deity) are extinguished
+					within {finalBlindingDistance}.
+				{/if}
 			</li>
 		</ul>
 	</div>
