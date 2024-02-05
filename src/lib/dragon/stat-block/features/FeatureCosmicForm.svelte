@@ -2,6 +2,7 @@
 	import type { DragonStats } from '$lib/dragon/dragon-stats';
 	import type { Die } from '$lib/monsters';
 
+	import { capitalizeFirstLetter } from '$lib/text-utils';
 	import { expectedDiceResult } from '$lib/monsters';
 
 	import ConditionLink from '$lib/conditions/ConditionLink.svelte';
@@ -36,22 +37,32 @@
 		<ul class="stat-block-unordered-list">
 			<li>
 				<b>Hovering.</b>
-				{dragon.nameUpper} can hover and {dragon.pronounPossessiveAdjective}
+				{capitalizeFirstLetter(dragon.pronounNominative)} can hover, and {dragon.pronounPossessiveAdjective}
 				speed is halved.
 			</li>
 			<li>
-				<b>Immutable Form.</b>
-				{dragon.nameUpper} is immune to any spell or effect which would alter {dragon.pronounPossessiveAdjective}
-				form (except {dragon.pronounPossessiveAdjective}
-				own Change Cosmic Form action).
+				<b>Restless.</b>
+				{capitalizeFirstLetter(dragon.pronounNominative)}
+				{dragon.pronounsPlural && dragon.pronounNominativeExists ? 'are' : 'is'}
+				immune to the <ConditionLink condition="unconscious" disabled={disableLinks} /> condition.
 			</li>
 			<li>
 				<b>No Spells.</b>
-				{dragon.nameUpper} cannot cast spells or concentrate on them.
+				{capitalizeFirstLetter(dragon.pronounNominative)} cannot cast or concentrate on spells.
+			</li>
+			<li>
+				<b>Immutable Form.</b>
+				{capitalizeFirstLetter(dragon.pronounNominative)}
+				{dragon.pronounsPlural && dragon.pronounNominativeExists ? 'are' : 'is'}
+				immune to any spell or effect which would alter {dragon.pronounPossessiveAdjective}
+				form (except {dragon.pronounPossessiveAdjective}
+				Change Cosmic Form action).
 			</li>
 			<li>
 				<b>Maximum {variableTraitName}.</b>
-				{dragon.nameUpper}'s Variable {variableTraitName} is maxed out at a radius of {dragon.prismaticRadianceRadius}
+				{capitalizeFirstLetter(dragon.pronounPossessiveAdjective)} Variable {variableTraitName} is maxed
+				out at a radius of
+				{dragon.prismaticRadianceRadius}
 				feet.
 				{#if dragon.cosmicForm === 'Supernova'}
 					If another creature that can see {dragon.name} moves to within {novaBlindingDistance} feet
@@ -67,10 +78,7 @@
 			</li>
 			<li>
 				<b>{novaTraitName}.</b>
-				{dragon.nameUpper} is immune to the <ConditionLink
-					condition="unconscious"
-					disabled={disableLinks}
-				/> condition. At the start of each of {dragon.name}'s turns, {dragon.name}
+				At the start of each of {dragon.pronounPossessiveAdjective} turns, {dragon.name}
 				{novaVerb}; each creature within {dragon.prismaticRadianceRadius}
 				feet of {dragon.name} must make a
 				<span class="whitespace-nowrap">DC {dragon.saveDCCon}</span>
@@ -88,12 +96,13 @@
 					is pulled {novaMovementDistance} feet closer to {dragon.name}. On a successful save, the
 					creature takes half as much damage and isn't pulled.
 				{/if}
-				Simultaneously, {dragon.name}
-				loses hit points equal to the damage roll.
+				{dragon.nameUpper} takes the full damage as well, bypassing {dragon.pronounPossessiveAdjective}
+				immunities and anything else which would reduce the damage.
 			</li>
 			<li>
 				<b>Annihilation.</b>
-				If {dragon.name} drops to 0 hit points,
+				If {dragon.pronounNominative}
+				{dragon.pronounsPlural && dragon.pronounNominativeExists ? 'drop' : 'drops'} to 0 hit points,
 				{dragon.name} immediately dies and {dragon.pronounPossessiveAdjective} body is destroyed without
 				a trace, bypassing {dragon.pronounPossessiveAdjective} Ward of {wardTraitName}.
 				{#if dragon.cosmicForm === 'Supernova'}
