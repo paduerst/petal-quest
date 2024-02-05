@@ -38,6 +38,12 @@
 				speed is halved.
 			</li>
 			<li>
+				<b>Immutable Form.</b>
+				{dragon.nameUpper} is immune to any spell or effect which would alter {dragon.pronounPossessiveAdjective}
+				form (except {dragon.pronounPossessiveAdjective}
+				own Change Cosmic Form action).
+			</li>
+			<li>
 				<b>No Spells.</b>
 				{dragon.nameUpper} cannot cast spells or concentrate on them.
 			</li>
@@ -59,7 +65,10 @@
 			</li>
 			<li>
 				<b>{novaTraitName}.</b>
-				At the start of each of {dragon.name}'s turns, {dragon.name}
+				{dragon.nameUpper} is immune to the <ConditionLink
+					condition="unconscious"
+					disabled={disableLinks}
+				/> condition. At the start of each of {dragon.name}'s turns, {dragon.name}
 				{novaVerb}; each creature within {dragon.prismaticRadianceRadius}
 				feet of {dragon.name} must make a
 				<span class="whitespace-nowrap">DC {dragon.saveDCCon}</span>
