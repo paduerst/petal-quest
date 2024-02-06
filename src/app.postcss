@@ -5,6 +5,12 @@
 
 @font-face {
 	/* Reference name */
+	font-family: 'Alegreya-Medium';
+	/* For multiple files use commas, ex: url(), url(), ... */
+	src: url('/fonts/Alegreya/static/Alegreya-Medium.ttf');
+}
+@font-face {
+	/* Reference name */
 	font-family: 'AlegreyaSansSC-Bold';
 	/* For multiple files use commas, ex: url(), url(), ... */
 	src: url('/fonts/Alegreya_Sans_SC/AlegreyaSansSC-Bold.ttf');
@@ -70,6 +76,10 @@ body {
 }
 
 @layer components {
+	.petal-quest-logo-font {
+		font-family: 'Alegreya-Medium', var(--theme-font-family-heading);
+	}
+
 	.stat-block-header {
 		@apply inline-flex w-full justify-between items-end;
 	}

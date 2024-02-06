@@ -15,7 +15,7 @@
 	on:click={dispatchClick}
 >
 	<img src="/images/favicon.png" alt="Petal Quest logo" class="logo-img" />
-	<span class="logo-txt">Petal Quest</span>
+	<span class="text-lg whitespace-nowrap px-1 petal-quest-logo-font">Petal Quest</span>
 </a>
 
 <style>
@@ -26,9 +26,5 @@
 
 	.logo-img {
 		@apply box-content h-8 w-8 px-1;
-	}
-
-	.logo-txt {
-		@apply text-lg whitespace-nowrap px-1;
 	}
 </style>
