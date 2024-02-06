@@ -16,7 +16,7 @@
 	});
 </script>
 
-<p class="font-bold text-xl">Welcome to the Prismatic Dragon Builder!</p>
+<h4 class="font-bold text-xl">Welcome to the Prismatic Dragon Builder!</h4>
 
 <div class="flex flex-col items-center">
 	<FormSubsectionWelcome bind:firstElement config={newConfig} />
