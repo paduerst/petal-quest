@@ -96,8 +96,11 @@
 					is pulled {novaMovementDistance} feet closer to {dragon.name}. On a successful save, the
 					creature takes half as much damage and isn't pulled.
 				{/if}
-				{dragon.nameUpper} takes the full damage as well, bypassing {dragon.pronounPossessiveAdjective}
-				immunities and anything else which would reduce the damage.
+				{novaTraitName} hurts {dragon.name} as well: {dragon.pronounNominative}
+				{dragon.pronounsPlural && dragon.pronounNominativeExists ? 'take' : 'takes'}
+				{dragon.immunity.toLowerCase()} damage as if if {dragon.pronounNominative} had failed the save.
+				This damage bypasses {dragon.name}'s immunities and anything else which would reduce the
+				damage to {dragon.pronounObjective}.
 			</li>
 			<li>
 				<b>Annihilation.</b>
