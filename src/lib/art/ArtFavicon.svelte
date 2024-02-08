@@ -8,5 +8,5 @@
 		alt="Petal Quest logo"
 		class="{heightClass} aspect-square shrink-0"
 	/>
-	<figcaption class="italic m-1">Artwork by Peter D.</figcaption>
+	<figcaption class="italic m-1">Artwork by Tal S.</figcaption>
 </figure>

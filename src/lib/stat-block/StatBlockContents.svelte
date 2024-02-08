@@ -27,3 +27,8 @@
 	<StatBlockSectionHeading theme={stats.theme}>Legendary Actions</StatBlockSectionHeading>
 	<slot name="legendary-actions" />
 {/if}
+
+{#if $$slots['reactions']}
+	<StatBlockSectionHeading theme={stats.theme}>Reactions</StatBlockSectionHeading>
+	<slot name="reactions" />
+{/if}
