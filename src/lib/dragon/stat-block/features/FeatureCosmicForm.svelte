@@ -4,6 +4,7 @@
 
 	import { capitalizeFirstLetter } from '$lib/text-utils';
 	import { expectedDiceResult } from '$lib/monsters';
+	import { WARD_OF_LIGHT_TYPE } from '..';
 
 	import ConditionLink from '$lib/conditions/ConditionLink.svelte';
 
@@ -99,15 +100,17 @@
 				{novaTraitName} hurts {dragon.name} as well: {dragon.pronounNominative}
 				{dragon.pronounsPlural && dragon.pronounNominativeExists ? 'take' : 'takes'}
 				{dragon.immunity.toLowerCase()} damage as if if {dragon.pronounNominative} had failed the save.
-				This damage bypasses {dragon.name}'s immunities and anything else which would reduce the
-				damage to {dragon.pronounObjective}.
+				This damage ignores {dragon.name}'s immunities and cannot be reduced in any way.
 			</li>
 			<li>
 				<b>Annihilation.</b>
 				If {dragon.pronounNominative}
 				{dragon.pronounsPlural && dragon.pronounNominativeExists ? 'drop' : 'drops'} to 0 hit points,
 				{dragon.name} immediately dies and {dragon.pronounPossessiveAdjective} body is destroyed without
-				a trace, bypassing {dragon.pronounPossessiveAdjective} Ward of {wardTraitName}.
+				a
+				{WARD_OF_LIGHT_TYPE == 'feature'
+					? `trace, bypassing ${dragon.pronounPossessiveAdjective} Ward of ${wardTraitName}.`
+					: 'trace.'}
 				{#if dragon.cosmicForm === 'Supernova'}
 					Each creature within {finalBlindingDistance} that can see {dragon.name} must succeed on a
 					<span class="whitespace-nowrap">DC {dragon.saveDCCon}</span>
