@@ -108,7 +108,7 @@
 				{dragon.pronounsPlural && dragon.pronounNominativeExists ? 'drop' : 'drops'} to 0 hit points,
 				{dragon.name} immediately dies and {dragon.pronounPossessiveAdjective} body is destroyed without
 				a
-				{WARD_OF_LIGHT_TYPE == 'feature'
+				{WARD_OF_LIGHT_TYPE === 'feature'
 					? `trace, bypassing ${dragon.pronounPossessiveAdjective} Ward of ${wardTraitName}.`
 					: 'trace.'}
 				{#if dragon.cosmicForm === 'Supernova'}

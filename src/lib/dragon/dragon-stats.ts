@@ -14,6 +14,7 @@ import {
 	SHAPE_CHANGE_RETAINS_LEGENDARY_RESISTANCE,
 	SHAPE_CHANGE_RETAINS_INNATE_SPELLCASTING
 } from '.';
+import { FLARE_TYPE } from './stat-block/bonus-actions';
 
 import { DragonConfig } from './dragon-config';
 import { DRAGON_VALS, type DragonVals } from './dragon-vals';
@@ -225,7 +226,9 @@ export class DragonStats {
 		this.hasWallOfLight = this.age === 'ancient' || this.age === 'cosmic';
 		this.wallLayers = this.#vals.wallLayers;
 
-		this.hasFrightfulFlare = this.age !== 'wyrmling' && this.age !== 'young';
+		this.hasFrightfulFlare =
+			this.age !== 'wyrmling' && this.age !== 'young' && FLARE_TYPE === 'frightful';
+		this.hasBlindingFlare = this.age !== 'wyrmling' && FLARE_TYPE === 'blinding';
 
 		this.prismaticRadianceRadius = this.#vals.prismaticRadianceRadius;
 
@@ -669,6 +672,7 @@ export class DragonStats {
 	wallLayers: string;
 
 	hasFrightfulFlare: boolean;
+	hasBlindingFlare: boolean;
 
 	prismaticRadianceRadius: number;
 

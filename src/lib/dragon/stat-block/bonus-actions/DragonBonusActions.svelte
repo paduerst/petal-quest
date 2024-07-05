@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { DragonStats } from '$lib/dragon/dragon-stats';
-	import BActionFrightfulFlare from './BActionFrightfulFlare.svelte';
+	import BActionFlare from './BActionFlare.svelte';
 	import BActionSupernova from './BActionSupernova.svelte';
 	import BActionVariableRadiance from './BActionVariableRadiance.svelte';
 	import BActionWardOfLight from './BActionWardOfLight.svelte';
@@ -10,7 +10,7 @@
 </script>
 
 {#if !dragon.isShapechanged}
-	<BActionFrightfulFlare {dragon} {disableLinks} />
+	<BActionFlare {dragon} {disableLinks} />
 
 	<BActionSupernova {dragon} />
 

@@ -13,6 +13,8 @@
 
 	export let abbreviation: string;
 	export let definition: string;
+	export let abbreviationText: string | undefined = undefined;
+	export let omitPrefixes: boolean = false;
 
 	let thisElement: HTMLElement | undefined;
 
@@ -20,6 +22,7 @@
 		const valueForAbbrModal: AbbrModalValue = {
 			abbreviation,
 			definition,
+			omitPrefixes,
 			onDestroyFocusElement: thisElement
 		};
 		modalConfig.value = valueForAbbrModal;
@@ -27,4 +30,4 @@
 	}
 </script>
 
-<SpanButton on:click={handleClick} bind:thisElement>{abbreviation}</SpanButton>
+<SpanButton on:click={handleClick} bind:thisElement>{abbreviationText ?? abbreviation}</SpanButton>
