@@ -13,7 +13,7 @@
 		{capitalizeFirstLetter(dragon.color)} rays of magical light flash from {dragon.name}'s mouth in
 		a {dragon.breathConeSize}-foot cone. Each creature in that area has its speed doubled until the
 		end of its next turn, at which time it must make a DC {dragon.saveDCCon} Constitution saving throw.
-		On a failed save, the creature gains 2 (1d4) levels of <ConditionLink
+		On a failed save, the creature gains 1d3 levels of <ConditionLink
 			condition="exhaustion"
 			disabled={disableLinks}
 		/>. If this would bring it to 5 or more levels of <ConditionLink
