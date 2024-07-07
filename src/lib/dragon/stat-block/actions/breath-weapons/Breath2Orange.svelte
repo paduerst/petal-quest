@@ -15,7 +15,7 @@
 		Constitution saving throw. On a failed save, the creature is <ConditionLink
 			condition="restrained"
 			disabled={disableLinks}
-		/> by bands of {dragon.color} light for 1 minute; while <ConditionLink
+		/> by bands of {dragon.color} light for 1 minute. While <ConditionLink
 			condition="restrained"
 			disabled={disableLinks}
 		/>

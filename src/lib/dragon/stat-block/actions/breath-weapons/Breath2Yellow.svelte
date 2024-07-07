@@ -15,13 +15,13 @@
 		Wisdom saving throw. On a failed save, the creature is <ConditionLink
 			condition="charmed"
 			disabled={disableLinks}
-		/> for <span class="whitespace-nowrap">1 minute</span>; while <ConditionLink
+		/> for <span class="whitespace-nowrap">1 minute</span>. While <ConditionLink
 			condition="charmed"
 			disabled={disableLinks}
 		/> in this way, it is also <ConditionLink condition="stunned" disabled={disableLinks} /> as it relives
-		a significant memory. Divination magic allows {dragon.name} to see the memory as the creature is
-		reliving it. The creature can repeat the saving throw at the end of each of its turns, and it can
-		repeat the saving throw with a +5 bonus each time it takes damage or another creature uses an action
-		to shake it out of its trance. On a success, the effect ends.
+		a significant memory. {dragon.nameUpper} sees this memory as it is relived, unless the creature is
+		immune to divination magic. The creature can repeat the saving throw at the end of each of its turns,
+		and it can repeat the saving throw with a +5 bonus each time it takes damage or another creature
+		uses an action to shake it out of its trance. On a success, the effect ends.
 	</p>
 </div>

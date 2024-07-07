@@ -11,3 +11,5 @@ export const RADIANCE_PENALIZES_FRIGHTFUL_FLARE_SAVES = false;
 export const FLARE_DISADVANTAGE_FOR_CLOSE_CREATURES = false;
 
 export const SUPERNOVA_ENABLED = false;
+
+export const FLARE_TYPE: 'frightful' | 'blinding' = 'blinding';

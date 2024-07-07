@@ -34,6 +34,7 @@ export type BaseModalValue = {
 export type AbbrModalValue = BaseModalValue & {
 	abbreviation: string;
 	definition: string;
+	omitPrefixes?: boolean;
 };
 
 export type AddLocalSpellModalValue = BaseModalValue & {
