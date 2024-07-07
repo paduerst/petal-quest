@@ -13,7 +13,7 @@
 			{#if dragon.color === 'black'}
 				<i><b>Wall of Shadow (1/Day).</b></i>
 				{dragon.nameUpper} casts <SpellLink spellName="wall of shadow" disabled={disableLinks} /> at
-				9th level (10d6), using Charisma as the spellcasting ability (spell save
+				9th level, using Charisma as the spellcasting ability (spell save
 				<span class="whitespace-nowrap">DC {dragon.saveDCCha}).</span>
 				If {dragon.name} casts this spell with a casting time of 1 hour instead of 1 action, the wall
 				remains in place until it's destroyed or
